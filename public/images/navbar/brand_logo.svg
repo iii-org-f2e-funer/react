@@ -1,0 +1,16 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="136" height="43" viewBox="0 0 136 43">
+  <g id="Group_609" data-name="Group 609" transform="translate(-442.132 117)">
+    <text id="FUNer" transform="translate(485.132 -82)" fill="#f9c149" font-size="32" font-family="SegoeUI, Segoe UI" letter-spacing="0.025em"><tspan x="0" y="0">FUNer</tspan></text>
+    <g id="Group_568" data-name="Group 568" transform="translate(441.132 -114)">
+      <rect id="Rectangle_35" data-name="Rectangle 35" width="36" height="36" rx="6" transform="translate(1 2)" fill="#f9c149"/>
+      <g id="Group_227" data-name="Group 227" transform="translate(2 1)">
+        <circle id="Ellipse_1" data-name="Ellipse 1" cx="5" cy="5" r="5" transform="translate(3.656 7.357)" fill="#fff"/>
+        <circle id="Ellipse_136" data-name="Ellipse 136" cx="3" cy="3" r="3" transform="translate(5.551 9.496)" fill="#272727"/>
+      </g>
+      <g id="Group_228" data-name="Group 228" transform="translate(19 1)">
+        <circle id="Ellipse_1-2" data-name="Ellipse 1" cx="5" cy="5" r="5" transform="translate(3.656 7.357)" fill="#fff"/>
+        <circle id="Ellipse_136-2" data-name="Ellipse 136" cx="3" cy="3" r="3" transform="translate(5.551 9.496)" fill="#272727"/>
+      </g>
+    </g>
+  </g>
+</svg>

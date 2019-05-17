@@ -1,0 +1,161 @@
+$font-family: 'Roboto', 'Noto Sans TC', 'arial', '微軟正黑體';
+
+$color_blue: #49b1c2;
+$color_grey: #474747;
+$color_light: #949494;
+$color_orange: #f9c149;
+$color_red: #ec6a6a;
+
+$color_background: #f6f6f6;
+$color_border: #dfdfdf;
+$boder_radius: 6px;
+
+$font_title_size: 24px;
+$font_content_size: 18px;
+$shadow: 0px 1px 4px rgba(black, 0.2);
+
+.navbar {
+  -webkit-user-select: none; /* for Chrome */
+  -moz-user-select: none; /* for Firefox */
+
+  background-color: white;
+  font-family: $font-family;
+  font-size: $font_content_size;
+  height: 72px;
+  padding: 0px;
+  box-shadow: 0px 1px 4px rgba(black, 0.2);
+  .container {
+    display: flex;
+    justify-content: space-between;
+    height: 100%;
+    padding: 0px;
+    //商標
+    .brand_logo {
+      height: 100%;
+      padding-left: 5px;
+      flex: 1;
+      img {
+        margin-top: 4px;
+        // cursor: pointer;
+      }
+    }
+    //nav 共用屬性
+    > ul {
+      padding: 0px;
+      list-style: none;
+      display: flex;
+      justify-content: center;
+      > li {
+        > a {
+          display: block;
+          height: 100%;
+          line-height: 72px;
+          text-decoration: none;
+          color: $color_grey;
+        }
+        > a:hover {
+          color: $color_blue;
+        }
+        > a.active {
+          color: $color_blue;
+        }
+      }
+    }
+    //左邊的nav
+    ul.web_nav {
+      li {
+        a {
+          padding: 0 18px;
+        }
+      }
+    }
+    //右邊的nav
+    ul.member_nav {
+      flex: 1;
+      justify-content: flex-end;
+      padding-right: 5px;
+      li {
+        a {
+          padding: 0 12.5px;
+        }
+        a:hover svg path {
+          fill: $color_blue;
+        }
+        a.active svg path {
+          fill: $color_blue;
+        }
+      }
+      //通知按鈕
+      li.notice_icon {
+        position: relative;
+        //submenu
+        ul {
+          position: absolute;
+          list-style: none;
+          right: 0;
+          background-color: white;
+          border-radius: 6px;
+          font-size: 16px;
+          box-shadow: $shadow;
+          padding: 10px 0 5px 0;
+          width: 260px;
+          li.notice_text {
+            padding-left: 20px;
+            padding-bottom: 4px;
+          }
+          li {
+            a {
+              display: block;
+              height: 80px;
+              text-decoration: none;
+              color: $color_grey;
+              padding: 4px 5px;
+              border-top:1px solid $color_border;
+            }
+           
+          }
+        }
+      }
+      //會員按鈕
+      li.user_icon {
+        position: relative;
+        //submenu
+        ul {
+          position: absolute;
+          right: 0;
+          list-style: none;
+          //   display: block;
+          background-color: white;
+          border-radius: 6px;
+          box-shadow: $shadow;
+          padding: 10px 0 5px 0;
+          width: 160px;
+          hr {
+            margin: 6px 0 6px 0;
+          }
+          li {
+            text-align: center;
+            div.avatar {
+              display: inline-block;
+              width: 45px;
+              height: 45px;
+              border-radius: 50%;
+              border: 1px solid rgba(black, 0.2);
+              margin: 5px 0;
+            }
+            a {
+              display: block;
+              text-decoration: none;
+              color: $color_grey;
+              font-size: 16px;
+              padding: 4px 5px;
+            }
+            a:hover {
+              color: $color_blue;
+            }
+          }
+        }
+      }
+    }
+  }
+}

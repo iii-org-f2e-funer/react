@@ -14,28 +14,13 @@ import Firm from '../pages/Firm.js'
 import Footer from '../components/Footer.js'
 import Product from '../pages/Product.js'
 
+import Navbar from '../components/Navbar'
+
 function RootRouter() {
   return (
     <Router>
       <>
-        <ul>
-          <li>
-            <Link to="/">Home</Link>
-          </li>
-          <li>
-            <Link to="/demo">demo</Link>
-          </li>
-          <li>
-            <Link to="/gamemap">gameMap</Link>
-          </li>
-          <li>
-            <Link to="/firm">firm</Link>
-          </li>
-          <li>
-            <Link to="/product">product</Link>
-          </li>
-        </ul>
-
+        <Navbar />
         <Switch>
           <Route exact path="/" component={Demopage} />
           <Route path="/about" component={Demopage} />
