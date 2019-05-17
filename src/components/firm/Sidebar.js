@@ -24,7 +24,7 @@ const Sidebar = () => {
           <Media.Body>
             <p>桌遊糖果城</p>
             <p>candycity@gmail.tw</p>
-            <button className="btn">編輯店家資料</button>
+            <button className="button">編輯店家資料</button>
           </Media.Body>
         </Media>
         <div className="sidebar_link">
@@ -53,7 +53,6 @@ const Sidebar = () => {
             <Route path="/firm/site_order" component={Account} />
           </Switch>
         </div>
-        <input type="search"></input>
       </div>
     </>
   )
