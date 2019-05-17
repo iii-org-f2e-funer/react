@@ -8,7 +8,7 @@ import {
 import React from 'react'
 import Demopage from '../pages/demopage.js'
 import Firm from '../pages/Firm.js'
-import Footer from '../components/footer.js'
+import Footer from '../components/Footer.js'
 import Product from '../pages/Product.js'
 
 
