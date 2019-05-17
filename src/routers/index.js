@@ -1,10 +1,4 @@
-import {
-  BrowserRouter as Router,
-  Route,
-  Link,
-  Switch,
-  NavLink,
-} from 'react-router-dom'
+import { BrowserRouter as Router, Route, Switch } from 'react-router-dom'
 import React from 'react'
 import Demopage from '../pages/demopage.js'
 
@@ -23,7 +17,6 @@ function RootRouter() {
         <Navbar />
         <Switch>
           <Route exact path="/" component={Demopage} />
-          <Route path="/about" component={Demopage} />
           <Route path="/gamemap" component={GameMapDetail} />
           <Route path="/demo" component={Demopage} />
           <Route path="/firm" component={Firm} />

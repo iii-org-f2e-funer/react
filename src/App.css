@@ -1,37 +1,218 @@
-body {
+/* layout */
+body .container{
+  padding: 0;
+}
+/* Link*/
+a{
+  color: #484848;
+  text-decoration: none;
+}
+a:hover,a:active,a:focus{
+  color: #484848;
+  text-decoration: none;
+}
+
+/*List*/
+ul,li{
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+/* font */
+body,html {
   background-color: #f6f6f6;
   font-family: 'Roboto','Noto Sans TC', Arial,'微軟正黑體';
 }
-.App {
-  text-align: center;
+
+/*Heading*/
+h1,h2,h3,h4,h5,p{
+  margin: 0;
+  color: #474747;
+}
+h1{
+  font-size: 80px;
+  font-weight: 800;
+  margin-top: 24px;
+  margin-bottom: 24px;
+}
+h2{
+  font-size: 48px;
+  font-weight: 600;
+  margin-top: 24px;
+  margin-bottom: 24px;
+}
+h3{
+  font-size: 40px;
+  font-weight: 600;
+  margin-top: 24px;
+  margin-bottom: 24px;
+  line-height: 48px;
+}
+h4{
+  font-size: 24px;
+  font-weight: 600;
+  margin-top: 24px;
+  margin-bottom: 24px;
+  line-height: 32px;
+}
+h5{
+  font-size: 20px;
+  font-weight: 400;
+  margin-top: 24px;
+  margin-bottom: 16px;
+  line-height: 1;
+}
+p{
+  font-size: 18px;
+  font-weight: 400;
+  letter-spacing: 0;
+  margin-bottom: 16px;
+  line-height: 32px;
+}
+/* background Color */
+.bg-color-blue{background-color: #3DB4E0;}
+.bg-color-red{background-color: #EC6A6A;}
+.bg-color-black{background-color:#474747;}
+.bg-color-grey{background-color:#949494;}
+.bg-color-yellow{background-color:#F9C149;}
+.bg-color-white{background-color:#FFF;}
+
+
+/* text Color */
+.color-blue{color: #3DB4E0!important;}
+.color-red{color: #EC6A6A!important;}
+.color-black{color:#474747!important;}
+.color-grey{color:#949494!important;}
+.color-yellow{color:#F9C149!important;}
+.color-white{color:#FFF!important;}
+
+
+/* button */
+/* 不叫btn是會和bootstrap衝突 */
+.button{
+	display: inline-block;
+	vertical-align: top;
+	position: relative;
+	margin: 0;
+	padding: 0 16px;
+	height: 36px; 
+	line-height: 36px;
+	min-width: 64px;
+	box-sizing: border-box;
+	font-size: 16px;
+	font-weight: 500; 
+	text-align: center;
+	text-decoration: none;
+	letter-spacing: 0;
+  background-color: #3DB4E0;
+	border: 0;
+	border-radius: 6px;
+	outline: 0;
+	cursor: pointer;
+	overflow: hidden;
+  transition: all 0.3s;
+  color: #fff;
+  font-weight: 400;
+}
+.button:hover,
+.button:active, 
+.button:focus{
+  background-color: #2095C1;
+  color: #fff;  
+	outline: 0;
+}
+.button.button--yellow{
+	background-color: #F9C149;
+	border-radius: 18px;
+}
+.button.button--yellow:hover, 
+.button.button--yellow:active,
+.button.button--yellow:focus{
+  background-color: #F9A629;
+  color: #fff;  
+	outline: 0;
+}
+.button.button--lg{
+  font-size: 20px;
+  height: 48px;
 }
 
-.App-logo {
-  animation: App-logo-spin infinite 20s linear;
-  height: 40vmin;
-  pointer-events: none;
+/* form */
+input{
+  color: #474747;
 }
-
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
-}
-
-.App-link {
-  color: #61dafb;
-}
-
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
+/* 帳密 */
+input[type="text"].account,
+input[type="password"]
+  {
+    padding: 8px 8px;
+    display: inline-block;
+    border: 1px solid #ccc;
+    background-color: #fff;
+    border-radius: 4px;
+    vertical-align: middle;
+    box-sizing: border-box;
+    width: 100%;
+    transition: all 0.3s;
+    
   }
-  to {
-    transform: rotate(360deg);
+input[type="text"].account:focus,
+input[type="password"]:focus
+  {
+    outline: none;
+    border-color: #3DB4E0;
   }
+/* focus藍色橫線 */
+input[type="text"],
+input[type="email"],
+input[type="tel"],
+input[type="number"]{
+  padding: 8px 8px;
+  display: inline-block;
+  border:none;
+  border-bottom: 2px solid #949494;
+  vertical-align: middle;
+  box-sizing: border-box;
+  width: 100%;
+  transition: all 0.3s;
+  position: relative;
+  transition: all 0.3s;
+}
+input[type="text"]:focus,
+input[type="email"]:focus,
+input[type="tel"]:focus,
+input[type="number"]{
+  outline: none;
+  border-bottom: 2px solid #2095C1;
+}
+/* search bar */ 
+/* 放大鏡icon自己加在外層，:before不能用 */
+input[type="search"]{
+  padding: 8px 16px;
+  display: inline-block;
+  border: 1px solid #949494;
+  background-color: #fff;
+  border-radius: 20px;
+  vertical-align: middle;
+  box-sizing: border-box;
+  width: 100%;
+  height: 36px;
+  transition: all 0.3s;
+
+}
+input[type="search"]:focus{
+  outline: none;
+  border: 1px solid #2095C1;
+}
+/* select */
+/* 請加classname="form-control" */
+body select.form-control:focus{
+  box-shadow: none;
+}
+
+/* textarea  */ 
+/* className="form-control */
+body textarea.form-control:focus{
+  box-shadow: none;
 }
