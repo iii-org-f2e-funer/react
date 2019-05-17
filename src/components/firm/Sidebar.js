@@ -51,8 +51,6 @@ const Sidebar = () => {
             <Route path="/firm/product_order" component={Account} />
             <Route path="/firm/site_manage" component={Account} />
             <Route path="/firm/site_order" component={Account} />
-
-
           </Switch>
         </div>
       </div>

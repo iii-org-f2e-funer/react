@@ -23,7 +23,7 @@ h1 {
 }
 .outside{
   width: 100%;
-  height: 300vh;
+  height: 200vh;
   background: #f6f6f6;
   position: relative;
 
@@ -31,9 +31,45 @@ h1 {
 .search{
   width: 342px;
   height: 520px;
-  background: white;
+  background: #ffffff;
   position: absolute;
   left: 300px;
   top: 50px;
+  border-radius: 10px;
+}
+.search input[type=text] {
+  padding: 6px;
+  margin-top: 10px;
+  font-size: 17px;
+  border: solid 1px #c4b3b3;
+  border-radius: 20px;
+}
+.search-control{
+  width: 307px;
+}
+
+#basic-addon3{
+  color: #6EC4D2;
+  border-radius:18px 0 0 18px; 
+  height: 36px;
+}
+#basic-url{
+  height: 36px;
+  border-radius:0px 18px 18px 0px; 
+}
+#dropdown-basic-button{
+  background:#ffffff;
+  color: #6EC4D2;
+  width: 100%;
+  border: solid 1px #c4b3b3;
+}
+.dropdown-menu{
+  width: 100%;
+}
+.searchit{
+  width: 86%;
+  height: 50px;
+  background: #6EC4D2;
+  border: none;
   border-radius: 10px;
 }
