@@ -93,7 +93,7 @@ const Navbar = props => (
           </ul>
         </li>
         <li className="user_icon">
-          <NavLink to="/firm">
+          <NavLink to="#">
             <svg
               xmlns="http://www.w3.org/2000/svg"
               width="17.5"
