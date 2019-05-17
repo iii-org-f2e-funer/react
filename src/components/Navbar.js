@@ -7,7 +7,7 @@ const Navbar = props => (
       <div className="brand_logo">
         <NavLink to="/">
           <img
-            src={process.env.PUBLIC_URL + '/images/navbar/brand_logo.svg'}
+            src={process.env.PUBLIC_URL + '/images/navbar/brand_logo.png'}
             alt="brand_logo"
           />
         </NavLink>
@@ -93,7 +93,7 @@ const Navbar = props => (
           </ul>
         </li>
         <li className="user_icon">
-          <NavLink to="/#">
+          <NavLink to="/firm">
             <svg
               xmlns="http://www.w3.org/2000/svg"
               width="17.5"

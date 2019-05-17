@@ -29,15 +29,14 @@ $shadow: 0px 1px 4px rgba(black, 0.2);
     justify-content: space-between;
     height: 100%;
     padding: 0px;
+
     //商標
     .brand_logo {
       height: 100%;
       padding-left: 5px;
       flex: 1;
-      img {
-        margin-top: 4px;
-        // cursor: pointer;
-      }
+      display: flex;
+      align-items: center;
     }
     //nav 共用屬性
     > ul {

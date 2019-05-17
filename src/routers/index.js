@@ -23,7 +23,6 @@ function RootRouter() {
         <Navbar />
         <Switch>
           <Route exact path="/" component={Demopage} />
-          <Route path="/about" component={Demopage} />
           <Route path="/gamemap" component={GameMapDetail} />
           <Route path="/demo" component={Demopage} />
           <Route path="/firm" component={Firm} />
