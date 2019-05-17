@@ -7,10 +7,15 @@
   font-family: 'Roboto', 'Noto Sans TC', 'arial', '微軟正黑體';
   bottom: 0;
 }
+@media (max-width: 768px) {
+  .watermark {
+    width: 30%;
+  }
+}
 .watermark {
-  width: 650px;
+  width: 40%;
   height: 500px;
-  background: url('/images/footer/FUNer.png');
+  background: url('/images/footer/FUNer.png') no-repeat;
   position: absolute;
   top: -50px;
   left: -60px;

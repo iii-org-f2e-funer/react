@@ -8,7 +8,7 @@ import {
 import React from 'react'
 import Demopage from '../pages/demopage.js'
 import Firm from '../pages/Firm.js'
-import Funfooter from '../components/Footer.js'
+import Footer from '../components/footer.js'
 
 
 
@@ -33,7 +33,7 @@ function RootRouter() {
           <Route path="/demo" component={Demopage} />
           <Route path="/firm" component={Firm} />
         </Switch>
-        <Funfooter/>
+        <Footer/>
         </>
     </Router>
   )
