@@ -16,7 +16,9 @@ const product = () => {
         <div className="search" />
         <div className="cards" />
       </div>
-         <Footer />
+
+      <Footer />
+
     </>
   )
 }
