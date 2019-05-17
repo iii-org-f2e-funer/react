@@ -1,0 +1,45 @@
+.flex {
+  display: flex;
+}
+.bodyRoot {
+  background-color: gray;
+  * {
+    box-sizing: border-box;
+  }
+  .container {
+    max-width: 1170px;
+    width: 100%;
+    background-color: gray;
+  }
+}
+// local
+.mainBoard {
+  padding: 20px;
+  box-shadow: 0px 0px 3px #aaaaaa;
+  .imgCard {
+    width: 420px;
+    height: 520px;
+    box-shadow: 0px 0px 1px #aaaaaa;
+  }
+  .detailCard {
+    padding: 20px;
+  }
+  .subBoard {
+    margin-top: 20px;
+    width: 100%;
+    a {
+      color: #474747;
+    }
+    .nav-link.active {
+      color: #49b1c2;
+    }
+  }
+  button.actionButton {
+    background-color: #49b1c2;
+    border-color: #49b1c2;
+  }
+}
+
+.red {
+  border: 1px solid red;
+}
