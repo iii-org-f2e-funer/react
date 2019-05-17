@@ -1,10 +1,4 @@
-import {
-  BrowserRouter as Router,
-  Route,
-  Link,
-  Switch,
-  NavLink,
-} from 'react-router-dom'
+import { BrowserRouter as Router, Route, Switch } from 'react-router-dom'
 import React from 'react'
 import Demopage from '../pages/demopage.js'
 
