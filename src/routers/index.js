@@ -9,7 +9,7 @@ import React from 'react'
 import Demopage from '../pages/demopage.js'
 import Firm from '../pages/Firm.js'
 import Footer from '../components/footer.js'
-
+import Product from '../pages/Product.js'
 
 
 function RootRouter() {
@@ -26,12 +26,16 @@ function RootRouter() {
           <li>
             <Link to="/firm">firm</Link>
           </li>
+          <li>
+            <Link to="/product">product</Link>
+          </li>
         </ul>
 
         <Switch>
           <Route exact path="/" component={Demopage}/>
           <Route path="/demo" component={Demopage} />
           <Route path="/firm" component={Firm} />
+          <Route path="/product" component={Product} />
         </Switch>
         <Footer/>
         </>
