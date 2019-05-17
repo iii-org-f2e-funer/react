@@ -1,5 +1,13 @@
 import React from 'react'
 import { Media } from 'react-bootstrap'
+import Account from '../../components/firm/Account'
+import {
+  BrowserRouter as Router,
+  Route,
+  Link,
+  Switch,
+  NavLink,
+} from 'react-router-dom'
 
 const Sidebar = () => {
   return (
@@ -22,21 +30,30 @@ const Sidebar = () => {
         <div className="link">
           <ul>
             <li>
-              <a href="">帳號設定</a>
+              <Link to="/">帳號設定</Link>
             </li>
             <li>
-              <a href="">商品管理</a>
+              <Link to="/firm/product_manage">商品管理</Link>
             </li>
             <li>
-              <a href="">商品訂單</a>
+              <Link to="/firm/product_order">商品訂單</Link>
             </li>
             <li>
-              <a href="">場地管理</a>
+              <Link to="/firm/site_manage">場地管理</Link>
             </li>
             <li>
-              <a href="">場地預約訂單</a>
+              <Link to="/firm/site_order">場地預約訂單</Link>
             </li>
           </ul>
+          <Switch>
+            <Route exact path="/" component={Account} />
+            <Route path="/firm/product_manage" component={Account} />
+            <Route path="/firm/product_order" component={Account} />
+            <Route path="/firm/site_manage" component={Account} />
+            <Route path="/firm/site_order" component={Account} />
+
+
+          </Switch>
         </div>
       </div>
     </>

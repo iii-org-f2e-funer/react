@@ -32,13 +32,13 @@ function RootRouter() {
         </ul>
 
         <Switch>
-          <Route exact path="/" component={Demopage}/>
+          <Route exact path="/" component={Demopage} />
           <Route path="/demo" component={Demopage} />
           <Route path="/firm" component={Firm} />
           <Route path="/product" component={Product} />
         </Switch>
-        <Footer/>
-        </>
+        <Footer />
+      </>
     </Router>
   )
 }
