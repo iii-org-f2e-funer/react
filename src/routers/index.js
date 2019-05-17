@@ -7,6 +7,7 @@ import {
 } from 'react-router-dom'
 import React from 'react'
 import Demopage from '../pages/demopage.js'
+import GameMapDetail from '../pages/GameMapDetail.js'
 
 function RootRouter() {
   return (
@@ -19,11 +20,15 @@ function RootRouter() {
           <li>
             <Link to="/demo">demo</Link>
           </li>
+          <li>
+            <Link to="/gamemap">gameMap</Link>
+          </li>
         </ul>
 
         <Switch>
           <Route exact path="/" component={Demopage} />
           <Route path="/about" component={Demopage} />
+          <Route path="/gamemap" component={GameMapDetail} />
         </Switch>
       </>
     </Router>
