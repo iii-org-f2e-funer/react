@@ -9,6 +9,7 @@ import Footer from '../components/Footer.js'
 import Product from '../pages/Product.js'
 
 import Navbar from '../components/Navbar'
+import ChatRoom from '../pages/ChatRoom'
 
 function RootRouter() {
   return (
@@ -21,6 +22,7 @@ function RootRouter() {
           <Route path="/demo" component={Demopage} />
           <Route path="/firm" component={Firm} />
           <Route path="/product" component={Product} />
+          <Route path="/chatroom" component={ChatRoom} />
         </Switch>
         <Footer />
       </>
