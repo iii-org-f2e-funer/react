@@ -38,7 +38,7 @@
 
 .range-controll{
   width: 88%;
-  margin: 30px auto;
+  margin: 20px auto;
 }
 input[type="range" i] {
   width: 100%;
@@ -59,7 +59,7 @@ input[type="range" i] {
 }
 
 #basic-addon3{
-  color: #6EC4D2;
+  color: #3DB4E0;
   border-radius:18px 0 0 18px; 
   height: 36px;
 }
@@ -69,7 +69,7 @@ input[type="range" i] {
 }
 #dropdown-basic-button{
   background:#ffffff;
-  color: #6EC4D2;
+  color: #3DB4E0;
   width: 100%;
   border: solid 1px #c4b3b3;
 }
@@ -79,9 +79,33 @@ input[type="range" i] {
 .searchit{
   width: 86%;
   height: 50px;
-  background: #6EC4D2;
-  border: none;
-  border-radius: 10px;
+  display: inline-block;
+	vertical-align: top;
+	position: relative;
+	padding: 0 16px;
+	height: 36px; 
+	line-height: 36px;
+	min-width: 64px;
+	box-sizing: border-box;
+	font-size: 16px;
+	font-weight: 500; 
+	text-align: center;
+	text-decoration: none;
+	letter-spacing: 0;
+  background-color: #3DB4E0;
+	border: 0;
+	border-radius: 6px;
+	outline: 0;
+	cursor: pointer;
+	overflow: hidden;
+  transition: all 0.3s;
+  color: #fff;
+  font-weight: 400;
+}
+.searchit:focus{
+  background-color: #2095C1;
+  color: #fff;  
+	outline: 0;
 }
 .cards{
   width: 790px;

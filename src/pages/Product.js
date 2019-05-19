@@ -67,12 +67,12 @@ const product = () => {
               <div className="range-controll">
                 <input type="range" name="money" min="0" max="10000" />
               </div>
-              <Button className="searchit m-4" block>
+              <Button className="searchit m-4 button button" block>
                 篩選商品
               </Button>
             </div>
             <div className="cards">
-              <Link to="/event">
+              <Link to="/ProductDetail">
                 <div className="gamecard">
                   <Card style={{ width: '190px', height: '280px' }}>
                     <Card.Img
@@ -86,7 +86,7 @@ const product = () => {
                   </Card>
                 </div>
               </Link>
-              <Link to="/event">
+              <Link to="/ProductDetail">
                 <div className="gamecard">
                   <Card
                     className="gamecard1"
@@ -103,7 +103,7 @@ const product = () => {
                   </Card>
                 </div>
               </Link>
-              <Link to="/event">
+              <Link to="/ProductDetail">
                 <div className="gamecard">
                   <Card style={{ width: '190px', height: '280px' }}>
                     <Card.Img
@@ -117,7 +117,7 @@ const product = () => {
                   </Card>
                 </div>
               </Link>
-              <Link to="/event">
+              <Link to="/ProductDetail">
                 <div className="gamecard">
                   <Card style={{ width: '190px', height: '280px' }}>
                     <Card.Img
@@ -131,7 +131,7 @@ const product = () => {
                   </Card>
                 </div>
               </Link>
-              <Link to="/event">
+              <Link to="/ProductDetail">
                 <div className="gamecard">
                   <Card style={{ width: '190px', height: '280px' }}>
                     <Card.Img
@@ -145,7 +145,7 @@ const product = () => {
                   </Card>
                 </div>
               </Link>
-              <Link to="/event">
+              <Link to="/ProductDetail">
                 <div className="gamecard">
                   <Card style={{ width: '190px', height: '280px' }}>
                     <Card.Img
@@ -159,7 +159,7 @@ const product = () => {
                   </Card>
                 </div>
               </Link>
-              <Link to="/event">
+              <Link to="/ProductDetail">
                 <div className="gamecard">
                   <Card style={{ width: '190px', height: '280px' }}>
                     <Card.Img
@@ -173,7 +173,7 @@ const product = () => {
                   </Card>
                 </div>
               </Link>
-              <Link to="/event">
+              <Link to="/ProductDetail">
                 <div className="gamecard">
                   <Card style={{ width: '190px', height: '280px' }}>
                     <Card.Img
