@@ -1,11 +1,11 @@
-h1 {
-  color: red;
-}
+.product{
 .banner{
   position: relative;
   width: 100%;
   height: 226px;
-  background: url('/images/product/banner-image.jpg')
+  background: url('/images/product/banner-image.jpg') no-repeat;
+  background-size: cover;
+  
 }
 .banner-tittle{
   position: absolute;
@@ -21,21 +21,31 @@ h1 {
   left:60%;
   z-index: 5;
 }
+
 .outside{
   width: 100%;
-  height: 200vh;
+  height: auto;
   background: #f6f6f6;
-  position: relative;
-
+  display: flex;
 }
 .search{
   width: 342px;
   height: 520px;
   background: #ffffff;
-  position: absolute;
-  left: 300px;
-  top: 50px;
   border-radius: 10px;
+  margin-top: 30px;
+}
+
+.range-controll{
+  width: 88%;
+  margin: 30px auto;
+}
+input[type="range" i] {
+  width: 100%;
+  cursor: default;
+  padding: 0px;
+  border: initial;
+  margin: 2px;
 }
 .search input[type=text] {
   padding: 6px;
@@ -45,7 +55,7 @@ h1 {
   border-radius: 20px;
 }
 .search-control{
-  width: 307px;
+  width: 88%;
 }
 
 #basic-addon3{
@@ -72,4 +82,62 @@ h1 {
   background: #6EC4D2;
   border: none;
   border-radius: 10px;
+}
+.cards{
+  width: 790px;
+  margin-top: 30px;
+  text-align: center;
+  display: flex;
+  flex-wrap: wrap;
+}
+.card{
+  box-shadow: 2px 2px 2px #888888;
+}
+.gamecard{
+  margin: 3px 3px 10px 3px
+
+}
+.scrolltop{
+  width: 190px;
+  height: 185px;
+  background: url('/images/product/srolltop.png') no-repeat;
+  margin-left: 80vw;
+  
+}
+}
+@media (max-width: 768px) {
+  .product .container .outside {
+       display:block;
+  }
+  .product .container .search {
+    padding-top: 5px ;
+    width: 100%;
+}
+.product .container .cards {
+  width: 100%;
+  padding: 0 50px;
+}
+.product .banner #purplemonster{
+  position: absolute;
+  bottom: 5px;
+  left: 40%;
+  z-index: 5;
+}
+.product .banner{
+  height: 500px;
+}
+.product .banner-tittle{
+  width: 100%;
+  position: absolute;
+  text-align: center;
+  left: 0;
+  top:40%;
+  color:white;
+  z-index: 10;
+  font-size: 30px;
+}
+.product .scrolltop{
+  width: 100%;
+  margin-left: 30vw;   
+}
 }
