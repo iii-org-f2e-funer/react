@@ -74,7 +74,7 @@ class Navbar extends React.Component {
               </NavLink>
             </li>
             <li>
-              <NavLink to="/cart" activeClassName="active">
+              <NavLink to="/Mycart" activeClassName="active">
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
                   width="23.066"

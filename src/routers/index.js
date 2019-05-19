@@ -10,6 +10,9 @@ import Product from '../pages/Product.js'
 
 import Navbar from '../components/Navbar'
 import ChatRoom from '../pages/ChatRoom'
+import ProductDetail from '../pages/ProductDetail'
+import Myfav from '../pages/Myfav'
+import Mycart from '../pages/Mycart'
 
 function RootRouter() {
   return (
@@ -23,6 +26,9 @@ function RootRouter() {
           <Route path="/firm" component={Firm} />
           <Route path="/product" component={Product} />
           <Route path="/chatroom" component={ChatRoom} />
+          <Route path="/ProductDetail" component={ProductDetail} />
+          <Route path="/Myfav" component={Myfav} />
+          <Route path="/Mycart" component={Mycart} />
         </Switch>
         <Footer />
       </>
