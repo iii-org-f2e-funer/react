@@ -6,7 +6,6 @@ const Firm_manage = () => {
       <div className="manage_info">
         <h5>帳號設定及店家資料</h5>
         <hr />
-
       </div>
     </>
   )

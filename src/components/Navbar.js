@@ -138,7 +138,8 @@ class Navbar extends React.Component {
             </li>
             <li>
               <NavLink variant="primary" onClick={this.handleShow}>登入</NavLink>
-              <LoginModal show={this.state.loginPopup}
+              <LoginModal
+                show={this.state.loginPopup}
                 handleHide={this.handleHide}
               />
             </li>
