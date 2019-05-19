@@ -13,20 +13,19 @@ const Sidebar = () => {
   return (
     <>
       <div className="sidebar">
-        <Media>
+        <div className="person flex">
           <div className="img-outter">
-            <div className="avatar">
-              <img
-                src={process.env.PUBLIC_URL + '/images/personalFolder/logo.png'}
-              />
-            </div>
+            <img
+              src={process.env.PUBLIC_URL + '/images/personalFolder/logo.png'}
+            />
           </div>
-          <Media.Body>
-            <p>桌遊糖果城</p>
-            <p>candycity@gmail.tw</p>
+          <div className="info">
+            <h5>桌遊糖果城</h5>
+            <div className="email">candycity@gmail.twfesfs</div>
             <button className="button">編輯店家資料</button>
-          </Media.Body>
-        </Media>
+          </div>
+        </div>
+
         <div className="sidebar_link">
           <ul>
             <li>
