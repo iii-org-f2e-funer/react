@@ -36,7 +36,7 @@ $fontsz_sm: 18px;
 	box-shadow: 0px 0px 3px $c_grey;
 	.imgCard {
 		width: 420px;
-		height: 520px;
+		height: 370px;
 		box-shadow: 0px 0px 1px $c_grey;
 	}
 	.detailCard {
@@ -62,10 +62,10 @@ $fontsz_sm: 18px;
 	}
 }
 
-.red {
-	border: 1px solid red;
+.recBoard {
+	margin: 20px 0;
 }
-
+//slider
 .slider {
 	position: relative;
 	width: 100%;

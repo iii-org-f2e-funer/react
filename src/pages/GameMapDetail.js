@@ -3,6 +3,28 @@ import '../styles/gameMap/gameMap.scss'
 import { Button, Tabs, Tab } from 'react-bootstrap'
 import { BrowserRouter as Router, Route, Link, Switch } from 'react-router-dom'
 import Slider from '../components/gameMap/ImgSlider'
+import * as fa from 'react-icons/fa'
+
+import 'react-image-gallery/styles/css/image-gallery.css'
+import ImageGallery from 'react-image-gallery'
+
+const images = [
+  {
+    original: 'https://s3.us-east-2.amazonaws.com/dzuz14/thumbnails/aurora.jpg',
+    thumbnail:
+      'https://s3.us-east-2.amazonaws.com/dzuz14/thumbnails/aurora.jpg',
+  },
+  {
+    original: 'https://s3.us-east-2.amazonaws.com/dzuz14/thumbnails/canyon.jpg',
+    thumbnail:
+      'https://s3.us-east-2.amazonaws.com/dzuz14/thumbnails/canyon.jpg',
+  },
+  {
+    original: 'https://s3.us-east-2.amazonaws.com/dzuz14/thumbnails/desert.jpg',
+    thumbnail:
+      'https://s3.us-east-2.amazonaws.com/dzuz14/thumbnails/desert.jpg',
+  },
+]
 
 class GameMapDetail extends React.Component {
   constructor() {
@@ -17,25 +39,39 @@ class GameMapDetail extends React.Component {
             <div className="mainBoard">
               <div className="flex">
                 <div className="imgCard">
-                  <h1 />
+                  <ImageGallery
+                    items={images}
+                    showPlayButton={false}
+                    autoPlay={true}
+                  />
                 </div>
                 <div className="detailCard">
                   <h2 className="shoptitle">Game Square 遊戲平方 中山店</h2>
                   <p>
-                    台北市,中山區中山北路1段135巷9號2樓
+                    <fa.FaMapMarkerAlt />
+                    &nbsp;&nbsp;
+                    <span>台北市,中山區中山北路1段135巷9號2樓</span>
                     <br />
-                    02 2581 1191
+                    <fa.FaPhone />
+                    &nbsp;&nbsp;
+                    <span>02 2581 1191</span>
                     <br />
-                    週一～週四 14:00 -22:00 <br />
-                    (22：00 後需當天21:30前預約)
-                    <br />
-                    週五～週日 13:00 - 02:00
-                  </p>
-                  <p>
-                    週五～週日及國定假日 <br />
-                    1hr 會員 $90 / 非會員 $100
-                    <br />
-                    4hrs 會員$300 / 非會員 $400
+                    <fa.FaRegClock />
+                    &nbsp;&nbsp;
+                    <span>
+                      週一～週四 14:00 -22:00 <br />
+                      &nbsp;&nbsp;&nbsp;&nbsp;(22：00 後需當天21:30前預約)
+                      <br />
+                      &nbsp;&nbsp;&nbsp;&nbsp;週五～週日 13:00 - 02:00
+                      週五～週日及國定假日 <br />
+                    </span>
+                    <fa.FaRegMoneyBillAlt />
+                    &nbsp;&nbsp;
+                    <span>
+                      1hr 會員 $90 / 非會員 $100
+                      <br />
+                      &nbsp;&nbsp;&nbsp;&nbsp; 4hrs 會員$300 / 非會員 $400
+                    </span>
                   </p>
                   <Button className="actionButton " size="lg" block>
                     預約場地
@@ -66,12 +102,13 @@ class GameMapDetail extends React.Component {
               </div>
             </div>
             {/* main board */}
-            <div>
+            <div className="recBoard">
               <h3 className="lgfont">附近店家</h3>
               <hr />
-            </div>
-            <div className="">
-              <Slider />
+
+              <div className="">
+                <Slider />
+              </div>
             </div>
           </div>
         </div>
