@@ -15,15 +15,15 @@ const Pt_list =()=>{
                 <div className="host_name">開團人姓名</div> 
             </div>
             <Card.Body className="card_bd">
-          <div class="pt_title d-flex justify-content-between">
+          <div className="pt_title d-flex justify-content-between">
             <span>神秘or蓋亞 輔大逗桌遊</span>
-            <a href=""><i class="fas fa-ellipsis-v"/></a>
+            <a href=""><i className="fas fa-ellipsis-v"/></a>
           </div>
-          <div class="pt_time">
-            <i class="fas fa-clock"/>2019/04/18 19:00
+          <div className="pt_time">
+            <i className="fas fa-clock"/>2019/04/18 19:00
           </div>
-          <div class="pt_locate">
-            <i class="fas fa-map-marker-alt"/>新莊區, 輔大逗桌遊
+          <div className="pt_locate">
+            <i className="fas fa-map-marker-alt"/>新莊區, 輔大逗桌遊
           </div>
             </Card.Body>
         </Card>
