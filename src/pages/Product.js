@@ -10,6 +10,7 @@ import {
   Card,
 } from 'react-bootstrap'
 import { Link } from 'react-router-dom'
+
 const product = () => {
   return (
     <>
@@ -191,7 +192,6 @@ const product = () => {
           </div>
         </div>
         <div className="scrolltop" />
-        <Footer />
       </div>
     </>
   )
