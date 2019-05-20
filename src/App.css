@@ -146,21 +146,25 @@ input{
 }
 /* 帳密 */
 /* 要加classname="account" */
-input[type="text"].account,
+.login-form input[type="text"],
+.login-form input[type="email"],
 input[type="password"]
   {
     padding: 8px 8px;
     display: inline-block;
-    border: 1px solid #ccc;
+    border: 2px solid #ccc;
     background-color: #fff;
     border-radius: 4px;
     vertical-align: middle;
     box-sizing: border-box;
     width: 100%;
     transition: all 0.3s;
-    padding-left: 40px
+    padding-left: 40px;
+    height: 48px;
+    margin-bottom: 12px
   }
-input[type="text"].account:focus,
+.login-form input[type="text"]:focus,
+.login-form input[type="email"]:focus,
 input[type="password"]:focus
   {
     outline: none;

@@ -73,6 +73,8 @@
 // login
 // -------------------------------------- 
 .login-form 
+    .red
+        color: #EC6A6A
     .modal-content
         width: 380px
         padding: 24px
@@ -80,6 +82,7 @@
         border: none
     .button
         width: 100%
+        margin-top: 12px
     .login_title
         font-size: 18px
         padding: 0 36px
@@ -90,16 +93,26 @@
     .login-control
         position: relative
         color: #474747
-        input
-            margin: 12px 0
-            height: 48px
         i
             position: absolute
-            left: 12px
-            top: 50%
-            transform: translateY(-50%)
+            top: 16px
             font-size: 16px
             z-index: 10
+            &.fa-lock
+                left: 12px
+            &.fa-user
+                left: 12px
+            &.fa-eye
+                top: 8px            
+                right: 12px
+                color: #949494
+                cursor: pointer
+                padding: 8px
+            &.active
+                color: #474747
+    
+
+
 
 
 

@@ -11,15 +11,24 @@ class Navbar extends React.Component {
     this.state = {
       noticeOpen: false,
       userMenuOpen: false,
-      loginPopup: false
+      loginPopup: false,
+      isLogin: false,
+      userName: '',
     }
   }
-  loginShow = () => {
-    this.setState({ loginPopup: true });
-  };
+
+  login = name => {
+    this.setState({ isLogin: true, loginPopup: false, userName: name })
+  }
+  logOut = () => {
+    this.setState({ isLogin: false })
+  }
+  handleShow = () => {
+    this.setState({ loginPopup: true })
+  }
 
   handleHide = () => {
-    this.setState({ loginPopup: false });
+    this.setState({ loginPopup: false })
   }
   handleNoticeOpen = () => {
     this.setState({ noticeOpen: !this.state.noticeOpen })
@@ -136,13 +145,29 @@ class Navbar extends React.Component {
               <UserMenu isOpen={this.state.userMenuOpen} />
               {/* 會員 submenu */}
             </li>
-            <li>
-              <NavLink variant="primary" onClick={this.loginShow}>登入</NavLink>
-              <LoginModal
-                show={this.state.loginPopup}
-                handleHide={this.handleHide}
-              />
-            </li>
+            {this.state.isLogin ? (
+              <>
+                <li>
+                  <NavLink variant="primary">{this.state.userName}</NavLink>
+                </li>
+                <li>
+                  <NavLink variant="primary" onClick={this.logOut}>
+                    登出
+                  </NavLink>
+                </li>
+              </>
+            ) : (
+              <li>
+                <NavLink variant="primary" onClick={this.handleShow}>
+                  登入
+                </NavLink>
+                <LoginModal
+                  show={this.state.loginPopup}
+                  handleHide={this.handleHide}
+                  login={this.login}
+                />
+              </li>
+            )}
           </ul>
         </div>
       </div>

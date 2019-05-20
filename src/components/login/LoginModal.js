@@ -10,8 +10,6 @@ class LoginModal extends React.Component {
       userOn: true,
     }
   }
-
-
   userclick = () => {
     this.setState({ userOn: true })
   }
@@ -22,28 +20,36 @@ class LoginModal extends React.Component {
     return (
       <>
         <Modal
-          className='login-form'
+          className="login-form"
           show={this.props.show}
           onHide={this.props.handleHide}
           dialogClassName="modal-90w"
           aria-labelledby="example-custom-modal-styling-title"
         >
           <Modal.Header>
-            <div onClick={this.userclick} className={"login_title " + (this.state.userOn ? 'active' : '')}>會員登入</div>
-            <div onClick={this.firmclick} className={"login_title " + (this.state.userOn ? '' : 'active')}>廠商登入</div>
+            <div
+              onClick={this.userclick}
+              className={'login_title ' + (this.state.userOn ? 'active' : '')}
+            >
+              會員登入
+            </div>
+            <div
+              onClick={this.firmclick}
+              className={'login_title ' + (this.state.userOn ? '' : 'active')}
+            >
+              廠商登入
+            </div>
           </Modal.Header>
-          {
-            this.state.userOn
-              ?
-              <LoginInput /> //會員登入的表單，我先用我的原件，之後放eason的元件
-              :
-              <LoginInput /> //廠商登入的表單
+          {this.state.userOn ? (
+            <LoginInput login={this.props.login} /> //會員登入的表單，我先用我的原件，之後放eason的元件
+          ) : (
+            <LoginInput />
+          ) //廠商登入的表單
           }
         </Modal>
       </>
     )
   }
 }
-
 
 export default LoginModal
