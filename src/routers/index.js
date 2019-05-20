@@ -3,7 +3,7 @@ import React from 'react'
 import Demopage from '../pages/demopage.js'
 
 import GameMapDetail from '../pages/GameMapDetail.js'
-
+import GameMap from '../pages/GameMapMain.js'
 import Firm from '../pages/Firm.js'
 import Footer from '../components/Footer.js'
 import Product from '../pages/Product.js'
@@ -21,7 +21,7 @@ function RootRouter() {
         <Navbar />
         <Switch>
           <Route exact path="/" component={Demopage} />
-          <Route path="/gamemap" component={GameMapDetail} />
+          <Route path="/gamemapdetail" component={GameMapDetail} />
           <Route path="/demo" component={Demopage} />
           <Route path="/firm" component={Firm} />
           <Route path="/product" component={Product} />
@@ -29,6 +29,7 @@ function RootRouter() {
           <Route path="/ProductDetail" component={ProductDetail} />
           <Route path="/Myfav" component={Myfav} />
           <Route path="/Mycart" component={Mycart} />
+          <Route path="/gameMap" component={GameMap} />
         </Switch>
         <Footer />
       </>
