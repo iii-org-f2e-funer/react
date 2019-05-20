@@ -1,11 +1,27 @@
+ .container {
+  width: 1170px;
+  min-height: 100vh;
+  margin: 0 auto;
+}
 .card {
-  width: 240px;
-  height: 360px;
-  border: 5px solid rgb(22, 201, 224);
+  width: 250px;
+  height: 350px;
+  border: 5px solid #6ec4d2;
   border-radius: 5px;
   position: relative;
   margin: 15px;
+  font-family: 'Noto Sans CJK TC';
 }
+.card .img_contain {
+  width: 100%;
+  height: 200px;
+}
+.card_img {
+  width: 100%;
+  height: 100%;
+  object-fit:contain
+}
+
 .pt_host {
   width: 100%;
   position: absolute;
@@ -13,8 +29,8 @@
   left: 10px;
 }
 .host_pic {
-  width: 40px;
-  height: 40px;
+  width: 30px;
+  height: 30px;
   border-radius: 50%;
   overflow: hidden;
 }
@@ -22,4 +38,22 @@
   width: 100%;
   height: 100%;
   object-fit: cover;
+}
+.host_name {
+  font-size: 14px;
+  // color: #fff;
+  font-weight: bolder;
+  padding: 5px 0;
+  margin: 0 5px;
+}
+
+.card_bd div {
+  margin: 5px 0;
+  color: #013b46;
+}
+.card_bd span {
+  font-weight: bolder;
+}
+.card_bd i {
+  margin: 0px 5px;
 }
