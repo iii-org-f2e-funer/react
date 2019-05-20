@@ -1,8 +1,7 @@
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom'
 import React from 'react'
 import Demopage from '../pages/demopage.js'
-import Pt_list from '../pages/pt_page/Pt_list'
-import Pt_new from '../pages/pt_page/Pt_new'
+import Event from '../pages/pt_page/Event.js'
 
 
 import GameMapDetail from '../pages/GameMapDetail.js'
@@ -25,6 +24,7 @@ function RootRouter() {
         <Switch>
           <Route exact path="/" component={Demopage} />
           <Route path="/gamemap" component={GameMapDetail} />
+          <Route path="/event" component={Event} />
           <Route path="/demo" component={Demopage} />
           <Route path="/firm" component={Firm} />
           <Route path="/product" component={Product} />
