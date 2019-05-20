@@ -11,15 +11,15 @@ class Navbar extends React.Component {
     this.state = {
       noticeOpen: false,
       userMenuOpen: false,
-      loginPopup: false
+      loginPopup: false,
     }
   }
   handleShow = () => {
-    this.setState({ loginPopup: true });
-  };
+    this.setState({ loginPopup: true })
+  }
 
   handleHide = () => {
-    this.setState({ loginPopup: false });
+    this.setState({ loginPopup: false })
   }
   handleNoticeOpen = () => {
     this.setState({ noticeOpen: !this.state.noticeOpen })
@@ -57,7 +57,7 @@ class Navbar extends React.Component {
           </ul>
           <ul className="member_nav">
             <li>
-              <NavLink to="/chatroom" activeClassName="active">
+              <NavLink to="/chatroom/message" activeClassName="active">
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
                   width="22.587"
@@ -137,7 +137,9 @@ class Navbar extends React.Component {
               {/* 會員 submenu */}
             </li>
             <li>
-              <NavLink variant="primary" onClick={this.handleShow}>登入</NavLink>
+              <NavLink variant="primary" onClick={this.handleShow}>
+                登入
+              </NavLink>
               <LoginModal
                 show={this.state.loginPopup}
                 handleHide={this.handleHide}
