@@ -59,7 +59,7 @@ $shadow: 0px 1px 4px rgba(black, 0.2);
         > a {
           height: 100%;
           line-height: 72px;
-          color: $color_grey;
+          color: $color_light;
         }
         > a:hover {
           color: $color_blue;
@@ -67,11 +67,11 @@ $shadow: 0px 1px 4px rgba(black, 0.2);
         > a.active {
           color: $color_blue;
         }
-        > a:hover path {
-          fill: $color_blue;
+        > a:hover  {
+          color: $color_blue;
         }
         > a.active path {
-          fill: $color_blue;
+          color: $color_blue;
         }
       }
     }
