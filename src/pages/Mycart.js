@@ -93,9 +93,11 @@ const Mycart = () => {
                   </Link>
                 </div>
                 <div className="m-4">
-                  <Button className="m-4 button" block>
-                    前往結帳
-                  </Button>
+                  <Link to="/Shopping1">
+                    <Button className="m-4 button" block>
+                      前往結帳
+                    </Button>
+                  </Link>
                 </div>
               </div>
             </div>

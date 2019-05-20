@@ -1,16 +1,54 @@
-.container {
-  .aside {
-    border: 1px solid #dfdfdf;
-    border-radius: 6px;
-    height: 90vh;
-  }
-  .chatArea {
-    border: 1px solid #dfdfdf;
-    border-radius: 6px;
-    height: 90vh;
-  }
-}
+$font-family: 'Roboto', 'Noto Sans TC', 'arial', '微軟正黑體';
 
-.aside-page-box {
-  border-bottom: 1px solid #dfdfdf;
+$color_blue: #49b1c2;
+$color_grey: #474747;
+$color_light: #949494;
+$color_orange: #f9c149;
+$color_red: #ec6a6a;
+
+$color_background: #f6f6f6;
+$color_border: #dfdfdf;
+$boder_radius: 6px;
+
+$font_title_size: 24px;
+$font_content_size: 18px;
+
+.chatroom {
+  .container {
+    margin-top: 16px;
+    margin-bottom: 16px;
+
+    .aside {
+      border: 1px solid #dfdfdf;
+      border-radius: 6px;
+      height: 90vh;
+    }
+    .chatArea {
+      border: 1px solid #dfdfdf;
+      border-radius: 6px;
+      height: 90vh;
+    }
+    .aside-page-box {
+      border-bottom: 1px solid #dfdfdf;
+      .chat-link {
+        display: block;
+        text-decoration: none;
+      }
+      .chat-link.active {
+        border-bottom: 4px solid $color_blue;
+      }
+    }
+    .message {
+      .message-date {
+        font-size: 8px;
+      }
+      .list-group-item.active {
+        background-color: $color_blue;
+        border-color: #fff;
+      }
+      small {
+        font-size: 16px;
+      }
+    }
+  }
 }
