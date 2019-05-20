@@ -4,12 +4,19 @@ import { Link } from 'react-router-dom'
 import LoginInput from './LoginInput.js'
 
 class LoginModal extends React.Component {
+  constructor(props) {
+    super(props)
+    this.state = {
+      userOn: true,
+    }
+  }
+
 
   userclick = () => {
-
+    this.setState({ userOn: true })
   }
   firmclick = () => {
-
+    this.setState({ userOn: false })
   }
   render() {
     return (
@@ -22,10 +29,16 @@ class LoginModal extends React.Component {
           aria-labelledby="example-custom-modal-styling-title"
         >
           <Modal.Header>
-            <div onClick={this.userclick()} className="login_title active">會員登入</div>
-            <div onClick={this.firmclick()} className="login_title">廠商登入</div>
+            <div onClick={this.userclick} className={"login_title " + (this.state.userOn ? 'active' : '')}>會員登入</div>
+            <div onClick={this.firmclick} className={"login_title " + (this.state.userOn ? '' : 'active')}>廠商登入</div>
           </Modal.Header>
-          <LoginInput />
+          {
+            this.state.userOn
+              ?
+              <LoginInput /> //會員登入的表單，我先用我的原件，之後放eason的元件
+              :
+              <LoginInput /> //廠商登入的表單
+          }
         </Modal>
       </>
     )

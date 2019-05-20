@@ -14,7 +14,7 @@ class Navbar extends React.Component {
       loginPopup: false
     }
   }
-  handleShow = () => {
+  loginShow = () => {
     this.setState({ loginPopup: true });
   };
 
@@ -137,7 +137,7 @@ class Navbar extends React.Component {
               {/* 會員 submenu */}
             </li>
             <li>
-              <NavLink variant="primary" onClick={this.handleShow}>登入</NavLink>
+              <NavLink variant="primary" onClick={this.loginShow}>登入</NavLink>
               <LoginModal
                 show={this.state.loginPopup}
                 handleHide={this.handleHide}
