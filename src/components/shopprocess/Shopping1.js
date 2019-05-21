@@ -1,7 +1,7 @@
 import React from 'react'
-import { Button, Table, Form, Col, Row } from 'react-bootstrap'
+import { Button, Form } from 'react-bootstrap'
 import '../../styles/product/shop.scss'
-import { BrowserRouter as Router, Route, Link, Switch } from 'react-router-dom'
+// import { BrowserRouter as Router, Route, Link, Switch } from 'react-router-dom'
 const Shopping1 = () => {
   return (
     <>

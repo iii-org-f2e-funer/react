@@ -1,7 +1,6 @@
 import React from 'react'
 import '../styles/product/ProductDetail.scss'
-import { Button, Card } from 'react-bootstrap'
-import { Link } from 'react-router-dom'
+import { Button } from 'react-bootstrap'
 import Maylike from '../components/product/Maylike'
 import ImageGallery from 'react-image-gallery'
 const images = [
