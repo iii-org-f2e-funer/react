@@ -1,35 +1,54 @@
 .pt_container {
   width: 1170px;
   min-height: 100vh;
-  margin: 0 auto;
+  margin: 16px auto;
   // background-color: bisque;
   border: 1px solid #ccc;
   font-family: 'Noto Sans CJK TC';
 }
-.flex {
-  display: inline-block;
-}
+
 .newptform {
   margin: 10px;
 }
 
 .form-row {
-  display: inline-block;
-  margin: 10px;
+  display: flex;
+  margin: 30px;
   width: 100%;
+}
+
+.form-control.county-sel,.form-control.district-sel{
+  display: inline-block;
+  width: 172px;
+  margin-right:16px
+}
+
+.form-control.zipcode{
+  display: none;
 }
 .form-row.title {
   color: #5b5b5b;
-  text-align:center;
+  justify-content:center;
+}
+.form-row.remind {
+  color: #8A8A8A;
+  font-size: 12px;
+  justify-content:center;
+  margin-bottom: 120px;
+}
+.imgfield{
+  width: 920px;
 }
 .pt_imgupload {
+  width: 160px;
+  height: 160px;
   border-radius: 50%;
   background: #d5d5d5;
-  margin: 0 500px;
+  margin: 0 auto;
 }
 .pt_imgupload i {
   font-size: 24px;
-  padding: 70px;
+padding: 68px;
   color: #fff;
 }
 label {
@@ -40,14 +59,21 @@ label {
     margin-left:10px
 }
 #pt_title{
-    border: none;
+    // border: none;
     width: 920px;
-    border-bottom: 1px solid #000;
+    border-radius: .25rem;
+    // border-bottom: 1px solid #000;
 }
 #pt_member, #pt_maxm{
-    border: 1px solid #ced4da;
+    // border: 1px solid #ced4da;
+    width: 360px;
     border-radius: .25rem;
     padding-left: 10px
+}
+#pt_add{
+  width: 550px;
+  border-radius: .25rem;
+  padding-left: 10px
 }
 
 textarea {
@@ -66,10 +92,16 @@ textarea {
     background-color: #6EC4D2;
     color: #fff;
 }
+.pt_level {
+  margin-top: 8px;
+}
 /*!
  * https://github.com/YouCanBookMe/react-datetime
  */
-
+.rdt input{
+  width: 360px;
+    border-radius: .25rem;
+}
  .rdt {
     position: relative;
   }
@@ -83,6 +115,7 @@ textarea {
     background: #fff;
     box-shadow: 0 1px 3px rgba(0,0,0,.1);
     border: 1px solid #f9f9f9;
+    top:45px;
   }
   .rdtOpen .rdtPicker {
     display: block;

@@ -2,6 +2,7 @@ import React from 'react'
 import '../../styles/pt_style/pt_new.scss'
 import Datetime from 'react-datetime'
 import moment from 'moment'
+import TWzipcode from 'react-twzipcode'
 
 class Pt_new extends React.Component {
   constructor() {
@@ -9,7 +10,9 @@ class Pt_new extends React.Component {
     this.state = {
       pt_img: '',
       pt_host: '',
-      pt_locate: '',
+      pt_city: '',
+      pt_dist: '',
+      pt_add: '',
       pt_time: moment().add(7, 'days'),
       pt_endtime: moment().add(5, 'days'),
       pt_member: 2,
@@ -19,6 +22,8 @@ class Pt_new extends React.Component {
       pt_info: '',
     }
   }
+
+  //handler
   handlememberChange = event => {
     this.setState({
       pt_member: event.target.value,
@@ -36,6 +41,19 @@ class Pt_new extends React.Component {
       pt_level: event.target.value,
     })
   }
+  handlecityChange = e =>
+    this.setState({
+      pt_city: e.county,
+    })
+  handledistChange = e =>
+    this.setState({
+      pt_dist: e.district,
+    })
+  handleaddChange = event => {
+    this.setState({
+      pt_add: event.target.value,
+    })
+  }
 
   render() {
     return (
@@ -48,17 +66,36 @@ class Pt_new extends React.Component {
             </div>
             <div className="form-row">
               <label for="pt_imgfile">桌遊封面</label>
-            </div>
-            <div className="form-row">
-              <div className="pt_imgupload flex">
-                <i class="fas fa-camera" />
+              <div className="imgfield">
+                <div className="pt_imgupload">
+                  <i className="fas fa-camera" />
+                </div>
               </div>
             </div>
+
             <div className="form-row">
               <label for="pt_locate">地點</label>
-              <select />
-              <select />
-              <input type="text" />
+              <TWzipcode
+                countyFieldName="pt_city"
+                districtFieldName="pt_dist"
+                countyValue={this.state.pt_city}
+                districtValue={this.state.pt_dist}
+                css={[
+                  'form-control county-sel',
+                  'form-control district-sel',
+                  'form-control zipcode',
+                ]}
+                handleChangeCounty={this.handlecityChange}
+                handleChangeDistrict={this.handledistChange}
+              />
+              <input
+                type="text"
+                id="pt_add"
+                name="pt_add"
+                placeholder="地址/店家名稱"
+                value={this.state.add}
+                onChange={event => this.handleaddChange(event)}
+              />
             </div>
 
             <div className="form-row">
@@ -66,7 +103,7 @@ class Pt_new extends React.Component {
               <Datetime
                 className="flex"
                 dateFormat="YYYY/MM/DD"
-                timeFormat="AHH:mm"
+                timeFormat="A HH:mm"
                 value={this.state.pt_time}
                 onChange={moment => this.handletimeChange(moment)}
               />
@@ -77,7 +114,7 @@ class Pt_new extends React.Component {
               <Datetime
                 className="flex"
                 dateFormat="YYYY/MM/DD"
-                timeFormat="AHH:mm"
+                timeFormat="A HH:mm"
                 value={this.state.pt_endtime}
                 onChange={moment => this.handleendtimeChange(moment)}
               />
@@ -104,35 +141,32 @@ class Pt_new extends React.Component {
                 onChange={event => this.handlemaxmChange(event)}
               />
             </div>
-            <div className="form-row">
+            <div className="form-row" id="pt_level">
               <label for="pt_level">遊戲難度</label>
               <input
                 className="pt_level"
                 type="radio"
                 name="pt_level"
-                id=""
                 value="1"
                 onChange={event => this.handlelevelChange(event)}
               />
-              適合新手
+              <span> 適合新手 </span>
               <input
                 className="pt_level"
                 type="radio"
                 name="pt_level"
-                id=""
                 value="2"
                 onChange={event => this.handlelevelChange(event)}
               />
-              適合已有基礎的玩家
+              <span>適合已有基礎的玩家</span>
               <input
                 className="pt_level"
                 type="radio"
                 name="pt_level"
-                id=""
                 value="3"
                 onChange={event => this.handlelevelChange(event)}
               />
-              高難度重度策略
+              <span>高難度重度策略</span>
             </div>
             <div className="form-row">
               <label for="pt_title">開團標題</label>
@@ -155,6 +189,9 @@ class Pt_new extends React.Component {
             </div>
             <div className="form-row">
               <button className="pt_submitbtn">確認開團</button>
+            </div>
+            <div className="form-row remind">
+              *您的揪團將會刊登在列表上，並於時間截止後下架，請記得在最晚審核時間勾選申請人哦!
             </div>
           </form>
         </div>
