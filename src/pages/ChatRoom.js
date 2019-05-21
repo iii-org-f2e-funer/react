@@ -10,25 +10,50 @@ import AsidePage from '../components/chatroom/pages/AsidePage'
 import ChatArea from '../components/chatroom/pages/ChatArea'
 import '../styles/chatroom/chatroomStyle.scss'
 
-function ChatRoom() {
-  return (
-    <Router>
-      <div className="chatroom">
-        <div className="container ">
-          <div className="row">
-            <div className="col-lg-3 aside">
-              <AsidePage />
+class ChatRoom extends React.Component {
+  constructor() {
+    super()
+    this.state = {
+      a: '300',
+    }
+  }
+  render() {
+    return (
+      <Router>
+        <>
+          <div className="chatroom">
+            <div className="container ">
+              <div className="row">
+                <div className="col-lg-3 aside">
+                  <AsidePage />
+                </div>
+                <div className="col-lg chatArea">
+                  {/* 傳props 給子元件: */}
+                  {/* <Route path="/abc" render={(props) => <TestWidget {...props} someProp={100} />} /> */}
+                  <Switch>
+                    <Route
+                      path="/chatroom/Message/user_id1"
+                      render={props => (
+                        <ChatArea
+                          {...props}
+                          someProp={'100'}
+                          text={this.state.a}
+                        />
+                      )}
+                    />
+                    <Route
+                      path="/chatroom/Message/user_id2"
+                      component={ChatArea}
+                    />
+                  </Switch>
+                </div>
+              </div>
             </div>
-            <div className="col-lg chatArea"><ChatArea /></div>
           </div>
-        </div>
-      </div>
-      <Switch>
-        <Route path="/chatroom/Message/user_id1" component={ChatArea} />
-        <Route path="/chatroom/Message/user_id2" component={ChatArea} />
-      </Switch>
-    </Router>
-  )
+        </>
+      </Router>
+    )
+  }
 }
 
 export default ChatRoom

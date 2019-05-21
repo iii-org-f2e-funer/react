@@ -3,7 +3,7 @@ import React from 'react'
 // Check out my free youtube video on how to build a thumbnail gallery in react
 // https://www.youtube.com/watch?v=GZ4d3HEn9zg
 import { Link } from 'react-router-dom'
-import { Button, Card } from 'react-bootstrap'
+import { Card } from 'react-bootstrap'
 class Maylike extends React.Component {
   constructor(props) {
     super(props)

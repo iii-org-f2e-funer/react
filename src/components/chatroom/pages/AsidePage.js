@@ -17,7 +17,6 @@ function AsidePage() {
           className=" chat-link pb-1 px-3"
           activeClassName="active"
           to="/chatroom/message"
-          exact
         >
           聊天室
         </NavLink>
