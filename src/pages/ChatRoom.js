@@ -14,8 +14,21 @@ class ChatRoom extends React.Component {
   constructor() {
     super()
     this.state = {
-      a: '300',
+      //{h_id: 1,h_sub: "BOB",m_id: 1,m_cont: "你好，BOB初次見面!",m_time: "2019-05-21T16:45:57.000Z",sender: 1,}
+      chatData: [],
     }
+  }
+  componentDidMount() {
+    fetch('http://localhost:3002/chatroom/message/user_id1', {
+      method: 'GET',
+      headers: { 'Content-type': 'application/json' },
+    })
+      .then(response => response.json())
+      .then(data => {
+        console.log(JSON.stringify(data))
+
+        return this.setState({ chatData: JSON.stringify(data) })
+      })
   }
   render() {
     return (
@@ -34,11 +47,7 @@ class ChatRoom extends React.Component {
                     <Route
                       path="/chatroom/Message/user_id1"
                       render={props => (
-                        <ChatArea
-                          {...props}
-                          someProp={'100'}
-                          text={this.state.a}
-                        />
+                        <ChatArea chatData={this.state.chatData} />
                       )}
                     />
                     <Route

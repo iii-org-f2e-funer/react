@@ -10,8 +10,7 @@ function ChatArea(props) {
   return (
     <>
       {props.location.pathname} <br />
-      {props.someProp} <br />
-      {props.text}
+      {props.chatData} <br />
       <div className="chat_box">
         <div className="message_list">
           <h5 className="text-center">您可以開始與user_id1聊天</h5>
