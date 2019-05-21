@@ -88,23 +88,23 @@ class Navbar extends React.Component {
                   </NavLink>
                 </li>
                 <li>
-                  <NavLink
-                    to="#"
-                    className="notice_btn"
-                    activeClassName={this.state.noticeOpen ? 'active' : ''}
+                  <div
+                    className={
+                      this.state.noticeOpen ? 'notice_btn active' : 'notice_btn'
+                    }
                     onMouseEnter={this.handleNoticeOpen}
                     onMouseLeave={this.handleNoticeOpen}
                   >
                     <FaBell />
                     <Notice isOpen={this.state.noticeOpen} />
-                  </NavLink>
+                  </div>
                 </li>
 
                 <li>
-                  <NavLink
-                    to="#"
-                    className="user_btn"
-                    activeClassName={this.state.userMenuOpen ? 'active' : ''}
+                  <div
+                    className={
+                      this.state.userMenuOpen ? 'user_btn active' : 'user_btn'
+                    }
                     onMouseEnter={this.handleUserMenuOpen}
                     onMouseLeave={this.handleUserMenuOpen}
                   >
@@ -113,7 +113,7 @@ class Navbar extends React.Component {
                       isOpen={this.state.userMenuOpen}
                       logOut={this.logOut}
                     />
-                  </NavLink>
+                  </div>
                 </li>
               </>
             ) : (

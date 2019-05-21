@@ -1,12 +1,12 @@
 import React from 'react'
 import NewStory from './NewStory'
+// import OldStory from './OldStory'
 const Event = () => {
   return (
     <>
       <div className="stories">
         <NewStory />
-        <div className="story">Hello</div>
-        <div className="story">World</div>
+        {/* <OldStory /> */}
       </div>
     </>
   )
