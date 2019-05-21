@@ -34,10 +34,10 @@ $shadow: 0px 1px 4px rgba(black, 0.2);
     height: 100%;
     padding: 0px;
     // ul, a 共通設定
-    ul{
+    ul {
       list-style: none;
     }
-    a{
+    a {
       display: block;
       text-decoration: none;
     }
@@ -50,7 +50,7 @@ $shadow: 0px 1px 4px rgba(black, 0.2);
       align-items: center;
     }
     // container > nav 共用屬性
-   
+
     > ul {
       padding: 0px;
       display: flex;
@@ -67,7 +67,7 @@ $shadow: 0px 1px 4px rgba(black, 0.2);
         > a.active {
           color: $color_blue;
         }
-        > a:hover  {
+        > a:hover {
           color: $color_blue;
         }
         > a.active path {
@@ -129,7 +129,7 @@ $shadow: 0px 1px 4px rgba(black, 0.2);
       //會員按鈕
       li.user_icon {
         position: relative;
-        a{
+        a {
           //會員功能List
           ul {
             position: absolute;
@@ -150,21 +150,21 @@ $shadow: 0px 1px 4px rgba(black, 0.2);
               line-height: 32px; //這裡
               div.avatar {
                 display: inline-block;
-               
+
                 width: 45px;
                 height: 45px;
                 border-radius: 50%;
                 border: 1px solid rgba(black, 0.2);
                 // margin: 5px 0;
               }
-            a {
-              color: $color_grey;
-              font-size: 16px;
-              padding: 4px 5px;
-            }
-            a:hover {
-              color: $color_blue;
-            }
+              a {
+                color: $color_grey;
+                font-size: 16px;
+                padding: 4px 5px;
+              }
+              a:hover {
+                color: $color_blue;
+              }
             }
           }
         }

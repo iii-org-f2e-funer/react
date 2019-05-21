@@ -53,7 +53,7 @@ export default class product extends React.Component {
                   <InputGroup className="mt-5 ml-3">
                     <InputGroup.Prepend>
                       <InputGroup.Text id="basic-addon3">
-                        <i class="fa fa-search" />
+                        <i className="fa fa-search" />
                       </InputGroup.Text>
                     </InputGroup.Prepend>
                     <FormControl
