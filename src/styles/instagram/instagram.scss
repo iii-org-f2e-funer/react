@@ -72,6 +72,8 @@
     }
     //新貼文
     .newStory {
+      position: relative;
+      z-index: 205;
       //新貼文header(作者、功能)
       .post-header {
         display: flex;
@@ -96,7 +98,7 @@
           color: #474747;
         }
       }
-      hr{
+      hr {
         margin: 0;
       }
       //新貼文body(內容、圖片)
@@ -104,30 +106,58 @@
         width: 95%;
         padding-top: 10px;
         margin: 0 auto;
-        //貼文文字
+        position: relative;
+        //貼文內容
         .post-content {
-          min-height: 100px;
+          min-height: 80px;
+        }
+        //placeholder
+        .placeholder{
+          color: #949494;
+          position: absolute;
+          top:10px;
+          pointer-events: none; //取消滑鼠事件(讓他穿過去)
+        }
+        //預覽圖
+        .post-image {
+          display: flex;
+          img {
+            display: block;
+            height: 80px;
+            width: 80px;
+            object-fit: contain;
+            margin:5px;
+            border:2px solid #dfdfdf;
+          }
         }
       }
       //新貼文 (圖片、發佈按鈕)
-      .post-footer{
+      .post-footer {
         width: 95%;
-        padding: 10px;
+        padding: 5px 10px;
         margin: 0 auto;
         display: flex;
         justify-content: space-between;
         align-items: center;
-        
-        svg:hover{
-          color:#49b1c2;
+
+        svg:hover {
+          color: #49b1c2;
         }
-        span{
-          color:#49b1c2;
+        span {
+          color: #49b1c2;
         }
       }
     }
   }
-
+  .mask{
+    position: absolute;
+    z-index: 200;
+    top: 0;
+    left:0;
+    // height: 100%;
+    // width: 100%;
+    background-color: rgba(0, 0, 0, 0.7);
+  }
   //右邊揪團快訊
   .event {
     width: 265px;
