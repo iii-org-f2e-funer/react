@@ -5,16 +5,10 @@ import {
   withGoogleMap,
   withScriptjs,
 } from 'react-google-maps'
-
+import MapStyles from './MapStylesRetro.json'
 // import MapStyles from './MapStylesNight.json'
 import MarkerClusterer from 'react-google-maps/lib/components/addons/MarkerClusterer'
-
-const DN = 'https://escape.bar/api/'
-const wpApiRoute = `${DN}?rest_route=/sections/v1/`
-const GetGame = `${wpApiRoute}games`
-const GetFirm = `${wpApiRoute}firms`
-const GetStore = `${wpApiRoute}stores`
-const GetArticle = `${wpApiRoute}articles/`
+import { GetStore } from '../../api/Api'
 
 const GoogleMapsWrapper = withScriptjs(
   withGoogleMap(props => {
@@ -118,6 +112,7 @@ class MapBody extends React.Component {
         onMapMounted={this._handleMapMounted}
         onBoundsChanged={this._handleBoundsChanged}
         defaultOptions={{
+          styles: MapStyles,
           mapTypeControl: false,
           // fullscreenControl: false,
           streetViewControl: false,
@@ -132,7 +127,7 @@ class MapBody extends React.Component {
                 lat: parseFloat(store.STORE_LAT),
                 lng: parseFloat(store.STORE_LNG),
               }}
-              icon={{ url: this.state.logo40Route + store.STORE_LOGO_NAME }}
+              // icon={{ url: this.state.logo40Route + store.STORE_LOGO_NAME }}
               onClick={this.onMarkerClick.bind(this, store)}
             />
           ))}

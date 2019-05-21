@@ -3,7 +3,7 @@ import React from 'react'
 import Demopage from '../pages/demopage.js'
 
 import GameMapDetail from '../pages/GameMapDetail.js'
-import GameMap from '../pages/GameMapMain.js'
+import GameMap from '../pages/dist/Map'
 import Firm from '../pages/Firm.js'
 import Footer from '../components/Footer.js'
 import Product from '../pages/Product.js'
