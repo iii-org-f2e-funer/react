@@ -19,14 +19,15 @@ function ChatRoom() {
             <div className="col-lg-3 aside">
               <AsidePage />
             </div>
-            <div className="col-lg chatArea"><ChatArea /></div>
+            <div className="col-lg chatArea">
+              <Switch>
+                <Route path="/chatroom/Message/user_id1" component={ChatArea} />
+                <Route path="/chatroom/Message/user_id2" component={ChatArea} />
+              </Switch>
+            </div>
           </div>
         </div>
       </div>
-      <Switch>
-        <Route path="/chatroom/Message/user_id1" component={ChatArea} />
-        <Route path="/chatroom/Message/user_id2" component={ChatArea} />
-      </Switch>
     </Router>
   )
 }
