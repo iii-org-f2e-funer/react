@@ -15,10 +15,11 @@ export default class product extends React.Component {
     super()
     this.state = {
       data: [],
+      data1: [],
     }
   }
   componentDidMount() {
-    fetch('//localhost:3002/product/try-db', {})
+    fetch('//localhost:3002/product/productlist', {})
       .then(response => {
         // 這裡會得到一個 ReadableStream 的物件
         console.log(response)
@@ -29,6 +30,39 @@ export default class product extends React.Component {
         this.setState({ data: jsonData })
         // typeof()
         console.log(this.state.data)
+      })
+      .catch(err => {
+        console.log('錯誤:', err)
+      })
+
+    fetch('//localhost:3002/product/productlist2', {})
+      //fetch product_sid=sid的所有圖片path
+      .then(response => {
+        // 這裡會得到一個 ReadableStream 的物件
+        console.log(response)
+        // 可以透過 blob(), json(), text() 轉成可用的資訊
+        return response.json()
+      })
+      .then(jsonData => {
+        this.setState({ data1: jsonData })
+
+        const dt1 = this.state.data
+        const dt2 = jsonData
+        const again = []
+        var d1_leng = Object.keys(this.state.data).length
+        var d2_leng = Object.keys(jsonData).length
+
+        //迴圈判斷只抓其中一張圖
+        for (let data1_index = 0; data1_index < d1_leng; data1_index++) {
+          for (let data2_index = 0; data2_index < d2_leng; data2_index++) {
+            if (dt2[data2_index].sid === dt1[data1_index].sid) {
+              //將抓到的image_path存回去 this.state.data
+              dt1[data1_index].image_path = dt2[data2_index].image_path
+            }
+          }
+        }
+
+        this.setState({ data: dt1 })
       })
       .catch(err => {
         console.log('錯誤:', err)
@@ -108,7 +142,7 @@ export default class product extends React.Component {
                           variant="top"
                           src={
                             process.env.PUBLIC_URL + '/images/product/game1.jpg'
-                            // 'http://192.168.27.25/happy6/product_manage/uploads/0dbb26784a58104b94bb96ebf6811028b5f4a887.jpg'
+                            // 'http://192.168.27.25/happy6/product_manage/' +item.productName
                           }
                         />
 

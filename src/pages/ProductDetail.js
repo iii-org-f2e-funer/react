@@ -50,7 +50,7 @@ class ProductDetail extends React.Component {
                     <div className="product-many">1</div>
                     <div className="subtract button ">-</div>
                   </div>
-                  <Button className="actionButton1 " size="lg" block>
+                  <Button className="actionButton1  button" size="lg" block>
                     加入購物車
                   </Button>
                 </div>
