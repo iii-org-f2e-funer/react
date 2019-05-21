@@ -96,27 +96,32 @@ $shadow: 0px 1px 4px rgba(black, 0.2);
       //通知按鈕
       li.notice_icon {
         position: relative;
-        //通知List
-        ul {
-          position: absolute;
-          z-index: 2;
-          right: 0;
-          width: 260px;
-          padding: 10px 0 5px 0;
-          background-color: white;
-          border-radius: 6px;
-          font-size: 16px;
-          box-shadow: $shadow;
-          li.notice_text {
-            padding-left: 20px;
-            padding-bottom: 4px;
-          }
-          li {
-            a {
-              height: 80px;
-              color: $color_grey;
-              padding: 4px 5px;
-              border-top: 1px solid $color_border;
+        a {
+          //通知List
+          ul {
+            position: absolute;
+            z-index: 2;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 260px;
+            padding: 10px 0 5px 0;
+            background-color: white;
+            border-radius: 6px;
+            font-size: 16px;
+            box-shadow: $shadow;
+            line-height: 32px; //這裡
+            li.notice_text {
+              padding-left: 20px;
+              padding-bottom: 4px;
+            }
+            li {
+              a {
+                height: 60px; //這裡
+                line-height: 60px; //這裡
+                color: $color_grey;
+                padding: 4px 5px;
+                border-top: 1px solid $color_border;
+              }
             }
           }
         }
@@ -124,30 +129,34 @@ $shadow: 0px 1px 4px rgba(black, 0.2);
       //會員按鈕
       li.user_icon {
         position: relative;
-        //會員功能List
-        ul {
-          position: absolute;
-          z-index: 2;
-          right: 0;
-          width: 160px;
-          background-color: white;
-          border-radius: 6px;
-          box-shadow: $shadow;
-          padding: 10px 0 5px 0;
-         
-          hr {
-            margin: 6px 0 6px 0;
-          }
-          li {
-            text-align: center;
-            div.avatar {
-              display: inline-block;
-              width: 45px;
-              height: 45px;
-              border-radius: 50%;
-              border: 1px solid rgba(black, 0.2);
-              margin: 5px 0;
+        a{
+          //會員功能List
+          ul {
+            position: absolute;
+            left: 50%;
+            transform: translateX(-50%);
+            z-index: 2;
+            right: 0;
+            width: 160px;
+            background-color: white;
+            border-radius: 6px;
+            box-shadow: $shadow;
+            padding: 10px 0 5px 0;
+            hr {
+              margin: 6px 0 6px 0;
             }
+            li {
+              text-align: center;
+              line-height: 32px; //這裡
+              div.avatar {
+                display: inline-block;
+               
+                width: 45px;
+                height: 45px;
+                border-radius: 50%;
+                border: 1px solid rgba(black, 0.2);
+                // margin: 5px 0;
+              }
             a {
               color: $color_grey;
               font-size: 16px;
@@ -155,6 +164,7 @@ $shadow: 0px 1px 4px rgba(black, 0.2);
             }
             a:hover {
               color: $color_blue;
+            }
             }
           }
         }

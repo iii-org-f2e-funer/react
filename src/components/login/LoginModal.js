@@ -41,9 +41,12 @@ class LoginModal extends React.Component {
             </div>
           </Modal.Header>
           {this.state.userOn ? (
-            <LoginInput login={this.props.login} /> //會員登入的表單，我先用我的原件，之後放eason的元件
+            <div style={{ height: '300px' }}>會員登入元件</div> //會員登入的表單，我先用我的原件，之後放eason的元件
           ) : (
-            <LoginInput />
+            <LoginInput
+              login={this.props.login}
+              register={this.props.register}
+            />
           ) //廠商登入的表單
           }
         </Modal>

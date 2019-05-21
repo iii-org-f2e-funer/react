@@ -1,6 +1,6 @@
 import React from 'react'
 import { Modal, Form, Button } from 'react-bootstrap'
-import { withRouter } from 'react-router-dom'
+import { Link, withRouter } from 'react-router-dom'
 
 class LoginInput extends React.Component {
   constructor(props) {
@@ -12,6 +12,9 @@ class LoginInput extends React.Component {
       passwordShow: false,
     }
   }
+  register = () => {
+    this.props.register()
+  }
   passwordShow = () => {
     this.setState({ passwordShow: !this.state.passwordShow })
   }
@@ -21,6 +24,7 @@ class LoginInput extends React.Component {
   checkPassword = evt => {
     this.state.password = evt.target.value
   }
+
   FirmRequest = evt => {
     if (this.refs.submitForm.reportValidity()) {
       evt.preventDefault()
@@ -28,7 +32,7 @@ class LoginInput extends React.Component {
         account: this.state.account,
         password: this.state.password,
       }
-      fetch('//localhost:3002/firmLogin', {
+      fetch('//localhost:3002/firm/firmLogin', {
         method: 'POST',
         body: JSON.stringify(data),
         credentials: 'include',
@@ -41,11 +45,12 @@ class LoginInput extends React.Component {
           console.log(obj)
           if (obj.data.success) {
             alert(obj.data.message)
-            console.log(obj.data.user)
+            console.log(obj.data)
             this.props.login(obj.data.user)
+            localStorage.setItem('account', obj.data.body.account)
           } else {
             this.inputTitle.value = ''
-            // this.setState({ remindText: '帳號或密碼錯誤' })
+            alert(obj.data.message)
           }
         })
     }
@@ -59,7 +64,7 @@ class LoginInput extends React.Component {
               <i className="fa fa-user" />
               <Form.Control
                 type="text"
-                placeholder="Enter email"
+                placeholder="廠商帳號"
                 className="account form-control"
                 onBlur={this.checkAccount}
                 required
@@ -75,7 +80,7 @@ class LoginInput extends React.Component {
               />
               <Form.Control
                 type={this.state.passwordShow ? 'text' : 'password'}
-                placeholder="Password"
+                placeholder="廠商密碼"
                 className="password form-control"
                 onBlur={this.checkPassword}
                 required
@@ -94,6 +99,14 @@ class LoginInput extends React.Component {
               登入
             </Button>
           </form>
+          <ul>
+            <li className="register blue">
+              <div>忘記密碼</div>
+            </li>
+            <li className="register blue">
+              <div onClick={this.register}>廠商註冊</div>
+            </li>
+          </ul>
         </Modal.Body>
       </>
     )
