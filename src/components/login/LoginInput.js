@@ -51,6 +51,7 @@ class LoginInput extends React.Component {
           } else {
             this.inputTitle.value = ''
             alert(obj.data.message)
+            this.setState({ remindText: obj.data.message })
           }
         })
     }
@@ -86,9 +87,7 @@ class LoginInput extends React.Component {
                 required
                 ref={el => (this.inputTitle = el)}
               />
-              <Form.Text className="text-muted red">
-                {this.state.remindText}
-              </Form.Text>
+              <Form.Text className="red">{this.state.remindText}</Form.Text>
             </Form.Group>
             <Button
               variant="primary"

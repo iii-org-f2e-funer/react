@@ -4,7 +4,13 @@ import { Modal, Form, Button } from 'react-bootstrap'
 class FirmRegisterModal extends React.Component {
   constructor(props) {
     super(props)
-    this.state = { account: '', password: '' }
+    this.state = {
+      account: '',
+      password: '',
+      passwordCheck: '',
+      store: '',
+      unicode: '',
+    }
   }
   checkAccount = evt => {
     this.state.account = evt.target.value
@@ -79,12 +85,11 @@ class FirmRegisterModal extends React.Component {
                 註冊
               </Button>
             </form>
-            <div className="register">
-              註冊即同意<span className="blue">隱私權政策</span> 和
-              <span className="blue"> 使用者條款</span>
+            <div className="register center">
+              註冊即同意<span className="blue">隱私權政策</span>和
+              <span className="blue">使用者條款</span>
             </div>
-
-            <div className="register" onClick={this.props.switch}>
+            <div className="register center" onClick={this.props.switch}>
               已經註冊?<span className="blue">登入</span>
             </div>
           </Modal.Body>
