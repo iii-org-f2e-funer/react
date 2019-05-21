@@ -15,7 +15,7 @@ class Navbar extends React.Component {
       userMenuOpen: false,
       loginPopup: false,
       registerPopup: false,
-      isLogin: false,
+      isLogin: true,
     }
   }
 
@@ -74,7 +74,7 @@ class Navbar extends React.Component {
               <NavLink to="/instagram">桌遊論壇</NavLink>
             </li>
           </ul>
-          <ul className="member_nav">
+          <ul className="user_nav">
             {this.state.isLogin ? (
               <>
                 <li>
@@ -87,22 +87,24 @@ class Navbar extends React.Component {
                     <FaComment />
                   </NavLink>
                 </li>
-                <li className="notice_icon">
-                  <Link
+                <li>
+                  <NavLink
                     to="#"
-                    className={this.state.noticeOpen ? 'active' : ''}
+                    className="notice_btn"
+                    activeClassName={this.state.noticeOpen ? 'active' : ''}
                     onMouseEnter={this.handleNoticeOpen}
                     onMouseLeave={this.handleNoticeOpen}
                   >
                     <FaBell />
                     <Notice isOpen={this.state.noticeOpen} />
-                  </Link>
+                  </NavLink>
                 </li>
 
-                <li className="user_icon">
-                  <Link
+                <li>
+                  <NavLink
                     to="#"
-                    className={this.state.userMenuOpen ? 'active' : ''}
+                    className="user_btn"
+                    activeClassName={this.state.userMenuOpen ? 'active' : ''}
                     onMouseEnter={this.handleUserMenuOpen}
                     onMouseLeave={this.handleUserMenuOpen}
                   >
@@ -111,7 +113,7 @@ class Navbar extends React.Component {
                       isOpen={this.state.userMenuOpen}
                       logOut={this.logOut}
                     />
-                  </Link>
+                  </NavLink>
                 </li>
               </>
             ) : (
