@@ -5,6 +5,9 @@ class OldStory extends React.Component {
     super(props)
     this.state = {}
   }
+  componentDidMount() {
+    this.text.innerText = this.props.data.content
+  }
   render() {
     // console.log(this.props.data)
     return (
@@ -21,7 +24,7 @@ class OldStory extends React.Component {
           {/* body 內文 光箱 */}
           <div className="post-body">
             {/* 內文 */}
-            <div className="post-content">{this.props.data.content}</div>
+            <div className="post-content" ref={el => (this.text = el)} />
             {/* slider */}
             <div className="post-photos">
               <Carousel photos={this.props.data.photos} />
