@@ -1,38 +1,27 @@
 import React from 'react'
-import {
-  BrowserRouter as Router,
-  Route,
-  Link,
-  Switch,
-  NavLink,
-} from 'react-router-dom'
+import { Route, Link, Switch, NavLink } from 'react-router-dom'
 
 class Message extends React.Component {
   constructor() {
     super()
     this.state = {
-      chat_data: [],
+      //{h_id: 1,h_sub: "BOB",m_id: 1,m_cont: "你好，BOB初次見面!",m_time: "2019-05-21T16:45:57.000Z",sender: 1,}
+      chatData: [],
     }
   }
 
   //get data from database
-  async componentDidMount() {
-    // try {
-    //   const response = await fetch('http://localhost:5555/students', {
-    //     method: 'GET',
-    //     headers: new Headers({
-    //       Accept: 'application/json',
-    //       'Content-Type': 'application/json',
-    //     }),
-    //   })
-    //   if (!response.ok) throw new Error(response.statusText)
-    //   const jsonObject = await response.json()
-    //   console.log(jsonObject)
-    //   await this.setState({ studentData: jsonObject })
-    // } catch (e) {
-    //   console.log(e)
-    // } finally {
-    // }
+  componentDidMount() {
+    fetch('http://localhost:3002/chatroom/message/user_id1', {
+      method: 'GET',
+      headers: { 'Content-type': 'application/json' },
+    })
+      .then(response => response.json())
+      .then(data => {
+        console.log(data)
+
+        return this.setState({ chatData: data })
+      })
   }
 
   render() {
@@ -40,8 +29,24 @@ class Message extends React.Component {
       <>
         <div className="message">
           <div className="list-group">
-            <NavLink
-              to="/chatroom/message/user_id1"
+            {this.state.chatData.map(data => {
+              return (
+                <NavLink
+                  key={data.m_id}
+                  to={'/chatroom/message/' + data.h_sub}
+                  className="list-group-item "
+                  activeClassName="active"
+                >
+                  <div className="d-flex w-100 justify-content-between">
+                    <h5 className="mb-1 ">{data.h_sub}</h5>
+                    <span className="message-date">{data.m_time}</span>
+                  </div>
+                  <small>{data.m_cont}</small>
+                </NavLink>
+              )
+            })}
+            {/* <NavLink
+              to="/chatroom/message/BOB"
               className="list-group-item "
               activeClassName="active"
             >
@@ -51,17 +56,7 @@ class Message extends React.Component {
               </div>
               <small>Donec id elit non mi porta.</small>
             </NavLink>
-            <NavLink
-              to="/chatroom/message/user_id2"
-              className="list-group-item"
-              activeClassName="active"
-            >
-              <div className="d-flex w-100 justify-content-between">
-                <h5 className="mb-1 ">用戶名稱2</h5>
-                <span className="message-date">4月28</span>
-              </div>
-              <small className="">Donec id elit non mi porta.</small>
-            </NavLink>
+             */}
           </div>
         </div>
       </>

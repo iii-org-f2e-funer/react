@@ -9,6 +9,7 @@ import {
 import AsidePage from '../components/chatroom/pages/AsidePage'
 import ChatArea from '../components/chatroom/pages/ChatArea'
 import '../styles/chatroom/chatroomStyle.scss'
+import ChatAreaOriginal from '../components/chatroom/pages/ChatAreaOriginal'
 
 class ChatRoom extends React.Component {
   constructor() {
@@ -25,9 +26,9 @@ class ChatRoom extends React.Component {
     })
       .then(response => response.json())
       .then(data => {
-        console.log(JSON.stringify(data))
+        console.log(data)
 
-        return this.setState({ chatData: JSON.stringify(data) })
+        return this.setState({ chatData: data })
       })
   }
   render() {
@@ -43,16 +44,24 @@ class ChatRoom extends React.Component {
                 <div className="col-lg chatArea">
                   {/* 傳props 給子元件: */}
                   {/* <Route path="/abc" render={(props) => <TestWidget {...props} someProp={100} />} /> */}
-                  <Switch>
-                    <Route
-                      path="/chatroom/Message/user_id1"
-                      render={props => (
-                        <ChatArea chatData={this.state.chatData} />
-                      )}
-                    />
-                    <Route
+                  {/* <Route
                       path="/chatroom/Message/user_id2"
                       component={ChatArea}
+                    /> */}
+                  <Switch>
+                    {/*  在這邊map 所有Route出來  */}
+                    {this.state.chatData.map(data => {
+                      return (
+                        <Route
+                          key={data.m_id}
+                          path={'/chatroom/Message/' + data.h_sub}
+                          component={ChatArea}
+                        />
+                      )
+                    })}
+                    <Route
+                      path={'/chatroom/Message/'}
+                      component={ChatAreaOriginal}
                     />
                   </Switch>
                 </div>
