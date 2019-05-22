@@ -1,6 +1,6 @@
 import React from 'react'
 import { Modal, Form, Button } from 'react-bootstrap'
-import { Link, withRouter } from 'react-router-dom'
+import { withRouter } from 'react-router-dom'
 
 class LoginInput extends React.Component {
   constructor(props) {
@@ -48,6 +48,7 @@ class LoginInput extends React.Component {
             console.log(obj.data)
             this.props.login(obj.data.user)
             localStorage.setItem('account', obj.data.body.account)
+            this.props.history.push('/firm')
           } else {
             this.inputTitle.value = ''
             alert(obj.data.message)
