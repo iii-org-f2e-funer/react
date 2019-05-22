@@ -6,21 +6,34 @@ class Message extends React.Component {
     super()
     this.state = {
       //{h_id: 1,h_sub: "BOB",m_id: 1,m_cont: "你好，BOB初次見面!",m_time: "2019-05-21T16:45:57.000Z",sender: 1,}
-      chatData: [],
+      chatDataAll: [],
+      chatDataNoRp: [],
     }
   }
 
   //get data from database
   componentDidMount() {
+    var newData = []
+
     fetch('http://localhost:3002/chatroom/message/user_id1', {
       method: 'GET',
       headers: { 'Content-type': 'application/json' },
     })
       .then(response => response.json())
       .then(data => {
-        console.log(data)
+        for (var i = 0; i < data.length; i++) {
+          if (i + 1 < 17) {
+            if (
+              data[i].receiver !== data[i + 1].receiver &&
+              data[i].sender_id === 1
+            ) {
+              newData.push(data[i])
+            }
+          }
+        }
+        console.log(newData)
 
-        return this.setState({ chatData: data })
+        this.setState({ chatDataAll: data, chatDataNoRp: newData })
       })
   }
 
@@ -29,19 +42,21 @@ class Message extends React.Component {
       <>
         <div className="message">
           <div className="list-group">
-            {this.state.chatData.map(data => {
+            {this.state.chatDataNoRp.map(data => {
               return (
                 <NavLink
                   key={data.m_id}
-                  to={'/chatroom/message/' + data.h_sub}
+                  to={'/chatroom/message/' + data.receiver}
                   className="list-group-item "
                   activeClassName="active"
                 >
-                  <div className="d-flex w-100 justify-content-between">
-                    <h5 className="mb-1 ">{data.h_sub}</h5>
-                    <span className="message-date">{data.m_time}</span>
+                  <div className="d-flex w-100 justify-content-between align-items-center">
+                    <h5 className="mb-1 text-nowrap  ">{data.receiver}</h5>
+                    <span className="message-date  text-wrap ">
+                      {data.m_time}
+                    </span>
                   </div>
-                  <small>{data.m_cont}</small>
+                  <small className="text-truncate">{data.m_cont}</small>
                 </NavLink>
               )
             })}

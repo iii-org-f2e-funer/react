@@ -41,7 +41,19 @@ $font_content_size: 18px;
       }
     }
     .message {
+      height: 76vh;
+      padding-bottom: 12px;
+      .list-group {
+        flex: 1;
+        height: 100%;
+        overflow: auto;
+        h5 {
+          width: 70%;
+          display: inline-block;
+        }
+      }
       .message-date {
+        width: 30%;
         font-size: 8px;
       }
       .list-group-item.active {
@@ -50,7 +62,9 @@ $font_content_size: 18px;
         color: black;
       }
       small {
-        font-size: 16px;
+        font-size: 14px;
+        width: 93%;
+        display: inline-block;
       }
     }
     .chat_box {
