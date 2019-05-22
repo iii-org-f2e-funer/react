@@ -13,7 +13,9 @@ class Account extends React.Component {
       .then(res => res.json())
       .then(obj => {
         console.log(obj)
-        this.setState({ data: obj })
+        if (obj.success) {
+          this.setState({ data: obj.body })
+        }
       })
   }
 

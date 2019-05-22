@@ -1,6 +1,7 @@
 import React from 'react'
+import actions from '../../redux/action/userInfo.js'
+import { connect } from 'react-redux'
 import { Modal, Form, Button } from 'react-bootstrap'
-import { withRouter } from 'react-router-dom'
 
 class LoginInput extends React.Component {
   constructor(props) {
@@ -46,9 +47,10 @@ class LoginInput extends React.Component {
           if (obj.data.success) {
             alert(obj.data.message)
             console.log(obj.data)
+            const account = this.state.account
+            const payload = { account: account }
+            this.props.userInfoAction(payload)
             this.props.login(obj.data.user)
-            localStorage.setItem('account', obj.data.body.account)
-            this.props.history.push('/firm')
           } else {
             this.inputTitle.value = ''
             alert(obj.data.message)
@@ -113,4 +115,13 @@ class LoginInput extends React.Component {
   }
 }
 
-export default withRouter(LoginInput)
+const mapStateToProp = store => {
+  return store
+}
+
+export default connect(
+  mapStateToProp,
+  {
+    userInfoAction: actions.userInfo,
+  }
+)(LoginInput)

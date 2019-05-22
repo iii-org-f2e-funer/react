@@ -1,6 +1,7 @@
 import React from 'react'
 import Account from '../../components/firm/Account'
-
+import actions from '../../redux/action/userInfo.js'
+import { connect } from 'react-redux'
 import {
   BrowserRouter as Router,
   Route,
@@ -77,4 +78,15 @@ class Sidebar extends React.Component {
   }
 }
 
-export default Sidebar
+function mapStateToProp(store) {
+  return {
+    userInfo: store.userInfo,
+  }
+}
+
+export default connect(
+  mapStateToProp,
+  {
+    userInfoAction: actions.userInfo,
+  }
+)(Sidebar)

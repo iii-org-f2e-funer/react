@@ -11,30 +11,53 @@ import ProductDetail from '../pages/ProductDetail'
 import Myfav from '../pages/Myfav'
 import Mycart from '../pages/Mycart'
 import Shopping1 from '../components/shopprocess/Shopping1'
-
 import Instagram from '../components/instagram/Instagram'
-function RootRouter() {
-  return (
-    <Router>
-      <>
-        <Navbar />
-        <Switch>
-          <Route exact path="/" component={Demopage} />
-          <Route path="/gamemap" component={GameMapDetail} />
-          <Route path="/demo" component={Demopage} />
-          <Route path="/firm" component={Firm} />
-          <Route path="/product" component={Product} />
-          <Route path="/chatroom" component={ChatRoom} />
-          <Route path="/ProductDetail" component={ProductDetail} />
-          <Route path="/Myfav" component={Myfav} />
-          <Route path="/Mycart" component={Mycart} />
-          <Route path="/Shopping1" component={Shopping1} />
+import actions from '../redux/action/userInfo.js'
+import { connect } from 'react-redux'
 
-          <Route path="/instagram" component={Instagram} />
-        </Switch>
-        <Footer />
-      </>
-    </Router>
-  )
+class RootRouter extends React.Component {
+  componentDidMount() {
+    fetch('//localhost:3002/firm/userInfo')
+      .then(res => res.json())
+      .then(obj => {
+        if (obj.success) {
+          this.props.userInfoAction({ account: obj.body.account })
+        }
+      })
+  }
+  render() {
+    return (
+      <Router>
+        <>
+          <Navbar />
+          <Switch>
+            <Route exact path="/" component={Demopage} />
+            <Route path="/gamemap" component={GameMapDetail} />
+            <Route path="/demo" component={Demopage} />
+            <Route path="/firm" component={Firm} />
+            <Route path="/product" component={Product} />
+            <Route path="/chatroom" component={ChatRoom} />
+            <Route path="/ProductDetail" component={ProductDetail} />
+            <Route path="/Myfav" component={Myfav} />
+            <Route path="/Mycart" component={Mycart} />
+            <Route path="/Shopping1" component={Shopping1} />
+
+            <Route path="/instagram" component={Instagram} />
+          </Switch>
+          <Footer />
+        </>
+      </Router>
+    )
+  }
 }
-export default RootRouter
+
+const mapStateToProp = store => {
+  return store
+}
+
+export default connect(
+  mapStateToProp,
+  {
+    userInfoAction: actions.userInfo,
+  }
+)(RootRouter)
