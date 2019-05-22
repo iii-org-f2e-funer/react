@@ -1,0 +1,116 @@
+.ProductDetail{
+    .imgCard {
+        width: 300px;
+        height: auto;
+        box-shadow: 0px 0px 0px #949494;
+        margin:0 60px;
+    }
+.product-Description-title{
+    width: 100%;
+    margin: 20px 0;
+    border-bottom:solid 2px  #C7C7C7;
+    font-size: 20px;
+    font-weight: 800;   
+}
+.product-Description-contact{
+    font-size: 18px;
+}
+.seld{
+    color: red;
+    display: inline;
+}
+.detailCard{
+    margin: 30px;
+}
+.add{    
+width: 50px;
+height: 50px;
+font-size: 25px;
+padding: 6px;
+}
+.subtract{
+    width: 50px;
+    height: 50px;
+    font-size: 40px;
+    font-weight: 700;
+    padding: 6px;
+}
+.addandsubtract{display: flex;
+margin-bottom: 30px;
+font-size: 20px;
+}
+.product-many{
+width: 80px;
+text-align: center;
+background: #fff;
+padding: 6px;
+}
+.actionButton1{
+    display: inline-block;
+	vertical-align: top;
+	position: relative;
+	margin: 0;
+	padding: 0 16px;
+	height: 50px; 
+	line-height: 36px;
+	min-width: 64px;
+	box-sizing: border-box;
+	font-size: 16px;
+	font-weight: 500; 
+	text-align: center;
+	text-decoration: none;
+	letter-spacing: 0;
+
+	border: 0;
+	border-radius: 6px;
+	outline: 0;
+	cursor: pointer;
+	overflow: hidden;
+  transition: all 0.3s;
+  color: #fff;
+  font-weight: 400
+}
+.actionButton1:focus{
+    color: #fff;  
+    outline: 0;
+  }
+}
+.maylike-title{
+margin-top: 20px;
+height: 60px;
+display: flex;
+position: relative;
+z-index: 10;
+border-bottom:solid 2px #C7C7C7;
+}
+.mayliketitle-img{
+    width: 47px;
+    height: 47px;
+    background: #F9C149;
+    border-radius: 50%;
+    position: absolute;
+    left: -20px;
+    z-index: -1;
+}
+.maylike-images{
+width: 100%;
+height: auto;
+margin:20px 0;
+display: flex;
+flex-wrap:wrap; 
+justify-content: center;
+align-items: center;
+}
+.maylike-image{
+    height: 400px;
+    width: 200px;
+    background: #fff;
+    margin: 20px 5px;
+}
+.scrolltop{
+    width: 190px;
+    height: 185px;
+    background: url('/images/product/srolltop.png') no-repeat;
+    margin-left: 80vw;
+    cursor: pointer;
+  }

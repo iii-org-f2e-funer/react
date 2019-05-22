@@ -1,0 +1,170 @@
+.product{
+.banner{
+  position: relative;
+  width: 100%;
+  height: 226px;
+  background: url('/images/product/banner-image.jpg') no-repeat;
+  background-size: cover;
+  
+}
+.banner-tittle{
+  position: absolute;
+  top:40%;
+  left: 30%;
+  color:white;
+  z-index: 10;
+  font-size: 30px;
+}
+#purplemonster{
+  position: absolute;
+  bottom: -5px;
+  left:60%;
+  z-index: 5;
+}
+
+.outside{
+  width: 100%;
+  height: auto;
+  background: #f6f6f6;
+  display: flex;
+}
+.search{
+  width: 342px;
+  height: 520px;
+  background: #ffffff;
+  border-radius: 10px;
+  margin-top: 30px;
+}
+
+.range-controll{
+  width: 88%;
+  margin: 20px auto;
+}
+input[type="range" i] {
+  width: 100%;
+  cursor: default;
+  padding: 0px;
+  border: initial;
+  margin: 2px;
+}
+.search input[type=text] {
+  padding: 6px;
+  margin-top: 10px;
+  font-size: 17px;
+  border: solid 1px #c4b3b3;
+  border-radius: 20px;
+}
+.search-control{
+  width: 88%;
+}
+
+#basic-addon3{
+  color: #3DB4E0;
+  border-radius:18px 0 0 18px; 
+  height: 36px;
+}
+#basic-url{
+  height: 36px;
+  border-radius:0px 18px 18px 0px; 
+}
+#dropdown-basic-button{
+  background:#ffffff;
+  color: #3DB4E0;
+  width: 100%;
+  border: solid 1px #c4b3b3;
+}
+.dropdown-menu{
+  width: 100%;
+}
+.searchit{
+  width: 86%;
+  height: 50px;
+  display: inline-block;
+	vertical-align: top;
+	position: relative;
+	padding: 0 16px;
+	height: 36px; 
+	line-height: 36px;
+	min-width: 64px;
+	box-sizing: border-box;
+	font-size: 16px;
+	font-weight: 500; 
+	text-align: center;
+	text-decoration: none;
+	letter-spacing: 0;
+	border: 0;
+	border-radius: 6px;
+	outline: 0;
+	cursor: pointer;
+	overflow: hidden;
+  transition: all 0.3s;
+  color: #fff;
+  font-weight: 400;
+}
+.searchit:focus{
+  color: #fff;  
+	outline: 0;
+}
+.cards{
+  
+  width: 790px;
+  margin-top: 30px;
+  text-align: center;
+  display: flex;
+  flex-wrap: wrap;
+}
+.card{
+  box-shadow: 2px 2px 2px #888888;
+  font-size:12px;
+}
+.card-title{
+  font-size: 14px;
+}
+.gamecard{
+  margin: 3px 3px 10px 3px
+
+}
+.scrolltop{
+  width: 190px;
+  height: 185px;
+  background: url('/images/product/srolltop.png') no-repeat;
+  margin-left: 80vw;
+  
+}
+}
+@media (max-width: 768px) {
+  .product .container .outside {
+       display:block;
+  }
+  .product .container .search {
+    padding-top: 5px ;
+    width: 100%;
+}
+.product .container .cards {
+  width: 100%;
+  padding: 0 50px;
+}
+.product .banner #purplemonster{
+  position: absolute;
+  bottom: 5px;
+  left: 40%;
+  z-index: 5;
+}
+.product .banner{
+  height: 500px;
+}
+.product .banner-tittle{
+  width: 100%;
+  position: absolute;
+  text-align: center;
+  left: 0;
+  top:40%;
+  color:white;
+  z-index: 10;
+  font-size: 30px;
+}
+.product .scrolltop{
+  width: 100%;
+  margin-left: 30vw;   
+}
+}
