@@ -73,6 +73,24 @@
 // login
 // -------------------------------------- 
 .login-form 
+    ul
+        text-align: right
+    .register
+        text-align: center
+        display: inline-block
+        vertical-align: top
+        margin: 6px
+        margin-top: 12px
+        cursor: pointer
+        color: #949494
+        &.blue
+            color: #3DB4E0
+            text-decoration: underline
+        .blue
+            color: #3DB4E0
+            text-decoration: underline
+    .red
+        color: #EC6A6A
     .modal-content
         width: 380px
         padding: 24px
@@ -80,6 +98,15 @@
         border: none
     .button
         width: 100%
+        margin-top: 12px
+    .register_title
+        text-align: center
+        font-size: 18px
+        width: 100%
+        padding-bottom: 12px
+        cursor: pointer
+        &.active
+            border-bottom: 4px solid #3DB4E0 
     .login_title
         font-size: 18px
         padding: 0 36px
@@ -90,16 +117,26 @@
     .login-control
         position: relative
         color: #474747
-        input
-            margin: 12px 0
-            height: 48px
         i
             position: absolute
-            left: 12px
-            top: 50%
-            transform: translateY(-50%)
+            top: 16px
             font-size: 16px
             z-index: 10
+            &.fa-lock
+                left: 12px
+            &.fa-user
+                left: 12px
+            &.fa-eye
+                top: 8px            
+                right: 12px
+                color: #949494
+                cursor: pointer
+                padding: 8px
+            &.active
+                color: #474747
+    
+
+
 
 
 

@@ -10,9 +10,7 @@ const Footer = () => {
             <div className="w1">聯絡我們</div>
             <div className="w2">客服電話 : 02-1234567</div>
             <div className="w2">客服信箱 : funer@funer.com</div>
-            <div className="w2">
-              地址 : 台北市大安區復興南路一段390號 2,3號
-              </div>
+            <div className="w2">地址 : 台北市大安區復興南路一段390號 2,3號</div>
           </div>
           <div className="about">
             <div className="w1">關於我們</div>
@@ -27,29 +25,17 @@ const Footer = () => {
             </div>
             <div className="link2">
               <div className="logoconnect">
-                <a herf="https://www.facebook.com">
-                  <img
-                    src={
-                      process.env.PUBLIC_URL + '/images/footer/facebook.png'
-                    }
-                  />
-                </a>
+                <img
+                  src={process.env.PUBLIC_URL + '/images/footer/facebook.png'}
+                />
               </div>
               <div className="logoconnect">
-                <a herf="https://www.facebook.com">
-                  <img
-                    src={process.env.PUBLIC_URL + '/images/footer/line.png'}
-                  />
-                </a>
+                <img src={process.env.PUBLIC_URL + '/images/footer/line.png'} />
               </div>
               <div className="logoconnect">
-                <a herf="https://www.facebook.com">
-                  <img
-                    src={
-                      process.env.PUBLIC_URL + '/images/footer/instagram.png'
-                    }
-                  />
-                </a>
+                <img
+                  src={process.env.PUBLIC_URL + '/images/footer/instagram.png'}
+                />
               </div>
             </div>
           </div>
@@ -58,7 +44,7 @@ const Footer = () => {
           <div className="copy-line" />
           <div className="copyright-word">
             Copyright © 2019 All rights reserved
-            </div>
+          </div>
         </div>
 
         <div className="logo" />

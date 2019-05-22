@@ -70,7 +70,7 @@ p{
   line-height: 32px;
 }
 /* background Color */
-.bg-color-blue{background-color: #3DB4E0;}
+.bg-color-blue{background-color: #6EC4D2;}
 .bg-color-lightblue{background-color: #D6EEF2;}
 .bg-color-red{background-color: #EC6A6A;}
 .bg-color-black{background-color:#474747;}
@@ -79,7 +79,7 @@ p{
 .bg-color-white{background-color:#FFF;}
 
 /* text Color */ 
-.color-blue{color: #3DB4E0!important;}
+.color-blue{color: #6EC4D2!important;}
 .color-red{color: #EC6A6A!important;}
 .color-black{color:#474747!important;}
 .color-grey{color:#949494!important;}
@@ -104,7 +104,7 @@ p{
 	text-align: center;
 	text-decoration: none;
 	letter-spacing: 0;
-  background-color: #3DB4E0;
+  background-color: #6EC4D2;
 	border: 0;
 	border-radius: 6px;
 	outline: 0;
@@ -120,7 +120,7 @@ p{
 .button:hover,
 .button:active, 
 .button:focus{
-  background-color: #2095C1;
+  background-color: #4fb2c1;
   color: #fff;  
 	outline: 0;
 }
@@ -146,21 +146,25 @@ input{
 }
 /* 帳密 */
 /* 要加classname="account" */
-input[type="text"].account,
+.login-form input[type="text"],
+.login-form input[type="email"],
 input[type="password"]
   {
     padding: 8px 8px;
     display: inline-block;
-    border: 1px solid #ccc;
+    border: 2px solid #ccc;
     background-color: #fff;
     border-radius: 4px;
     vertical-align: middle;
     box-sizing: border-box;
     width: 100%;
     transition: all 0.3s;
-    padding-left: 40px
+    padding-left: 40px;
+    height: 48px;
+    margin-bottom: 12px
   }
-input[type="text"].account:focus,
+.login-form input[type="text"]:focus,
+.login-form input[type="email"]:focus,
 input[type="password"]:focus
   {
     outline: none;

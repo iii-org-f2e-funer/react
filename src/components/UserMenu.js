@@ -30,7 +30,9 @@ class UserMenu extends React.Component {
             </li>
             <hr />
             <li>
-              <Link to="#">登出</Link>
+              <Link to="#" onClick={this.props.logOut}>
+                登出
+              </Link>
             </li>
           </ul>
         ) : (

@@ -92,7 +92,6 @@ input[type="range" i] {
 	text-align: center;
 	text-decoration: none;
 	letter-spacing: 0;
-  background-color: #3DB4E0;
 	border: 0;
 	border-radius: 6px;
 	outline: 0;
@@ -103,11 +102,11 @@ input[type="range" i] {
   font-weight: 400;
 }
 .searchit:focus{
-  background-color: #2095C1;
   color: #fff;  
 	outline: 0;
 }
 .cards{
+  
   width: 790px;
   margin-top: 30px;
   text-align: center;
@@ -116,6 +115,10 @@ input[type="range" i] {
 }
 .card{
   box-shadow: 2px 2px 2px #888888;
+  font-size:12px;
+}
+.card-title{
+  font-size: 14px;
 }
 .gamecard{
   margin: 3px 3px 10px 3px

@@ -15,7 +15,9 @@ import ChatRoom from '../pages/ChatRoom'
 import ProductDetail from '../pages/ProductDetail'
 import Myfav from '../pages/Myfav'
 import Mycart from '../pages/Mycart'
+import Shopping1 from '../components/shopprocess/Shopping1'
 
+import Instagram from '../components/instagram/Instagram'
 function RootRouter() {
   return (
     <Router>
@@ -32,6 +34,9 @@ function RootRouter() {
           <Route path="/ProductDetail" component={ProductDetail} />
           <Route path="/Myfav" component={Myfav} />
           <Route path="/Mycart" component={Mycart} />
+          <Route path="/Shopping1" component={Shopping1} />
+
+          <Route path="/instagram" component={Instagram} />
         </Switch>
         <Footer />
       </>
