@@ -8,7 +8,6 @@ import {
   Button,
   Card,
 } from 'react-bootstrap'
-import { Link } from 'react-router-dom'
 
 export default class product extends React.Component {
   constructor() {
@@ -63,7 +62,6 @@ export default class product extends React.Component {
           }
         }
         console.log(dt1)
-
         this.setState({ data: dt1 })
       })
       .catch(err => {
@@ -71,6 +69,11 @@ export default class product extends React.Component {
       })
   }
 
+  clickaaa = sid => () => {
+    console.log(sid)
+    window.location.href = 'http://localhost:3000/ProductDetail'
+    localStorage.setItem('item.sid', sid)
+  }
   render() {
     return (
       <>
@@ -137,28 +140,30 @@ export default class product extends React.Component {
               </div>
               <div className="cards">
                 {this.state.data.map(item => (
-                  <Link to="/ProductDetail">
-                    <div className="gamecard" key={item.id}>
-                      <Card style={{ width: '190px', height: '280px' }}>
-                        <Card.Img
-                          variant="top"
-                          src={
-                            // process.env.PUBLIC_URL + '/images/product/game1.jpg'
-                            'http://192.168.27.25/happy6/product_manage/' +
-                            item.image_path
-                          }
-                        />
+                  <div
+                    className="gamecard"
+                    key={item.id}
+                    onClick={this.clickaaa(item.sid)}
+                  >
+                    <Card style={{ width: '190px', height: '280px' }}>
+                      <Card.Img
+                        variant="top"
+                        src={
+                          // process.env.PUBLIC_URL + '/images/product/game1.jpg'
+                          'http://192.168.27.25/happy6/product_manage/' +
+                          item.image_path
+                        }
+                      />
 
-                        <Card.Body>
-                          <Card.Title>{item.productName}</Card.Title>
-                          <Card.Text>
-                            NT{item.price}
-                            sid:{item.sid}
-                          </Card.Text>
-                        </Card.Body>
-                      </Card>
-                    </div>
-                  </Link>
+                      <Card.Body>
+                        <Card.Title>{item.productName}</Card.Title>
+                        <Card.Text>
+                          NT{item.price}
+                          sid:{item.sid}
+                        </Card.Text>
+                      </Card.Body>
+                    </Card>
+                  </div>
                 ))}
               </div>
             </div>
