@@ -20,6 +20,7 @@ export default class product extends React.Component {
   }
   componentDidMount() {
     fetch('//localhost:3002/product/productlist', {})
+      //fetch prodct_manage
       .then(response => {
         // 這裡會得到一個 ReadableStream 的物件
         console.log(response)
@@ -53,14 +54,15 @@ export default class product extends React.Component {
         var d2_leng = Object.keys(jsonData).length
 
         //迴圈判斷只抓其中一張圖
-        for (let data1_index = 0; data1_index < d1_leng; data1_index++) {
-          for (let data2_index = 0; data2_index < d2_leng; data2_index++) {
+        for (let data1_index = d1_leng - 1; data1_index >= 0; data1_index--) {
+          for (let data2_index = d2_leng - 1; data2_index >= 0; data2_index--) {
             if (dt2[data2_index].sid === dt1[data1_index].sid) {
               //將抓到的image_path存回去 this.state.data
               dt1[data1_index].image_path = dt2[data2_index].image_path
             }
           }
         }
+        console.log(dt1)
 
         this.setState({ data: dt1 })
       })
@@ -134,21 +136,25 @@ export default class product extends React.Component {
                 </Button>
               </div>
               <div className="cards">
-                {this.state.data.map((item, index) => (
+                {this.state.data.map(item => (
                   <Link to="/ProductDetail">
-                    <div className="gamecard">
+                    <div className="gamecard" key={item.id}>
                       <Card style={{ width: '190px', height: '280px' }}>
                         <Card.Img
                           variant="top"
                           src={
-                            process.env.PUBLIC_URL + '/images/product/game1.jpg'
-                            // 'http://192.168.27.25/happy6/product_manage/' +item.productName
+                            // process.env.PUBLIC_URL + '/images/product/game1.jpg'
+                            'http://192.168.27.25/happy6/product_manage/' +
+                            item.image_path
                           }
                         />
 
                         <Card.Body>
                           <Card.Title>{item.productName}</Card.Title>
-                          <Card.Text>NT{item.price}</Card.Text>
+                          <Card.Text>
+                            NT{item.price}
+                            sid:{item.sid}
+                          </Card.Text>
                         </Card.Body>
                       </Card>
                     </div>
