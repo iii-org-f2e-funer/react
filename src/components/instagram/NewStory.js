@@ -1,8 +1,8 @@
 import React from 'react'
 import { FaTimes, FaRegImage } from 'react-icons/fa'
 class NewStory extends React.Component {
-  constructor() {
-    super()
+  constructor(props) {
+    super(props)
     this.state = {
       content: '', // post-body content 貼文內文
       preViewImgs: [], // 預覽 base64 Data Array
@@ -71,7 +71,13 @@ class NewStory extends React.Component {
           // 寫入成功 關閉編輯視窗 清空state
           if (obj.success) {
             this.inputText.innerText = ''
-            this.setState({ isEditing: false, content: '', preViewImgs: [] })
+            this.setState(
+              { isEditing: false, content: '', preViewImgs: [] },
+              () => {
+                //刷新父元素頁面
+                this.props.handleReFresh()
+              }
+            )
           }
         })
     }
@@ -118,8 +124,8 @@ class NewStory extends React.Component {
             {this.state.isEditing ? (
               <div className="post-image">
                 {/* <img src={process.env.PUBLIC_URL + '/images/instagram/avatar.png'} alt="" /> */}
-                {this.state.preViewImgs.map(item => (
-                  <img src={item} alt="" />
+                {this.state.preViewImgs.map((item, idx) => (
+                  <img key={idx} src={item} alt="" />
                 ))}
               </div>
             ) : (

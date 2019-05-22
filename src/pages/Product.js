@@ -29,7 +29,7 @@ export default class product extends React.Component {
       .then(jsonData => {
         this.setState({ data: jsonData })
         // typeof()
-        console.log(this.state.data)
+        // console.log(this.state.data)
       })
       .catch(err => {
         console.log('錯誤:', err)
@@ -48,7 +48,6 @@ export default class product extends React.Component {
 
         const dt1 = this.state.data
         const dt2 = jsonData
-        const again = []
         var d1_leng = Object.keys(this.state.data).length
         var d2_leng = Object.keys(jsonData).length
 

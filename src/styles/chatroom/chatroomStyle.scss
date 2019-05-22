@@ -41,7 +41,7 @@ $font_content_size: 18px;
       }
     }
     .message {
-      height: 76vh;
+      height: 74vh;
       padding-bottom: 12px;
       .list-group {
         flex: 1;
@@ -55,6 +55,8 @@ $font_content_size: 18px;
       .message-date {
         width: 30%;
         font-size: 8px;
+        display: inline-block;
+        overflow: hidden;
       }
       .list-group-item.active {
         background-color: $color_blue_choose;
@@ -72,7 +74,8 @@ $font_content_size: 18px;
         font-size: 14px;
       }
       .message_list {
-        height: 720px;
+        padding-top: 14px;
+        height: 80vh;
         li {
           width: 50%;
           margin-bottom: 8px;

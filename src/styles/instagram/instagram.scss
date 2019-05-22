@@ -64,7 +64,7 @@
     width: 640px;
     .story {
       width: 100%;
-      min-height: 150px;
+      min-height: 100px;
       background-color: white;
       border: 1px solid #dbdbdb;
       border-radius: 6px;
@@ -112,10 +112,10 @@
           min-height: 80px;
         }
         //placeholder
-        .placeholder{
+        .placeholder {
           color: #949494;
           position: absolute;
-          top:10px;
+          top: 10px;
           pointer-events: none; //取消滑鼠事件(讓他穿過去)
         }
         //預覽圖
@@ -126,8 +126,8 @@
             height: 80px;
             width: 80px;
             object-fit: contain;
-            margin:5px;
-            border:2px solid #dfdfdf;
+            margin: 5px;
+            border: 2px dashed #cacaca;
           }
         }
       }
@@ -148,12 +148,145 @@
         }
       }
     }
+    // 舊貼文
+    .oldStory {
+      //貼文header(作者、功能)
+      .post-header {
+        display: flex;
+        justify-content: space-between;
+        padding: 10px 20px;
+        .poster {
+          font-size: 14px;
+          img {
+            display: inline-block;
+            height: 30px;
+            width: 30px;
+            border-radius: 50%;
+            border: 1px solid #949494;
+          }
+          span {
+            line-height: 30px;
+            margin-left: 7px;
+          }
+        }
+      }
+      hr {
+        margin: 0;
+      }
+      //舊貼文body
+      .post-body {
+        padding-top: 10px;
+        margin: 0 auto;
+        position: relative;
+        //貼文內容
+        .post-content {
+          width: 95%;
+          min-height: 80px;
+          margin: 0 auto;
+        }
+        .post-photos {
+          .carousel {
+            width: 100%;
+            height: 100%;
+            box-sizing: border-box;
+            position: relative;
+            box-shadow: inset 0 0 2px #dfdfdf;
+
+            .carousel_inner {
+              position: absolute;
+              top: 0;
+              width: 100%;
+              height: 100%;
+              overflow: hidden;
+              // photo list <ul>
+              .photo_list {
+                transition: 0.4s;
+                transition-timing-function: ease-in-out;
+                position: absolute;
+                height: 100%;
+                width: 100%;
+                left: -100%;
+                top: 0;
+                display: flex;
+
+                li {
+                  height: 100%;
+                  width: 100%;
+                  flex-shrink: 0;
+
+                  display: flex;
+                  justify-content: center;
+                  align-items: center;
+                  img {
+                    max-height: 100%;
+                    max-width: 100%;
+                    object-fit: cover;
+                  }
+                }
+              }
+            }
+
+            // 上一頁按鈕 <div>
+            .btn_prev {
+              position: absolute;
+              top: 50%;
+              transform: translateY(-50%);
+              left: 0;
+              width: 50px;
+              height: 50px;
+              img {
+                width: 100%;
+                height: 100%;
+              }
+            }
+            // 下一頁按鈕 <div>
+            .btn_next {
+              position: absolute;
+              top: 50%;
+              transform: translateY(-50%);
+              right: 0;
+              width: 50px;
+              height: 50px;
+              img {
+                width: 100%;
+                height: 100%;
+              }
+            }
+            // pagination <div>
+            .pagination {
+              position: absolute;
+              bottom: -37px;
+              left: 50%;
+              transform: translateX(-50%);
+              font-size: 12px;
+
+              .circle {
+                color: #949494;
+                margin: 0 1px;
+              }
+              .circle.active {
+                color: #ddf0f3;
+              }
+            }
+          }
+          // trick -> width = height
+          .carousel:before {
+            content: '';
+            display: block;
+            padding-bottom: 100%; /* initial ratio of 1:1*/
+          }
+        }
+      }
+      .post-footer {
+        height: 55px;
+      }
+    }
   }
-  .mask{
+  .mask {
     position: absolute;
     z-index: 200;
     top: 0;
-    left:0;
+    left: 0;
     // height: 100%;
     // width: 100%;
     background-color: rgba(0, 0, 0, 0.7);
