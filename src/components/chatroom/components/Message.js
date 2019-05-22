@@ -22,7 +22,7 @@ class Message extends React.Component {
       .then(response => response.json())
       .then(data => {
         for (var i = 0; i < data.length; i++) {
-          if (i + 1 < 17) {
+          if (i + 1 < data.length) {
             if (
               data[i].receiver !== data[i + 1].receiver &&
               data[i].sender_id === 1

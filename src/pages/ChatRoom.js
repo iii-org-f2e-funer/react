@@ -54,7 +54,7 @@ class ChatRoom extends React.Component {
                       return (
                         <Route
                           key={data.m_id}
-                          path={'/chatroom/Message/' + data.h_sub}
+                          path={'/chatroom/Message/' + data.receiver}
                           component={ChatArea}
                         />
                       )
