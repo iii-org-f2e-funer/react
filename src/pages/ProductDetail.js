@@ -3,25 +3,12 @@ import '../styles/product/ProductDetail.scss'
 import { Button } from 'react-bootstrap'
 import Maylike from '../components/product/Maylike'
 import ImageGallery from 'react-image-gallery'
-const images = [
-  {
-    original: '/images/product/game1.jpg',
-    thumbnail: '/images/product/game1.jpg',
-  },
-  {
-    original: '/images/product/game1.jpg',
-    thumbnail: '/images/product/game1.jpg',
-  },
-  {
-    original: '/images/product/game1.jpg',
-    thumbnail: '/images/product/game1.jpg',
-  },
-]
 class ProductDetail extends React.Component {
   constructor() {
     super()
     this.state = {
       gotit: {},
+      images: [],
     }
   }
   componentDidMount() {
@@ -44,7 +31,39 @@ class ProductDetail extends React.Component {
           }
         }
         this.setState({ gotit: gotit })
-        console.log(gotit)
+        // console.log(gotit)
+      })
+      .catch(err => {
+        console.log('錯誤:', err)
+      })
+
+    fetch('//localhost:3002/product/productlist2', {})
+      //fetch prodct_images
+      .then(response => {
+        // 這裡會得到一個 ReadableStream 的物件
+        console.log(response)
+        // 可以透過 blob(), json(), text() 轉成可用的資訊
+        return response.json()
+      })
+      .then(jsonData => {
+        // this.setState({ data: jsonData })
+        var sid = localStorage.getItem('item.sid')
+        const gotdata2 = jsonData
+        var data_leng = Object.keys(jsonData).length
+        for (let i = 0; i < data_leng; i++) {
+          if (gotdata2[i].sid == sid) {
+            var a1 =
+              'http://192.168.27.25/happy6/product_manage' +
+              gotdata2[i].image_path
+            var image = {
+              original: a1,
+              thumbnail: a1,
+            }
+            this.state.images.push(image)
+          }
+        }
+        this.setState({ images: this.state.images })
+        // console.log(this.state.images)
       })
       .catch(err => {
         console.log('錯誤:', err)
@@ -60,7 +79,7 @@ class ProductDetail extends React.Component {
                 <div className="imgCard">
                   <ImageGallery
                     showFullscreenButton={false}
-                    items={images}
+                    items={this.state.images}
                     showPlayButton={false}
                   />
                 </div>
