@@ -1,10 +1,5 @@
 import React from 'react'
-import {
-  BrowserRouter as Router,
-  Route,
-  Switch,
-  NavLink,
-} from 'react-router-dom'
+import { Route, Switch, NavLink } from 'react-router-dom'
 import { InputGroup, FormControl } from 'react-bootstrap'
 import Message from '../components/Message'
 import FriendList from '../components/FriendList'

@@ -1,6 +1,7 @@
 $font-family: 'Roboto', 'Noto Sans TC', 'arial', '微軟正黑體';
 
 $color_blue: #49b1c2;
+$color_blue_choose: #d0ecf0;
 $color_grey: #474747;
 $color_light: #949494;
 $color_orange: #f9c149;
@@ -14,6 +15,7 @@ $font_title_size: 24px;
 $font_content_size: 18px;
 
 .chatroom {
+  font-family: $font-family;
   .container {
     margin-top: 16px;
     margin-bottom: 16px;
@@ -39,15 +41,30 @@ $font_content_size: 18px;
       }
     }
     .message {
+      height: 76vh;
+      padding-bottom: 12px;
+      .list-group {
+        flex: 1;
+        height: 100%;
+        overflow: auto;
+        h5 {
+          width: 70%;
+          display: inline-block;
+        }
+      }
       .message-date {
+        width: 30%;
         font-size: 8px;
       }
       .list-group-item.active {
-        background-color: $color_blue;
-        border-color: #fff;
+        background-color: $color_blue_choose;
+        border-color: $color_border;
+        color: black;
       }
       small {
-        font-size: 16px;
+        font-size: 14px;
+        width: 93%;
+        display: inline-block;
       }
     }
     .chat_box {
@@ -63,6 +80,10 @@ $font_content_size: 18px;
             display: flex;
             h5 {
               width: 90%;
+              background-color: $color_blue_choose;
+              border-radius: $boder_radius;
+              padding: 14px 28px;
+              line-height: 18px;
             }
 
             .avatar {
@@ -107,7 +128,7 @@ $font_content_size: 18px;
       }
       input[type='text']:focus {
         outline: none;
-        border: 1px solid $color_blue;
+        border: 1px solid $color_blue_choose;
         box-shadow: none;
       }
       .button.button--yellow {

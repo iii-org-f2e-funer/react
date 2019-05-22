@@ -10,8 +10,7 @@ function ChatArea(props) {
   return (
     <>
       {props.location.pathname} <br />
-      {props.someProp} <br />
-      {props.text}
+      {props.chatData} <br />
       <div className="chat_box">
         <div className="message_list">
           <h5 className="text-center">您可以開始與user_id1聊天</h5>
@@ -21,7 +20,7 @@ function ChatArea(props) {
           <ul className="d-flex flex-column ">
             <li className={'sender'}>
               <div className="text-box sender align-items-center">
-                <h5 className="my-auto">
+                <h5 className="my-auto rounded-pill">
                   這是第一段話這是第一段話這是第一段話這是第一段話這是第一段話這是第一段話這是第一段話這是第一段話這是第一段話
                 </h5>
               </div>
@@ -34,7 +33,7 @@ function ChatArea(props) {
                 <div className="avatar ">
                   <img src={avatar} alt="會員1頭像" />
                 </div>
-                <h5 className="my-auto">
+                <h5 className="my-auto rounded-pill">
                   這是第二段話這是第二段話這是第二段話這是第二段話這是第二段話這是第二段話這是第二段話這是第二段話這是第二段話
                 </h5>
               </div>
