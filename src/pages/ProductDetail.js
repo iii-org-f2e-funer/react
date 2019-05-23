@@ -10,6 +10,7 @@ class ProductDetail extends React.Component {
       gotit: {},
       images: [],
       number: 1,
+      allcart: [],
     }
   }
   componentDidMount() {
@@ -17,7 +18,7 @@ class ProductDetail extends React.Component {
       //fetch prodct_manage
       .then(response => {
         // 這裡會得到一個 ReadableStream 的物件
-        console.log(response)
+        // console.log(response)
         // 可以透過 blob(), json(), text() 轉成可用的資訊
         return response.json()
       })
@@ -42,7 +43,7 @@ class ProductDetail extends React.Component {
       //fetch prodct_images
       .then(response => {
         // 這裡會得到一個 ReadableStream 的物件
-        console.log(response)
+        // console.log(response)
         // 可以透過 blob(), json(), text() 轉成可用的資訊
         return response.json()
       })
@@ -55,8 +56,6 @@ class ProductDetail extends React.Component {
         var sid_index = local.lastIndexOf('sid:')
         var sid = local.slice(sid_index + 4, long)
         // alert(sid_index + 'spice:' + sid + 'length:' + long)
-        alert(sid)
-
         const gotdata2 = jsonData
         var data_leng = Object.keys(jsonData).length
         for (let i = 0; i < data_leng; i++) {
@@ -94,7 +93,17 @@ class ProductDetail extends React.Component {
   }
   addtoshop = () => () => {
     var product_num = this.state.number
-    alert(product_num)
+    this.state.gotit.number = product_num
+    console.log(this.state.gotit)
+    var arr = []
+    if (localStorage.allcart) {
+      arr = JSON.parse(localStorage.allcart)
+    }
+    arr.push(this.state.gotit)
+    localStorage.setItem('allcart', JSON.stringify(arr))
+    this.setState({ allcart: arr })
+    // console.log(this.state.allcart)
+    // const aaa = JSON.stringify(this.state.allcart)
   }
   render() {
     return (
@@ -123,18 +132,19 @@ class ProductDetail extends React.Component {
                       <i className="fas fa-plus" />
                     </div>
                     <div className="product-many">{this.state.number}</div>
-                    <div className="subtract button " onClick={this.subtract()}>
-                      -
-                    </div>
+                    <div
+                      className="subtract button "
+                      onClick={this.subtract()}
+                    />
                   </div>
-                  <Button
+                  <div
                     className="actionButton1  button"
                     size="lg"
                     onClick={this.addtoshop()}
                     block
                   >
                     加入購物車
-                  </Button>
+                  </div>
                 </div>
               </div>
               <div className="product-Description-title">產品說明</div>
