@@ -280,8 +280,89 @@
           }
         }
       }
+      // 舊貼文 footer
       .post-footer {
         height: 55px;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        font-size: 25px;
+        color: #949494;
+        border-top: 1px solid #ededed;
+        border-bottom: 1px solid #ededed;
+
+        .heart {
+          margin-left: 20px;
+        }
+        .bookmark {
+          margin-right: 20px;
+        }
+      }
+      // 留言區
+      .comments {
+        padding: 12px 0 0 0;
+        // 每則留言
+        .comment {
+          display: flex;
+          width: 95%;
+          margin: 5px auto;
+          // 頭像
+          img.avatar {
+            display: block;
+            width: 30px;
+            height: 30px;
+            border: 1px solid #949494;
+            border-radius: 50%;
+            flex-shrink: 0;
+          }
+          // 頭像右邊內容
+          .comment_inner {
+            margin-left: 8px;
+            .text {
+              background-color: #ededed;
+              padding: 4px 8px;
+              border-radius: 4px;
+              // 留言人
+              .sender {
+                color: #38bdd8;
+              }
+              // 留言內容
+              .content {
+                margin-left: 6px;
+                width: 100%;
+                word-break: break-word;
+              }
+            }
+            // 留言時間
+            .time {
+              font-size: 10px;
+              color: #949494;
+            }
+          }
+        }
+       
+      }
+      // 發布留言
+      .publish{
+
+        margin: 2px 0 10px 0;
+        .publish_inner{
+          width: 90%;
+          margin: 0 auto;
+          .content{
+            display: inline-block;
+            min-height: 40px;
+            width: 90%;
+          }
+          .submit{
+            vertical-align: top;
+            width: 10%;
+            color:#38bdd8;
+            line-height: 40px;
+            margin-left: 10px;
+          }
+        }
+        
       }
     }
   }
