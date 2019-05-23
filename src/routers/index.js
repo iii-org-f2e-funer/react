@@ -1,12 +1,8 @@
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom'
 import React from 'react'
+import { connect } from 'react-redux'
 import Demopage from '../pages/demopage.js'
-<<<<<<< HEAD
-import Event from '../pages/pt_page/Event.js'
 
-
-=======
->>>>>>> fa429b0874535b4338d6c1d50373d75719cf56de
 import GameMapDetail from '../pages/GameMapDetail.js'
 import Firm from '../pages/Firm.js'
 import Footer from '../components/Footer.js'
@@ -18,28 +14,8 @@ import Myfav from '../pages/Myfav'
 import Mycart from '../pages/Mycart'
 import Shopping1 from '../components/shopprocess/Shopping1'
 import Instagram from '../components/instagram/Instagram'
-<<<<<<< HEAD
-function RootRouter() {
-  return (
-    <Router>
-      <>
-        <Navbar />
-        <Switch>
-          <Route exact path="/" component={Demopage} />
-          <Route path="/gamemap" component={GameMapDetail} />
-          <Route path="/event" component={Event} />
-          <Route path="/demo" component={Demopage} />
-          <Route path="/firm" component={Firm} />
-          <Route path="/product" component={Product} />
-          <Route path="/chatroom" component={ChatRoom} />
-          <Route path="/ProductDetail" component={ProductDetail} />
-          <Route path="/Myfav" component={Myfav} />
-          <Route path="/Mycart" component={Mycart} />
-          <Route path="/Shopping1" component={Shopping1} />
-=======
 import actions from '../redux/action/userInfo.js'
-import { connect } from 'react-redux'
->>>>>>> fa429b0874535b4338d6c1d50373d75719cf56de
+import Event from '../pages/pt_page/Event.js'
 
 class RootRouter extends React.Component {
   componentDidMount() {
