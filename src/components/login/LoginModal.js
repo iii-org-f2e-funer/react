@@ -1,6 +1,5 @@
 import React from 'react'
 import { Modal, Form, Button } from 'react-bootstrap'
-import { Link } from 'react-router-dom'
 import LoginInput from './LoginInput.js'
 
 class LoginModal extends React.Component {

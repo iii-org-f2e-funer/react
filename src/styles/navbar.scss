@@ -13,7 +13,11 @@ $boder_radius: 6px;
 $font_title_size: 24px;
 $font_content_size: 18px;
 $shadow: 0px 1px 4px rgba(black, 0.2);
-
+.navbar.navfixed{
+  position: fixed;
+  top:0;
+  z-index: 209;
+}
 .navbar {
   width: 100%;
   background-color: white;
@@ -150,6 +154,7 @@ $shadow: 0px 1px 4px rgba(black, 0.2);
             line-height: 1;//
             hr {
               margin: 6px 0 6px 0;
+              color: #949494
             }
             li {
               text-align: center;
@@ -160,6 +165,7 @@ $shadow: 0px 1px 4px rgba(black, 0.2);
                 height: 45px;
                 border-radius: 50%;
                 border: 1px solid rgba(black, 0.2);
+                margin-bottom: 12px;
                 margin: 5px 0;
               }
               // 每個功能

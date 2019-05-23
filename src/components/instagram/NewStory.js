@@ -1,15 +1,18 @@
 import React from 'react'
 import { FaTimes, FaRegImage } from 'react-icons/fa'
 class NewStory extends React.Component {
-  constructor() {
-    super()
+  constructor(props) {
+    super(props)
     this.state = {
       content: '', // post-body content 貼文內文
       preViewImgs: [], // 預覽 base64 Data Array
       isEditing: false,
     }
   }
-  // 正在編輯狀態
+  // this.inputText 內容 DOM
+  // this.inputFiles 檔案 DOM
+
+  // 編輯狀態改變
   handleIsEditing = () => {
     this.setState({ isEditing: true })
   }
@@ -22,8 +25,6 @@ class NewStory extends React.Component {
   }
   // 貼文內容改變
   handleChange = event => {
-    console.log(this.inputText)
-    // console.log(event.target.innerText)
     this.setState({ content: event.target.innerText })
   }
 
@@ -47,11 +48,45 @@ class NewStory extends React.Component {
       })
     }
   }
+
+  // Fetch 資料庫
+  handleSubmit = () => {
+    // 文字或圖片 其中一個有內容 才能送出
+    if (this.inputText.innerText.trim() || this.inputFiles.files.length > 0) {
+      // 文字丟進 formData
+      var formData = new FormData()
+      formData.append('memberID', '1')
+      formData.append('content', this.inputText.innerText)
+      // 圖片丟進 formData
+      for (let i = 0; i < this.inputFiles.files.length; i++) {
+        formData.append('photos', this.inputFiles.files[i])
+      }
+      // Fetch
+      fetch('http://localhost:3002/instagram/newStory', {
+        method: 'POST',
+        body: formData,
+      })
+        .then(res => res.json())
+        .then(obj => {
+          // 寫入成功 關閉編輯視窗 清空state
+          if (obj.success) {
+            this.inputText.innerText = ''
+            this.setState(
+              { isEditing: false, content: '', preViewImgs: [] },
+              () => {
+                //刷新父元素頁面
+                this.props.handleReFresh()
+              }
+            )
+          }
+        })
+    }
+  }
   render() {
     return (
       <>
         <div className="newStory story">
-          {/* header 使用者頭像 取消編輯按鈕 */}
+          {/* header 使用者頭像、取消編輯按鈕 */}
           <div className="post-header">
             <div className="poster">
               <img
@@ -69,7 +104,7 @@ class NewStory extends React.Component {
             </div>
           </div>
           <hr />
-          {/* body 內文 圖片預覽列 */}
+          {/* body 內文、圖片預覽列 */}
           <div className="post-body">
             {/* 內文 */}
             <div
@@ -89,8 +124,8 @@ class NewStory extends React.Component {
             {this.state.isEditing ? (
               <div className="post-image">
                 {/* <img src={process.env.PUBLIC_URL + '/images/instagram/avatar.png'} alt="" /> */}
-                {this.state.preViewImgs.map(item => (
-                  <img src={item} alt="" />
+                {this.state.preViewImgs.map((item, idx) => (
+                  <img key={idx} src={item} alt="" />
                 ))}
               </div>
             ) : (
@@ -111,8 +146,11 @@ class NewStory extends React.Component {
                 style={{ display: 'none' }}
                 multiple
                 onChange={this.handleFilesChange}
+                ref={el => (this.inputFiles = el)}
               />
-              <span className="submmit">發佈</span>
+              <span className="submmit" onClick={this.handleSubmit}>
+                發佈
+              </span>
             </div>
           ) : (
             ''

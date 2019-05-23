@@ -1,11 +1,14 @@
 import React from 'react'
-import { Link, NavLink } from 'react-router-dom'
+import { NavLink, Redirect } from 'react-router-dom'
 import '../styles/navbar.scss'
 import Notice from './Notice'
 import UserMenu from './UserMenu'
 import LoginModal from './login/LoginModal'
 import FirmRegisterModal from './login/FirmRegisterModal'
 import { FaComment, FaShoppingCart, FaBell, FaUserAlt } from 'react-icons/fa'
+import actions from '../redux/action/userInfo.js'
+import { connect } from 'react-redux'
+import { withRouter } from 'react-router'
 
 class Navbar extends React.Component {
   constructor(props) {
@@ -15,16 +18,28 @@ class Navbar extends React.Component {
       userMenuOpen: false,
       loginPopup: false,
       registerPopup: false,
-      isLogin: true,
     }
   }
 
-  login = name => {
-    this.setState({ isLogin: true, loginPopup: false, userName: name })
+  registerSuccess = () => {
+    this.setState({ registerPopup: false })
+  }
+  login = () => {
+    this.setState({ loginPopup: false })
   }
   logOut = () => {
-    localStorage.removeItem('account')
-    this.setState({ isLogin: false, userName: '' })
+    fetch('//localhost:3002/firm/logOut', {
+      method: 'POST',
+      body: '',
+      credentials: 'include',
+    })
+      .then(res => res.json())
+      .then(obj => {
+        this.props.logout()
+        if (this.props.location.pathname === '/firm') {
+          this.props.history.push('/')
+        }
+      })
   }
   registerShow = () => {
     this.setState({ registerPopup: true, loginPopup: false })
@@ -46,9 +61,11 @@ class Navbar extends React.Component {
   handleUserMenuOpen = () => {
     this.setState({ userMenuOpen: !this.state.userMenuOpen })
   }
+
   render() {
+    window.scrollTo(0, 0) //滾到最上面 (for instagram)
     return (
-      <div className="navbar">
+      <div className={this.props.isFixed ? 'navbar navfixed' : 'navbar'}>
         <div className="container">
           <div className="brand_logo">
             <NavLink to="/">
@@ -75,7 +92,7 @@ class Navbar extends React.Component {
             </li>
           </ul>
           <ul className="user_nav">
-            {this.state.isLogin ? (
+            {this.props.userInfo.login ? (
               <>
                 <li>
                   <NavLink to="/Mycart" activeClassName="active">
@@ -144,6 +161,7 @@ class Navbar extends React.Component {
               show={this.state.registerPopup}
               handleHide={this.registerHide}
               switch={this.handleShow}
+              registerSuccess={this.registerSuccess}
             />
           </ul>
         </div>
@@ -151,4 +169,19 @@ class Navbar extends React.Component {
     )
   }
 }
-export default Navbar
+
+function mapStateToProp(store) {
+  return {
+    userInfo: store.userInfo,
+    isFixed: store.isFixed,
+  }
+}
+
+export default withRouter(
+  connect(
+    mapStateToProp,
+    {
+      logout: actions.logOut,
+    }
+  )(Navbar)
+)

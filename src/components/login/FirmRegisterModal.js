@@ -1,16 +1,117 @@
 import React from 'react'
-import { Modal, Form, Button } from 'react-bootstrap'
+import { Modal, Form, Button, Col, Row } from 'react-bootstrap'
 
 class FirmRegisterModal extends React.Component {
   constructor(props) {
     super(props)
-    this.state = { account: '', password: '' }
+    this.state = {
+      account: '',
+      password: '',
+      passwordCheck: '',
+      store: '',
+      uniform: '',
+      remindText: '',
+    }
+  }
+  checkStore = evt => {
+    this.state.store = evt.target.value
+  }
+  checkuniform = evt => {
+    if (evt.target.value !== '') {
+      let data = { uniform: evt.target.value }
+      this.state.unicode = evt.target.value
+      fetch('//localhost:3002/firm/unicodeCheck', {
+        method: 'POST',
+        body: JSON.stringify(data),
+        credentials: 'include',
+        headers: {
+          'Content-type': 'application/json',
+        },
+      })
+        .then(res => res.json())
+        .then(obj => {
+          console.log(obj)
+          this.setState({ unicode: '' })
+          if (obj.data.success) {
+            return
+          } else {
+            this.inputunicode.value = ''
+            alert(obj.data.message)
+          }
+        })
+    }
   }
   checkAccount = evt => {
-    this.state.account = evt.target.value
+    if (evt.target.value !== '') {
+      let data = { account: evt.target.value }
+      this.state.account = evt.target.value
+      fetch('//localhost:3002/firm/accountCheck', {
+        method: 'POST',
+        body: JSON.stringify(data),
+        credentials: 'include',
+        headers: {
+          'Content-type': 'application/json',
+        },
+      })
+        .then(res => res.json())
+        .then(obj => {
+          console.log(obj)
+          this.setState({ account: '' })
+          if (obj.data.success) {
+            return
+          } else {
+            this.inputaccount.value = ''
+            alert(obj.data.message)
+          }
+        })
+    }
   }
   checkPassword = evt => {
+    if (evt.target.value.length > 0 && evt.target.value.length < 8) {
+      alert('密碼需8碼以上')
+    }
     this.state.password = evt.target.value
+  }
+  checkPasswordAgain = evt => {
+    if (evt.target.value !== '') {
+      this.state.passwordCheck = evt.target.value
+      if (this.state.passwordCheck !== this.state.password) {
+        this.setState({ remindText: '密碼不一致!' })
+        this.inputPassword.value = ''
+        this.inputPassword2.value = ''
+      }
+    }
+  }
+  FirmRegisterRequest = evt => {
+    if (this.refs.submitForm.reportValidity()) {
+      evt.preventDefault()
+      var data = {
+        account: this.state.account,
+        password: this.state.password,
+        store: this.state.store,
+        uniform: this.state.uniform,
+      }
+      fetch('//localhost:3002/firm/firmRegister', {
+        method: 'POST',
+        body: JSON.stringify(data),
+        credentials: 'include',
+        headers: {
+          'Content-type': 'application/json',
+        },
+      })
+        .then(res => res.json())
+        .then(obj => {
+          console.log(obj)
+          if (obj.data.success) {
+            alert(obj.data.message)
+            console.log(obj.data)
+            this.props.registerSuccess()
+            localStorage.setItem('account', obj.data.body.account)
+          } else {
+            alert(obj.data.message)
+          }
+        })
+    }
   }
   render() {
     return (
@@ -37,6 +138,7 @@ class FirmRegisterModal extends React.Component {
                   className="account form-control"
                   onBlur={this.checkAccount}
                   required
+                  ref={el => (this.inputaccount = el)}
                 />
               </Form.Group>
               <Form.Group
@@ -50,7 +152,7 @@ class FirmRegisterModal extends React.Component {
                   className="password form-control"
                   onBlur={this.checkPassword}
                   required
-                  ref={el => (this.inputTitle = el)}
+                  ref={el => (this.inputPassword = el)}
                 />
               </Form.Group>
               <Form.Group
@@ -62,29 +164,41 @@ class FirmRegisterModal extends React.Component {
                   type="password"
                   placeholder="再次輸入密碼"
                   className="password form-control"
-                  onBlur={this.checkPassword}
+                  onBlur={this.checkPasswordAgain}
                   required
-                  ref={el => (this.inputTitle = el)}
+                  ref={el => (this.inputPassword2 = el)}
                 />
+                <Form.Text className="red">{this.state.remindText}</Form.Text>
               </Form.Group>
+              <label htmlFor="uniform">統編</label>
+              <input
+                name="uniform"
+                type="text"
+                required
+                onBlur={this.checkuniform}
+                ref={el => (this.inputuniform = el)}
+              />
               <label htmlFor="store">店家</label>
-              <input name="store" type="text" />
-              <label htmlFor="unicode">統編</label>
-              <input name="unicode" type="text" />
+              <input
+                name="store"
+                type="text"
+                required
+                onBlur={this.checkStore}
+              />
               <Button
                 variant="primary"
                 type="submit"
                 className="button button--lg"
+                onClick={this.FirmRegisterRequest}
               >
                 註冊
               </Button>
             </form>
-            <div className="register">
-              註冊即同意<span className="blue">隱私權政策</span> 和
-              <span className="blue"> 使用者條款</span>
+            <div className="register center">
+              註冊即同意<span className="blue">隱私權政策</span>和
+              <span className="blue">使用者條款</span>
             </div>
-
-            <div className="register" onClick={this.props.switch}>
+            <div className="register center" onClick={this.props.switch}>
               已經註冊?<span className="blue">登入</span>
             </div>
           </Modal.Body>

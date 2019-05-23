@@ -9,23 +9,73 @@ class Maylike extends React.Component {
     super(props)
 
     this.state = {
-      images: [
-        process.env.PUBLIC_URL + './images/product/game1.jpg',
-        'http://192.168.27.25/happy6/%E5%9C%96%E7%89%87%E4%B8%8A%E8%88%B9%E5%8D%80/%E5%95%86%E5%93%81%E4%B8%8A%E6%9E%B6/06.jpg',
-        '/images/product/game1.jpg',
-        '/images/product/game2.jpg',
-        '/images/product/game1.jpg',
-        '/images/product/game2.jpg',
-        '/images/product/game1.jpg',
-        '/images/product/game2.jpg',
-        '/images/product/game1.jpg',
-      ],
+      data: {},
+      data2: {},
+      images: [],
       names: ['1', '2', '3', '4', '5', '6', '7', '8', '9'],
       currentIndex: 0,
       translateValue: 0,
     }
   }
 
+  componentDidMount() {
+    fetch('//localhost:3002/product/productlist', {})
+      //fetch prodct_manage
+      .then(response => {
+        // 這裡會得到一個 ReadableStream 的物件
+        console.log(response)
+        // 可以透過 blob(), json(), text() 轉成可用的資訊
+        return response.json()
+      })
+      .then(jsonData => {
+        this.setState({ data: jsonData })
+        // typeof()
+        console.log(this.state.data)
+      })
+      .catch(err => {
+        console.log('錯誤:', err)
+      })
+
+    fetch('//localhost:3002/product/productlist2', {})
+      //fetch product_sid=sid的所有圖片path
+      .then(response => {
+        // 這裡會得到一個 ReadableStream 的物件
+        console.log(response)
+        // 可以透過 blob(), json(), text() 轉成可用的資訊
+        return response.json()
+      })
+      .then(jsonData => {
+        this.setState({ data1: jsonData })
+
+        const dt1 = this.state.data
+        const dt2 = jsonData
+        var d1_leng = Object.keys(this.state.data).length
+        var d2_leng = Object.keys(jsonData).length
+
+        //迴圈判斷只抓其中一張圖
+        for (let data1_index = d1_leng - 1; data1_index >= 0; data1_index--) {
+          for (let data2_index = d2_leng - 1; data2_index >= 0; data2_index--) {
+            if (dt2[data2_index].sid === dt1[data1_index].sid) {
+              //將抓到的image_path存回去 this.state.data
+              dt1[data1_index].image_path = dt2[data2_index].image_path
+            }
+          }
+        }
+        // console.log(dt1)
+        this.setState({ data: dt1 })
+        // ddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddd
+        for (let i = 0; i < d1_leng; i++) {
+          var tep =
+            'http://192.168.27.25/happy6/product_manage' +
+            this.state.data[i].image_path
+          this.state.images.push(tep)
+        }
+        // console.log(this.state.images)
+      })
+      .catch(err => {
+        console.log('錯誤:', err)
+      })
+  }
   goToPrevSlide = () => {
     if (this.state.currentIndex === 0) return
 
@@ -56,8 +106,21 @@ class Maylike extends React.Component {
   slideWidth = () => {
     return document.querySelector('.slide').clientWidth
   }
+  clickaaa1 = index => () => {
+    console.log(index)
+    window.location.href = 'http://localhost:3000/ProductDetail'
+    localStorage.setItem('item.sid', index)
+  }
 
   render() {
+    const styles = {
+      backgroundSize: 'cover',
+      backgroundRepeat: 'no-repeat',
+      backgroundPosition: '50% 60%',
+      width: '200px',
+      height: '300px',
+      margin: '10px',
+    }
     return (
       <div className="slider">
         <div
@@ -67,8 +130,28 @@ class Maylike extends React.Component {
             transition: 'transform ease-out 0.45s',
           }}
         >
-          {this.state.images.map((image, i) => (
-            <Slide key={i} image={image} />
+          {/* ddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddd */}
+          {this.state.images.map((item, index, array) => (
+            <div
+              className="slide "
+              style={styles}
+              onClick={this.clickaaa1(index)}
+            >
+              <div className="gamecard">
+                <Card style={{ width: '200px', height: '500px' }}>
+                  <Card.Img
+                    variant="top"
+                    width="184px"
+                    height="184px"
+                    src={`${item}`}
+                  />
+                  <Card.Body>
+                    <Card.Title />
+                    {/* <Card.Text>NT 790</Card.Text> */}
+                  </Card.Body>
+                </Card>
+              </div>
+            </div>
           ))}
         </div>
 
@@ -78,36 +161,6 @@ class Maylike extends React.Component {
       </div>
     )
   }
-}
-const Slide = ({ image }) => {
-  const styles = {
-    backgroundSize: 'cover',
-    backgroundRepeat: 'no-repeat',
-    backgroundPosition: '50% 60%',
-    width: '200px',
-    height: '300px',
-    margin: '10px',
-  }
-  return (
-    <Link to="">
-      <div className="slide" style={styles}>
-        <div className="gamecard">
-          <Card style={{ width: '200px', height: '500px' }}>
-            <Card.Img
-              variant="top"
-              width="184px"
-              height="184px"
-              src={`${image}`}
-            />
-            <Card.Body>
-              <Card.Title>矮人礦坑</Card.Title>
-              <Card.Text>NT 790</Card.Text>
-            </Card.Body>
-          </Card>
-        </div>
-      </div>
-    </Link>
-  )
 }
 
 const LeftArrow = props => {

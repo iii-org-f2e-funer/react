@@ -148,6 +148,7 @@ input{
 /* 要加classname="account" */
 .login-form input[type="text"],
 .login-form input[type="email"],
+.login-form input[type="number"],
 input[type="password"]
   {
     padding: 8px 8px;
@@ -165,6 +166,7 @@ input[type="password"]
   }
 .login-form input[type="text"]:focus,
 .login-form input[type="email"]:focus,
+.login-form input[type="number"]:focus,
 input[type="password"]:focus
   {
     outline: none;
