@@ -76,72 +76,78 @@ $font_content_size: 18px;
       .message_list {
         padding-top: 14px;
         height: 80vh;
-        li {
-          width: 50%;
-          margin-bottom: 8px;
-          .text-box {
-            display: flex;
-            h5 {
-              width: 90%;
-              background-color: $color_blue_choose;
-              border-radius: $boder_radius;
-              padding: 14px 28px;
-              line-height: 18px;
-            }
+        ul {
+          height: 90%;
+          overflow: auto;
+          li {
+            width: 50%;
+            margin-bottom: 8px;
+            .text-box {
+              display: flex;
+              h5 {
+                width: 90%;
+                background-color: $color_blue_choose;
+                border-radius: $boder_radius;
+                padding: 14px 28px;
+                line-height: 18px;
+              }
 
-            .avatar {
-              width: 50px;
-              height: 50px;
-              border-radius: 50%;
-              overflow: hidden;
-              margin-right: 16px;
-              img {
-                object-fit: cover;
-                width: 100%;
-                height: 100%;
+              .avatar {
+                width: 50px;
+                height: 50px;
+                border-radius: 50%;
+                overflow: hidden;
+                margin-right: 16px;
+                img {
+                  object-fit: cover;
+                  width: 100%;
+                  height: 100%;
+                }
               }
             }
-          }
-          .text-box.sender {
-            justify-content: flex-end;
-          }
-          small {
-            width: 100%;
-            text-align: right;
-            display: inline-block;
+            .text-box.sender {
+              justify-content: flex-end;
+            }
+            small {
+              width: 100%;
+              text-align: right;
+              display: inline-block;
+            }
           }
         }
         li.sender {
           margin-left: 50%;
         }
       }
-
+      .send_box {
+        height: 10%;
+        input[type='text'] {
+          padding: 8px 8px;
+          display: inline-block;
+          border: 1px solid $color_border;
+          border-radius: $boder_radius;
+          vertical-align: middle;
+          box-sizing: border-box;
+          width: 88%;
+          transition: all 0.3s;
+          position: relative;
+          transition: all 0.3s;
+        }
+        input[type='text']:focus {
+          outline: none;
+          border: 1px solid $color_blue_choose;
+          box-shadow: none;
+        }
+        .button.button--yellow {
+          width: 12%;
+          line-height: 0px;
+          height: 42px;
+          border-radius: 0;
+          padding: 10px 10px;
+          border-radius: $boder_radius;
+        }
+      }
       /* focus藍色橫線 */
-      input[type='text'] {
-        padding: 8px 8px;
-        display: inline-block;
-        border: 1px solid $color_border;
-        border-radius: $boder_radius;
-        vertical-align: middle;
-        box-sizing: border-box;
-        width: 88%;
-        transition: all 0.3s;
-        position: relative;
-        transition: all 0.3s;
-      }
-      input[type='text']:focus {
-        outline: none;
-        border: 1px solid $color_blue_choose;
-        box-shadow: none;
-      }
-      .button.button--yellow {
-        width: 12%;
-        line-height: 0px;
-        height: 42px;
-        border-radius: 0;
-        padding: 10px 10px;
-        border-radius: $boder_radius;
-      }
     }
   }
 }
