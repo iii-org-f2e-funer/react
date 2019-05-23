@@ -16,8 +16,7 @@ import Mycart from '../pages/Mycart'
 import Shopping1 from '../components/shopprocess/Shopping1'
 import Instagram from '../components/instagram/Instagram'
 import actions from '../redux/action/userInfo.js'
-import { connect } from 'react-redux'
-import Event from '../pages/pt_page/Event.js'
+
 
 class RootRouter extends React.Component {
   componentDidMount() {
