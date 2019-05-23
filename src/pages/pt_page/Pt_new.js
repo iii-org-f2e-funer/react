@@ -64,7 +64,7 @@ class Pt_new extends React.Component {
         .then(res => res.json())
         .then(obj => {
           console.log(obj)
-          this.setState({ pt_img: obj.file, imgurl: obj.filepath })
+          this.setState({ pt_img: obj.filepath, imgurl: obj.filepath })
         })
         .then()
     }
@@ -84,6 +84,23 @@ class Pt_new extends React.Component {
       pt_add: event.target.value,
     })
   }
+  handletitleChange = event => {
+    this.setState({
+      pt_title: event.target.value,
+    })
+  }
+  handleinfoChange = event => {
+    this.setState({
+      pt_info: event.target.value,
+    })
+  }
+  handleformsubmit = e => {
+    console.log(e)
+
+    const fd = new FormData(document.newptform)
+
+    console.log(fd)
+  }
 
   render() {
     return (
@@ -94,6 +111,7 @@ class Pt_new extends React.Component {
             <div className="form-row title">
               <h3>主揪一場新桌遊</h3>
             </div>
+            <input type="hidden" name="pt_host" value={this.state.pt_host} />
             <div className="form-row">
               <label for="pt_imgfile">桌遊封面</label>
               <input
@@ -220,7 +238,8 @@ class Pt_new extends React.Component {
                 id="pt_title"
                 name="pt_title"
                 placeholder="請輸入你的桌遊標題"
-                value=""
+                value={this.state.pt_title}
+                onChange={event => this.handletitleChange(event)}
               />
             </div>
             <div className="form-row">
@@ -230,10 +249,16 @@ class Pt_new extends React.Component {
                 name="pt_info"
                 rows="20"
                 placeholder="增加一些描述讓你的團吸引其他人加入吧"
+                onBlur={event => this.handleinfoChange(event)}
               />
             </div>
             <div className="form-row">
-              <button className="pt_submitbtn">確認開團</button>
+              <button
+                className="pt_submitbtn"
+                onClick={e => this.handleformsubmit(e)}
+              >
+                確認開團
+              </button>
             </div>
             <div className="form-row remind">
               *您的揪團將會刊登在列表上，並於時間截止後下架，請記得在最晚審核時間勾選申請人哦!
