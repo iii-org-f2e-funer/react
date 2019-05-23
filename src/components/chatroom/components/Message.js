@@ -1,5 +1,6 @@
 import React from 'react'
 import { Route, Link, Switch, NavLink } from 'react-router-dom'
+import { Next } from 'react-bootstrap/PageItem'
 
 class Message extends React.Component {
   constructor() {
@@ -14,23 +15,34 @@ class Message extends React.Component {
   //get data from database
   componentDidMount() {
     var newData = []
-
+    var receiverArray = []
+    var receiverIndex = []
     fetch('http://localhost:3002/chatroom/message/user_id1', {
       method: 'GET',
       headers: { 'Content-type': 'application/json' },
     })
       .then(response => response.json())
       .then(data => {
-        for (var i = 0; i < data.length; i++) {
-          if (i + 1 < data.length) {
-            if (
-              data[i].receiver !== data[i + 1].receiver &&
-              data[i].sender_id === 1
-            ) {
-              newData.push(data[i])
-            }
-          }
-        }
+        // 處理聊天室的對象主題時間（不包含自己）
+        receiverArray = data.filter(element => {
+          return element.sender_id === 1
+        })
+        receiverArray = receiverArray.map(ele => {
+          return ele.receiver
+        })
+        receiverIndex = receiverArray.map((element, index, arr) => {
+          return arr.indexOf(element)
+        })
+        receiverIndex = receiverIndex.filter((element, index, arr) => {
+          return index === arr.indexOf(element)
+        })
+
+        newData = receiverIndex.map(element => {
+          return data[element]
+        })
+
+        console.log(receiverArray)
+        console.log(receiverIndex)
         console.log(newData)
 
         this.setState({ chatDataAll: data, chatDataNoRp: newData })
