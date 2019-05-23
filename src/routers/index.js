@@ -45,6 +45,8 @@ class RootRouter extends React.Component {
             <Route path="/Shopping1" component={Shopping1} />
 
             <Route path="/instagram" component={Instagram} />
+
+            <Route path="/event" component={Event} />
           </Switch>
           <Footer />
         </>
