@@ -11,10 +11,12 @@ import Navbar from '../components/Navbar'
 import ChatRoom from '../pages/ChatRoom'
 import ProductDetail from '../pages/ProductDetail'
 import Myfav from '../pages/Myfav'
+import Event from '../pages/pt_page/Event'
 import Mycart from '../pages/Mycart'
 import Shopping1 from '../components/shopprocess/Shopping1'
 import Instagram from '../components/instagram/Instagram'
 import actions from '../redux/action/userInfo.js'
+import { connect } from 'react-redux'
 import Event from '../pages/pt_page/Event.js'
 
 class RootRouter extends React.Component {
@@ -37,6 +39,7 @@ class RootRouter extends React.Component {
             <Route path="/gamemap" component={GameMapDetail} />
             <Route path="/demo" component={Demopage} />
             <Route path="/firm" component={Firm} />
+            <Route path="/event" component={Event} />
             <Route path="/product" component={Product} />
             <Route path="/chatroom" component={ChatRoom} />
             <Route path="/ProductDetail" component={ProductDetail} />
