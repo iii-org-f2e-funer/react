@@ -9,6 +9,7 @@ class ProductDetail extends React.Component {
     this.state = {
       gotit: {},
       images: [],
+      number: 1,
     }
   }
   componentDidMount() {
@@ -47,13 +48,21 @@ class ProductDetail extends React.Component {
       })
       .then(jsonData => {
         // this.setState({ data: jsonData })
-        var sid = localStorage.getItem('item.sid')
+        //抓localStorage.sid
+        // var sid = localStorage.getItem('item.sid')
+        var local = window.location.href
+        var long = local.length
+        var sid_index = local.lastIndexOf('sid:')
+        var sid = local.slice(sid_index + 4, long)
+        // alert(sid_index + 'spice:' + sid + 'length:' + long)
+        alert(sid)
+
         const gotdata2 = jsonData
         var data_leng = Object.keys(jsonData).length
         for (let i = 0; i < data_leng; i++) {
           if (gotdata2[i].sid == sid) {
             var a1 =
-              'http://192.168.27.25/happy6/product_manage' +
+              'http://192.168.27.25/happy6/product_manage/' +
               gotdata2[i].image_path
             var image = {
               original: a1,
@@ -68,6 +77,24 @@ class ProductDetail extends React.Component {
       .catch(err => {
         console.log('錯誤:', err)
       })
+  }
+  add = () => () => {
+    this.state.number++
+    this.setState({ number: this.state.number })
+    console.log(this.state.number)
+  }
+
+  subtract = () => () => {
+    this.state.number--
+    if (this.state.number == 0) {
+      this.state.number = 1
+    }
+    this.setState({ number: this.state.number })
+    console.log(this.state.number)
+  }
+  addtoshop = () => () => {
+    var product_num = this.state.number
+    alert(product_num)
   }
   render() {
     return (
@@ -92,13 +119,20 @@ class ProductDetail extends React.Component {
                     售價 <div className="seld">{this.state.gotit.price}</div>元
                   </p>
                   <div className="addandsubtract">
-                    <div className="add button button">
+                    <div className="add button" onClick={this.add()}>
                       <i className="fas fa-plus" />
                     </div>
-                    <div className="product-many">1</div>
-                    <div className="subtract button ">-</div>
+                    <div className="product-many">{this.state.number}</div>
+                    <div className="subtract button " onClick={this.subtract()}>
+                      -
+                    </div>
                   </div>
-                  <Button className="actionButton1  button" size="lg" block>
+                  <Button
+                    className="actionButton1  button"
+                    size="lg"
+                    onClick={this.addtoshop()}
+                    block
+                  >
                     加入購物車
                   </Button>
                 </div>

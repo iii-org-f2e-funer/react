@@ -70,7 +70,7 @@ export default class product extends React.Component {
 
   clickaaa = sid => () => {
     console.log(sid)
-    window.location.href = 'http://localhost:3000/ProductDetail'
+    window.location.href = 'http://localhost:3000/ProductDetail/sid:' + sid
     localStorage.setItem('item.sid', sid)
   }
   render() {
