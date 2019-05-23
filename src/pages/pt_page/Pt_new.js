@@ -3,12 +3,14 @@ import '../../styles/pt_style/pt_new.scss'
 import Datetime from 'react-datetime'
 import moment from 'moment'
 import TWzipcode from 'react-twzipcode'
+// import Pt_imgupload from '../../components/event/Pt_imgupload'
 
 class Pt_new extends React.Component {
   constructor() {
     super()
     this.state = {
       pt_img: '',
+      imgurl: '',
       pt_host: '',
       pt_city: '',
       pt_dist: '',
@@ -22,7 +24,6 @@ class Pt_new extends React.Component {
       pt_info: '',
     }
   }
-
   //handler
   handlememberChange = event => {
     this.setState({
@@ -41,6 +42,35 @@ class Pt_new extends React.Component {
       pt_level: event.target.value,
     })
   }
+
+  //上傳圖片
+  handleuploadimg = e => {
+    this.refs.fileUploader.click()
+  }
+
+  handleimgChange = e => {
+    if (e.target.files.length !== 0) {
+      const imgfile = e.target.files[0]
+      // this.setState({ imgdata: imgfile })
+      console.log(imgfile)
+      const imgdata = new FormData()
+      imgdata.append('pt_img', imgfile)
+      console.log(imgdata)
+
+      fetch('//localhost:3002/event/imgupload', {
+        method: 'POST',
+        body: imgdata,
+      })
+        .then(res => res.json())
+        .then(obj => {
+          console.log(obj)
+          this.setState({ pt_img: obj.file, imgurl: obj.filepath })
+        })
+        .then()
+    }
+  }
+
+  //設定地址
   handlecityChange = e =>
     this.setState({
       pt_city: e.county,
@@ -66,10 +96,25 @@ class Pt_new extends React.Component {
             </div>
             <div className="form-row">
               <label for="pt_imgfile">桌遊封面</label>
+              <input
+                type="file"
+                id="pt_imgfile"
+                name="pt_imgfile"
+                ref="fileUploader"
+                accept="image/jpeg,.png"
+                onChange={this.handleimgChange}
+                style={{ display: 'none' }}
+              />
               <div className="imgfield">
-                <div className="pt_imgupload">
-                  <i className="fas fa-camera" />
-                </div>
+                {this.state.imgurl ? (
+                  <div className="imgpreview" onClick={this.handleuploadimg}>
+                    <img src={this.state.imgurl} alt="" />
+                  </div>
+                ) : (
+                  <div className="pt_imgupload" onClick={this.handleuploadimg}>
+                    <i className="fas fa-camera" />
+                  </div>
+                )}
               </div>
             </div>
 
