@@ -1,6 +1,8 @@
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom'
 import React from 'react'
+import { connect } from 'react-redux'
 import Demopage from '../pages/demopage.js'
+
 import GameMapDetail from '../pages/GameMapDetail.js'
 import Firm from '../pages/Firm.js'
 import Footer from '../components/Footer.js'
@@ -15,6 +17,7 @@ import Shopping1 from '../components/shopprocess/Shopping1'
 import Instagram from '../components/instagram/Instagram'
 import actions from '../redux/action/userInfo.js'
 import { connect } from 'react-redux'
+import Event from '../pages/pt_page/Event.js'
 
 class RootRouter extends React.Component {
   componentDidMount() {
@@ -45,6 +48,8 @@ class RootRouter extends React.Component {
             <Route path="/Shopping1" component={Shopping1} />
 
             <Route path="/instagram" component={Instagram} />
+
+            <Route path="/event" component={Event} />
           </Switch>
           <Footer />
         </>
