@@ -92,6 +92,7 @@ class ProductDetail extends React.Component {
     console.log(this.state.number)
   }
   addtoshop = () => () => {
+    alert('成功加入購物車')
     var product_num = this.state.number
     this.state.gotit.number = product_num
     console.log(this.state.gotit)
@@ -120,7 +121,7 @@ class ProductDetail extends React.Component {
                   />
                 </div>
                 <div className="detailCard">
-                  <h2>{this.state.gotit.productName}</h2>
+                  <h3>{this.state.gotit.productName}</h3>
                   <p>出售商:{this.state.gotit.seller_sid}</p>
                   <p>上架日期:{this.state.gotit.createDate}</p>
                   <p>分類 紙牌遊戲 ,輕策略遊戲</p>
@@ -132,10 +133,9 @@ class ProductDetail extends React.Component {
                       <i className="fas fa-plus" />
                     </div>
                     <div className="product-many">{this.state.number}</div>
-                    <div
-                      className="subtract button "
-                      onClick={this.subtract()}
-                    />
+                    <div className="subtract button" onClick={this.subtract()}>
+                      -
+                    </div>
                   </div>
                   <div
                     className="actionButton1  button"

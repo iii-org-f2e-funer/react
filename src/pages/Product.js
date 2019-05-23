@@ -156,10 +156,7 @@ export default class product extends React.Component {
 
                       <Card.Body>
                         <Card.Title>{item.productName}</Card.Title>
-                        <Card.Text>
-                          NT{item.price}
-                          sid:{item.sid}
-                        </Card.Text>
+                        <Card.Text>NT{item.price}</Card.Text>
                       </Card.Body>
                     </Card>
                   </div>
