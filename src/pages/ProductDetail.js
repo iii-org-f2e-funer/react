@@ -9,6 +9,8 @@ class ProductDetail extends React.Component {
     this.state = {
       gotit: {},
       images: [],
+      number: 1,
+      allcart: [],
     }
   }
   componentDidMount() {
@@ -16,7 +18,7 @@ class ProductDetail extends React.Component {
       //fetch prodct_manage
       .then(response => {
         // 這裡會得到一個 ReadableStream 的物件
-        console.log(response)
+        // console.log(response)
         // 可以透過 blob(), json(), text() 轉成可用的資訊
         return response.json()
       })
@@ -41,19 +43,25 @@ class ProductDetail extends React.Component {
       //fetch prodct_images
       .then(response => {
         // 這裡會得到一個 ReadableStream 的物件
-        console.log(response)
+        // console.log(response)
         // 可以透過 blob(), json(), text() 轉成可用的資訊
         return response.json()
       })
       .then(jsonData => {
         // this.setState({ data: jsonData })
-        var sid = localStorage.getItem('item.sid')
+        //抓localStorage.sid
+        // var sid = localStorage.getItem('item.sid')
+        var local = window.location.href
+        var long = local.length
+        var sid_index = local.lastIndexOf('sid:')
+        var sid = local.slice(sid_index + 4, long)
+        // alert(sid_index + 'spice:' + sid + 'length:' + long)
         const gotdata2 = jsonData
         var data_leng = Object.keys(jsonData).length
         for (let i = 0; i < data_leng; i++) {
           if (gotdata2[i].sid == sid) {
             var a1 =
-              'http://192.168.27.25/happy6/product_manage' +
+              'http://192.168.27.25/happy6/product_manage/' +
               gotdata2[i].image_path
             var image = {
               original: a1,
@@ -68,6 +76,34 @@ class ProductDetail extends React.Component {
       .catch(err => {
         console.log('錯誤:', err)
       })
+  }
+  add = () => () => {
+    this.state.number++
+    this.setState({ number: this.state.number })
+    console.log(this.state.number)
+  }
+
+  subtract = () => () => {
+    this.state.number--
+    if (this.state.number == 0) {
+      this.state.number = 1
+    }
+    this.setState({ number: this.state.number })
+    console.log(this.state.number)
+  }
+  addtoshop = () => () => {
+    var product_num = this.state.number
+    this.state.gotit.number = product_num
+    console.log(this.state.gotit)
+    var arr = []
+    if (localStorage.allcart) {
+      arr = JSON.parse(localStorage.allcart)
+    }
+    arr.push(this.state.gotit)
+    localStorage.setItem('allcart', JSON.stringify(arr))
+    this.setState({ allcart: arr })
+    // console.log(this.state.allcart)
+    // const aaa = JSON.stringify(this.state.allcart)
   }
   render() {
     return (
@@ -92,15 +128,23 @@ class ProductDetail extends React.Component {
                     售價 <div className="seld">{this.state.gotit.price}</div>元
                   </p>
                   <div className="addandsubtract">
-                    <div className="add button button">
+                    <div className="add button" onClick={this.add()}>
                       <i className="fas fa-plus" />
                     </div>
-                    <div className="product-many">1</div>
-                    <div className="subtract button ">-</div>
+                    <div className="product-many">{this.state.number}</div>
+                    <div
+                      className="subtract button "
+                      onClick={this.subtract()}
+                    />
                   </div>
-                  <Button className="actionButton1  button" size="lg" block>
+                  <div
+                    className="actionButton1  button"
+                    size="lg"
+                    onClick={this.addtoshop()}
+                    block
+                  >
                     加入購物車
-                  </Button>
+                  </div>
                 </div>
               </div>
               <div className="product-Description-title">產品說明</div>

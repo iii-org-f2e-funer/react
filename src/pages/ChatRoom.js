@@ -26,7 +26,7 @@ class ChatRoom extends React.Component {
     })
       .then(response => response.json())
       .then(data => {
-        console.log(data)
+        console.log('chatRoom:', data)
 
         return this.setState({ chatData: data })
       })

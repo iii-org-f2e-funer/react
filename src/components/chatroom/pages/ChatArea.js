@@ -2,6 +2,8 @@ import React from 'react'
 // //withRouter 匯入這個方法來讓子元件可以得到ROUTER的URL屬性
 import { withRouter } from 'react-router'
 import avatar from '../avatar/ironman.jpg'
+import Moment from 'react-moment'
+
 // const PathNow = props => <div>目前位置 {props.location.pathname}</div>;
 
 // export default withRouter(PathNow);
@@ -13,37 +15,72 @@ class ChatArea extends React.Component {
       //{h_id: 1,h_sub: "BOB",m_id: 1,m_cont: "你好，BOB初次見面!",m_time: "2019-05-21T16:45:57.000Z",sender: 1,}
       chatDataAll: [],
       chatDataNoRp: [],
-      url: '',
-      senderText: [],
-      receiverText: [],
+      member_name: '',
+      member_chat_data: [],
+      start_chat_time: '',
     }
   }
-  componentDidMount() {
-    var newData = []
-
-    fetch('http://localhost:3002/chatroom/message/user_id1', {
-      method: 'GET',
-      headers: { 'Content-type': 'application/json' },
-    })
-      .then(response => response.json())
-      .then(data => {
-        for (var i = 0; i < data.length; i++) {
-          if (i + 1 < data.length) {
-            if (
-              data[i].receiver !== data[i + 1].receiver &&
-              data[i].sender_id === 1
-            ) {
-              newData.push(data[i])
-            }
-          }
+  async componentDidMount() {
+    try {
+      var newData = []
+      var receiverArray = []
+      var receiverIndex = []
+      var memberChatData = []
+      let theUrl = this.props.location.pathname
+      theUrl = theUrl.split('/')[3]
+      await this.setState({ member_name: theUrl })
+      const response = await fetch(
+        'http://localhost:3002/chatroom/message/user_id1',
+        {
+          method: 'GET',
+          headers: { 'Content-type': 'application/json' },
         }
-        console.log(newData)
+      )
+      if (!response.ok) throw new Error(response.statusText)
+      const data = await response.json()
+      console.log(data)
 
-        this.setState({ chatDataAll: data, chatDataNoRp: newData })
+      // 處理聊天室的對象主題時間（不包含自己）
+      receiverArray = data.filter(element => {
+        return element.sender_id === 1
       })
-    let theUrl = this.props.location.pathname
-    this.setState({ url: this.props.location.pathname })
-    console.log(theUrl)
+      receiverArray = receiverArray.map(ele => {
+        return ele.receiver
+      })
+      receiverIndex = receiverArray.map((element, index, arr) => {
+        return arr.indexOf(element)
+      })
+      receiverIndex = receiverIndex.filter((element, index, arr) => {
+        return index === arr.indexOf(element)
+      })
+
+      newData = receiverIndex.map(element => {
+        return data[element]
+      })
+
+      console.log(receiverArray)
+      console.log(receiverIndex)
+      console.log(newData)
+
+      memberChatData = data.filter(ele => {
+        return ele.receiver === theUrl || ele.sender === theUrl
+      })
+
+      await this.setState({
+        chatDataAll: data,
+        chatDataNoRp: newData,
+        member_chat_data: memberChatData,
+        start_chat_time: memberChatData[0].h_stime,
+      })
+
+      console.log(this.state.chatDataAll)
+
+      console.log(theUrl)
+
+      console.log(memberChatData)
+    } catch (e) {
+      console.log(e)
+    }
   }
 
   render() {
@@ -53,8 +90,14 @@ class ChatArea extends React.Component {
 
         <div className="chat_box">
           <div className="message_list">
-            <h5 className="text-center">您可以開始與user_id1聊天</h5>
-            <h5 className="text-center">timeSpan</h5>
+            <h5 className="text-center">
+              {'您可以開始與' + this.state.member_name + '聊天'}
+            </h5>
+            <h5 className="text-center">
+              <Moment format="YYYY-MM-DD HH:MM:SS">
+                {this.state.start_chat_time}
+              </Moment>
+            </h5>
             {/* 資料庫撈資料進來的地方 */}
             {/* 如果是自己傳給對方在右邊(有sender class) */}
             <ul className="d-flex flex-column ">

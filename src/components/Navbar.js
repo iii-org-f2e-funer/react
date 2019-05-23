@@ -65,7 +65,7 @@ class Navbar extends React.Component {
   render() {
     window.scrollTo(0, 0) //滾到最上面 (for instagram)
     return (
-      <div className={this.props.isFixed ? 'navbar navfixed' : 'navbar'}>
+      <div className="navbar">
         <div className="container">
           <div className="brand_logo">
             <NavLink to="/">
@@ -151,20 +151,20 @@ class Navbar extends React.Component {
                 </li>
               </>
             )}
-            <LoginModal
-              show={this.state.loginPopup}
-              handleHide={this.handleHide}
-              login={this.login}
-              register={this.registerShow}
-            />
-            <FirmRegisterModal
-              show={this.state.registerPopup}
-              handleHide={this.registerHide}
-              switch={this.handleShow}
-              registerSuccess={this.registerSuccess}
-            />
           </ul>
         </div>
+        <LoginModal
+          show={this.state.loginPopup}
+          handleHide={this.handleHide}
+          login={this.login}
+          register={this.registerShow}
+        />
+        <FirmRegisterModal
+          show={this.state.registerPopup}
+          handleHide={this.registerHide}
+          switch={this.handleShow}
+          registerSuccess={this.registerSuccess}
+        />
       </div>
     )
   }
