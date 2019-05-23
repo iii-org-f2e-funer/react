@@ -7,15 +7,31 @@ import Bookmark from './Bookmark'
 import Event from './Event'
 import Battle from './Battle'
 
+// import actions from '../redux/action/instagram'
+import { connect } from 'react-redux'
+
 class Instagram extends React.Component {
-  constructor() {
-    super()
+  constructor(props) {
+    super(props)
     this.state = {}
   }
+  componentDidMount() {
+    this.props.dispatch({ type: 'isFixed' })
+  }
+  componentWillUnmount(){
+    this.props.dispatch({ type: 'unFixed' })
+  }
+
   render() {
     return (
       <>
-        <div className="instagram container">
+        <div
+          className={
+            this.props.isFixed
+              ? 'instagram container navfixed'
+              : 'instagram container'
+          }
+        >
           <User />
           <Switch>
             <Route exact path="/instagram" component={Stories} />
@@ -29,4 +45,12 @@ class Instagram extends React.Component {
   }
 }
 
-export default Instagram
+// export default Instagram
+
+function mapStateToProp(store) {
+  return {
+    isFixed: store.isFixed,
+  }
+}
+
+export default connect(mapStateToProp)(Instagram)

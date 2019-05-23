@@ -61,9 +61,11 @@ class Navbar extends React.Component {
   handleUserMenuOpen = () => {
     this.setState({ userMenuOpen: !this.state.userMenuOpen })
   }
+
   render() {
+    window.scrollTo(0, 0) //滾到最上面 (for instagram)
     return (
-      <div className="navbar">
+      <div className={this.props.isFixed ? 'navbar navfixed' : 'navbar'}>
         <div className="container">
           <div className="brand_logo">
             <NavLink to="/">
@@ -171,6 +173,7 @@ class Navbar extends React.Component {
 function mapStateToProp(store) {
   return {
     userInfo: store.userInfo,
+    isFixed: store.isFixed,
   }
 }
 
