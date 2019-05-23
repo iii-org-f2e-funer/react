@@ -20,10 +20,10 @@ class LoginInput extends React.Component {
     this.setState({ passwordShow: !this.state.passwordShow })
   }
   checkAccount = evt => {
-    this.state.account = evt.target.value
+    this.setState({ account: evt.target.value })
   }
   checkPassword = evt => {
-    this.state.password = evt.target.value
+    this.setState({ password: evt.target.value })
   }
 
   FirmRequest = evt => {
