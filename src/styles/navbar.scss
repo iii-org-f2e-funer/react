@@ -13,11 +13,7 @@ $boder_radius: 6px;
 $font_title_size: 24px;
 $font_content_size: 18px;
 $shadow: 0px 1px 4px rgba(black, 0.2);
-.navbar.navfixed{
-  position: fixed;
-  top:0;
-  z-index: 209;
-}
+
 .navbar {
   width: 100%;
   background-color: white;
@@ -26,8 +22,9 @@ $shadow: 0px 1px 4px rgba(black, 0.2);
   padding: 0px;
   box-shadow: 0px 1px 4px rgba(black, 0.2);
 
-  position: relative;
-  z-index: 1;
+  position: sticky;
+  top: 0;
+  z-index: 209;
 
   -webkit-user-select: none; /* for Chrome */
   -moz-user-select: none; /* for Firefox */
@@ -81,15 +78,15 @@ $shadow: 0px 1px 4px rgba(black, 0.2);
 
       display: flex;
       justify-content: flex-end;
-      >li {
+      > li {
         //會員功能按鈕 (購物車 訊息 通知 會員)
-        >a {
+        > a {
           padding: 0 12.5px;
           line-height: 72px;
         }
         //通知按鈕
-        .notice_btn.active{
-          color:$color_blue
+        .notice_btn.active {
+          color: $color_blue;
         }
         .notice_btn {
           position: relative;
@@ -129,8 +126,8 @@ $shadow: 0px 1px 4px rgba(black, 0.2);
           }
         }
         //會員按鈕
-        .user_btn.active{
-          color:$color_blue
+        .user_btn.active {
+          color: $color_blue;
         }
         .user_btn {
           position: relative;
@@ -151,10 +148,10 @@ $shadow: 0px 1px 4px rgba(black, 0.2);
             left: 50%;
             transform: translateX(-50%);
 
-            line-height: 1;//
+            line-height: 1; //
             hr {
               margin: 6px 0 6px 0;
-              color: #949494
+              color: #949494;
             }
             li {
               text-align: center;
