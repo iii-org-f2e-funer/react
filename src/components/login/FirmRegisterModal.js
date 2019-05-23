@@ -14,12 +14,12 @@ class FirmRegisterModal extends React.Component {
     }
   }
   checkStore = evt => {
-    this.state.store = evt.target.value
+    this.setState({ store: evt.target.value })
   }
   checkuniform = evt => {
     if (evt.target.value !== '') {
+      let uniform = evt.target.value
       let data = { uniform: evt.target.value }
-      this.state.unicode = evt.target.value
       fetch('//localhost:3002/firm/unicodeCheck', {
         method: 'POST',
         body: JSON.stringify(data),
@@ -33,6 +33,7 @@ class FirmRegisterModal extends React.Component {
           console.log(obj)
           this.setState({ unicode: '' })
           if (obj.data.success) {
+            this.setState({ uniform: uniform })
             return
           } else {
             this.inputunicode.value = ''
@@ -43,8 +44,8 @@ class FirmRegisterModal extends React.Component {
   }
   checkAccount = evt => {
     if (evt.target.value !== '') {
+      let account = evt.target.value
       let data = { account: evt.target.value }
-      this.state.account = evt.target.value
       fetch('//localhost:3002/firm/accountCheck', {
         method: 'POST',
         body: JSON.stringify(data),
@@ -58,6 +59,7 @@ class FirmRegisterModal extends React.Component {
           console.log(obj)
           this.setState({ account: '' })
           if (obj.data.success) {
+            this.setState({ account: account })
             return
           } else {
             this.inputaccount.value = ''
@@ -69,8 +71,9 @@ class FirmRegisterModal extends React.Component {
   checkPassword = evt => {
     if (evt.target.value.length > 0 && evt.target.value.length < 8) {
       alert('密碼需8碼以上')
+      this.inputPassword.value = ''
     }
-    this.state.password = evt.target.value
+    this.setState({ password: evt.target.value })
   }
   checkPasswordAgain = evt => {
     if (evt.target.value !== '') {

@@ -92,14 +92,14 @@ class LoginInput extends React.Component {
               />
               <Form.Text className="red">{this.state.remindText}</Form.Text>
             </Form.Group>
-            <Button
+            <button
               variant="primary"
               type="submit"
               className="button button--lg"
               onClick={this.FirmRequest}
             >
               登入
-            </Button>
+            </button>
           </form>
           <ul>
             <li className="register blue">

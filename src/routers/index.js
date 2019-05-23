@@ -17,7 +17,9 @@ import { connect } from 'react-redux'
 
 class RootRouter extends React.Component {
   componentDidMount() {
-    fetch('//localhost:3002/firm/userInfo')
+    fetch('//localhost:3002/firm/userInfo', {
+      credentials: 'include',
+    })
       .then(res => res.json())
       .then(obj => {
         if (obj.success) {
