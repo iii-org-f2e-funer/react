@@ -20,8 +20,6 @@ class EscapeRoomMap extends React.Component {
     zoom: 7,
     center: { lat: 23.715, lng: 120.91 },
     panTo: {},
-
-    // getStoreByMarker
     storeId: '',
     storeLogo: '',
     storeName: '',
@@ -29,21 +27,11 @@ class EscapeRoomMap extends React.Component {
     storeTel: '',
     storeOpHr: '',
     gamesInfo: [],
-    storeSid: '',
-    storeFirm_id: 'yuyu',
-    storeStore: '',
-    storeCounty: '',
-    storeDist: '',
-    storeAddress: '',
-    storePhone: '',
-    businessHour: '',
-    ////
     fetchNearbyStores: false,
   }
 
   // 取得來自MapBody點擊場館獲得的場館資料與遊戲資料
   getStoreByMarker(data) {
-    console.log(data)
     this.setState({
       storeId: data.storeId,
       storeLogoUrl: data.storeLogoUrl,
@@ -53,16 +41,7 @@ class EscapeRoomMap extends React.Component {
       storeHourWeekday: data.storeHourWeekday,
       storeHourWeekend: data.storeHourWeekend,
       gamesInfo: data.gamesInfo,
-      storeSid: data.storeSid,
-      storeFirm_id: data.storeFirm_id,
-      storeStore: data.storeStore,
-      storeCounty: data.storeCounty,
-      storeDist: data.storeDist,
-      storeAddress: data.storeAddress,
-      storePhone: data.storePhone,
-      businessHour: data.businessHour,
     })
-    console.log(this.state)
   }
 
   // 依據城市選擇器回傳的地圖中心與比例尺切換，並讀出該城市場館
@@ -72,7 +51,6 @@ class EscapeRoomMap extends React.Component {
       zoom: data.zoom,
       center: data.center,
     })
-    //^^^^^^CitySelect==CALLBACK
 
     fetch(GetStore + '&city=' + data.city_id)
       .then(res => res.json())
@@ -129,12 +107,9 @@ class EscapeRoomMap extends React.Component {
     }
   }
 
-  //^^^^^^componentWillMount
-
   // 依所在位置取得鄰近場館
   getStoresByPosition(lat, lng) {
-    // fetch(GetStore + '&lat=' + lat + '&lng=' + lng)
-    fetch('http://127.0.0.1:3002/gameMap/All')
+    fetch(GetStore + '&lat=' + lat + '&lng=' + lng)
       .then(res => res.json())
       // .then(res => console.log(res))
       .then(res => {
@@ -145,7 +120,6 @@ class EscapeRoomMap extends React.Component {
       })
       .catch(err => console.log(err))
   }
-  //^^^^^^ componentDidUpdate^^^^^^^^res=>state.srores
 
   componentWillMount() {
     this.setState({ markers: [] })
@@ -216,16 +190,8 @@ class EscapeRoomMap extends React.Component {
               storeAdd={this.state.storeAdd}
               storeTel={this.state.storeTel}
               storeHourWeekday={this.state.storeHourWeekday}
-              storeSid={this.state.storeSid}
-              storeFirm_id={this.state.storeFirm_id}
-              storeStore={this.state.storeStore}
-              storeCounty={this.state.storeCounty}
-              storeDist={this.state.storeDist}
-              storeAddress={this.state.storeAddress}
-              storePhone={this.state.storePhone}
-              businessHour={this.state.businessHour}
             />
-            {/* <GameInfo gamesInfo={this.state.gamesInfo} /> */}
+            <GameInfo gamesInfo={this.state.gamesInfo} />
           </div>
         </div>
       </React.Fragment>

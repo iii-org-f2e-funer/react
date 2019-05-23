@@ -65,26 +65,58 @@ class MapBody extends React.Component {
 
   onMarkerClick = evt => {
     //<- event object, not a marker object!
-    let storeId = evt.ID
-    let storeName = evt.STORE_NAME
-    let storeLogoUrl = evt.STORE_LOGO_URL
-    let storeAdd = evt.STORE_ADD
-    let storeTel1 = evt.STORE_TEL_1
-    let storeHourWeekday = evt.STORE_HOUR_WEEKDAY
+    // let storeId = evt.ID
+    // let storeName = evt.STORE_NAME
+    // let storeLogoUrl = evt.STORE_LOGO_URL
+    // let storeAdd = evt.STORE_ADD
+    // let storeTel1 = evt.STORE_TEL_1
+    // let storeHourWeekday = evt.STORE_HOUR_WEEKDAY
+    let storeId = evt.sid
+    let storeName = evt.store
+    let storeLogoUrl = evt.phone
+    let storeAdd = 'haha111'
+    let storeTel1 = 'haha222'
+    let storeHourWeekday = 'haha333'
+
+    let storeSid = evt.sid
+    let storeFirm_id = evt.firm_id
+    let storeStore = evt.store
+    let storeCounty = evt.county
+    let storeDist = evt.dist
+    let storeAddress = evt.address
+    let storePhone = evt.phone
+    let businessHour = evt.business_hour
 
     // *Get games in store
-    fetch(GetStore + '/store_id=' + storeId)
+    // fetch(GetStore + '/store_id=' + storeId)
+    fetch('http://127.0.0.1:3002/gameMap/All')
       .then(res => res.json())
       // .then(res => {console.log(res)})
       .then(res => {
         this.props.getStoreByMarker({
+          // storeId: storeId,
+          // storeLogoUrl: storeLogoUrl,
+          // storeName: storeName,
+          // storeAdd: storeAdd,
+          // storeTel: storeTel1,
+          // storeHourWeekday: storeHourWeekday,
+          // gamesInfo: res,
           storeId: storeId,
           storeLogoUrl: storeLogoUrl,
           storeName: storeName,
           storeAdd: storeAdd,
           storeTel: storeTel1,
           storeHourWeekday: storeHourWeekday,
-          gamesInfo: res,
+          gamesInfo: 'hahah',
+          ////
+          storeSid: storeSid,
+          storeFirm_id: storeFirm_id,
+          storeStore: storeStore,
+          storeCounty: storeCounty,
+          storeDist: storeDist,
+          storeAddress: storeAddress,
+          storePhone: storePhone,
+          businessHour: businessHour,
         })
       })
       .catch(err => console.log(err))
@@ -124,8 +156,10 @@ class MapBody extends React.Component {
             <Marker
               key={store.ID}
               position={{
-                lat: parseFloat(store.STORE_LAT),
-                lng: parseFloat(store.STORE_LNG),
+                // lat: parseFloat(store.STORE_LAT),
+                // lng: parseFloat(store.STORE_LNG),
+                lat: parseFloat(store.lat),
+                lng: parseFloat(store.lng),
               }}
               // icon={{ url: this.state.logo40Route + store.STORE_LOGO_NAME }}
               onClick={this.onMarkerClick.bind(this, store)}
