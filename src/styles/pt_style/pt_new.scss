@@ -1,0 +1,330 @@
+.pt_container {
+  width: 1170px;
+  min-height: 100vh;
+  margin: 16px auto;
+  // background-color: bisque;
+  border: 1px solid #ccc;
+  font-family: 'Noto Sans CJK TC';
+}
+
+.newptform {
+  margin: 10px;
+}
+
+.form-row {
+  display: flex;
+  margin: 30px;
+  width: 100%;
+}
+
+.form-control.county-sel,.form-control.district-sel{
+  display: inline-block;
+  width: 172px;
+  margin-right:16px
+}
+
+.form-control.zipcode{
+  display: none;
+}
+.form-row.title {
+  color: #5b5b5b;
+  justify-content:center;
+}
+.form-row.remind {
+  color: #8A8A8A;
+  font-size: 12px;
+  justify-content:center;
+  margin-bottom: 120px;
+}
+.imgfield{
+  width: 920px;
+}
+.imgpreview{
+  max-width: 800px;
+  max-height:600px ;
+  object-fit: contain;
+  margin: 0 auto;
+}
+.imgfield img{
+  width: 100%;
+  height: 100%;
+}
+.pt_imgupload {
+  width: 160px;
+  height: 160px;
+  border-radius: 50%;
+  background: #d5d5d5;
+  margin: 0 auto;
+}
+.pt_imgupload i {
+  font-size: 24px;
+padding: 68px;
+  color: #fff;
+}
+label {
+  font-size: 18px;
+  width: 150px;
+}
+.pt_level{
+    margin-left:10px
+}
+#pt_title{
+    // border: none;
+    width: 920px;
+    border-radius: .25rem;
+    // border-bottom: 1px solid #000;
+}
+#pt_member, #pt_maxm{
+    // border: 1px solid #ced4da;
+    width: 360px;
+    border-radius: .25rem;
+    padding-left: 10px
+}
+#pt_add{
+  width: 550px;
+  border-radius: .25rem;
+  padding-left: 10px
+}
+
+textarea {
+    width: 920px;
+    vertical-align:text-top;
+    border: 1px solid #ced4da;
+    border-radius: 8px;
+    padding: 8px;
+}
+.pt_submitbtn {
+    padding: 10px 50px;
+    border: none;
+    border-radius: 5px;
+    display: flex;
+    margin: 0 auto;
+    background-color: #6EC4D2;
+    color: #fff;
+}
+.pt_level {
+  margin-top: 8px;
+}
+/*!
+ * https://github.com/YouCanBookMe/react-datetime
+ */
+.rdt input{
+  width: 360px;
+    border-radius: .25rem;
+}
+ .rdt {
+    position: relative;
+  }
+  .rdtPicker {
+    display: none;
+    position: absolute;
+    width: 250px;
+    padding: 4px;
+    margin-top: 1px;
+    z-index: 99999 !important;
+    background: #fff;
+    box-shadow: 0 1px 3px rgba(0,0,0,.1);
+    border: 1px solid #f9f9f9;
+    top:45px;
+  }
+  .rdtOpen .rdtPicker {
+    display: block;
+  }
+  .rdtStatic .rdtPicker {
+    box-shadow: none;
+    position: static;
+  }
+  
+  .rdtPicker .rdtTimeToggle {
+    text-align: center;
+  }
+  
+  .rdtPicker table {
+    width: 100%;
+    margin: 0;
+  }
+  .rdtPicker td,
+  .rdtPicker th {
+    text-align: center;
+    height: 28px;
+  }
+  .rdtPicker td {
+    cursor: pointer;
+  }
+  .rdtPicker td.rdtDay:hover,
+  .rdtPicker td.rdtHour:hover,
+  .rdtPicker td.rdtMinute:hover,
+  .rdtPicker td.rdtSecond:hover,
+  .rdtPicker .rdtTimeToggle:hover {
+    background: #eeeeee;
+    cursor: pointer;
+  }
+  .rdtPicker td.rdtOld,
+  .rdtPicker td.rdtNew {
+    color: #999999;
+  }
+  .rdtPicker td.rdtToday {
+    position: relative;
+  }
+  .rdtPicker td.rdtToday:before {
+    content: '';
+    display: inline-block;
+    border-left: 7px solid transparent;
+    border-bottom: 7px solid #428bca;
+    border-top-color: rgba(0, 0, 0, 0.2);
+    position: absolute;
+    bottom: 4px;
+    right: 4px;
+  }
+  .rdtPicker td.rdtActive,
+  .rdtPicker td.rdtActive:hover {
+    background-color: #428bca;
+    color: #fff;
+    text-shadow: 0 -1px 0 rgba(0, 0, 0, 0.25);
+  }
+  .rdtPicker td.rdtActive.rdtToday:before {
+    border-bottom-color: #fff;
+  }
+  .rdtPicker td.rdtDisabled,
+  .rdtPicker td.rdtDisabled:hover {
+    background: none;
+    color: #999999;
+    cursor: not-allowed;
+  }
+  
+  .rdtPicker td span.rdtOld {
+    color: #999999;
+  }
+  .rdtPicker td span.rdtDisabled,
+  .rdtPicker td span.rdtDisabled:hover {
+    background: none;
+    color: #999999;
+    cursor: not-allowed;
+  }
+  .rdtPicker th {
+    border-bottom: 1px solid #f9f9f9;
+  }
+  .rdtPicker .dow {
+    width: 14.2857%;
+    border-bottom: none;
+    cursor: default;
+  }
+  .rdtPicker th.rdtSwitch {
+    width: 100px;
+  }
+  .rdtPicker th.rdtNext,
+  .rdtPicker th.rdtPrev {
+    font-size: 21px;
+    vertical-align: top;
+  }
+  
+  .rdtPrev span,
+  .rdtNext span {
+    display: block;
+    -webkit-touch-callout: none; /* iOS Safari */
+    -webkit-user-select: none;   /* Chrome/Safari/Opera */
+    -khtml-user-select: none;    /* Konqueror */
+    -moz-user-select: none;      /* Firefox */
+    -ms-user-select: none;       /* Internet Explorer/Edge */
+    user-select: none;
+  }
+  
+  .rdtPicker th.rdtDisabled,
+  .rdtPicker th.rdtDisabled:hover {
+    background: none;
+    color: #999999;
+    cursor: not-allowed;
+  }
+  .rdtPicker thead tr:first-child th {
+    cursor: pointer;
+  }
+  .rdtPicker thead tr:first-child th:hover {
+    background: #eeeeee;
+  }
+  
+  .rdtPicker tfoot {
+    border-top: 1px solid #f9f9f9;
+  }
+  
+  .rdtPicker button {
+    border: none;
+    background: none;
+    cursor: pointer;
+  }
+  .rdtPicker button:hover {
+    background-color: #eee;
+  }
+  
+  .rdtPicker thead button {
+    width: 100%;
+    height: 100%;
+  }
+  
+  td.rdtMonth,
+  td.rdtYear {
+    height: 50px;
+    width: 25%;
+    cursor: pointer;
+  }
+  td.rdtMonth:hover,
+  td.rdtYear:hover {
+    background: #eee;
+  }
+  
+  .rdtCounters {
+    display: inline-block;
+  }
+  
+  .rdtCounters > div {
+    float: left;
+  }
+  
+  .rdtCounter {
+    height: 100px;
+  }
+  
+  .rdtCounter {
+    width: 40px;
+  }
+  
+  .rdtCounterSeparator {
+    line-height: 100px;
+  }
+  
+  .rdtCounter .rdtBtn {
+    height: 40%;
+    line-height: 40px;
+    cursor: pointer;
+    display: block;
+  
+    -webkit-touch-callout: none; /* iOS Safari */
+    -webkit-user-select: none;   /* Chrome/Safari/Opera */
+    -khtml-user-select: none;    /* Konqueror */
+    -moz-user-select: none;      /* Firefox */
+    -ms-user-select: none;       /* Internet Explorer/Edge */
+    user-select: none;
+  }
+  .rdtCounter .rdtBtn:hover {
+    background: #eee;
+  }
+  .rdtCounter .rdtCount {
+    height: 20%;
+    font-size: 1.2em;
+  }
+  
+  .rdtMilli {
+    vertical-align: middle;
+    padding-left: 8px;
+    width: 48px;
+  }
+  
+  .rdtMilli input {
+    width: 100%;
+    font-size: 1.2em;
+    margin-top: 37px;
+  }
+  
+  .rdtTime td {
+    cursor: default;
+  }
+  
