@@ -4,13 +4,13 @@ import Datetime from 'react-datetime'
 import moment from 'moment'
 import TWzipcode from 'react-twzipcode'
 // import Pt_imgupload from '../../components/event/Pt_imgupload'
+import Pt_newmodal from '../../components/event/Pt_newmodal'
 
 class Pt_new extends React.Component {
   constructor() {
     super()
     this.state = {
       pt_img: '',
-      imgurl: '',
       pt_host: '',
       pt_city: '',
       pt_dist: '',
@@ -22,6 +22,7 @@ class Pt_new extends React.Component {
       pt_level: '',
       pt_title: '',
       pt_info: '',
+      modalshow: false,
     }
   }
   //handler
@@ -94,19 +95,40 @@ class Pt_new extends React.Component {
       pt_info: event.target.value,
     })
   }
+  
   handleformsubmit = e => {
-    console.log(e)
-
-    const fd = new FormData(document.newptform)
-
-    console.log(fd)
+    e.preventDefault()
+    this.setState({ modalshow: true })
+    // console.log(this.form)
+    // const fd = new FormData(this.form)
+    // console.log(this.form.check.value)
+    // console.log(fd)
+    // fetch('//localhost:3002/event/newptsubmit', {
+    //   method: 'POST',
+    //   body: fd,
+    // })
+    //   .then(res => res.json())
+    //   .then(obj => {
+    //     if (obj.success) {
+    // this.setState({ modalshow: true })
+    //   }
+    // })
+  }
+  handleClose = e => {
+    this.setState({ modalshow: false })
   }
 
   render() {
     return (
       <>
         <div className="pt_container">
-          <form name="newptform" className="newptform" method="post">
+          <form
+            name="newptform"
+            className="newptform"
+            method="post"
+            onSubmit={this.handleformsubmit}
+            ref={el => (this.form = el)}
+          >
             <input type="hidden" name="check" value="happy6" />
             <div className="form-row title">
               <h3>主揪一場新桌遊</h3>
@@ -115,9 +137,14 @@ class Pt_new extends React.Component {
             <div className="form-row">
               <label for="pt_imgfile">桌遊封面</label>
               <input
+                type="hidden"
+                id="pt_img"
+                name="pt_img"
+                value={this.state.pt_img}
+              />
+              <input
                 type="file"
                 id="pt_imgfile"
-                name="pt_imgfile"
                 ref="fileUploader"
                 accept="image/jpeg,.png"
                 onChange={this.handleimgChange}
@@ -126,7 +153,7 @@ class Pt_new extends React.Component {
               <div className="imgfield">
                 {this.state.imgurl ? (
                   <div className="imgpreview" onClick={this.handleuploadimg}>
-                    <img src={this.state.imgurl} alt="" />
+                    <img src={this.state.pt_img} alt="" />
                   </div>
                 ) : (
                   <div className="pt_imgupload" onClick={this.handleuploadimg}>
@@ -166,8 +193,9 @@ class Pt_new extends React.Component {
               <Datetime
                 className="flex"
                 dateFormat="YYYY/MM/DD"
-                timeFormat="A HH:mm"
+                timeFormat="HH:mm"
                 value={this.state.pt_time}
+                inputProps={{ name: 'pt_time' }}
                 onChange={moment => this.handletimeChange(moment)}
               />
             </div>
@@ -177,8 +205,9 @@ class Pt_new extends React.Component {
               <Datetime
                 className="flex"
                 dateFormat="YYYY/MM/DD"
-                timeFormat="A HH:mm"
+                timeFormat="HH:mm"
                 value={this.state.pt_endtime}
+                inputProps={{ name: 'pt_endtime' }}
                 onChange={moment => this.handleendtimeChange(moment)}
               />
             </div>
@@ -253,12 +282,13 @@ class Pt_new extends React.Component {
               />
             </div>
             <div className="form-row">
-              <button
-                className="pt_submitbtn"
-                onClick={e => this.handleformsubmit(e)}
-              >
+              <button type="submit" className="pt_submitbtn">
                 確認開團
               </button>
+              <Pt_newmodal
+                show={this.state.modalshow}
+                handleHide={this.handleClose}
+              />
             </div>
             <div className="form-row remind">
               *您的揪團將會刊登在列表上，並於時間截止後下架，請記得在最晚審核時間勾選申請人哦!
