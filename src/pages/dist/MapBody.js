@@ -71,6 +71,7 @@ class MapBody extends React.Component {
     // let storeAdd = evt.STORE_ADD
     // let storeTel1 = evt.STORE_TEL_1
     // let storeHourWeekday = evt.STORE_HOUR_WEEKDAY
+    console.log(evt)
     let storeId = evt.sid
     let storeName = evt.store
     let storeLogoUrl = evt.phone
@@ -85,7 +86,8 @@ class MapBody extends React.Component {
     let storeDist = evt.dist
     let storeAddress = evt.address
     let storePhone = evt.phone
-    let businessHour = evt.business_hour
+    let businessHour = evt.business_hours
+    let publicHoliday = evt.public_holiday
 
     // *Get games in store
     // fetch(GetStore + '/store_id=' + storeId)
@@ -117,6 +119,7 @@ class MapBody extends React.Component {
           storeAddress: storeAddress,
           storePhone: storePhone,
           businessHour: businessHour,
+          publicHoliday: publicHoliday,
         })
       })
       .catch(err => console.log(err))
@@ -154,7 +157,7 @@ class MapBody extends React.Component {
         <MarkerClusterer averageCenter enableRetinaIcons gridSize={30}>
           {this.state.stores.map(store => (
             <Marker
-              key={store.ID}
+              key={store.sid}
               position={{
                 // lat: parseFloat(store.STORE_LAT),
                 // lng: parseFloat(store.STORE_LNG),

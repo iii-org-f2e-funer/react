@@ -11,7 +11,7 @@ import GameInfo from './GameInfo'
 import './map.scss'
 import { GetStore } from '../../api/Api'
 
-class EscapeRoomMap extends React.Component {
+class BoradGameMap extends React.Component {
   state = {
     currentLatLng: {},
     stores: [],
@@ -30,20 +30,20 @@ class EscapeRoomMap extends React.Component {
     storeOpHr: '',
     gamesInfo: [],
     storeSid: '',
-    storeFirm_id: 'yuyu',
+    storeFirm_id: '',
     storeStore: '',
     storeCounty: '',
     storeDist: '',
     storeAddress: '',
     storePhone: '',
     businessHour: '',
+    publicHoliday: '',
     ////
     fetchNearbyStores: false,
   }
 
   // 取得來自MapBody點擊場館獲得的場館資料與遊戲資料
   getStoreByMarker(data) {
-    console.log(data)
     this.setState({
       storeId: data.storeId,
       storeLogoUrl: data.storeLogoUrl,
@@ -61,8 +61,8 @@ class EscapeRoomMap extends React.Component {
       storeAddress: data.storeAddress,
       storePhone: data.storePhone,
       businessHour: data.businessHour,
+      publicHoliday: data.publicHoliday,
     })
-    console.log(this.state)
   }
 
   // 依據城市選擇器回傳的地圖中心與比例尺切換，並讀出該城市場館
@@ -74,7 +74,8 @@ class EscapeRoomMap extends React.Component {
     })
     //^^^^^^CitySelect==CALLBACK
 
-    fetch(GetStore + '&city=' + data.city_id)
+    // fetch(GetStore + '&city=' + data.city_id)
+    fetch('http://127.0.0.1:3002/gameMap/city/' + data.city_id)
       .then(res => res.json())
       // .then(res => console.log(res))
       .then(res => {
@@ -156,7 +157,7 @@ class EscapeRoomMap extends React.Component {
     window.scrollTo(0, 0)
     this.setState({
       storeLogoUrl: '/img/opened-door-aperture.png',
-      storeName: '請點選地圖上的場館以顯示更多資訊',
+      storeName: 'blank_storeName',
     })
   }
   componentDidUpdate(prevProps, prevState) {
@@ -224,6 +225,7 @@ class EscapeRoomMap extends React.Component {
               storeAddress={this.state.storeAddress}
               storePhone={this.state.storePhone}
               businessHour={this.state.businessHour}
+              publicHoliday={this.state.publicHoliday}
             />
             {/* <GameInfo gamesInfo={this.state.gamesInfo} /> */}
           </div>
@@ -233,4 +235,4 @@ class EscapeRoomMap extends React.Component {
   }
 }
 
-export default EscapeRoomMap
+export default BoradGameMap

@@ -97,18 +97,11 @@ class CitySelect extends Component {
     return (
       <React.Fragment>
         <select className="custom-select" onChange={this.handleChange}>
-          <option value="">選擇城市快速移動</option>
+          <option value="">依縣市篩選</option>
           {/* <option value="0">現在位置</option> */}
           <option value="101">台北市</option>
           <option value="102">新北市</option>
-          <option value="104">桃園市</option>
-          <option value="105">新竹市</option>
-          <option value="202">台中市</option>
-          <option value="204">南投縣</option>
-          <option value="301">嘉義市</option>
-          <option value="303">台南市</option>
-          <option value="304">高雄市</option>
-          <option value="107">宜蘭縣</option>
+
           <option value="">全台灣</option>
         </select>
       </React.Fragment>
