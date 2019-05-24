@@ -52,7 +52,9 @@ export default class Mycart extends React.Component {
     // alert(JSON.stringify(this.state.data))
     // alert(JSON.stringify(newItems))
   }
-
+  goto = sid => () => {
+    window.location.href = 'http://localhost:3000/ProductDetail/sid:' + sid
+  }
   render() {
     if (localStorage.allcart == undefined || localStorage.allcart === '[]') {
       return (
@@ -65,59 +67,14 @@ export default class Mycart extends React.Component {
                     <div className="mycart">購物車</div>
                   </Link>
                 </li>
-                <li>
+                {/* <li>
                   <Link to="/Myfav" activeClassName="active">
                     <div className="myfav">我的收藏</div>
                   </Link>
-                </li>
+                </li> */}
               </ul>
               <div className="myfav-table">
                 <h1>給我快去買!!!!!!!</h1>
-              </div>
-              <div className="check">
-                <div className="remind">
-                  <label>提醒您</label>
-                  <div>
-                    選擇宅配請填寫正確收件人姓名，避免包裹無法送達
-                    <br />
-                    選擇超商取貨請填寫正確收件人姓名，避免無法領取
-                    <br />
-                  </div>
-                </div>
-                <div className="gotocheck">
-                  <div className="money">
-                    <h5>小計</h5>
-                    <h5>0</h5>
-                  </div>
-                  <div className="paymethod money">
-                    <h5>付款方式</h5>
-                    <h5>???</h5>
-                  </div>
-                  <div className="money">
-                    <h5>運費</h5>
-                    <h5>0</h5>
-                  </div>
-                  <div className="money">
-                    <h5>訂單金額總計</h5>
-                    <h3 className="total">0</h3>
-                  </div>
-                  <div className="checkbutton">
-                    <div className="m-4">
-                      <Link to="/product">
-                        <Button className="m-4 button " block>
-                          繼續購物
-                        </Button>
-                      </Link>
-                    </div>
-                    <div className="m-4">
-                      <Link to="/Shopping1">
-                        <Button className="m-4 button" block>
-                          前往結帳
-                        </Button>
-                      </Link>
-                    </div>
-                  </div>
-                </div>
               </div>
             </div>
           </div>
@@ -171,6 +128,13 @@ export default class Mycart extends React.Component {
                             onClick={this.deleteit(index)}
                           >
                             刪除
+                          </Button>
+                          <Button
+                            className="m-1 button button"
+                            block
+                            onClick={this.goto(this.state.data[index].sid)}
+                          >
+                            detail
                           </Button>
                         </td>
                       </tr>
