@@ -27,13 +27,27 @@ const images = [
 ]
 
 class GameMapDetail extends React.Component {
-  constructor() {
-    super()
-    this.state = {}
+  constructor(props) {
+    super(props)
+    this.state = {
+      dataStore: [],
+    }
+  }
+  componentDidMount() {
+    fetch('http://127.0.0.1:3002/gameMap/sid/' + this.props.match.params.id)
+      .then(res => res.json())
+      .then(data => {
+        this.setState({ dataStore: data[0] })
+        return this.state
+      })
+      .then(state => console.log())
+      .catch(err => console.log(err))
   }
   render() {
     return (
       <>
+        {console.log(this.state.dataStore)}
+
         <div className="bodyroot">
           <div className="container">
             <div className="mainBoard">
@@ -45,33 +59,29 @@ class GameMapDetail extends React.Component {
                     autoPlay={true}
                   />
                 </div>
+
                 <div className="detailCard">
-                  <h2 className="shoptitle">Game Square 遊戲平方 中山店</h2>
+                  <h2 className="shoptitle">{this.state.dataStore.store}</h2>
                   <p>
                     <fa.FaMapMarkerAlt />
                     &nbsp;&nbsp;
-                    <span>台北市,中山區中山北路1段135巷9號2樓</span>
+                    <span>
+                      {this.state.dataStore.county}
+                      {this.state.dataStore.dist}
+                      {this.state.dataStore.address}
+                    </span>
                     <br />
                     <fa.FaPhone />
                     &nbsp;&nbsp;
-                    <span>02 2581 1191</span>
+                    <span>{this.state.dataStore.phone}</span>
                     <br />
                     <fa.FaRegClock />
                     &nbsp;&nbsp;
-                    <span>
-                      週一～週四 14:00 -22:00 <br />
-                      &nbsp;&nbsp;&nbsp;&nbsp;(22：00 後需當天21:30前預約)
-                      <br />
-                      &nbsp;&nbsp;&nbsp;&nbsp;週五～週日 13:00 - 02:00
-                      週五～週日及國定假日 <br />
-                    </span>
+                    <span>{this.state.dataStore.business_hours}</span>
+                    <br />
                     <fa.FaRegMoneyBillAlt />
                     &nbsp;&nbsp;
-                    <span>
-                      1hr 會員 $90 / 非會員 $100
-                      <br />
-                      &nbsp;&nbsp;&nbsp;&nbsp; 4hrs 會員$300 / 非會員 $400
-                    </span>
+                    <span>{this.state.dataStore.rule}</span>
                   </p>
                   <Button className="actionButton " size="lg" block>
                     預約場地

@@ -2,8 +2,9 @@ import React, { Component } from 'react'
 import 'bootstrap/dist/css/bootstrap.min.css'
 import './map.scss'
 import { FaMapMarkerAlt, FaPhone, FaClock, FaTags } from 'react-icons/fa'
-import { ListGroup } from 'react-bootstrap'
+import { ListGroup, Input, Button, Label, Tooltip } from 'react-bootstrap'
 import * as fa from 'react-icons/fa'
+import { BrowserRouter, Route, Link, NavLink } from 'react-router-dom'
 
 class StoreInfo extends Component {
   constructor(props) {
@@ -20,29 +21,37 @@ class StoreInfo extends Component {
             {/* <div>{this.props.storeSid}</div>
             <div>{this.props.storeFirm_id}</div> */}
             <div>
-              <fa.FaShoppingBag />
+              <img src="https://img.icons8.com/color/50/000000/briefcase.png" />
               {this.props.storeStore}
             </div>
           </ListGroup.Item>
           <ListGroup.Item>
             <div>
-              <fa.FaMapMarkedAlt />
+              <img src="https://img.icons8.com/doodle/50/000000/marker.png" />
               {this.props.storeCounty}
               {this.props.storeDist}
               {this.props.storeAddress}
             </div>
             <div>
-              <fa.FaPhone />
+              <img src="https://img.icons8.com/dusk/50/000000/ringer-volume.png" />
               {this.props.storePhone}
             </div>
           </ListGroup.Item>
           <ListGroup.Item>
             <div>
-              <fa.FaRegClock />
+              <img src="https://img.icons8.com/dusk/50/000000/clock.png" />
               {this.props.businessHour}
             </div>
-            <div>公休時間 :{this.props.publicHoliday}</div>
+            <div>
+              <img src="https://img.icons8.com/office/50/000000/sleeping-in-bed.png" />
+              {this.props.publicHoliday}
+            </div>
           </ListGroup.Item>
+          <NavLink to={{ pathname: `/gamemapDetail/${this.props.storeSid}` }}>
+            <Button className="actionButton " size="lg" block>
+              馬上預約
+            </Button>
+          </NavLink>
         </ListGroup>
         {/* <div>=========</div> */}
         {/* <div>{this.props.storeLogoUrl}</div> */}
@@ -57,6 +66,7 @@ class StoreInfo extends Component {
     return (
       <React.Fragment>
         {this.props.storeStore ? this.DisplayInfo() : ''}
+        {/* <NavLink to={{ pathname: `/games/game/${game.ID}` }}> */}
       </React.Fragment>
     )
   }

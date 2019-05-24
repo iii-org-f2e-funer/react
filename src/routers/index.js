@@ -21,7 +21,6 @@ function RootRouter() {
         <Navbar />
         <Switch>
           <Route exact path="/" component={Demopage} />
-          <Route path="/gamemapdetail" component={GameMapDetail} />
           <Route path="/demo" component={Demopage} />
           <Route path="/firm" component={Firm} />
           <Route path="/product" component={Product} />
@@ -30,6 +29,7 @@ function RootRouter() {
           <Route path="/Myfav" component={Myfav} />
           <Route path="/Mycart" component={Mycart} />
           <Route path="/gameMap" component={GameMap} />
+          <Route path="/gameMapDetail/:id" component={GameMapDetail} />
         </Switch>
         <Footer />
       </>

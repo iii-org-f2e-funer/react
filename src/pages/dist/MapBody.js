@@ -165,6 +165,10 @@ class MapBody extends React.Component {
                 lng: parseFloat(store.lng),
               }}
               // icon={{ url: this.state.logo40Route + store.STORE_LOGO_NAME }}
+              icon={{
+                url:
+                  'https://img.icons8.com/color/48/000000/small-business.png',
+              }}
               onClick={this.onMarkerClick.bind(this, store)}
             />
           ))}
