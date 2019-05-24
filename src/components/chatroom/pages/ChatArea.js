@@ -100,18 +100,45 @@ class ChatArea extends React.Component {
             </h5>
             {/* 資料庫撈資料進來的地方 */}
             {/* 如果是自己傳給對方在右邊(有sender class) */}
-            <ul className="d-flex flex-column ">
-              <li className={'sender'}>
+            <ul className="d-flex flex-column  ">
+              {this.state.member_chat_data.map(element => {
+                return element.m_issender ? (
+                  <li className={'sender'} key={element.m_time}>
+                    <div className="text-box sender align-items-center">
+                      <h5 className="my-auto rounded-pill">{element.m_cont}</h5>
+                    </div>
+                    <small>
+                      <Moment format="YYYY-MM-DD HH:MM:SS">
+                        {element.m_time}
+                      </Moment>
+                    </small>
+                  </li>
+                ) : (
+                  <li>
+                    <div className="text-box  align-items-center">
+                      <div className="avatar ">
+                        <img src={avatar} alt="會員1頭像" />
+                      </div>
+                      <h5 className="my-auto rounded-pill">{element.m_cont}</h5>
+                    </div>
+                    <small>
+                      <Moment format="YYYY-MM-DD HH:MM:SS">
+                        {element.m_time}
+                      </Moment>
+                    </small>
+                  </li>
+                )
+              })}
+              {/* <li className={'sender'}>
                 <div className="text-box sender align-items-center">
                   <h5 className="my-auto rounded-pill">
-                    這是第一段話這是第一段話這是第一段話這是第一段話這是第一段話這是第一段話這是第一段話這是第一段話這是第一段話
+                    {this.state.member_chat_data.m_cont}
                   </h5>
                 </div>
                 <small>timespan</small>
-              </li>
-
+              </li> */}
               {/* 如果是對方傳來在左邊 */}
-              <li>
+              {/* <li>
                 <div className="text-box  align-items-center">
                   <div className="avatar ">
                     <img src={avatar} alt="會員1頭像" />
@@ -121,7 +148,7 @@ class ChatArea extends React.Component {
                   </h5>
                 </div>
                 <small>timespan</small>
-              </li>
+              </li> */}
             </ul>
           </div>
           <div className="send_box d-flex ">
