@@ -8,6 +8,7 @@ import {
 } from 'react-router-dom'
 import AsidePage from '../components/chatroom/pages/AsidePage'
 import ChatArea from '../components/chatroom/pages/ChatArea'
+import ChatArea_socket from '../components/chatroom/pages/ChatArea_socket'
 import '../styles/chatroom/chatroomStyle.scss'
 import ChatAreaOriginal from '../components/chatroom/pages/ChatAreaOriginal'
 
@@ -55,7 +56,7 @@ class ChatRoom extends React.Component {
                         <Route
                           key={data.m_id}
                           path={'/chatroom/Message/' + data.receiver}
-                          component={ChatArea}
+                          component={ChatArea_socket}
                         />
                       )
                     })}

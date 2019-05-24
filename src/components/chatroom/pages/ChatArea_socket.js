@@ -3,6 +3,7 @@ import React from 'react'
 import { withRouter } from 'react-router'
 import avatar from '../avatar/ironman.jpg'
 import Moment from 'react-moment'
+import socketIOClient from 'socket.io-client'
 
 // const PathNow = props => <div>目前位置 {props.location.pathname}</div>;
 
@@ -18,6 +19,7 @@ class ChatArea extends React.Component {
       member_name: '',
       member_chat_data: [],
       start_chat_time: '',
+      endpoint: 'http://localhost:8080',
     }
   }
   async componentDidMount() {
@@ -28,7 +30,12 @@ class ChatArea extends React.Component {
       var memberChatData = []
       let theUrl = this.props.location.pathname
       theUrl = theUrl.split('/')[3]
+      //socket connect
+      const socket = socketIOClient(this.state.endpoint)
+      console.log(this.state.endpoint)
       await this.setState({ member_name: theUrl })
+
+      //fecth data from database
       const response = await fetch(
         'http://localhost:3002/chatroom/message/user_id1',
         {
@@ -77,7 +84,18 @@ class ChatArea extends React.Component {
 
       console.log(theUrl)
 
-      console.log(memberChatData)
+      console.log('memberChatData', this.state.member_chat_data)
+
+      //socket sever interact
+      socket.emit(
+        'join',
+        this.state.member_chat_data.sender_id +
+          '_' +
+          this.state.member_chat_data.receiver_id
+      )
+      socket.on('join', data => {
+        console.log(data)
+      })
     } catch (e) {
       console.log(e)
     }
@@ -114,7 +132,7 @@ class ChatArea extends React.Component {
                     </small>
                   </li>
                 ) : (
-                  <li>
+                  <li key={+element.m_time + 1}>
                     <div className="text-box  align-items-center">
                       <div className="avatar ">
                         <img src={avatar} alt="會員1頭像" />
