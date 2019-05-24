@@ -9,27 +9,20 @@ class Stories extends React.Component {
       stories: [],
     }
   }
-
   componentDidMount() {
-    this.fetchAllData()
-    this.timer1 = setInterval(() => {
-      this.fetchAllData()
-    }, 5000)
+    this.fetchStories()
   }
-  componentWillUnmount() {
-    clearInterval(this.timer1)
-  }
-  fetchAllData = () => {
+  fetchStories = () => {
     // fetch('http://localhost:3002/instagram/getStories')
     fetch('http://localhost:3002/instagram/allData')
       .then(res => res.json())
       .then(data => {
-        // console.log(data)
+        console.log(data)
         this.setState({ stories: data })
       })
   }
   handleReFresh = () => {
-    this.fetchAllData()
+    this.fetchStories()
   }
   render() {
     return (
@@ -37,11 +30,7 @@ class Stories extends React.Component {
         <div className="stories">
           <NewStory handleReFresh={this.handleReFresh} />
           {this.state.stories.map(item => (
-            <OldStory
-              key={item.post_id}
-              data={item}
-              handleReFresh={this.fetchAllData}
-            />
+            <OldStory key={item.post_id} data={item} />
           ))}
         </div>
       </>

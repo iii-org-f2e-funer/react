@@ -3,8 +3,34 @@ import Carousel from './Carousel'
 import OldComment from './OldComment'
 import { FaHeart, FaRegHeart, FaBookmark, FaRegBookmark } from 'react-icons/fa'
 class OldStory extends React.Component {
+  constructor(props) {
+    super(props)
+    this.state = {
+      comments: [],
+    }
+  }
   componentDidMount() {
     this.text.innerText = this.props.data.content
+    this.fetchComments()
+  }
+  //撈DB留言
+  fetchComments = () => {
+    const data = { postID: this.props.data.post_id }
+    fetch('http://localhost:3002/instagram/getComments', {
+      method: 'POST',
+      body: JSON.stringify(data),
+      headers: {
+        'user-agent': 'Mozilla/4.0 MDN Example',
+        'content-type': 'application/json',
+      },
+    })
+      .then(res => res.json())
+      .then(data => {
+        console.log(data)
+        if (data.success === true) {
+          this.setState({ comments: data.data })
+        }
+      })
   }
   //發送留言
   handleSubmit = () => {
@@ -33,13 +59,14 @@ class OldStory extends React.Component {
           if (data.success === true) {
             this.textInput.innerText = ''
             //刷新
-            this.props.handleReFresh()
+            this.fetchComments()
           }
         })
     }
   }
 
   render() {
+    // console.log(this.props.data)
     return (
       <>
         <div className="oldStory story">
@@ -70,12 +97,18 @@ class OldStory extends React.Component {
           {/* 留言 */}
           {/* 舊的留言 */}
           <div className="comments">
-            {this.props.data.comments.map(item => (
-              <OldComment
-                key={item.comment_id}
-                data={item}
-                handleReFresh={this.props.handleReFresh}
-              />
+            {this.state.comments.map(item => (
+              <div className="comment">
+                <img src="" alt="" className="avatar" />
+                <div className="comment_inner">
+                  <div className="text">
+                    <span className="sender">{item.nickname}</span>
+                    <span className="content">{item.content} </span>
+                  </div>
+                  <div className="time">1分鐘前</div>
+                </div>
+              </div>
+              // <OldComment />
             ))}
           </div>
           {/* 發送留言 */}

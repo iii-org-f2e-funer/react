@@ -6,6 +6,7 @@ class Carousel extends React.Component {
     super(props)
     this.state = {
       pointer: 0,
+      photos: [],
     }
   }
   // 按上一頁
@@ -17,14 +18,17 @@ class Carousel extends React.Component {
     this.setState({ pointer: this.state.pointer + 1 })
   }
   componentDidMount() {
+    // porps傳進來的資料 設定給 state
     // this.props.photos
+
+    this.setState({ photos: this.props.photos })
   }
 
   render() {
     return (
       <>
         {/* 空陣列就不用render Carousel */}
-        {this.props.photos[0] !== '' ? (
+        {this.state.photos[0] !== '' ? (
           <div className="carousel">
             {/* 圖片list */}
             <div className="carousel_inner">
@@ -32,7 +36,7 @@ class Carousel extends React.Component {
                 className="photo_list"
                 style={{ left: `-${this.state.pointer * 100}%` }}
               >
-                {this.props.photos.map((item, idx) => (
+                {this.state.photos.map((item, idx) => (
                   <li key={idx}>
                     <img src={'http://localhost:3002/images/' + item} alt="" />
                   </li>
@@ -48,7 +52,7 @@ class Carousel extends React.Component {
               ''
             )}
             {/* 下一張 按鈕 */}
-            {this.state.pointer < this.props.photos.length - 1 ? (
+            {this.state.pointer < this.state.photos.length - 1 ? (
               <div className="btn_next" onClick={this.handleNextClick}>
                 <img src="/images/instagram/btn_next.png" alt="" />
               </div>
@@ -57,7 +61,7 @@ class Carousel extends React.Component {
             )}
             {/* 小圈圈 */}
             <div className="pagination">
-              {this.props.photos.map((item, idx) => (
+              {this.state.photos.map((item, idx) => (
                 <div
                   key={idx}
                   className={
