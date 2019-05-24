@@ -137,7 +137,7 @@ class FirmRegisterModal extends React.Component {
                 <i className="fa fa-user" />
                 <Form.Control
                   type="text"
-                  placeholder="輸入信箱註冊"
+                  placeholder="輸入帳號"
                   className="account form-control"
                   onBlur={this.checkAccount}
                   required
@@ -175,6 +175,7 @@ class FirmRegisterModal extends React.Component {
               </Form.Group>
               <label htmlFor="uniform">統編</label>
               <input
+                className="pl-3"
                 name="uniform"
                 type="text"
                 required
@@ -183,6 +184,7 @@ class FirmRegisterModal extends React.Component {
               />
               <label htmlFor="store">店家</label>
               <input
+                className="pl-3"
                 name="store"
                 type="text"
                 required

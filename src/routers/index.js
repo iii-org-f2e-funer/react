@@ -25,7 +25,15 @@ class RootRouter extends React.Component {
       .then(res => res.json())
       .then(obj => {
         if (obj.success) {
-          this.props.userInfoAction({ account: obj.body.account })
+          if (obj.isFirm) {
+            this.props.firmInfoAction({
+              account: obj.body.account,
+            })
+          } else {
+            this.props.userInfoAction({
+              account: obj.body.account,
+            })
+          }
         }
       })
   }
@@ -66,5 +74,6 @@ export default connect(
   mapStateToProp,
   {
     userInfoAction: actions.userInfo,
+    firmInfoAction: actions.firmInfo,
   }
 )(RootRouter)

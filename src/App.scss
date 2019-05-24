@@ -69,22 +69,33 @@ p{
   margin-bottom: 16px;
   line-height: 32px;
 }
+// mixin
+$blue : #6EC4D2;
+$red : #EC6A6A;
+$yellow : #F9C149;
+$black : #474747;
+$grey : #949494;
+$white : #FFF;
+
+$dark-blue : #4fb2c1;
+$dark-yellow : #F9A629;
+
 /* background Color */
-.bg-color-blue{background-color: #6EC4D2;}
+.bg-color-blue{background-color: $blue;}
 .bg-color-lightblue{background-color: #D6EEF2;}
-.bg-color-red{background-color: #EC6A6A;}
-.bg-color-black{background-color:#474747;}
-.bg-color-grey{background-color:#949494;}
-.bg-color-yellow{background-color:#F9C149;}
-.bg-color-white{background-color:#FFF;}
+.bg-color-red{background-color: $red;}
+.bg-color-black{background-color:$black;}
+.bg-color-grey{background-color:$grey ;}
+.bg-color-yellow{background-color:$yellow;}
+.bg-color-white{background-color:$white ;}
 
 /* text Color */ 
-.color-blue{color: #6EC4D2!important;}
-.color-red{color: #EC6A6A!important;}
-.color-black{color:#474747!important;}
-.color-grey{color:#949494!important;}
-.color-yellow{color:#F9C149!important;}
-.color-white{color:#FFF!important;}
+.color-blue{color: $blue!important;}
+.color-red{color: $red!important;}
+.color-black{color:$black!important;}
+.color-grey{color:$grey!important;}
+.color-yellow{color:$yellow!important;}
+.color-white{color:$white!important;}
 
 
 /* button */
@@ -104,37 +115,50 @@ p{
 	text-align: center;
 	text-decoration: none;
 	letter-spacing: 0;
-  background-color: #6EC4D2;
+  background-color: $blue;
 	border: 0;
 	border-radius: 6px;
 	outline: 0;
 	cursor: pointer;
 	overflow: hidden;
   transition: all 0.3s;
-  color: #fff;
+  color: $white;
   font-weight: 400;
-}
-.button:focus{
-  box-shadow: none;
 }
 .button:hover,
 .button:active, 
 .button:focus{
-  background-color: #4fb2c1;
-  color: #fff;  
+  box-shadow: none;
+  background-color: $dark-blue;
+  color: $white;  
 	outline: 0;
 }
+/* yellow btn */
 .button.button--yellow{
-	background-color: #F9C149;
+	background-color: $yellow;
 	border-radius: 18px;
 }
 .button.button--yellow:hover, 
 .button.button--yellow:active,
 .button.button--yellow:focus{
-  background-color: #F9A629;
-  color: #fff;  
+  background-color: $dark-yellow;
+  color: $white;  
 	outline: 0;
 }
+/* white btn */
+.button.button-white{
+  color:$blue;
+  background-color: $white;
+  border: 2px solid $blue;
+}
+.button.button-white:hover,
+.button.button-white:active,
+.button.button-white:focus{
+  background-color: $white;
+  color: $blue;
+  border: 2px solid $blue;
+}
+/* big btn */
 .button.button--lg{
   font-size: 20px;
   height: 48px;
@@ -142,14 +166,15 @@ p{
 
 /* form */
 input{
-  color: #474747;
+  color: $black;
 }
 /* 帳密 */
 /* 要加classname="account" */
-.login-form input[type="text"],
-.login-form input[type="email"],
-.login-form input[type="number"],
-input[type="password"]
+.login-form{
+  input[type="text"],
+  input[type="email"],
+  input[type="number"],
+  input[type="password"]
   {
     padding: 8px 8px;
     display: inline-block;
@@ -164,10 +189,11 @@ input[type="password"]
     height: 48px;
     margin-bottom: 12px
   }
+}
 .login-form input[type="text"]:focus,
 .login-form input[type="email"]:focus,
 .login-form input[type="number"]:focus,
-input[type="password"]:focus
+.login-form input[type="password"]:focus
   {
     outline: none;
     border-color: #3DB4E0;
@@ -218,7 +244,14 @@ input[type="search"]:focus{
   border: 2px solid #2095C1;
   box-shadow: none;
 }
-
+select{
+  border-radius: 4px;
+  height: 36px;
+  margin-right: 12px;
+  box-shadow: none;
+  outline: none;
+}
+  
 /* select */
 /* 請加classname="form-control" */
 body select.form-control:focus{

@@ -5,6 +5,12 @@ const actions = {
       payload,
     }
   },
+  firmInfo: payload => {
+    return {
+      type: 'FIRM_INFO',
+      payload,
+    }
+  },
   logOut: payload => {
     return {
       type: 'LOG_OUT',

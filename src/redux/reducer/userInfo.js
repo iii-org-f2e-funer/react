@@ -7,12 +7,21 @@ function userInfo(state = {}, action) {
         ...state,
         account: action.payload.account,
         login: true,
+        isFirm: false,
+      }
+    case 'FIRM_INFO':
+      return {
+        ...state,
+        account: action.payload.account,
+        login: true,
+        isFirm: true,
       }
     case 'LOG_OUT':
       return {
         ...state,
         account: '',
         login: false,
+        isFirm: false,
       }
     default:
       return state

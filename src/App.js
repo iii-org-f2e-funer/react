@@ -1,5 +1,5 @@
 import React from 'react'
-import './App.css'
+import './App.scss'
 import { createStore, applyMiddleware, compose } from 'redux'
 import RootRouter from './routers/index.js'
 import rootReducer from './redux/reducer/userInfo'
