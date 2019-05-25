@@ -95,24 +95,24 @@ class Pt_new extends React.Component {
       pt_info: event.target.value,
     })
   }
-  
+
   handleformsubmit = e => {
     e.preventDefault()
-    this.setState({ modalshow: true })
+    // this.setState({ modalshow: true })
     // console.log(this.form)
-    // const fd = new FormData(this.form)
+    const fd = new FormData(this.form)
     // console.log(this.form.check.value)
     // console.log(fd)
-    // fetch('//localhost:3002/event/newptsubmit', {
-    //   method: 'POST',
-    //   body: fd,
-    // })
-    //   .then(res => res.json())
-    //   .then(obj => {
-    //     if (obj.success) {
-    // this.setState({ modalshow: true })
-    //   }
-    // })
+    fetch('//localhost:3002/event/newptsubmit', {
+      method: 'POST',
+      body: fd,
+    })
+      .then(res => res.json())
+      .then(obj => {
+        if (obj.success) {
+          this.setState({ modalshow: true })
+        }
+      })
   }
   handleClose = e => {
     this.setState({ modalshow: false })
@@ -239,7 +239,7 @@ class Pt_new extends React.Component {
                 className="pt_level"
                 type="radio"
                 name="pt_level"
-                value="1"
+                value="easy"
                 onChange={event => this.handlelevelChange(event)}
               />
               <span> 適合新手 </span>
@@ -247,7 +247,7 @@ class Pt_new extends React.Component {
                 className="pt_level"
                 type="radio"
                 name="pt_level"
-                value="2"
+                value="normal"
                 onChange={event => this.handlelevelChange(event)}
               />
               <span>適合已有基礎的玩家</span>
@@ -255,7 +255,7 @@ class Pt_new extends React.Component {
                 className="pt_level"
                 type="radio"
                 name="pt_level"
-                value="3"
+                value="hard"
                 onChange={event => this.handlelevelChange(event)}
               />
               <span>高難度重度策略</span>
