@@ -15,9 +15,11 @@ export default class product extends React.Component {
     this.state = {
       data: [],
       data1: [],
-      searchmoney: 0,
+      searchmoney: 180,
       oridata: [],
       game_type: [],
+      type: 0,
+      sort: 'hightolow',
     }
   }
   componentDidMount() {
@@ -85,17 +87,16 @@ export default class product extends React.Component {
         // console.log('錯誤:', err)
       })
   }
-  clickaaa = sid => () => {
+  gotodetail = sid => () => {
     // console.log(sid)
     window.location.href = 'http://localhost:3000/ProductDetail/sid:' + sid
     localStorage.setItem('item.sid', sid)
   }
   search = () => () => {
-    /////////////////getstart///////////////////
+    ///////////////// getstart ///////////////////
     this.setState({ data: this.state.oridata })
     this.state.data = this.state.oridata
-    /////////////////getstart///////////////////
-    /////////////////////searchtext///////////////////////////////
+    ///////////////////// searchtext ///////////////////////////////
     let data = this.state.data
     if (this.state.searchText && this.state.searchText.trim() !== '') {
       data = this.state.data.filter(item =>
@@ -103,9 +104,7 @@ export default class product extends React.Component {
       )
     }
     this.setState({ data: data })
-
-    /////////////////////searchtext///////////////////////////////
-    ////////////////////////money////////////////////////////////////////////
+    //////////////////////// money /////////////////////////////////
     var aaa = []
     var money = document.getElementById('searchmoney').value
     var d1_leng = Object.keys(data).length
@@ -116,20 +115,57 @@ export default class product extends React.Component {
     }
     data = aaa
     this.setState({ data: data })
-    console.log(data)
-    ////////////////////////money////////////////////////////////////////////
+    // console.log(data)
+    /////////////////////// type ///////////////////////////////////
+    var bbb = []
+    var type_id = this.state.type
+    // console.log(type_id)
+    var d2_leng = Object.keys(data).length
+    if (type_id == 0) {
+    } else {
+      for (let i = 0; i < d2_leng; i++) {
+        if (data[i].gametype_id == type_id) {
+          bbb.push(data[i])
+        }
+      }
+      data = bbb
+      this.setState({ data: data })
+    }
+    /////////////////////// sort ///////////////////////////////
+    var sort_style = this.state.sort
+    if (sort_style === 'hightolow') {
+      //物件排序方法
+      data.sort(function(a, b) {
+        return b.price - a.price
+      })
+    } else {
+      data.sort(function(a, b) {
+        return a.price - b.price
+      })
+    }
+    this.setState({ data: data })
+    ////////////////////////////////////////////////////////////////
   }
   range = () => () => {
     var money = document.getElementById('searchmoney').value
     this.setState({ searchmoney: money })
     // console.log(uuu)
   }
-  choose_type = () => () => {
-    console.log('111')
+  gettype = event => {
+    // console.log(event.target.value)
+    // console.log(event.target.value)
+    this.setState({ type: event.target.value })
   }
+
   handleSearchTextChange = event => {
     // console.log(event.target.value)
     this.setState({ searchText: event.target.value })
+  }
+
+  getsort = event => {
+    // console.log(event.target.value)
+    // console.log(event.target.value)
+    this.setState({ sort: event.target.value })
   }
   render() {
     return (
@@ -155,14 +191,11 @@ export default class product extends React.Component {
                 </InputGroup>
                 <label className="mt-4 ml-4">遊戲分類</label>
                 <div className="game-control ml-4 mr-4 mt-1 ">
-                  {/* <DropdownButton id="dropdown-basic-button" title="全部">
-                    {this.state.game_type.map((item, index, array) => (
-                      <Dropdown.Item className="dropdown">
-                        <div className="whatkind" />
-                      </Dropdown.Item>
-                    ))}
-                  </DropdownButton> */}
-                  <select className="game-control mr-4 mt-1 ">
+                  <select
+                    className="game-control mr-4 mt-1 "
+                    onChange={this.gettype}
+                    value={this.state.type}
+                  >
                     {this.state.game_type.map((item, index, array) => (
                       <option className="dropdown" value={item.type_id}>
                         {item.type_name}
@@ -170,14 +203,19 @@ export default class product extends React.Component {
                     ))}
                   </select>
                 </div>{' '}
-                <label className="mt-2 ml-4">品牌</label>
+                <label className="mt-2 ml-4">SORT</label>
                 <div className="game-control ml-4 mr-4 mt-1 ">
-                  <select className="game-control mr-4 mt-1 p-4">
-                    {this.state.game_type.map((item, index, array) => (
-                      <option className="dropdown" value={item.type_id}>
-                        {item.type_name}
-                      </option>
-                    ))}
+                  <select
+                    className="game-control mr-4 mt-1 p-4"
+                    onChange={this.getsort}
+                    value={this.state.sort}
+                  >
+                    <option className="dropdown" value="hightolow">
+                      high TO low
+                    </option>
+                    <option className="dropdown" value="lowtohigh">
+                      low TO high
+                    </option>
                   </select>
                 </div>
                 <label className="mt-4 ml-4">價格</label>
@@ -208,7 +246,7 @@ export default class product extends React.Component {
                   <div
                     className="gamecard"
                     key={item.id}
-                    onClick={this.clickaaa(item.sid)}
+                    onClick={this.gotodetail(item.sid)}
                   >
                     <Card style={{ width: '190px', height: '280px' }}>
                       <Card.Img
