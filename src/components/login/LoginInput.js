@@ -20,10 +20,10 @@ class LoginInput extends React.Component {
     this.setState({ passwordShow: !this.state.passwordShow })
   }
   checkAccount = evt => {
-    this.state.account = evt.target.value
+    this.setState({ account: evt.target.value })
   }
   checkPassword = evt => {
-    this.state.password = evt.target.value
+    this.setState({ password: evt.target.value })
   }
 
   FirmRequest = evt => {
@@ -92,14 +92,14 @@ class LoginInput extends React.Component {
               />
               <Form.Text className="red">{this.state.remindText}</Form.Text>
             </Form.Group>
-            <Button
+            <button
               variant="primary"
               type="submit"
               className="button button--lg"
               onClick={this.FirmRequest}
             >
               登入
-            </Button>
+            </button>
           </form>
           <ul>
             <li className="register blue">

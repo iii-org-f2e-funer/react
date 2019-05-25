@@ -2,13 +2,9 @@ import React from 'react'
 import Account from '../../components/firm/Account'
 import actions from '../../redux/action/userInfo.js'
 import { connect } from 'react-redux'
-import {
-  BrowserRouter as Router,
-  Route,
-  Link,
-  Switch,
-  NavLink,
-} from 'react-router-dom'
+import { BrowserRouter as Router, Route, Link, Switch } from 'react-router-dom'
+import FirmEdit from './FirmEdit.js'
+import { withRouter } from 'react-router'
 
 class Sidebar extends React.Component {
   constructor(props) {
@@ -19,12 +15,24 @@ class Sidebar extends React.Component {
     }
   }
   componentDidMount() {
-    fetch('//localhost:3002/firm/userInfo')
+    fetch('//localhost:3002/firm/userInfo', {
+      credentials: 'include',
+    })
       .then(res => res.json())
       .then(obj => {
-        console.log(obj)
-        this.setState({ data: obj })
+        if (obj.success) {
+          this.setState({ data: obj.body })
+        } else {
+          this.props.history.push('/')
+        }
       })
+  }
+  handleShow = () => {
+    this.setState({ editPopup: true })
+  }
+
+  handleHide = () => {
+    this.setState({ editPopup: false })
   }
   render() {
     const data = this.state.data
@@ -39,7 +47,9 @@ class Sidebar extends React.Component {
               <div className="info">
                 <h5>{data.firmname}</h5>
                 <div className="email">{data.email}</div>
-                <button className="button">編輯店家資料</button>
+                <button className="button" onClick={this.handleShow}>
+                  編輯店家資料
+                </button>
               </div>
             </div>
 
@@ -72,6 +82,11 @@ class Sidebar extends React.Component {
               <Route path="/firm/site_order" component={Account} />
             </Switch>
           </div>
+          <FirmEdit
+            editPopup={this.state.editPopup}
+            handleHide={this.handleHide}
+            data={this.state.data}
+          />
         </>
       </Router>
     )
@@ -84,9 +99,11 @@ function mapStateToProp(store) {
   }
 }
 
-export default connect(
-  mapStateToProp,
-  {
-    userInfoAction: actions.userInfo,
-  }
-)(Sidebar)
+export default withRouter(
+  connect(
+    mapStateToProp,
+    {
+      userInfoAction: actions.userInfo,
+    }
+  )(Sidebar)
+)
