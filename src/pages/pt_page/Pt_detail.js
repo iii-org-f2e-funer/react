@@ -5,19 +5,11 @@ import Pt_detailrouter from '../../routers/Pt_detailrouter'
 import Pt_applymodal from '../../components/event/Pt_applymodal'
 
 class Pt_detail extends React.Component {
-  constructor() {
-    super()
-    this.state = {}
-  }
-  applyclick = e => {
-    this.setState({ applymodalshow: true })
-    console.log(this)
-  }
-  handleClose() {
-    this.setState({ applymodalshow: false })
-  }
-  handleShow() {
-    this.setState({ applymodalshow: true })
+  constructor(props) {
+    super(props)
+    this.state = {
+      data: [],
+    }
   }
 
   render() {
