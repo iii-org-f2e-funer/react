@@ -128,8 +128,8 @@ class AccountEdit extends React.Component {
             <TWzipcode
               countyFieldName="pt_city"
               districtFieldName="pt_dist"
-              countyValue={this.state.pt_city}
-              districtValue={this.state.pt_dist}
+              countyValue={this.state.city}
+              districtValue={this.state.dist}
               css={[
                 'form-control county-sel',
                 'form-control district-sel',
@@ -139,7 +139,7 @@ class AccountEdit extends React.Component {
               handleChangeDistrict={this.handledistChange}
             />
             <input
-              className="addressinput"
+              className="addressinput mt-2"
               type="text"
               value={this.state.address}
               onChange={e => this.setState({ address: e.target.value })}

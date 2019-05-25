@@ -69,7 +69,11 @@ class Account extends React.Component {
             </div>
             <div className="flex mb-3">
               <label className="col-2">店家地址</label>
-              <div className="col-7">{this.state.data.address}</div>
+              <div className="col-7">
+                {this.state.data.city +
+                  this.state.data.dist +
+                  this.state.data.address}
+              </div>
             </div>
             <div className="flex mb-3">
               <label className="col-2">電子信箱</label>
