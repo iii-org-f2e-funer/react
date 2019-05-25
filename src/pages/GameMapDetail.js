@@ -1,13 +1,99 @@
 import React from 'react'
 import '../styles/gameMap/gameMap.scss'
-import { Button, Tabs, Tab } from 'react-bootstrap'
+import { Button, Tabs, Tab, Modal, ButtonToolbar } from 'react-bootstrap'
 import { BrowserRouter as Router, Route, Link, Switch } from 'react-router-dom'
 import Slider from '../components/gameMap/ImgSlider'
 import * as fa from 'react-icons/fa'
 
 import 'react-image-gallery/styles/css/image-gallery.css'
 import ImageGallery from 'react-image-gallery'
+import DatePicker from 'react-datepicker'
 
+import 'react-datepicker/dist/react-datepicker.css'
+
+class MyVerticallyCenteredModal extends React.Component {
+  constructor(props) {
+    super(props)
+    this.state = {
+      startDate: new Date(),
+    }
+    this.handleChange = this.handleChange.bind(this)
+    this.isWeekday = this.isWeekday.bind(this)
+  }
+  handleChange(date) {
+    this.setState({
+      startDate: date,
+    })
+  }
+  isWeekday = date => {
+    console.log(date.getDay())
+
+    return !(date.getDay() === 0 || date.getDay() === 5)
+  }
+  render() {
+    return (
+      <Modal
+        {...this.props}
+        size="lg"
+        aria-labelledby="contained-modal-title-vcenter"
+        centered
+      >
+        <Modal.Header closeButton>
+          <Modal.Title id="contained-modal-title-vcenter">
+            {this.props.headertitle}
+          </Modal.Title>
+        </Modal.Header>
+        <Modal.Body>
+          <div className="flex" />
+          <div>
+            <form>
+              <div className="group">
+                <input type="text" required />
+                <span className="highlight" />
+                <span className="bar" />
+                <label>姓名</label>
+              </div>
+
+              <div className="group">
+                <input type="text" required />
+                <span className="highlight" />
+                <span className="bar" />
+                <label>手機</label>
+              </div>
+            </form>
+            <div className="numberSpinner">
+              <label className="label" htmlFor="number1" />
+              <div className="number">
+                <button className="number__btn number__btn--down" />
+                <input
+                  className="number__field"
+                  type="number"
+                  id="number1"
+                  min="1"
+                  max="9"
+                  step="1"
+                  value="2"
+                />
+                <button className="number__btn number__btn--up" />
+              </div>
+            </div>
+          </div>
+          <div>
+            <DatePicker
+              inline
+              selected={this.state.startDate}
+              onChange={this.handleChange}
+              filterDate={this.isWeekday}
+            />
+          </div>
+        </Modal.Body>
+        <Modal.Footer>
+          <Button onClick={this.props.onHide}>Close</Button>
+        </Modal.Footer>
+      </Modal>
+    )
+  }
+}
 const images = [
   {
     original: 'https://s3.us-east-2.amazonaws.com/dzuz14/thumbnails/aurora.jpg',
@@ -31,6 +117,7 @@ class GameMapDetail extends React.Component {
     super(props)
     this.state = {
       dataStore: [],
+      modalShow: false,
     }
   }
   componentDidMount() {
@@ -44,10 +131,10 @@ class GameMapDetail extends React.Component {
       .catch(err => console.log(err))
   }
   render() {
-    return (
-      <>
-        {console.log(this.state.dataStore)}
+    let modalClose = () => this.setState({ modalShow: false })
 
+    return (
+      <React.Fragment>
         <div className="bodyroot">
           <div className="container">
             <div className="mainBoard">
@@ -83,7 +170,12 @@ class GameMapDetail extends React.Component {
                     &nbsp;&nbsp;
                     <span>{this.state.dataStore.rule}</span>
                   </p>
-                  <Button className="actionButton " size="lg" block>
+                  <Button
+                    className="actionButton "
+                    size="lg"
+                    block
+                    onClick={() => this.setState({ modalShow: true })}
+                  >
                     預約場地
                   </Button>
                 </div>
@@ -92,21 +184,16 @@ class GameMapDetail extends React.Component {
               <div className="subBoard">
                 <Tabs defaultActiveKey="profile" id="uncontrolled-tab-example">
                   <Tab eventKey="home" title="關於我們">
-                    Game Square
-                    遊戲平方是一家複合式的休閒桌遊空間，店主是台灣相當知名的卡牌桌遊魔法風雲會的世界級現役競賽選手！
-                    在各國旅行比賽的過程中參訪過了世界各地的桌遊空間店，發現在歐美等地，桌遊與現代休閒是相當自然的流行著。
-                    於是我們就有了一個想法，想去創造一個可以輕鬆喝著飲料啤酒、一邊聊天一邊看著運動競賽、玩桌遊，且營業時間較符合都會需求的複合空間！
-                    歡迎大家在想放鬆或享受益智休閒的時候，來到我們店裡享受自己想要遊玩的桌遊或是一起為喜歡的隊伍加油！
-                    店內提供免費無線網路以及桌遊教學，另外備有MOD及100吋大螢幕投影及音響設備，歡迎聯誼活動、運動賽事觀賞、各式座談會等活動包場！
+                    <br />
+                    {this.state.dataStore.about}
                   </Tab>
                   <Tab eventKey="profile" title="場地規範">
-                    於是我們就有了一個想法，想去創造一個可以輕鬆喝著飲料啤酒、一邊聊天一邊看著運動競賽、玩桌遊，且營業時間較符合都會需求的複合空間！
-                    歡迎大家在想放鬆或享受益智休閒的時候，來到我們店裡享受自己想要遊玩的桌遊或是一起為喜歡的隊伍加油！
-                    店內提供免費無線網路以及桌遊教學，另外備有MOD及100吋大螢幕投影及音響設備，歡迎聯誼活動、運動賽事觀賞、各式座談會等活動包場！
+                    <br />
+                    {this.state.dataStore.charges}
                   </Tab>
                   <Tab eventKey="contact" title="評價">
-                    遊戲平方是一家複合式的休閒桌遊空間，店主是台灣相當知名的卡牌桌遊魔法風雲會的世界級現役競賽選手！
-                    在各國旅行比賽的過程中參訪過了世界各地的桌遊空間店，發現在歐美等地，桌遊與現代休閒是相當自然的流行著。
+                    <br />
+                    很棒~~~~~
                   </Tab>
                 </Tabs>
               </div>
@@ -119,10 +206,25 @@ class GameMapDetail extends React.Component {
               <div className="">
                 <Slider />
               </div>
+
+              <ButtonToolbar>
+                <Button
+                  variant="primary"
+                  onClick={() => this.setState({ modalShow: true })}
+                >
+                  Launch vertically centered modal
+                </Button>
+
+                <MyVerticallyCenteredModal
+                  show={this.state.modalShow}
+                  onHide={modalClose}
+                  headertitle={this.state.dataStore.store}
+                />
+              </ButtonToolbar>
             </div>
           </div>
         </div>
-      </>
+      </React.Fragment>
     )
   }
 }
