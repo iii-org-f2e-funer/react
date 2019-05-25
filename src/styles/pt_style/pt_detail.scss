@@ -65,6 +65,7 @@
   align-items: flex-start;
 }
 .infoicon {
+  align-self: flex-start;
   width: 32px;
 }
 .leveldot {
@@ -72,6 +73,7 @@
   height: 15px;
   border-radius: 50%;
   background-color: #56b08d;
+  margin-top: 6px ;
 }
 .ptinfo_title {
   font-size: 24px;
