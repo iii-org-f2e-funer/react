@@ -7,7 +7,7 @@ function Pt_detailrouter() {
   return (
     <>
       <Switch>
-        <Route exact path="/event/id" component={Pt_infointro} />
+        <Route exact path="/event/:id" component={Pt_infointro} />
         <Route exact="/event/id/quest" component={Pt_qa} />
       </Switch>
     </>

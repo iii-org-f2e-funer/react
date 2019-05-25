@@ -3,13 +3,31 @@ import '../../styles/pt_style/pt_detail.scss'
 import { Link, NavLink } from 'react-router-dom'
 import Pt_detailrouter from '../../routers/Pt_detailrouter'
 import Pt_applymodal from '../../components/event/Pt_applymodal'
+import moment from 'moment'
 
 class Pt_detail extends React.Component {
-  constructor(props) {
-    super(props)
+  constructor() {
+    super()
     this.state = {
       data: [],
     }
+  }
+
+  componentDidMount() {
+    let data = JSON.stringify({ ptsid: window.location.pathname.slice('7') })
+    // console.log(data)
+    fetch('//localhost:3002/event/ptinfo', {
+      method: 'POST',
+      body: data,
+      headers: {
+        'Content-type': 'application/json',
+      },
+    })
+      .then(res => res.json())
+      .then(obj => {
+        console.log(obj[0])
+        this.setState({ data: obj[0] })
+      })
   }
 
   render() {
@@ -32,27 +50,41 @@ class Pt_detail extends React.Component {
               </div>
               <div className="ptinfo_colright">
                 <div className="ptinfo">
-                  <div className="ptinfo_title">神秘or蓋亞 輔大逗桌遊</div>
+                  <div className="ptinfo_title">{this.state.data.pt_title}</div>
                   <div className="ptinfo_time">
                     <div className="infoicon">
                       <i className="fas fa-clock" />
                     </div>
                     <div>
-                      <div id="starttime">2019/04/18, 19:00</div>
-                      <div id="deadlinetime">2019/04/17, 18:00截止揪團</div>
+                      <div id="starttime">
+                        {moment(this.state.data.pt_time).format(
+                          'YYYY/MM/DD HH:mm'
+                        )}
+                      </div>
+                      <div id="deadlinetime">
+                        {moment(this.state.data.pt_endtime).format(
+                          'YYYY/MM/DD HH:mm'
+                        )}
+                        截止揪團
+                      </div>
                     </div>
                   </div>
                   <div className="ptinfo_locate">
                     <div className="infoicon">
                       <i className="fas fa-map-marker-alt" />
                     </div>
-                    <div>新北市 新莊區 輔大逗桌遊</div>
+                    <div>
+                      {this.state.data.pt_city},{this.state.data.pt_dist}{' '}
+                      {this.state.data.pt_add}
+                    </div>
                   </div>
                   <div className="ptinfo_member">
                     <div className="infoicon">
                       <i className="fas fa-user-friends" />
                     </div>
-                    <div>3 - 6 人</div>
+                    <div>
+                      {this.state.data.pt_member} - {this.state.data.pt_maxm} 人
+                    </div>
                   </div>
                   <div className="ptinfo_level">
                     <div className="infoicon">

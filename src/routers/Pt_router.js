@@ -10,7 +10,7 @@ function Pt_Router() {
       <Switch>
         <Route exact path="/event" component={Pt_list} />
         <Route path="/event/new" component={Pt_new} />
-        <Route path="/event/id" component={Pt_detail} />
+        <Route path="/event/:id" component={Pt_detail} />
       </Switch>
     </>
   )
