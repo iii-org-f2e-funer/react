@@ -18,6 +18,14 @@ $shadow: 0px 1px 4px rgba(black, 0.2);
     width: 760px;
     background: $color_background;
   }
+  .text-mute{
+    color:red;
+  }
+  .orderdetail{
+    width: 100%;
+    height: auto;
+    background: #49b1c2
+  }
   .stepall {
     display: flex;
     justify-content: center;

@@ -30,6 +30,7 @@ export default class Mycart extends React.Component {
         totall: this.state.totall,
         allcart: allcart,
       })
+      // console.log(allcart)
     }
   }
 
@@ -74,6 +75,10 @@ export default class Mycart extends React.Component {
   }
   gotocheck = () => {
     localStorage.setItem('method_funshop', this.state.method_funshop)
+    localStorage.setItem(
+      'funapptotal',
+      this.state.totall + this.state.method_money
+    )
   }
   render() {
     if (localStorage.allcart == undefined || localStorage.allcart === '[]') {
