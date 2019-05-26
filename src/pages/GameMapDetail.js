@@ -7,29 +7,80 @@ import * as fa from 'react-icons/fa'
 
 import 'react-image-gallery/styles/css/image-gallery.css'
 import ImageGallery from 'react-image-gallery'
-import DatePicker from 'react-datepicker'
+import DatePicker, { registerLocale } from 'react-datepicker'
+import zhCN from 'date-fns/locale/zh-CN'
 
 import 'react-datepicker/dist/react-datepicker.css'
+registerLocale('zh_cn', zhCN)
 
 class MyVerticallyCenteredModal extends React.Component {
   constructor(props) {
     super(props)
     this.state = {
       startDate: new Date(),
+      startPeo: 1,
+      startName: '',
+      startPhone: '',
     }
-    this.handleChange = this.handleChange.bind(this)
+    this.handleDateChange = this.handleDateChange.bind(this)
     this.isWeekday = this.isWeekday.bind(this)
+    this.calcDays = this.calcDays.bind(this)
+    this.handlePeoChange = this.handlePeoChange.bind(this)
+    this.handleNameChange = this.handleNameChange.bind(this)
+    this.handlePhoneChange = this.handlePhoneChange.bind(this)
   }
-  handleChange(date) {
+  handleDateChange(date) {
     this.setState({
       startDate: date,
     })
   }
-  isWeekday = date => {
-    console.log(date.getDay())
-
-    return !(date.getDay() === 0 || date.getDay() === 5)
+  handlePeoChange(modifyValue) {
+    if (this.state.startPeo + modifyValue === 0) {
+      return
+    }
+    this.setState({ startPeo: this.state.startPeo + modifyValue })
   }
+
+  handleNameChange(evt) {
+    this.setState({ startName: evt.target.value })
+  }
+
+  handlePhoneChange(evt) {
+    this.setState({ startPhone: evt.target.value })
+  }
+
+  isWeekday = date => {
+    if (this.props.public_holiday == null) {
+      return 1
+    }
+    let holidayArray = this.props.public_holiday.split(',')
+    // ["星期二", "星期三", "星期四", "星期五", "星期六"]
+    let resultArray = []
+
+    let checkDaysSample = [
+      '星期日',
+      '星期一',
+      '星期二',
+      '星期三',
+      '星期四',
+      '星期五',
+      '星期六',
+    ]
+    for (let index in holidayArray) {
+      resultArray.push('' + checkDaysSample.indexOf(holidayArray[index]))
+    }
+    let dd = resultArray.indexOf('' + date.getDay())
+    if (dd === -1) {
+      return 1
+    } else {
+      return 0
+    }
+  }
+
+  calcDays = (date, days) => {
+    return date.getTime() + days * 24 * 60 * 60 * 1000
+  }
+
   render() {
     return (
       <Modal
@@ -48,33 +99,51 @@ class MyVerticallyCenteredModal extends React.Component {
           <div>
             <form>
               <div className="group">
-                <input type="text" required />
+                <input
+                  type="text"
+                  required
+                  value={this.state.startName}
+                  onChange={this.handleNameChange}
+                />
                 <span className="highlight" />
                 <span className="bar" />
                 <label>姓名</label>
               </div>
 
               <div className="group">
-                <input type="text" required />
+                <input
+                  type="text"
+                  required
+                  value={this.state.startPhone}
+                  onChange={this.handlePhoneChange}
+                />
                 <span className="highlight" />
                 <span className="bar" />
                 <label>手機</label>
               </div>
             </form>
             <div className="numberSpinner">
+              <p>人數</p>
               <label className="label" htmlFor="number1" />
               <div className="number">
-                <button className="number__btn number__btn--down" />
+                <button
+                  className="number__btn number__btn--down"
+                  onClick={() => this.handlePeoChange(-1)}
+                />
                 <input
                   className="number__field"
                   type="number"
                   id="number1"
                   min="1"
-                  max="9"
+                  max="30"
                   step="1"
-                  value="2"
+                  value={this.state.startPeo}
+                  readOnly
                 />
-                <button className="number__btn number__btn--up" />
+                <button
+                  className="number__btn number__btn--up"
+                  onClick={() => this.handlePeoChange(1)}
+                />
               </div>
             </div>
           </div>
@@ -82,9 +151,17 @@ class MyVerticallyCenteredModal extends React.Component {
             <DatePicker
               inline
               selected={this.state.startDate}
-              onChange={this.handleChange}
+              onChange={this.handleDateChange}
               filterDate={this.isWeekday}
+              locale="zh_cn"
+              minDate={this.calcDays(new Date(), 1)}
+              maxDate={this.calcDays(new Date(), 90)}
             />
+            <div style={{ color: 'orange' }}>
+              可預約日期:明天 至 90天前，
+              <br />
+              排除 店家公休日
+            </div>
           </div>
         </Modal.Body>
         <Modal.Footer>
@@ -132,6 +209,9 @@ class GameMapDetail extends React.Component {
   }
   render() {
     let modalClose = () => this.setState({ modalShow: false })
+    {
+      console.log(this.state)
+    }
 
     return (
       <React.Fragment>
@@ -219,6 +299,7 @@ class GameMapDetail extends React.Component {
                   show={this.state.modalShow}
                   onHide={modalClose}
                   headertitle={this.state.dataStore.store}
+                  public_holiday={this.state.dataStore.public_holiday}
                 />
               </ButtonToolbar>
             </div>
