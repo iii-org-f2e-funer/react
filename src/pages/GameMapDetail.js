@@ -1,7 +1,21 @@
 import React from 'react'
 import '../styles/gameMap/gameMap.scss'
-import { Button, Tabs, Tab, Modal, ButtonToolbar } from 'react-bootstrap'
-import { BrowserRouter as Router, Route, Link, Switch } from 'react-router-dom'
+import {
+  Button,
+  Tabs,
+  Tab,
+  Modal,
+  ButtonToolbar,
+  Row,
+  Col,
+} from 'react-bootstrap'
+import {
+  BrowserRouter as Router,
+  Route,
+  Link,
+  Switch,
+  Redirect,
+} from 'react-router-dom'
 import Slider from '../components/gameMap/ImgSlider'
 import * as fa from 'react-icons/fa'
 
@@ -28,6 +42,7 @@ class MyVerticallyCenteredModal extends React.Component {
     this.handlePeoChange = this.handlePeoChange.bind(this)
     this.handleNameChange = this.handleNameChange.bind(this)
     this.handlePhoneChange = this.handlePhoneChange.bind(this)
+    this.handleSubmit = this.handleSubmit.bind(this)
   }
   handleDateChange(date) {
     this.setState({
@@ -47,6 +62,37 @@ class MyVerticallyCenteredModal extends React.Component {
 
   handlePhoneChange(evt) {
     this.setState({ startPhone: evt.target.value })
+  }
+  handleSubmit(event) {
+    event.preventDefault()
+    fetch('http://127.0.0.1:3002/gameMap/reservation', {
+      method: 'POST',
+      headers: {
+        Accept: 'application/json',
+        'Content-Type': 'application/json',
+        credentials: 'include',
+      },
+      body: JSON.stringify({
+        name: this.state.startName,
+        phone: this.state.startPhone,
+        people: this.state.startPeo,
+        date: this.state.startDate,
+      }),
+    })
+      .then(() => {
+        this.setState({
+          startDate: new Date(),
+          startPeo: 1,
+          startName: '',
+          startPhone: '',
+        })
+        return 1
+      })
+      .then(() => {
+        this.props.onHide()
+        window.location.href = '/gameMap'
+        return 1
+      })
   }
 
   isWeekday = date => {
@@ -95,77 +141,84 @@ class MyVerticallyCenteredModal extends React.Component {
           </Modal.Title>
         </Modal.Header>
         <Modal.Body>
-          <div className="flex" />
-          <div>
-            <form>
-              <div className="group">
-                <input
-                  type="text"
-                  required
-                  value={this.state.startName}
-                  onChange={this.handleNameChange}
-                />
-                <span className="highlight" />
-                <span className="bar" />
-                <label>姓名</label>
-              </div>
+          <Row>
+            <Col>
+              <form>
+                <div className="group">
+                  <input
+                    type="text"
+                    required
+                    value={this.state.startName}
+                    onChange={this.handleNameChange}
+                  />
+                  <span className="highlight" />
+                  <span className="bar" />
+                  <label>姓名</label>
+                </div>
 
-              <div className="group">
-                <input
-                  type="text"
-                  required
-                  value={this.state.startPhone}
-                  onChange={this.handlePhoneChange}
-                />
-                <span className="highlight" />
-                <span className="bar" />
-                <label>手機</label>
+                <div className="group">
+                  <input
+                    type="number"
+                    required
+                    value={this.state.startPhone}
+                    onChange={this.handlePhoneChange}
+                  />
+                  <span className="highlight" />
+                  <span className="bar" />
+                  <label>手機</label>
+                </div>
+              </form>
+              <div className="numberSpinner">
+                <p>人數</p>
+                <label className="label" htmlFor="number1" />
+                <div className="number">
+                  <button
+                    className="number__btn number__btn--down"
+                    onClick={() => this.handlePeoChange(-1)}
+                  />
+                  <input
+                    className="number__field"
+                    type="number"
+                    id="number1"
+                    min="1"
+                    max="30"
+                    step="1"
+                    value={this.state.startPeo}
+                    readOnly
+                  />
+                  <button
+                    className="number__btn number__btn--up"
+                    onClick={() => this.handlePeoChange(1)}
+                  />
+                </div>
               </div>
-            </form>
-            <div className="numberSpinner">
-              <p>人數</p>
-              <label className="label" htmlFor="number1" />
-              <div className="number">
-                <button
-                  className="number__btn number__btn--down"
-                  onClick={() => this.handlePeoChange(-1)}
-                />
-                <input
-                  className="number__field"
-                  type="number"
-                  id="number1"
-                  min="1"
-                  max="30"
-                  step="1"
-                  value={this.state.startPeo}
-                  readOnly
-                />
-                <button
-                  className="number__btn number__btn--up"
-                  onClick={() => this.handlePeoChange(1)}
-                />
+            </Col>
+
+            <Col>
+              <DatePicker
+                inline
+                selected={this.state.startDate}
+                onChange={this.handleDateChange}
+                filterDate={this.isWeekday}
+                locale="zh_cn"
+                minDate={this.calcDays(new Date(), 1)}
+                maxDate={this.calcDays(new Date(), 90)}
+                showTimeSelect
+                timeFormat="HH:mm"
+                timeIntervals={60}
+                timeCaption="時間"
+              />
+              <div style={{ color: 'orange' }}>
+                可預約日期:明天 至 90天前，
+                <br />
+                排除 店家公休日
               </div>
-            </div>
-          </div>
-          <div>
-            <DatePicker
-              inline
-              selected={this.state.startDate}
-              onChange={this.handleDateChange}
-              filterDate={this.isWeekday}
-              locale="zh_cn"
-              minDate={this.calcDays(new Date(), 1)}
-              maxDate={this.calcDays(new Date(), 90)}
-            />
-            <div style={{ color: 'orange' }}>
-              可預約日期:明天 至 90天前，
-              <br />
-              排除 店家公休日
-            </div>
-          </div>
+            </Col>
+          </Row>
         </Modal.Body>
         <Modal.Footer>
-          <Button onClick={this.props.onHide}>Close</Button>
+          {/* <Button onClick={this.props.onHide}>Close</Button> */}
+          <Button onClick={this.handleSubmit}>完成預約</Button>
         </Modal.Footer>
       </Modal>
     )
@@ -207,6 +260,7 @@ class GameMapDetail extends React.Component {
       .then(state => console.log())
       .catch(err => console.log(err))
   }
+
   render() {
     let modalClose = () => this.setState({ modalShow: false })
     {
@@ -224,6 +278,8 @@ class GameMapDetail extends React.Component {
                     items={images}
                     showPlayButton={false}
                     autoPlay={true}
+                    showFullscreenButton={false}
+                    showIndex={true}
                   />
                 </div>
 
@@ -288,13 +344,6 @@ class GameMapDetail extends React.Component {
               </div>
 
               <ButtonToolbar>
-                <Button
-                  variant="primary"
-                  onClick={() => this.setState({ modalShow: true })}
-                >
-                  Launch vertically centered modal
-                </Button>
-
                 <MyVerticallyCenteredModal
                   show={this.state.modalShow}
                   onHide={modalClose}

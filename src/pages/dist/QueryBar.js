@@ -103,7 +103,7 @@ class QueryBar extends Component {
             <input
               type="text"
               className="form-control"
-              placeholder="或者輸入場館或工作室名稱..."
+              placeholder="來搜尋店家~~~"
               onChange={this.handleChange}
               value={this.state.text}
               onBlur={this.close}
