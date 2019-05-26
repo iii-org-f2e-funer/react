@@ -17,7 +17,6 @@ import Shopping1 from '../components/shopprocess/Shopping1'
 import Instagram from '../components/instagram/Instagram'
 import actions from '../redux/action/userInfo.js'
 
-
 class RootRouter extends React.Component {
   componentDidMount() {
     fetch('//localhost:3002/firm/userInfo', {

@@ -85,7 +85,6 @@ class Sidebar extends React.Component {
           <FirmEdit
             editPopup={this.state.editPopup}
             handleHide={this.handleHide}
-            data={this.state.data}
           />
         </>
       </Router>
