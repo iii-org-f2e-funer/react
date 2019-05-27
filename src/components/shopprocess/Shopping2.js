@@ -14,23 +14,16 @@ class Shopping2 extends React.Component {
       card: 0,
       paymethod: localStorage.paymethod,
       getmethod: localStorage.method_funshop,
-      order: {
-        allcart: localStorage.allcart,
-        year_card: '',
-        month_card: '',
-        csv: '',
-        card_number: '',
-        paymethod: localStorage.paymethod,
-        getmethod: localStorage.method_funshop,
-        Freight: '',
-        total: '',
-      },
+      order: {},
     }
   }
   componentDidMount() {}
   finish2 = () => {
     var temp_order = JSON.parse(localStorage.temp_order)
+    ///orderlist
     var order = {
+      //////user_sid
+      login_user_sid: 1,
       ////cartlist
       allcart: localStorage.allcart,
       ////card
