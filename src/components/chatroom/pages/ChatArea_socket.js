@@ -15,6 +15,7 @@ class ChatArea extends React.Component {
     super(props)
     this.state = {
       //{h_id: 1,h_sub: "BOB",m_id: 1,m_cont: "你好，BOB初次見面!",m_time: "2019-05-21T16:45:57.000Z",sender: 1,}
+      logInMember: [{ id: 0, name: '' }],
       chatDataAll: [],
       chatDataNoRp: [],
       member_name: '',
@@ -32,7 +33,7 @@ class ChatArea extends React.Component {
       var receiverIndex = []
       var memberChatData = []
       let theUrl = this.props.location.pathname
-      theUrl = theUrl.split('/')[3]
+      theUrl = theUrl.split('/')[4]
       //socket connect
       const socket = socketIOClient(this.state.endpoint)
       console.log(this.state.endpoint)
@@ -40,7 +41,7 @@ class ChatArea extends React.Component {
 
       //fecth data from database
       const response = await fetch(
-        'http://localhost:3002/chatroom/message/user_id1',
+        `http://localhost:3002/chatroom/message/${this.props.logInId}`,
         {
           method: 'GET',
           headers: { 'Content-type': 'application/json' },
@@ -73,7 +74,12 @@ class ChatArea extends React.Component {
       console.log(newData)
 
       memberChatData = data.filter(ele => {
-        return ele.receiver === theUrl || ele.sender === theUrl
+        return (
+          'ID' + ele.receiver_id == theUrl || 'ID' + ele.sender_id == theUrl
+        )
+      })
+      memberChatData = memberChatData.sort(function(a, b) {
+        return a.m_time > b.m_time ? 1 : -1
       })
 
       await this.setState({
@@ -95,8 +101,8 @@ class ChatArea extends React.Component {
           '_' +
           this.state.member_chat_data[0].receiver_id
       )
-      socket.on('join', data => {
-        console.log(data)
+      socket.on('join', join_message => {
+        console.log(join_message)
       })
     } catch (e) {
       console.log(e)
@@ -115,19 +121,35 @@ class ChatArea extends React.Component {
 
     console.log(localISOTime)
     console.log(this.state.member_chat_data[0].m_time)
+    console.log(this.state.member_chat_data[0].sender_id)
+    console.log(this.props.logInId)
+
+    let m_issender =
+      this.state.member_chat_data[0].sender_id == this.props.logInId ? 1 : 0
     let chatData = {
       m_cont: this.state.inputContent,
       m_time: localISOTime,
-      m_issender: 1,
+      m_issender: m_issender,
+      h_id: this.state.member_chat_data[0].h_id,
+      is_readed: 0,
     }
-    let copyNewChatData = [chatData, ...this.state.newChatData]
-    let copyMemberChatData = [chatData, ...this.state.member_chat_data]
+    let copyNewChatData = [...this.state.newChatData, chatData]
+    let copyMemberChatData = [...this.state.member_chat_data, chatData]
     await this.setState({
       newChatData: copyNewChatData,
       inputContent: '',
       member_chat_data: copyMemberChatData,
     })
-    console.log(this.state.newChatData)
+    console.log(this.state.member_chat_data)
+    //Post data to database
+    const post_data = await fetch(
+      `http://localhost:3002/chatroom/message/${this.props.logInId}`,
+      {
+        method: 'POST',
+        headers: { 'Content-type': 'application/json' },
+        body: JSON.stringify(copyNewChatData),
+      }
+    )
   }
 
   render() {
