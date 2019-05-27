@@ -1,5 +1,5 @@
 import React from 'react'
-import { Modal, Form, Col, Row } from 'react-bootstrap'
+import { Form, Col, Row } from 'react-bootstrap'
 import TWzipcode from 'react-twzipcode'
 import actions from '../../redux/action/userInfo.js'
 import { connect } from 'react-redux'
@@ -8,11 +8,12 @@ import { withRouter } from 'react-router'
 class FirmEditInput extends React.Component {
   constructor(props) {
     super(props)
+    console.log(props)
     const data = this.props.firmData
     this.state = {
-      insert: true,
+      insert: this.props.insert,
       sid: data.sid,
-      firm_id: data.firm_id,
+      firm_id: this.props.firm_id,
       store: data.store,
       county: data.county,
       dist: data.dist,
@@ -26,6 +27,14 @@ class FirmEditInput extends React.Component {
       status: data.status,
     }
   }
+  handlecityChange = evt =>
+    this.setState({
+      county: evt.county,
+    })
+  handledistChange = evt =>
+    this.setState({
+      dist: evt.district,
+    })
   updateAccount = () => {
     const data = {
       sid: this.state.sid,
@@ -54,11 +63,11 @@ class FirmEditInput extends React.Component {
         .then(res => res.json())
         .then(obj => {
           if (obj.success) {
-            this.setState({
-              firmData: obj.body,
-            })
+            console.log(obj.message)
+            this.props.cancelEdit()
           } else {
             console.log(obj.message)
+            this.props.cancelEdit()
           }
         })
     } else {
@@ -73,11 +82,11 @@ class FirmEditInput extends React.Component {
         .then(res => res.json())
         .then(obj => {
           if (obj.success) {
-            this.setState({
-              firmData: obj.body,
-            })
+            console.log(obj.message)
+            this.props.cancelEdit()
           } else {
             console.log(obj.message)
+            this.props.cancelEdit()
           }
         })
     }
@@ -239,15 +248,15 @@ class FirmEditInput extends React.Component {
           </Form.Group>
 
           <div className="d-flex justify-content-center">
-            <button className="button mt-3 mr-3" onClick={this.updateAccount}>
+            <div className="button mt-3 mr-3" onClick={this.updateAccount}>
               確認更改
-            </button>
-            <button
+            </div>
+            <div
               className="button button-white mt-3"
               onClick={this.props.cancelEdit}
             >
               取消變更
-            </button>
+            </div>
           </div>
         </Form>
       </>

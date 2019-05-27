@@ -4,14 +4,16 @@ import actions from '../../redux/action/userInfo.js'
 import { connect } from 'react-redux'
 import { withRouter } from 'react-router'
 import FirmEditInput from './FirmEditInput'
+import { runInThisContext } from 'vm'
 
 class AccountEdit extends React.Component {
   constructor(props) {
     super(props)
     this.state = {
+      insert: true,
+      firm_id: '',
       firmData: {
         sid: '',
-        firm_id: '',
         store: '',
         county: '',
         dist: '',
@@ -33,14 +35,37 @@ class AccountEdit extends React.Component {
       .then(res => res.json())
       .then(obj => {
         if (obj.success) {
+          console.log(obj)
           this.setState({
             firmData: Object.assign(this.state.firmData, obj.body),
+            firm_id: obj.firm_id,
+            insert: false,
           })
-          console.log(this.state.firmData)
         } else {
-          console.log(obj.message)
+          console.log(obj)
+          this.setState({ firm_id: obj.firm_id })
         }
       })
+  }
+  cancelEdit = () => {
+    fetch('//localhost:3002/firm/firmInfo', {
+      credentials: 'include',
+    })
+      .then(res => res.json())
+      .then(obj => {
+        if (obj.success) {
+          console.log(obj)
+          this.setState({
+            firmData: Object.assign(this.state.firmData, obj.body),
+            firm_id: obj.firm_id,
+            insert: false,
+          })
+        } else {
+          console.log(obj)
+          this.setState({ firm_id: obj.firm_id })
+        }
+      })
+    this.props.handleHide()
   }
   render() {
     return (
@@ -55,7 +80,9 @@ class AccountEdit extends React.Component {
           <h4 className="text-center">店家基本資訊</h4>
           <FirmEditInput
             firmData={this.state.firmData}
-            cancelEdit={this.props.handleHide}
+            cancelEdit={this.cancelEdit}
+            insert={this.state.insert}
+            firm_id={this.state.firm_id}
           />
         </Modal>
       </>
