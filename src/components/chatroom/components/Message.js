@@ -8,14 +8,12 @@ class Message extends React.Component {
       //{h_id: 1,h_sub: "BOB",m_id: 1,m_cont: "你好，BOB初次見面!",m_time: "2019-05-21T16:45:57.000Z",sender: 1,}
       chatDataAll: [],
       chatDataNoRp: [],
+      doUpdate: '',
     }
   }
 
   //get data from database
   async componentDidMount() {
-    var newData = []
-    var receiverArray = []
-    var receiverIndex = []
     const response = await fetch(
       `http://localhost:3002/chatroom/message/${this.props.logInId}`,
       {
@@ -25,60 +23,81 @@ class Message extends React.Component {
     )
     const data = await response.json()
 
-    receiverArray = await data.filter(element => {
-      return element.sender_id === 1
-    })
-    receiverArray = await receiverArray.map(ele => {
-      return ele.receiver
-    })
-    receiverIndex = await receiverArray.map((element, index, arr) => {
-      return arr.indexOf(element)
-    })
-    receiverIndex = await receiverIndex.filter((element, index, arr) => {
-      return index === arr.indexOf(element)
-    })
+    console.log(data)
 
-    newData = await receiverIndex.map(element => {
-      return data[element]
-    })
-
-    console.log(receiverArray)
-    console.log(receiverIndex)
-    console.log(newData)
-
-    await this.setState({ chatDataAll: data, chatDataNoRp: newData })
+    await this.setState({ chatDataAll: data })
   }
+
+  // async componentWillReceiveProps() {
+  //   const response = await fetch(
+  //     `http://localhost:3002/chatroom/message/${this.props.logInId}`,
+  //     {
+  //       method: 'GET',
+  //       headers: { 'Content-type': 'application/json' },
+  //     }
+  //   )
+  //   const data = await response.json()
+
+  //   console.log(data)
+
+  //   await this.setState({ chatDataAll: data })
+  // }
 
   render() {
     return (
       <>
         <div className="message">
           <div className="list-group">
-            {this.state.chatDataNoRp.map(data => {
-              return (
+            {this.state.chatDataAll.map(data => {
+              return this.props.logInId == data.from_id ? (
                 <NavLink
-                  key={data.m_id}
+                  key={+new Date() + Math.random()}
                   to={
                     '/chatroom/message/' +
                     'ID' +
                     this.props.logInId +
                     '/' +
                     'ID' +
-                    data.receiver_id
+                    data.to_id
                   }
                   className="list-group-item "
                   activeClassName="active"
                 >
                   <div className="d-flex w-100 justify-content-between align-items-center">
-                    <h5 className="mb-1 text-nowrap  ">{data.receiver}</h5>
+                    <h5 className="mb-1 text-nowrap  ">{data.y_toname}</h5>
                     <span className="message-date  text-wrap ">
-                      {data.m_time}
+                      {data.time}
                     </span>
                     {/* <span className="message-date  text-wrap ">
                       {data.m_time}
                     </span> */}
                   </div>
-                  <small className="text-truncate">{data.m_cont}</small>
+                  <small className="text-truncate">{data.subject}</small>
+                </NavLink>
+              ) : (
+                <NavLink
+                  key={+new Date() + Math.random()}
+                  to={
+                    '/chatroom/message/' +
+                    'ID' +
+                    this.props.logInId +
+                    '/' +
+                    'ID' +
+                    data.from_id
+                  }
+                  className="list-group-item "
+                  activeClassName="active"
+                >
+                  <div className="d-flex w-100 justify-content-between align-items-center">
+                    <h5 className="mb-1 text-nowrap  ">{data.x_fromname}</h5>
+                    <span className="message-date  text-wrap ">
+                      {data.time}
+                    </span>
+                    {/* <span className="message-date  text-wrap ">
+                      {data.m_time}
+                    </span> */}
+                  </div>
+                  <small className="text-truncate">{data.subject}</small>
                 </NavLink>
               )
             })}
