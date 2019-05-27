@@ -6,8 +6,8 @@ import moment from 'moment'
 const Pt_listitem = props => {
   return (
     <>
-      <Link to={"/event/"+props.data.pt_sid}>
-        <div className={"card"+ " "+props.data.pt_level}>
+      <Link to={'/event/' + props.data.pt_sid}>
+        <div className={'card' + ' ' + props.data.pt_level}>
           <div className="img_contain">
             <Card.Img
               className="card_img"

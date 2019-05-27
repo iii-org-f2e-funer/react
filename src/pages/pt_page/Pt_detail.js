@@ -25,8 +25,8 @@ class Pt_detail extends React.Component {
     })
       .then(res => res.json())
       .then(obj => {
-        console.log(obj[0])
-        this.setState({ data: obj[0] })
+        console.log(obj)
+        this.setState({ data: obj })
       })
   }
 
@@ -38,7 +38,7 @@ class Pt_detail extends React.Component {
             <div className="ptdetail_hostimg">
               <img src="/images/pt_img/dr_strange.jpg" alt="" />
             </div>
-            <div className="ptdetail_hostname">奇異博士</div>
+            <div className="ptdetail_hostname">{this.state.data.name}</div>
           </div>
           <div className="ptdetail_info">
             <div className="ptinfo_up">
@@ -87,10 +87,48 @@ class Pt_detail extends React.Component {
                     </div>
                   </div>
                   <div className="ptinfo_level">
-                    <div className="infoicon">
-                      <div className="leveldot" />
-                    </div>
-                    <div>新手</div>
+                    {(() => {
+                      switch (this.state.data.pt_level) {
+                        case 'normal':
+                          return (
+                            <>
+                              <div className="infoicon">
+                                <div
+                                  className="leveldot"
+                                  style={{ backgroundColor: '#F9C149' }}
+                                />
+                              </div>
+                              <div>適合有基礎的玩家</div>
+                            </>
+                          )
+                          break
+                        case 'hard':
+                          return (
+                            <>
+                              <div className="infoicon">
+                                <div
+                                  className="leveldot"
+                                  style={{ backgroundColor: '#EC6A6A' }}
+                                />
+                              </div>
+                              <div>高難度重度燒腦策略</div>
+                            </>
+                          )
+                          break
+                        default:
+                          return (
+                            <>
+                              <div className="infoicon">
+                                <div
+                                  className="leveldot"
+                                  style={{ backgroundColor: '#56b08d' }}
+                                />
+                              </div>
+                              <div>歡迎新手</div>
+                            </>
+                          )
+                      }
+                    })()}
                   </div>
                 </div>
                 <div className="pt_apply">
@@ -98,7 +136,7 @@ class Pt_detail extends React.Component {
                   <div className="pt_applyer" />
                 </div>
                 <div className="pt_applybtn" />
-                <Pt_applymodal />
+                <Pt_applymodal ptapply={this.state.data}/>
                 <div className="pt_share" />
               </div>
             </div>
@@ -106,12 +144,19 @@ class Pt_detail extends React.Component {
               <div className="ptinfo_bottom_nav">
                 <ul>
                   <li>
-                    <NavLink to="/event/id/" activeClassName="active" exact>
+                    <NavLink
+                      to={'/event/' + this.state.data.pt_sid}
+                      activeClassName="active"
+                      exact
+                    >
                       主揪介紹
                     </NavLink>
                   </li>
                   <li>
-                    <NavLink to="/event/id/quest" activeClassName="active">
+                    <NavLink
+                      to={'/event/' + this.state.data.pt_sid + '/quest'}
+                      activeClassName="active"
+                    >
                       留言
                     </NavLink>
                   </li>

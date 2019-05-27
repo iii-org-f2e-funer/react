@@ -40,7 +40,7 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
-  height: 600px;
+  height: 460px;
   margin-bottom: 24px;
 }
 .ptinfo_img {
@@ -67,14 +67,14 @@
 .infoicon {
   align-self: flex-start;
   width: 32px;
+  .leveldot {
+    width: 15px;
+    height: 15px;
+    border-radius: 50%;
+    margin-top: 6px;
+  }
 }
-.leveldot {
-  width: 15px;
-  height: 15px;
-  border-radius: 50%;
-  background-color: #56b08d;
-  margin-top: 6px ;
-}
+
 .ptinfo_title {
   font-size: 24px;
   color: #474747;
@@ -151,13 +151,13 @@
 }
 .ptinfo_bottom_nav ul a.active {
   color: #49b1c2;
-  padding-bottom:6px;
+  padding-bottom: 6px;
   border-bottom: 3px solid #49b1c2;
 }
-.Pt_infointro{
+.Pt_infointro {
   padding: 8px;
 }
-.applymodal{
+.applymodal {
   display: flex;
   flex-direction: column;
   text-align: center;

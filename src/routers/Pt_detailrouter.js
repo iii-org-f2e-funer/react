@@ -8,7 +8,7 @@ function Pt_detailrouter() {
     <>
       <Switch>
         <Route exact path="/event/:id" component={Pt_infointro} />
-        <Route exact="/event/id/quest" component={Pt_qa} />
+        <Route exact="/event/:id/quest" component={Pt_qa} />
       </Switch>
     </>
   )
