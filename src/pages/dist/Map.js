@@ -38,12 +38,14 @@ class BoradGameMap extends React.Component {
     storePhone: '',
     businessHour: '',
     publicHoliday: '',
+    imageArray: [],
     ////
     fetchNearbyStores: false,
   }
 
   // 取得來自MapBody點擊場館獲得的場館資料與遊戲資料
   getStoreByMarker(data) {
+    console.log(data)
     this.setState({
       storeId: data.storeId,
       storeLogoUrl: data.storeLogoUrl,
@@ -62,6 +64,7 @@ class BoradGameMap extends React.Component {
       storePhone: data.storePhone,
       businessHour: data.businessHour,
       publicHoliday: data.publicHoliday,
+      imageArray: data.imageArray,
     })
   }
 
@@ -226,6 +229,7 @@ class BoradGameMap extends React.Component {
               storePhone={this.state.storePhone}
               businessHour={this.state.businessHour}
               publicHoliday={this.state.publicHoliday}
+              imageArray={this.state.imageArray}
             />
             {/* <GameInfo gamesInfo={this.state.gamesInfo} /> */}
           </div>

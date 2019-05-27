@@ -217,9 +217,20 @@ class MyVerticallyCenteredModal extends React.Component {
             </Col>
           </Row>
         </Modal.Body>
-        <Modal.Footer>
-          {/* <Button onClick={this.props.onHide}>Close</Button> */}
-          <Button onClick={this.handleSubmit}>完成預約</Button>
+        <Modal.Footer style={{ justifyContent: 'center' }}>
+          <Row>
+            <Col>
+              <Button onClick={this.handleSubmit} style={{ width: '100px' }}>
+                確認預約
+              </Button>
+            </Col>
+            <Col>
+              <Button onClick={this.props.onHide} style={{ width: '100px' }}>
+                {' '}
+                取消
+              </Button>
+            </Col>
+          </Row>
         </Modal.Footer>
       </Modal>
     )
@@ -249,6 +260,7 @@ class GameMapDetail extends React.Component {
     this.state = {
       dataStore: [],
       modalShow: false,
+      image: [],
     }
   }
 
@@ -262,7 +274,22 @@ class GameMapDetail extends React.Component {
         this.setState({ dataStore: data[0] })
         return this.state
       })
-      .then(state => console.log())
+      .then(state => {
+        let newImageArray = []
+        for (let index in this.state.dataStore.imageArray) {
+          let imgString =
+            'http://192.168.27.25/happy6/site' +
+            this.state.dataStore.imageArray[index]
+          let imgObj = {
+            original: imgString,
+            thumbnail: imgString,
+          }
+          newImageArray.push(imgObj)
+        }
+        this.setState({ images: newImageArray })
+
+        console.log(this.state)
+      })
       .catch(err => console.log(err))
   }
 
@@ -280,7 +307,7 @@ class GameMapDetail extends React.Component {
               <div className="flex">
                 <div className="imgCard">
                   <ImageGallery
-                    items={images}
+                    items={this.state.images}
                     showPlayButton={false}
                     autoPlay={true}
                     showFullscreenButton={false}
@@ -323,7 +350,7 @@ class GameMapDetail extends React.Component {
               </div>
 
               <div className="subBoard">
-                <Tabs defaultActiveKey="profile" id="uncontrolled-tab-example">
+                <Tabs defaultActiveKey="home" id="uncontrolled-tab-example">
                   <Tab eventKey="home" title="關於我們">
                     <br />
                     {this.state.dataStore.about}
@@ -348,15 +375,13 @@ class GameMapDetail extends React.Component {
                 <Slider />
               </div>
 
-              <ButtonToolbar>
-                <MyVerticallyCenteredModal
-                  show={this.state.modalShow}
-                  onHide={modalClose}
-                  headertitle={this.state.dataStore.store}
-                  public_holiday={this.state.dataStore.public_holiday}
-                  goBack={this.goBack}
-                />
-              </ButtonToolbar>
+              <MyVerticallyCenteredModal
+                show={this.state.modalShow}
+                onHide={modalClose}
+                headertitle={this.state.dataStore.store}
+                public_holiday={this.state.dataStore.public_holiday}
+                goBack={this.goBack}
+              />
             </div>
           </div>
         </div>

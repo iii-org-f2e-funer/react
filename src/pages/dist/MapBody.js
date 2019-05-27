@@ -88,6 +88,7 @@ class MapBody extends React.Component {
     let storePhone = evt.phone
     let businessHour = evt.business_hours
     let publicHoliday = evt.public_holiday
+    let imageArray = evt.imageArray
 
     // *Get games in store
     // fetch(GetStore + '/store_id=' + storeId)
@@ -95,6 +96,7 @@ class MapBody extends React.Component {
       .then(res => res.json())
       // .then(res => {console.log(res)})
       .then(res => {
+        console.log(res)
         this.props.getStoreByMarker({
           // storeId: storeId,
           // storeLogoUrl: storeLogoUrl,
@@ -120,6 +122,7 @@ class MapBody extends React.Component {
           storePhone: storePhone,
           businessHour: businessHour,
           publicHoliday: publicHoliday,
+          imageArray: imageArray,
         })
       })
       .catch(err => console.log(err))

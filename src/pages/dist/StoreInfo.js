@@ -16,7 +16,15 @@ class StoreInfo extends Component {
     return (
       <div className="storeInfo">
         <ListGroup variant="flush">
-          <ListGroup.Item>This is image</ListGroup.Item>
+          <ListGroup.Item>
+            <img
+              src={
+                'http://192.168.27.25/happy6/site' + this.props.imageArray[0]
+              }
+              style={{ width: '200px' }}
+            />
+            {console.log(this.props)}
+          </ListGroup.Item>
           <ListGroup.Item>
             {/* <div>{this.props.storeSid}</div>
             <div>{this.props.storeFirm_id}</div> */}
