@@ -173,6 +173,26 @@
           }
         }
       }
+      // 編輯的 點點點
+      .editable {
+        line-height: 2;
+        padding: 0 5px;
+        position: relative;
+        // 編輯 刪除
+        .edit {
+          position: absolute;
+          right: 0;
+          z-index: 5;
+          width: 80px;
+          display: flex;
+          flex-direction: column;
+          text-align: center;
+          padding: 8px 0;
+          background-color: white;
+          border: 1px solid #dbdbdb;
+          border-radius: 6px;
+        }
+      }
       hr {
         margin: 0;
       }
@@ -294,8 +314,19 @@
         .heart {
           margin-left: 20px;
         }
+        .hearted {
+          color: #ed4956;
+        }
+        .favorites {
+          vertical-align: middle;
+          margin-left: 6px;
+          font-size: 12px;
+        }
         .bookmark {
           margin-right: 20px;
+        }
+        .bookmarked {
+          color: #262626;
         }
       }
       // 留言區
@@ -325,6 +356,7 @@
               border-radius: 4px;
               // 留言人
               .sender {
+                white-space: nowrap;
                 color: #38bdd8;
               }
               // 留言內容
@@ -350,9 +382,10 @@
         // 每則留言
         .sub {
           display: flex;
-          width: 95%;
+          width: auto;
           margin: 5px auto;
           margin-left: 50px;
+          margin-right: 2.5%;
           // 頭像
           img.avatar {
             display: block;
@@ -443,7 +476,16 @@
     left: 0;
     // height: 100%;
     // width: 100%;
-    background-color: rgba(0, 0, 0, 0.7);
+    background-color: rgba(0, 0, 0, 0.2);
+  }
+  .mask_edit {
+    position: absolute;
+    z-index: 200;
+    top: 72px;
+    left: 0;
+    // height: 100%;
+    // width: 100%;
+    background-color: rgba(0, 0, 0, 0.2);
   }
   //右邊揪團快訊
   .event {

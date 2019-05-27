@@ -29,7 +29,6 @@ class OldComment extends React.Component {
         method: 'POST',
         body: JSON.stringify(data),
         headers: {
-          'user-agent': 'Mozilla/4.0 MDN Example',
           'content-type': 'application/json',
         },
       })
@@ -43,7 +42,7 @@ class OldComment extends React.Component {
         })
     }
   }
- 
+
   render() {
     return (
       <>
