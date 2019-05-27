@@ -15,6 +15,7 @@ import {
   Link,
   Switch,
   Redirect,
+  withRouter,
 } from 'react-router-dom'
 import Slider from '../components/gameMap/ImgSlider'
 import * as fa from 'react-icons/fa'
@@ -250,6 +251,10 @@ class GameMapDetail extends React.Component {
       modalShow: false,
     }
   }
+
+  goBack = () => {
+    this.props.history.push('/gameMap')
+  }
   componentDidMount() {
     fetch('http://127.0.0.1:3002/gameMap/sid/' + this.props.match.params.id)
       .then(res => res.json())
@@ -349,6 +354,7 @@ class GameMapDetail extends React.Component {
                   onHide={modalClose}
                   headertitle={this.state.dataStore.store}
                   public_holiday={this.state.dataStore.public_holiday}
+                  goBack={this.goBack}
                 />
               </ButtonToolbar>
             </div>
@@ -359,4 +365,4 @@ class GameMapDetail extends React.Component {
   }
 }
 
-export default GameMapDetail
+export default withRouter(GameMapDetail)
