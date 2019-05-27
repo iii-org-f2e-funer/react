@@ -1,5 +1,5 @@
 import React from 'react'
-import { Button, Form } from 'react-bootstrap'
+import { Form } from 'react-bootstrap'
 import '../../styles/product/shop.scss'
 import TWzipcode from 'react-twzipcode'
 // import { BrowserRouter as Router, Route, Link, Switch } from 'react-router-dom'
@@ -57,7 +57,7 @@ export default class Shopping1 extends React.Component {
   getordername = event => {
     this.setState({ order_name: event.target.value })
     var aaa = event.target.value
-    if (aaa == '') {
+    if (aaa === '') {
       document.getElementById('name1-mute').innerText = 'name error'
     } else {
       document.getElementById('name1-mute').innerText = ''
@@ -74,7 +74,7 @@ export default class Shopping1 extends React.Component {
     this.setState({ order_addr: event.target.value })
     // console.log(this.state)
     var aaa = event.target.value
-    if (aaa == '') {
+    if (aaa === '') {
       document.getElementById('addr1-mute').innerText = 'addr error'
     } else {
       document.getElementById('addr1-mute').innerText = ''
@@ -84,7 +84,7 @@ export default class Shopping1 extends React.Component {
     this.setState({ order_phone: event.target.value })
     var aaa = event.target.value
     var aaaa = /^(09)[0-9]{8}$/.test(aaa)
-    if (aaaa == false) {
+    if (aaaa === false) {
       document.getElementById('phone1-mute').innerText = 'phone error'
     } else {
       document.getElementById('phone1-mute').innerText = ''
@@ -98,7 +98,7 @@ export default class Shopping1 extends React.Component {
       aaa
     )
     console.log(aaaa)
-    if (aaaa == false) {
+    if (aaaa === false) {
       document.getElementById('email1-mute').innerText = 'email error'
     } else {
       document.getElementById('email1-mute').innerText = ''

@@ -1,6 +1,6 @@
 import React from 'react'
 import '../styles/product/ProductDetail.scss'
-import { Button } from 'react-bootstrap'
+// import { Button } from 'react-bootstrap'
 import Maylike from '../components/product/Maylike'
 import ImageGallery from 'react-image-gallery'
 class ProductDetail extends React.Component {
@@ -27,7 +27,7 @@ class ProductDetail extends React.Component {
         var sid = localStorage.getItem('item.sid')
         var data_leng = Object.keys(jsonData).length
         for (let i = 0; i < data_leng; i++) {
-          if (this.state.data[i].sid == sid) {
+          if (this.state.data[i].sid === sid) {
             var gotit = this.state.data[i]
             break
           }
@@ -59,7 +59,7 @@ class ProductDetail extends React.Component {
         const gotdata2 = jsonData
         var data_leng = Object.keys(jsonData).length
         for (let i = 0; i < data_leng; i++) {
-          if (gotdata2[i].sid == sid) {
+          if (gotdata2[i].sid === sid) {
             var a1 =
               'http://192.168.27.25/happy6/product_manage/' +
               gotdata2[i].image_path
@@ -85,7 +85,7 @@ class ProductDetail extends React.Component {
 
   subtract = () => () => {
     this.state.number--
-    if (this.state.number == 0) {
+    if (this.state.number === 0) {
       this.state.number = 1
     }
     this.setState({ number: this.state.number })
