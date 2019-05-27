@@ -1,7 +1,5 @@
 import React from 'react'
 import { Route, Link, Switch, NavLink } from 'react-router-dom'
-import { Next } from 'react-bootstrap/PageItem'
-import Moment from 'react-moment'
 
 class Message extends React.Component {
   constructor(props) {
@@ -74,9 +72,7 @@ class Message extends React.Component {
                   <div className="d-flex w-100 justify-content-between align-items-center">
                     <h5 className="mb-1 text-nowrap  ">{data.receiver}</h5>
                     <span className="message-date  text-wrap ">
-                      <Moment format="YYYY-MM-DD HH:MM:SS">
-                        {data.m_time}
-                      </Moment>
+                      {data.m_time}
                     </span>
                     {/* <span className="message-date  text-wrap ">
                       {data.m_time}

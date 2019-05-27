@@ -2,9 +2,7 @@ import React from 'react'
 // //withRouter 匯入這個方法來讓子元件可以得到ROUTER的URL屬性
 import { withRouter } from 'react-router'
 import avatar from '../avatar/ironman.jpg'
-import Moment from 'react-moment'
 import socketIOClient from 'socket.io-client'
-import moment from 'moment'
 
 // const PathNow = props => <div>目前位置 {props.location.pathname}</div>;
 
@@ -162,11 +160,7 @@ class ChatArea extends React.Component {
             <h5 className="text-center">
               {'您可以開始與' + this.state.member_name + '聊天'}
             </h5>
-            <h5 className="text-center">
-              <Moment format="YYYY-MM-DD HH:MM:SS">
-                {this.state.start_chat_time}
-              </Moment>
-            </h5>
+            <h5 className="text-center">{this.state.start_chat_time}</h5>
             {/* 資料庫撈資料進來的地方 */}
             {/* 如果是自己傳給對方在右邊(有sender class) */}
             <ul className="d-flex flex-column  ">
