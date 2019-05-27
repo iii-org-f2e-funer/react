@@ -2,9 +2,11 @@ import React from 'react'
 import Account from '../../components/firm/Account'
 import actions from '../../redux/action/userInfo.js'
 import { connect } from 'react-redux'
+import { withRouter } from 'react-router'
 import { BrowserRouter as Router, Route, Link, Switch } from 'react-router-dom'
 import FirmEdit from './FirmEdit.js'
-import { withRouter } from 'react-router'
+import Site_manage from './Site_manage.js'
+import { FaPen } from 'react-icons/fa'
 
 class Sidebar extends React.Component {
   constructor(props) {
@@ -41,9 +43,30 @@ class Sidebar extends React.Component {
         <>
           <div className="sidebar">
             <div className="person flex">
-              <div className="img-outter">
-                <img src={process.env.PUBLIC_URL + this.state.data.my_file} />
-              </div>
+              <form action="">
+                <div className="img-outter">
+                  <div className="avatar-edit">
+                    <input
+                      id="file-upload"
+                      type="file"
+                      accept=".png, .jpg, .jpeg"
+                    />
+                    <label htmlFor="file-upload" className="pen">
+                      <FaPen />
+                    </label>
+                  </div>
+                  <div className="circle">
+                    <img
+                      alt="無法顯示"
+                      src={
+                        process.env.PUBLIC_URL +
+                        '/images/personalFolder/logo.png'
+                      }
+                    />
+                  </div>
+                </div>
+              </form>
+
               <div className="info">
                 <h5>{data.firmname}</h5>
                 <div className="email">{data.email}</div>
@@ -78,7 +101,7 @@ class Sidebar extends React.Component {
               <Route path="/firm" component={Account} />
               <Route path="/firm/product_manage" component={Account} />
               <Route path="/firm/product_order" component={Account} />
-              <Route path="/firm/site_manage" component={Account} />
+              <Route path="/firm/site_manage" component={Site_manage} />
               <Route path="/firm/site_order" component={Account} />
             </Switch>
           </div>
