@@ -206,15 +206,15 @@ export default class product extends React.Component {
                 <label className="mt-2 ml-4">SORT</label>
                 <div className="game-control ml-4 mr-4 mt-1 ">
                   <select
-                    className="game-control mr-4 mt-1 p-4"
+                    className="game-control"
                     onChange={this.getsort}
                     value={this.state.sort}
                   >
                     <option className="dropdown" value="hightolow">
-                      high TO low
+                      highTOlow
                     </option>
                     <option className="dropdown" value="lowtohigh">
-                      low TO high
+                      lowTOhigh
                     </option>
                   </select>
                 </div>

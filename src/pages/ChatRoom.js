@@ -18,36 +18,60 @@ class ChatRoom extends React.Component {
     this.state = {
       //{h_id: 1,h_sub: "BOB",m_id: 1,m_cont: "你好，BOB初次見面!",m_time: "2019-05-21T16:45:57.000Z",sender: 1,}
       chatData: [],
+      inputId: '',
+      logInId: '',
     }
   }
   componentDidMount() {
-    fetch('http://localhost:3002/chatroom/message/user_id1', {
-      method: 'GET',
-      headers: { 'Content-type': 'application/json' },
-    })
-      .then(response => response.json())
-      .then(data => {
-        console.log('chatRoom:', data)
+    // fetch('http://localhost:3002/chatroom/message/user_id1', {
+    //   method: 'GET',
+    //   headers: { 'Content-type': 'application/json' },
+    // })
+    //   .then(response => response.json())
+    //   .then(data => {
+    //     console.log('chatRoom:', data)
+    //     return this.setState({ chatData: data })
+    //   })
+  }
+  handleChange = event => {
+    this.setState({ inputId: event.target.value })
+  }
+  handleClick = async () => {
+    let logInId = this.state.inputId
+    await this.setState({ logInId: this.state.inputId, inputId: '' })
 
-        return this.setState({ chatData: data })
-      })
+    //login ok
+    console.log(logInId)
+    const response = await fetch(
+      `http://localhost:3002/chatroom/message/${logInId}`,
+      {
+        method: 'GET',
+        headers: { 'Content-type': 'application/json' },
+      }
+    )
+    const data = await response.json()
+    console.log(data)
+    await this.setState({ chatData: data })
   }
   render() {
     return (
       <Router>
         <>
+          <input value={this.state.inputId} onChange={this.handleChange} />
+          <button onClick={this.handleClick}>send</button>
+          {'welcome member: ' + this.state.logInId}
           <div className="chatroom">
             <div className="container ">
               <div className="row">
                 <div className="col-lg-3 aside">
-                  <AsidePage />
+                  <AsidePage logInId={this.state.logInId} />
                 </div>
                 <div className="col-lg chatArea">
                   {/* 傳props 給子元件: */}
                   {/* <Route path="/abc" render={(props) => <TestWidget {...props} someProp={100} />} /> */}
                   {/* <Route
                       path="/chatroom/Message/user_id2"
-                      component={ChatArea}
+                      component={ChatArea_socket}
                     /> */}
                   <Switch>
                     {/*  在這邊map 所有Route出來  */}
@@ -55,8 +79,17 @@ class ChatRoom extends React.Component {
                       return (
                         <Route
                           key={data.m_id}
-                          path={'/chatroom/Message/' + data.receiver}
-                          component={ChatArea_socket}
+                          path={
+                            '/chatroom/Message/' +
+                            'ID' +
+                            this.state.logInId +
+                            '/' +
+                            'ID' +
+                            data.receiver_id
+                          }
+                          render={() => (
+                            <ChatArea_socket logInId={this.state.logInId} />
+                          )}
                         />
                       )
                     })}

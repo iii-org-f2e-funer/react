@@ -3,7 +3,7 @@ import { Button, Form } from 'react-bootstrap'
 import '../../styles/product/shop.scss'
 import TWzipcode from 'react-twzipcode'
 // import { BrowserRouter as Router, Route, Link, Switch } from 'react-router-dom'
-
+import { Link } from 'react-router-dom'
 export default class Shopping1 extends React.Component {
   constructor() {
     super()
@@ -132,6 +132,11 @@ export default class Shopping1 extends React.Component {
     console.log(data)
     localStorage.setItem('temp_order', data)
   }
+  paymethod = event => {
+    // alert(event.target.value)
+    localStorage.setItem('paymethod', event.target.value)
+  }
+
   render() {
     return (
       <>
@@ -300,15 +305,32 @@ export default class Shopping1 extends React.Component {
                       />
                       <Form.Text className="text-muted" />
                     </Form.Group>
+                    <Form.Group controlId="formBasicEmail">
+                      <h5>付款方式</h5>
+                      <select className="game-control" onBlur={this.paymethod}>
+                        <option className="dropdown" value="ATM">
+                          ATM轉帳
+                        </option>
+                        <option className="dropdown" value="MASTERCARD">
+                          信用卡
+                        </option>
+                        <option className="dropdown" value="TOHOMEPAY">
+                          貨到付款
+                        </option>
+                      </select>
+                    </Form.Group>
+
                     <div className="buttons">
                       <div className="buttonall">
-                        <Button className="button2 button">回購物車</Button>
+                        <div className="button2 button">回購物車</div>
                       </div>
-                      <div className="buttonall">
-                        <Button className="button1 button" onClick={this.goto2}>
-                          下一步
-                        </Button>
-                      </div>
+                      <Link to="/Shopping2">
+                        <div className="buttonall">
+                          <div className="button1 button" onClick={this.goto2}>
+                            下一步
+                          </div>
+                        </div>
+                      </Link>
                     </div>
                   </Form>
                 </div>

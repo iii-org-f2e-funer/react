@@ -4,21 +4,22 @@ import { InputGroup, FormControl } from 'react-bootstrap'
 import Message from '../components/Message'
 import FriendList from '../components/FriendList'
 
-function AsidePage() {
+function AsidePage(props) {
   return (
     <>
+      {props.logInId}
       <nav className="nav aside-page-box my-3 ">
         <NavLink
           className=" chat-link pb-1 px-3"
           activeClassName="active"
-          to="/chatroom/message"
+          to={'/chatroom/message/' + 'ID' + props.logInId}
         >
           聊天室
         </NavLink>
         <NavLink
           className=" chat-link pb-1 px-3"
           activeClassName="active"
-          to="/chatroom/FriendList"
+          to={'/chatroom/FriendList/' + 'ID' + props.logInId}
         >
           好友列表
         </NavLink>
@@ -31,8 +32,14 @@ function AsidePage() {
         />
       </InputGroup>
       <Switch>
-        <Route path="/chatroom/Message" component={Message} />
-        <Route path="/chatroom/FriendList" component={FriendList} />
+        <Route
+          path={'/chatroom/message/' + 'ID' + props.logInId}
+          render={() => <Message logInId={props.logInId} />}
+        />
+        <Route
+          path={'/chatroom/FriendList/' + 'ID' + props.logInId}
+          render={() => <FriendList logInId={props.logInId} />}
+        />
       </Switch>
     </>
   )

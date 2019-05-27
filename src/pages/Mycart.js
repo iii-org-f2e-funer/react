@@ -183,16 +183,13 @@ export default class Mycart extends React.Component {
                     <h5>{this.state.totall}</h5>
                   </div>
                   <div className="paymethod money">
-                    <h5>付款方式</h5>
-                    <select
-                      className="game-control mr-4 mt-1 p-4"
-                      onChange={this.paymethod}
-                    >
+                    <h5>取貨方式</h5>
+                    <select className="game-control" onChange={this.paymethod}>
                       <option className="dropdown" value="toshop">
                         超商取貨
                       </option>
                       <option className="dropdown" value="tohome">
-                        宅配
+                        宅配到府
                       </option>
                     </select>
                   </div>

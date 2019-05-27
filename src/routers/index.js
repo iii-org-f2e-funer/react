@@ -14,6 +14,8 @@ import Myfav from '../pages/Myfav'
 import Event from '../pages/pt_page/Event'
 import Mycart from '../pages/Mycart'
 import Shopping1 from '../components/shopprocess/Shopping1'
+import Shopping2 from '../components/shopprocess/Shopping2'
+import Shopping3 from '../components/shopprocess/Shopping3'
 import Instagram from '../components/instagram/Instagram'
 import actions from '../redux/action/userInfo.js'
 
@@ -54,9 +56,9 @@ class RootRouter extends React.Component {
             <Route path="/Myfav" component={Myfav} />
             <Route path="/Mycart" component={Mycart} />
             <Route path="/Shopping1" component={Shopping1} />
-
+            <Route path="/Shopping2" component={Shopping2} />
+            <Route path="/Shopping3" component={Shopping3} />
             <Route path="/instagram" component={Instagram} />
-
             <Route path="/event" component={Event} />
           </Switch>
           <Footer />
