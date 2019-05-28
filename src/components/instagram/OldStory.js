@@ -13,11 +13,11 @@ import {
 class OldStory extends React.Component {
   constructor(props) {
     super(props)
-    this.state = { editMenu: false, isEdit: false }
+    this.state = { editMenu: false, isEdit: false, preViewImges: [] }
   }
   componentDidMount() {
     this.text.innerText = this.props.data.content
-    console.log(this.props)
+    // console.log(this.props)
   }
   //發送留言
   handleSubmit = () => {
@@ -92,13 +92,13 @@ class OldStory extends React.Component {
   // 編輯舊貼文
   handleEdit = () => {
     this.setState({ editMenu: false, isEdit: true }, () => {
-      this.props.handleControlRefresh()
+      this.props.handleControlRefresh(false)
     })
   }
   handleOnBlur = e => {
     e.stopPropagation()
-    this.setState({ editMenu: false, isEdit: false }, () => {
-      this.props.handleControlRefresh()
+    this.setState({ editMenu: false, isEdit: false, preViewImges: [] }, () => {
+      this.props.handleControlRefresh(true)
     })
   }
   // 刪除貼文
@@ -119,6 +119,59 @@ class OldStory extends React.Component {
         }
       })
   }
+  // 更新圖片
+  handleFilesChange = event => {
+    // console.log(event.target.files)
+    const files = event.target.files
+
+    var _this = this
+    let preViewImges = [] // 建立新陣列
+
+    for (let i = 0; i < files.length; i++) {
+      var reader = new FileReader()
+      reader.readAsDataURL(files[i]) //read file data as a base64 encoded string.
+      // reader loaded
+      reader.addEventListener('load', function(e) {
+        // console.log(e.target.result)
+        //
+        preViewImges.push(e.target.result)
+        _this.setState({ preViewImges: preViewImges })
+      })
+    }
+  }
+  // 更新貼文
+  handleUpdate = () => {
+    console.log(this.text.innerText)
+    // 文字丟進 formData
+    var formData = new FormData()
+    formData.append('memberID', '1')
+    formData.append('postID', this.props.data.post_id)
+    formData.append('content', this.text.innerText)
+    // 圖片丟進 formData
+    for (let i = 0; i < this.inputFiles.files.length; i++) {
+      formData.append('photos', this.inputFiles.files[i])
+    }
+    // Fetch
+    fetch('http://localhost:3002/instagram/updateStory', {
+      method: 'POST',
+      body: formData,
+    })
+      .then(res => res.json())
+      .then(obj => {
+        // 寫入成功 關閉編輯視窗 清空state
+        if (obj.success) {
+          this.setState(
+            { editMenu: false, isEdit: false, preViewImges: [] },
+            () => {
+              this.props.handleControlRefresh(true)
+              //刷新父元素頁面
+              this.props.handleReFresh()
+            }
+          )
+        }
+      })
+  }
+
   render() {
     return (
       <>
@@ -166,17 +219,29 @@ class OldStory extends React.Component {
             {/* 預覽圖 圖 photo */}
             {this.state.isEdit ? (
               <div className="post-image">
-                {this.props.data.photos.map((item, idx) => {
-                  if (item !== '') {
-                    return (
-                      <img
-                        key={idx}
-                        src={'http://localhost:3002/images/' + item}
-                        alt=""
-                      />
-                    )
-                  }
-                })}
+                {this.state.preViewImges.length > 0 ? (
+                  <>
+                    {this.state.preViewImges.map((item, idx) => {
+                      if (item !== '') {
+                        return <img key={idx} src={item} alt="" />
+                      }
+                    })}
+                  </>
+                ) : (
+                  <>
+                    {this.props.data.photos.map((item, idx) => {
+                      if (item !== '') {
+                        return (
+                          <img
+                            key={idx}
+                            src={'http://localhost:3002/images/' + item}
+                            alt=""
+                          />
+                        )
+                      }
+                    })}
+                  </>
+                )}
               </div>
             ) : (
               <div className="post-photos">
@@ -198,7 +263,9 @@ class OldStory extends React.Component {
                 onChange={this.handleFilesChange}
                 ref={el => (this.inputFiles = el)}
               />
-              <span className="oldStoryEdit button">編輯完成</span>
+              <span className="oldStoryEdit button" onClick={this.handleUpdate}>
+                編輯完成
+              </span>
             </div>
           ) : (
             <>

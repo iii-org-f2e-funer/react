@@ -49,8 +49,8 @@ class Stories extends React.Component {
       })
   }
   // 控制刷新
-  handleControlRefresh = () => {
-    this.setState({ isRefreshing: !this.state.isRefreshing })
+  handleControlRefresh = state => {
+    this.setState({ isRefreshing: state })
   }
   // 強制刷新
   handleReFresh = () => {
