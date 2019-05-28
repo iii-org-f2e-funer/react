@@ -17,20 +17,16 @@ class Shopping2 extends React.Component {
       order: {},
     }
   }
-  componentDidMount() {}
+
   finish2 = () => {
     var temp_order = JSON.parse(localStorage.temp_order)
-    ///orderlist
+    var order_str = localStorage.allcart
+    //////////////////////////////////////////////////// orderlist ////////////////////////////
     var order = {
       //////user_sid
       login_user_sid: 1,
       ////cartlist
       allcart: localStorage.allcart,
-      ////card
-      year_card: this.state.year_card,
-      month_card: this.state.month_card,
-      csv: this.state.csv,
-      card_number: this.state.card_number,
       ////how to
       paymethod: localStorage.paymethod,
       getmethod: localStorage.method_funshop,
@@ -51,7 +47,11 @@ class Shopping2 extends React.Component {
       order_addr: temp_order.order_addr,
       order_email: temp_order.order_email,
       order_phone: temp_order.order_phone,
+      paid: 1,
+      cre_date: '',
     }
+
+    //////////////////////////////////////////////////////////////////////////////////
     alert('訂單完成')
     if (localStorage.method_funshop === 'tohome') {
       order.Freight = 130
@@ -60,7 +60,25 @@ class Shopping2 extends React.Component {
     }
     this.setState({ order: order })
     console.log(order)
-    ////////////////////////////////////////////////////////////////////////////////////存回去??
+
+    ////////////////////////////////////// 新增訂單 //////////////////////////////////////////////
+
+    fetch('//localhost:3002/product/product_order', {
+      method: 'POST',
+      body: JSON.stringify(order),
+      credentials: 'include',
+      headers: {
+        'Content-type': 'application/json',
+      },
+    })
+      .then(res => res.json())
+      .then(obj => {
+        if (obj.success) {
+          console.log('order success')
+        } else {
+          console.log(obj.message)
+        }
+      })
   }
   years = event => {
     this.setState({ year_card: event.target.value })
