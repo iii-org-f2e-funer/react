@@ -9,6 +9,7 @@ import {
 import AsidePage from '../components/chatroom/pages/AsidePage'
 import ChatArea from '../components/chatroom/pages/ChatArea'
 import ChatArea_socket from '../components/chatroom/pages/ChatArea_socket'
+import ChatArea_socket_new from '../components/chatroom/pages/ChatArea_socket_new'
 import '../styles/chatroom/chatroomStyle.scss'
 import ChatAreaOriginal from '../components/chatroom/pages/ChatAreaOriginal'
 
@@ -20,12 +21,9 @@ class ChatRoom extends React.Component {
       chatData: [],
       inputId: '',
       logInId: '',
-      doUpdate: '',
     }
   }
-  handleUpdate = inputVal => {
-    this.setState({ doUpdate: inputVal })
-  }
+
   componentDidMount() {
     // fetch('http://localhost:3002/chatroom/message/user_id1', {
     //   method: 'GET',
@@ -86,7 +84,7 @@ class ChatRoom extends React.Component {
                     {this.state.chatData.map(data => {
                       return this.state.logInId == data.from_id ? (
                         <Route
-                          key={+new Date() + Math.random()}
+                          key={data.to_id}
                           path={
                             '/chatroom/Message/' +
                             'ID' +
@@ -96,15 +94,15 @@ class ChatRoom extends React.Component {
                             data.to_id
                           }
                           render={() => (
-                            <ChatArea_socket
+                            <ChatArea_socket_new
                               logInId={this.state.logInId}
-                              handleUpdate={this.handleUpdate}
+                              userData={this.state.chatData}
                             />
                           )}
                         />
                       ) : (
                         <Route
-                          key={+new Date() + Math.random()}
+                          key={data.from_id}
                           path={
                             '/chatroom/Message/' +
                             'ID' +
@@ -114,9 +112,9 @@ class ChatRoom extends React.Component {
                             data.from_id
                           }
                           render={() => (
-                            <ChatArea_socket
+                            <ChatArea_socket_new
                               logInId={this.state.logInId}
-                              handleUpdate={this.handleUpdate}
+                              userData={this.state.chatData}
                             />
                           )}
                         />

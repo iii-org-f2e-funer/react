@@ -33,13 +33,7 @@ function AsidePage(props) {
       <Switch>
         <Route
           path={'/chatroom/message/' + 'ID' + props.logInId}
-          render={() => (
-            <Message
-              logInId={props.logInId}
-              handleUpdate={props.handleUpdate}
-              upDatetext={props.upDatetext}
-            />
-          )}
+          render={() => <Message logInId={props.logInId} />}
         />
         <Route
           path={'/chatroom/FriendList/' + 'ID' + props.logInId}
