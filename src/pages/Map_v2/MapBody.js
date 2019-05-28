@@ -125,7 +125,9 @@ class MapBody extends React.Component {
           imageArray: imageArray,
         })
       })
-      .catch(err => console.log(err))
+      .catch(err => {
+        throw new Error(err)
+      })
   }
 
   componentDidUpdate(prevProps, prevState) {

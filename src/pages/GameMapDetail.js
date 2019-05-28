@@ -65,6 +65,7 @@ class MyVerticallyCenteredModal extends React.Component {
     this.setState({ startPhone: evt.target.value })
   }
   handleSubmit(event) {
+    console.log(this.props)
     event.preventDefault()
     fetch('http://127.0.0.1:3002/gameMap/reservation', {
       method: 'POST',
@@ -78,6 +79,8 @@ class MyVerticallyCenteredModal extends React.Component {
         phone: this.state.startPhone,
         people: this.state.startPeo,
         date: this.state.startDate,
+        firm_id: this.props.datastore.firm_id,
+        store: this.props.datastore.store,
       }),
     })
       .then(() => {
@@ -95,7 +98,7 @@ class MyVerticallyCenteredModal extends React.Component {
         return 1
       })
       .catch(err => {
-        throw err
+        throw new Error(err)
       })
   }
 
@@ -296,7 +299,7 @@ class GameMapDetail extends React.Component {
       })
       // .catch(err => console.log(err))
       .catch(err => {
-        throw err
+        throw new Error(err)
       })
   }
 
@@ -388,6 +391,7 @@ class GameMapDetail extends React.Component {
                 headertitle={this.state.dataStore.store}
                 public_holiday={this.state.dataStore.public_holiday}
                 goBack={this.goBack}
+                datastore={this.state.dataStore}
               />
             </div>
           </div>

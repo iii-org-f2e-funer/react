@@ -86,7 +86,7 @@ class BoradGameMap extends React.Component {
       })
       // .catch(err => console.log(err))
       .catch(err => {
-        throw err
+        throw new Error(err)
       })
   }
 
@@ -152,7 +152,7 @@ class BoradGameMap extends React.Component {
       })
       // .catch(err => console.log(err))
       .catch(err => {
-        throw err
+        throw new Error(err)
       })
   }
   //^^^^^^ componentDidUpdate^^^^^^^^res=>state.srores
