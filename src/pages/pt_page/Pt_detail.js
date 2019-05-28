@@ -52,7 +52,7 @@ class Pt_detail extends React.Component {
     })
       .then(res => res.json())
       .then(obj => {
-        console.log(obj)
+        // console.log(obj)
         this.setState({ applyer: obj })
       })
   }
