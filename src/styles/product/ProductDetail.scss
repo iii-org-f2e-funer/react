@@ -1,4 +1,10 @@
 .ProductDetail{
+    .imgCard {
+        width: 300px;
+        height: auto;
+        box-shadow: 0px 0px 0px #949494;
+        margin:0 60px;
+    }
 .product-Description-title{
     width: 100%;
     margin: 20px 0;
@@ -54,7 +60,7 @@ padding: 6px;
 	text-align: center;
 	text-decoration: none;
 	letter-spacing: 0;
-    background-color: #3DB4E0;
+
 	border: 0;
 	border-radius: 6px;
 	outline: 0;
@@ -65,7 +71,6 @@ padding: 6px;
   font-weight: 400
 }
 .actionButton1:focus{
-    background-color: #2095C1;
     color: #fff;  
     outline: 0;
   }
@@ -97,7 +102,7 @@ justify-content: center;
 align-items: center;
 }
 .maylike-image{
-    height: 268px;
+    height: 400px;
     width: 200px;
     background: #fff;
     margin: 20px 5px;

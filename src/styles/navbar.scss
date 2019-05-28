@@ -1,6 +1,6 @@
 $font-family: 'Roboto', 'Noto Sans TC', 'arial', '微軟正黑體';
 
-$color_blue: #49b1c2;
+$color_blue: #6EC4D2;
 $color_grey: #474747;
 $color_light: #949494;
 $color_orange: #f9c149;
@@ -22,8 +22,9 @@ $shadow: 0px 1px 4px rgba(black, 0.2);
   padding: 0px;
   box-shadow: 0px 1px 4px rgba(black, 0.2);
 
-  position: relative;
-  z-index: 1;
+  position: sticky;
+  top: 0;
+  z-index: 209;
 
   -webkit-user-select: none; /* for Chrome */
   -moz-user-select: none; /* for Firefox */
@@ -34,127 +35,147 @@ $shadow: 0px 1px 4px rgba(black, 0.2);
     height: 100%;
     padding: 0px;
     // ul, a 共通設定
-    ul{
+    ul {
       list-style: none;
+      padding: 0;
     }
-    a{
+    a {
       display: block;
       text-decoration: none;
     }
-    //商標
-    .brand_logo {
-      height: 100%;
-      padding-left: 5px;
-      flex: 1;
-      display: flex;
-      align-items: center;
+    // a 共通 color
+    a {
+      color: $color_light;
     }
-    // container > nav 共用屬性
-   
-    > ul {
-      padding: 0px;
+    a:hover {
+      color: $color_blue;
+    }
+    a.active {
+      color: $color_blue;
+    }
+
+    // Logo
+    .brand_logo {
+      padding-left: 5px;
+      flex: 1; // 讓web_nav置中用的
+    }
+    // web_nav
+    ul.web_nav {
       display: flex;
       justify-content: center;
-      > li {
-        > a {
-          height: 100%;
-          line-height: 72px;
-          color: $color_grey;
-        }
-        > a:hover {
-          color: $color_blue;
-        }
-        > a.active {
-          color: $color_blue;
-        }
-        > a:hover path {
-          fill: $color_blue;
-        }
-        > a.active path {
-          fill: $color_blue;
-        }
-      }
-    }
-    //左邊的nav
-    ul.web_nav {
       li {
         a {
           padding: 0 18px;
+          height: 72px;
+          line-height: 72px;
         }
       }
     }
-    //右邊的nav
-    ul.member_nav {
-      flex: 1;
-      justify-content: flex-end;
+    // user_nav
+    ul.user_nav {
       padding-right: 5px;
-      li {
-        a {
+      flex: 1; // 讓web_nav置中用的
+
+      display: flex;
+      justify-content: flex-end;
+      > li {
+        //會員功能按鈕 (購物車 訊息 通知 會員)
+        > a {
           padding: 0 12.5px;
+          line-height: 72px;
         }
-      }
-      //通知按鈕
-      li.notice_icon {
-        position: relative;
-        //通知List
-        ul {
-          position: absolute;
-          z-index: 2;
-          right: 0;
-          width: 260px;
-          padding: 10px 0 5px 0;
-          background-color: white;
-          border-radius: 6px;
-          font-size: 16px;
-          box-shadow: $shadow;
-          li.notice_text {
-            padding-left: 20px;
-            padding-bottom: 4px;
-          }
-          li {
-            a {
-              height: 80px;
-              color: $color_grey;
-              padding: 4px 5px;
-              border-top: 1px solid $color_border;
-            }
-          }
+        //通知按鈕
+        .notice_btn.active {
+          color: $color_blue;
         }
-      }
-      //會員按鈕
-      li.user_icon {
-        position: relative;
-        //會員功能List
-        ul {
-          position: absolute;
-          z-index: 2;
-          right: 0;
-          width: 160px;
-          background-color: white;
-          border-radius: 6px;
-          box-shadow: $shadow;
-          padding: 10px 0 5px 0;
-         
-          hr {
-            margin: 6px 0 6px 0;
-          }
-          li {
-            text-align: center;
-            div.avatar {
-              display: inline-block;
-              width: 45px;
-              height: 45px;
-              border-radius: 50%;
-              border: 1px solid rgba(black, 0.2);
-              margin: 5px 0;
-            }
-            a {
-              color: $color_grey;
+        .notice_btn {
+          cursor: pointer;
+          position: relative;
+          height: 72px;
+          line-height: 72px;
+          padding: 0 12.5px;
+          color: $color_light;
+          //通知List (component -> notice.js)
+          ul {
+            width: 260px;
+            padding: 10px 0 5px 0;
+            background-color: white;
+            border-radius: 6px;
+            box-shadow: $shadow;
+
+            position: absolute;
+            z-index: 2;
+            left: 50%;
+            transform: translateX(-50%);
+
+            line-height: 1; //
+            // '通知' header
+            li.notice_header {
+              color: #949494;
               font-size: 16px;
-              padding: 4px 5px;
+              padding: 0 0 4px 20px;
             }
-            a:hover {
-              color: $color_blue;
+            // 每則通知
+            li {
+              a {
+                color: $color_grey;
+                height: 80px;
+                padding: 4px 5px;
+                border-top: 1px solid $color_border;
+              }
+            }
+          }
+        }
+        //會員按鈕
+        .user_btn.active {
+          color: $color_blue;
+        }
+        .user_btn {
+          cursor: pointer;
+          position: relative;
+          height: 72px;
+          line-height: 72px;
+          padding: 0 12.5px;
+          color: $color_light;
+          //會員功能List
+          ul {
+            width: 160px;
+            padding: 10px 0 5px 0;
+            background-color: white;
+            border-radius: 6px;
+            box-shadow: $shadow;
+
+            position: absolute;
+            z-index: 2;
+            left: 50%;
+            transform: translateX(-50%);
+
+            line-height: 1; //
+            hr {
+              margin: 6px 0 6px 0;
+              color: #949494;
+            }
+            li {
+              text-align: center;
+              // 會員頭像
+              div.avatar {
+                display: inline-block;
+                width: 45px;
+                height: 45px;
+                border-radius: 50%;
+                border: 1px solid rgba(black, 0.2);
+                margin-bottom: 12px;
+                margin: 5px 0;
+              }
+              // 每個功能
+              a {
+                color: $color_grey;
+                font-size: 16px;
+                padding: 8px 5px;
+              }
+              a:hover {
+                color: $color_blue;
+              }
             }
           }
         }

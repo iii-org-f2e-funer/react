@@ -18,16 +18,50 @@
             width: 80px
             height: 80px
             margin-right: 16px
-            overflow: hidden
-            border-radius: 50%
-            img
+            position: relative
+            .circle
+                border-radius: 100%
+                overflow: hidden
                 width: 100%
                 height: 100%
-                object-position: 50% 50%
-                object-fit: cover
+                img
+                    width: 100%
+                    height: 100%
+                    object-position: 50% 50%
+                    object-fit: cover
+            .avatar-edit 
+                position: absolute
+                right: -2px
+                z-index: 10
+                top: -2px
+                display: inline-block
+                width: 30px
+                height: 30px
+                margin-bottom: 0
+                border-radius: 100%
+                background: #FFFFFF
+                border: 1px solid transparent
+                box-shadow: 0px 2px 4px 0px rgba(0, 0, 0, 0.22)
+                font-weight: normal
+                transition: all .2s ease-in-out
+                &:hover 
+                    background: #f1f1f1
+                    border-color: #d6d6d6 
+                input 
+                    display: none  
+                .pen
+                    width: 100%
+                    height: 100%
+                    font-size: 14px
+                    text-align: center
+                    line-height: 28px
+                    color: #474747     
+                    cursor: pointer
         .info
             width: calc(100% - 96px)
+            font-size: 18px
             .email
+                font-size: 16px
                 width: 100%
                 word-wrap: break-word
                 margin-bottom: 12px
@@ -54,6 +88,7 @@
             font-weight: 500
             &:before
                 width: 4px
+
 // --------------------------------------
 // Firm_manage
 // -------------------------------------- 
@@ -68,11 +103,57 @@
     width: calc(75% - 12px)
     font-size: 18px
     padding: 32px 28px
+// account
+.col-7.account
+    line-height: 45px
+.right-15
+    position: relative
+    right: 15px
+label.col-2
+    margin-bottom: 0
+    line-height: 45px
+// firmEdit
+.firmEdit
+    .modal-dialog
+        max-width: 900px  
+        width: 100% 
+        .modal-content
+            padding: 32px 60px
+    .post-image 
+          display: flex
+          img 
+            display: block
+            height: 80px
+            width: 80px
+            object-fit: cover
+            margin: 5px
+          
+        
 
 // --------------------------------------
 // login
 // -------------------------------------- 
 .login-form 
+    ul
+        text-align: right
+        margin-top: 12px
+    .register
+        display: inline-block
+        vertical-align: top
+        margin-left: 6px
+        margin-top: 12px
+        cursor: pointer
+        color: #949494
+        &.center
+            text-align: center
+            display: block
+            margin: 0 auto
+            margin-top: 12px
+    .blue
+        color: #3DB4E0
+        text-decoration: underline
+    .red
+        color: #EC6A6A
     .modal-content
         width: 380px
         padding: 24px
@@ -80,6 +161,15 @@
         border: none
     .button
         width: 100%
+        margin-top: 12px
+    .register_title
+        text-align: center
+        font-size: 18px
+        width: 100%
+        padding-bottom: 12px
+        cursor: pointer
+        &.active
+            border-bottom: 4px solid #3DB4E0 
     .login_title
         font-size: 18px
         padding: 0 36px
@@ -90,16 +180,26 @@
     .login-control
         position: relative
         color: #474747
-        input
-            margin: 12px 0
-            height: 48px
         i
             position: absolute
-            left: 12px
-            top: 50%
-            transform: translateY(-50%)
+            top: 16px
             font-size: 16px
             z-index: 10
+            &.fa-lock
+                left: 12px
+            &.fa-user
+                left: 12px
+            &.fa-eye
+                top: 8px            
+                right: 12px
+                color: #949494
+                cursor: pointer
+                padding: 8px
+            &.active
+                color: #474747
+    
+
+
 
 
 

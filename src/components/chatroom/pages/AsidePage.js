@@ -1,28 +1,44 @@
 import React from 'react'
-import {
-  BrowserRouter as Router,
-  Route,
-  Link,
-  Switch,
-  NavLink,
-} from 'react-router-dom'
+import { Route, Switch, NavLink } from 'react-router-dom'
+import { InputGroup, FormControl } from 'react-bootstrap'
 import Message from '../components/Message'
 import FriendList from '../components/FriendList'
 
-function AsidePage() {
+function AsidePage(props) {
   return (
     <>
-      <div className="row justify-content-around aside-page-box">
-        <div className="col-lg-4 pt-3 pb-1">
-          <Link to="/message">聊天室</Link>
-        </div>
-        <div className="col-lg-6 pt-3 pb-1">
-          <Link to="/FriendList">好友列表</Link>
-        </div>
-      </div>
+      <nav className="nav aside-page-box my-3 ">
+        <NavLink
+          className=" chat-link pb-1 px-3"
+          activeClassName="active"
+          to={'/chatroom/message/' + 'ID' + props.logInId}
+        >
+          聊天室
+        </NavLink>
+        <NavLink
+          className=" chat-link pb-1 px-3"
+          activeClassName="active"
+          to={'/chatroom/FriendList/' + 'ID' + props.logInId}
+        >
+          好友列表
+        </NavLink>
+      </nav>
+      <InputGroup className="mb-3">
+        <FormControl
+          className="rounded-pill"
+          name="searchText"
+          placeholder=""
+        />
+      </InputGroup>
       <Switch>
-        <Route path="/Message" component={Message} />
-        <Route path="/FriendList" component={FriendList} />
+        <Route
+          path={'/chatroom/message/' + 'ID' + props.logInId}
+          render={() => <Message logInId={props.logInId} />}
+        />
+        <Route
+          path={'/chatroom/FriendList/' + 'ID' + props.logInId}
+          render={() => <FriendList logInId={props.logInId} />}
+        />
       </Switch>
     </>
   )

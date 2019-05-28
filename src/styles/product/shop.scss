@@ -1,0 +1,265 @@
+$font-family: 'Roboto', 'Noto Sans TC', 'arial', '微軟正黑體';
+$color_blue: #49b1c2;
+$color_grey: #474747;
+$color_light: #949494;
+$color_orange: #f9c149;
+$color_red: #ec6a6a;
+$color_background: #f6f6f6;
+$color_border: #dfdfdf;
+$boder_radius: 6px;
+$font_title_size: 24px;
+$font_content_size: 18px;
+$shadow: 0px 1px 4px rgba(black, 0.2);
+
+.Shopping1 {
+  background: $color_background;
+  .container1 {
+    margin: 0 auto;
+    width: 760px;
+    background: $color_background;
+  }
+  .text-mute{
+    color:red;
+  }
+  .orderdetail{
+    width: 100%;
+    height: auto;
+    background: #49b1c2
+  }
+  .stepall {
+    display: flex;
+    justify-content: center;
+    .step {
+      width: 48px;
+      height: 48px;
+      border-radius: 50%;
+      background: none;
+      border: solid 3px $color_blue;
+      margin: 40px;
+      text-align: center;
+      font-size: 30px;
+      font-weight: 600;
+      line-height: 48px;
+      color: $color_blue;
+    }
+    .step1 {
+      background: $color_blue;
+      color: #f6f6f6;
+    }
+    .line {
+      width: 100px;
+      margin: auto 0;
+      height: 2px;
+      background: #b9b3b3;
+    }
+  }
+  .step-word {
+    display: flex;
+    justify-content: center;
+    margin-bottom: 20px;
+    .word {
+      margin: 0 80px;
+      color: #949494;
+    }
+  }
+  .step1-form {
+    width: 100%;
+    height: 1200px;
+    background: #ffffff;
+    .title-people {
+      width: 120px;
+      height: 40px;
+      color: $color_grey;
+      font-size: 24px;
+      margin-top:20px; 
+      border-bottom: #f9c149 5px solid;
+    }
+    .form-controll {
+      width: 600px;
+      font-size: 20px;
+      margin: 0 auto;
+      .title-titles {
+        display: flex;
+      }
+    }
+  }
+  .buttons {
+    margin-left: 60%;
+    display: flex;
+    .buttonall {
+      margin: 10px;
+    }
+  }
+  .form-check{
+      margin: 30px;
+      font-size: 16px;
+  }
+}
+.Shopping2{
+  background: $color_background;
+  .container1 {
+    margin: 0 auto;
+    width: 760px;
+    background: $color_background;
+  }
+  .text-mute{
+    color:red;
+  }
+  .orderdetail{
+    width: 100%;
+    height: auto;
+    background: #49b1c2
+  }
+  .stepall {
+    display: flex;
+    justify-content: center;
+    .step {
+      width: 48px;
+      height: 48px;
+      border-radius: 50%;
+      background: none;
+      border: solid 3px $color_blue;
+      margin: 40px;
+      text-align: center;
+      font-size: 30px;
+      font-weight: 600;
+      line-height: 48px;
+      color: $color_blue;
+    }
+    .step2 {
+      background: $color_blue;
+      color: #f6f6f6;
+    }
+    .line {
+      width: 100px;
+      margin: auto 0;
+      height: 2px;
+      background: #b9b3b3;
+    }
+  }
+  .step-word {
+    display: flex;
+    justify-content: center;
+    margin-bottom: 20px;
+    .word {
+      margin: 0 80px;
+      color: #949494;
+    }
+  }
+  .step1-form {
+    width: 100%;
+    height: 1200px;
+    background: #ffffff;
+    .title-people {
+      width: 120px;
+      height: 40px;
+      color: $color_grey;
+      font-size: 24px;
+      margin-top:20px; 
+      border-bottom: #f9c149 5px solid;
+    }
+    .form-controll {
+      width: 600px;
+      font-size: 20px;
+      margin: 0 auto;
+      .title-titles {
+        display: flex;
+      }
+    }
+  }
+  .buttons {
+    margin-left: 60%;
+    display: flex;
+    .buttonall {
+      margin: 10px;
+    }
+  }
+  .form-check{
+      margin: 30px;
+      font-size: 16px;
+  }
+}
+.Shopping3{
+  background: $color_background;
+  .container1 {
+    margin: 0 auto;
+    width: 760px;
+    background: $color_background;
+  }
+  .text-mute{
+    color:red;
+  }
+  .orderdetail{
+    width: 100%;
+    height: auto;
+    background: #49b1c2
+  }
+  .stepall {
+    display: flex;
+    justify-content: center;
+    .step {
+      width: 48px;
+      height: 48px;
+      border-radius: 50%;
+      background: none;
+      border: solid 3px $color_blue;
+      margin: 40px;
+      text-align: center;
+      font-size: 30px;
+      font-weight: 600;
+      line-height: 48px;
+      color: $color_blue;
+    }
+    .step3 {
+      background: $color_blue;
+      color: #f6f6f6;
+    }
+    .line {
+      width: 100px;
+      margin: auto 0;
+      height: 2px;
+      background: #b9b3b3;
+    }
+  }
+  .step-word {
+    display: flex;
+    justify-content: center;
+    margin-bottom: 20px;
+    .word {
+      margin: 0 80px;
+      color: #949494;
+    }
+  }
+  .step1-form {
+    width: 100%;
+    height: 1200px;
+    background: #ffffff;
+    .title-people {
+      width: 120px;
+      height: 40px;
+      color: $color_grey;
+      font-size: 24px;
+      margin-top:20px; 
+      border-bottom: #f9c149 5px solid;
+    }
+    .form-controll {
+      width: 600px;
+      font-size: 20px;
+      margin: 0 auto;
+      .title-titles {
+        display: flex;
+      }
+    }
+  }
+  .buttons {
+    margin-left: 60%;
+    display: flex;
+    .buttonall {
+      margin: 10px;
+    }
+  }
+  .form-check{
+      margin: 30px;
+      font-size: 16px;
+  }
+}

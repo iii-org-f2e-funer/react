@@ -1,60 +1,131 @@
 import React from 'react'
-import { Media } from 'react-bootstrap'
 import Account from '../../components/firm/Account'
-import {
-  BrowserRouter as Router,
-  Route,
-  Link,
-  Switch,
-  NavLink,
-} from 'react-router-dom'
+import actions from '../../redux/action/userInfo.js'
+import { connect } from 'react-redux'
+import { withRouter } from 'react-router'
+import { BrowserRouter as Router, Route, Link, Switch } from 'react-router-dom'
+import FirmEdit from './FirmEdit.js'
+import Site_manage from './Site_manage.js'
+import { FaPen } from 'react-icons/fa'
 
-const Sidebar = () => {
-  return (
-    <>
-      <div className="sidebar">
-        <div className="person flex">
-          <div className="img-outter">
-            <img
-              src={process.env.PUBLIC_URL + '/images/personalFolder/logo.png'}
-            />
-          </div>
-          <div className="info">
-            <h5>桌遊糖果城</h5>
-            <div className="email">candycity@gmail.twfesfs</div>
-            <button className="button">編輯店家資料</button>
-          </div>
-        </div>
+class Sidebar extends React.Component {
+  constructor(props) {
+    super(props)
+    this.state = {
+      editPopup: false,
+      data: [],
+    }
+  }
+  componentDidMount() {
+    fetch('//localhost:3002/firm/userInfo', {
+      credentials: 'include',
+    })
+      .then(res => res.json())
+      .then(obj => {
+        if (obj.success) {
+          this.setState({ data: obj.body })
+        } else {
+          this.props.history.push('/')
+        }
+      })
+  }
+  handleShow = () => {
+    this.setState({ editPopup: true })
+  }
 
-        <div className="sidebar_link">
-          <ul>
-            <li>
-              <Link to="/">帳號設定</Link>
-            </li>
-            <li>
-              <Link to="/firm/product_manage">商品管理</Link>
-            </li>
-            <li>
-              <Link to="/firm/product_order">商品訂單</Link>
-            </li>
-            <li>
-              <Link to="/firm/site_manage">場地管理</Link>
-            </li>
-            <li>
-              <Link to="/firm/site_order">場地預約訂單</Link>
-            </li>
-          </ul>
-          <Switch>
-            <Route exact path="/" component={Account} />
-            <Route path="/firm/product_manage" component={Account} />
-            <Route path="/firm/product_order" component={Account} />
-            <Route path="/firm/site_manage" component={Account} />
-            <Route path="/firm/site_order" component={Account} />
-          </Switch>
-        </div>
-      </div>
-    </>
-  )
+  handleHide = () => {
+    this.setState({ editPopup: false })
+  }
+  render() {
+    const data = this.state.data
+    return (
+      <Router>
+        <>
+          <div className="sidebar">
+            <div className="person flex">
+              <form action="">
+                <div className="img-outter">
+                  <div className="avatar-edit">
+                    <input
+                      id="file-upload"
+                      type="file"
+                      accept=".png, .jpg, .jpeg"
+                    />
+                    <label htmlFor="file-upload" className="pen">
+                      <FaPen />
+                    </label>
+                  </div>
+                  <div className="circle">
+                    <img
+                      alt="無法顯示"
+                      src={
+                        process.env.PUBLIC_URL +
+                        '/images/personalFolder/logo.png'
+                      }
+                    />
+                  </div>
+                </div>
+              </form>
+
+              <div className="info">
+                <h5>{data.firmname}</h5>
+                <div className="email">{data.email}</div>
+                <button className="button" onClick={this.handleShow}>
+                  編輯店家資料
+                </button>
+              </div>
+            </div>
+
+            <div className="sidebar_link">
+              <ul>
+                <li>
+                  <Link to="/firm">帳號設定</Link>
+                </li>
+                <li>
+                  <Link to="/firm/product_manage">商品管理</Link>
+                </li>
+                <li>
+                  <Link to="/firm/product_order">商品訂單</Link>
+                </li>
+                <li>
+                  <Link to="/firm/site_manage">場地管理</Link>
+                </li>
+                <li>
+                  <Link to="/firm/site_order">場地預約訂單</Link>
+                </li>
+              </ul>
+            </div>
+          </div>
+          <div className="manage_info">
+            <Switch>
+              <Route path="/firm" component={Account} />
+              <Route path="/firm/product_manage" component={Account} />
+              <Route path="/firm/product_order" component={Account} />
+              <Route path="/firm/site_manage" component={Site_manage} />
+              <Route path="/firm/site_order" component={Account} />
+            </Switch>
+          </div>
+          <FirmEdit
+            editPopup={this.state.editPopup}
+            handleHide={this.handleHide}
+          />
+        </>
+      </Router>
+    )
+  }
 }
 
-export default Sidebar
+function mapStateToProp(store) {
+  return {
+    userInfo: store.userInfo,
+  }
+}
+
+export default withRouter(
+  connect(
+    mapStateToProp,
+    {
+      userInfoAction: actions.userInfo,
+    }
+  )(Sidebar)
+)

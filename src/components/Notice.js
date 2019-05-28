@@ -11,7 +11,7 @@ class Notice extends React.Component {
       <>
         {this.props.isOpen ? (
           <ul>
-            <li className="notice_text">通知</li>
+            <li className="notice_header">通知</li>
             <li>
               <Link to="#">您有一則新通知</Link>
             </li>

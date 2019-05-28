@@ -1,0 +1,85 @@
+.ptlist_container {
+
+  width: 1170px;
+  min-height: 100vh;
+  margin: 0 auto;
+
+.commentList{
+  display: flex;
+  flex-wrap:wrap;
+}
+
+  .card {
+    width: 250px;
+    height: 350px;
+    border-radius: 5px;
+    position: relative;
+    margin: 15px;
+    font-family: 'Noto Sans CJK TC';
+    border: 5px solid #6ec4d2;
+  }
+  .card.easy {
+    border: 5px solid #6ec4d2;
+  }
+  .card.normal {
+    border: 5px solid #F9C149;
+  }
+  .card.hard {
+    border: 5px solid #EC6A6A;
+  }
+  
+  .card .img_contain {
+    width: 100%;
+    height: 200px;
+  }
+  .card_img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+
+  .pt_host {
+    width: 100%;
+    position: absolute;
+    top: 10px;
+    left: 10px;
+  }
+  .host_pic {
+    width: 30px;
+    height: 30px;
+    border-radius: 50%;
+    overflow: hidden;
+  }
+  .host_pic img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+  .host_name {
+    font-size: 14px;
+    // color: #fff;
+    font-weight: bolder;
+    padding: 5px 0;
+    margin: 0 5px;
+  }
+
+  .card_bd div {
+    margin: 5px 0;
+    color: #013b46;
+  }
+  .card_bd span {
+    font-weight: bolder;
+  }
+  .card_bd i {
+    margin: 0px 5px;
+  }
+}
+#react-paginate ul {
+  display: inline-block;
+  padding-left: 15px;
+  padding-right: 15px;
+}
+
+#react-paginate li {
+  display: inline-block;
+}

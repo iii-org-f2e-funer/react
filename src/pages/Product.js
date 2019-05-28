@@ -1,200 +1,269 @@
 import React from 'react'
 import '../styles/product/product.scss'
-import Footer from '../components/Footer'
-import {
-  InputGroup,
-  FormControl,
-  DropdownButton,
-  Dropdown,
-  Button,
-  Card,
-} from 'react-bootstrap'
-import { Link } from 'react-router-dom'
-const product = () => {
-  return (
-    <>
-      <div className="product">
-        <div className="banner">
-          <h2 className="banner-tittle">桌遊，知性與深度的休閒生活方式</h2>
-          <img
-            id="purplemonster"
-            src={process.env.PUBLIC_URL + '/images/product/redmonster.png'}
-          />
-        </div>
-        <div className="container">
-          <div className="outside">
-            <div className="search">
-              <div className="search-control">
-                <InputGroup className="mt-5 ml-3">
-                  <InputGroup.Prepend>
-                    <InputGroup.Text id="basic-addon3">
-                      <i class="fa fa-search" />
-                    </InputGroup.Text>
-                  </InputGroup.Prepend>
-                  <FormControl id="basic-url" aria-describedby="basic-addon3" />
+import { InputGroup, FormControl, Button, Card } from 'react-bootstrap'
+
+export default class product extends React.Component {
+  constructor() {
+    super()
+    this.state = {
+      data: [],
+      data1: [],
+      searchmoney: 180,
+      oridata: [],
+      game_type: [],
+      type: 0,
+      sort: 'hightolow',
+    }
+  }
+  componentDidMount() {
+    ///////////////////////////////////////////////////////////////////////////////
+    fetch('//localhost:3002/product/productlist', {})
+      //fetch prodct_manage
+      .then(response => {
+        // 這裡會得到一個 ReadableStream 的物件
+        // console.log(response)
+        // 可以透過 blob(), json(), text() 轉成可用的資訊
+        return response.json()
+      })
+      .then(jsonData => {
+        this.setState({ data: jsonData })
+        // typeof()
+        // console.log(this.state.data)
+      })
+      .catch(err => {
+        // console.log('錯誤:', err)
+      })
+    ////////////////////////////////////////////////////////////////////////////////
+    fetch('//localhost:3002/product/productlist2', {})
+      //fetch product_sid=sid的所有圖片path
+      .then(response => {
+        // 這裡會得到一個 ReadableStream 的物件
+        // console.log(response)
+        // 可以透過 blob(), json(), text() 轉成可用的資訊
+        return response.json()
+      })
+      .then(jsonData => {
+        this.setState({ data1: jsonData })
+        const dt1 = this.state.data
+        const dt2 = jsonData
+        var d1_leng = Object.keys(this.state.data).length
+        var d2_leng = Object.keys(jsonData).length
+
+        //迴圈判斷只抓其中一張圖
+        for (let data1_index = d1_leng - 1; data1_index >= 0; data1_index--) {
+          for (let data2_index = d2_leng - 1; data2_index >= 0; data2_index--) {
+            if (dt2[data2_index].sid === dt1[data1_index].sid) {
+              //將抓到的image_path存回去 this.state.data
+              dt1[data1_index].image_path = dt2[data2_index].image_path
+            }
+          }
+        }
+        console.log(dt1)
+        this.setState({ data: dt1 })
+        this.setState({ oridata: dt1 })
+      })
+      .catch(err => {
+        console.log('錯誤:', err)
+      })
+    ///////////////////////////////////////////////////////////////////////////////
+    fetch('//localhost:3002/product/game_type', {})
+      //fetch game_type
+      .then(response => {
+        return response.json()
+      })
+      .then(jsonData => {
+        this.setState({ game_type: jsonData })
+        // typeof()
+        console.log(this.state.game_type)
+      })
+      .catch(err => {
+        // console.log('錯誤:', err)
+      })
+  }
+  gotodetail = sid => () => {
+    // console.log(sid)
+    window.location.href = 'http://localhost:3000/ProductDetail/sid:' + sid
+    localStorage.setItem('item.sid', sid)
+  }
+  search = () => () => {
+    ///////////////// getstart ///////////////////
+    this.setState({ data: this.state.oridata })
+    // this.state.data = this.state.oridata
+    ///////////////////// searchtext ///////////////////////////////
+    let data = this.state.oridata
+    if (this.state.searchText && this.state.searchText.trim() !== '') {
+      data = this.state.data.filter(item =>
+        item.productName.includes(this.state.searchText)
+      )
+    }
+    this.setState({ data: data })
+    //////////////////////// money /////////////////////////////////
+    var aaa = []
+    var money = document.getElementById('searchmoney').value
+    var d1_leng = Object.keys(data).length
+    for (let i = 0; i < d1_leng; i++) {
+      if (data[i].price <= money) {
+        aaa.push(data[i])
+      }
+    }
+    data = aaa
+    this.setState({ data: data })
+    // console.log(data)
+    /////////////////////// type ///////////////////////////////////
+    var bbb = []
+    var type_id = this.state.type
+    // console.log(type_id)
+    var d2_leng = Object.keys(data).length
+    if (type_id === 0) {
+    } else {
+      for (let i = 0; i < d2_leng; i++) {
+        if (data[i].gametype_id === type_id) {
+          bbb.push(data[i])
+        }
+      }
+      data = bbb
+      this.setState({ data: data })
+    }
+    /////////////////////// sort ///////////////////////////////
+    var sort_style = this.state.sort
+    if (sort_style === 'hightolow') {
+      //物件排序方法
+      data.sort(function(a, b) {
+        return b.price - a.price
+      })
+    } else {
+      data.sort(function(a, b) {
+        return a.price - b.price
+      })
+    }
+    this.setState({ data: data })
+    ////////////////////////////////////////////////////////////////
+  }
+  range = () => () => {
+    var money = document.getElementById('searchmoney').value
+    this.setState({ searchmoney: money })
+    // console.log(uuu)
+  }
+  gettype = event => {
+    // console.log(event.target.value)
+    // console.log(event.target.value)
+    this.setState({ type: event.target.value })
+  }
+
+  handleSearchTextChange = event => {
+    // console.log(event.target.value)
+    this.setState({ searchText: event.target.value })
+  }
+
+  getsort = event => {
+    // console.log(event.target.value)
+    // console.log(event.target.value)
+    this.setState({ sort: event.target.value })
+  }
+  render() {
+    return (
+      <>
+        <div className="product">
+          <div className="banner">
+            <h2 className="banner-tittle">桌遊，知性與深度的休閒生活方式</h2>
+            <img
+              id="purplemonster"
+              src={process.env.PUBLIC_URL + '/images/product/redmonster.png'}
+            />
+          </div>
+          <div className="container">
+            <div className="outside">
+              <div className="search">
+                <InputGroup className="mb-3">
+                  <FormControl
+                    name="searchText"
+                    placeholder="輸入商品名稱"
+                    value={this.state.searchText}
+                    onChange={this.handleSearchTextChange}
+                  />
                 </InputGroup>
-              </div>
-              <label className="mt-4 ml-4">遊戲分類</label>
-              <div className="game-control ml-4 mr-4 mt-1 ">
-                <DropdownButton id="dropdown-basic-button" title="全部">
-                  <Dropdown.Item className="dropdown" href="#/action-1">
-                    遊戲1
-                  </Dropdown.Item>
-                  <Dropdown.Item className="dropdown" href="#/action-2">
-                    遊戲2
-                  </Dropdown.Item>
-                  <Dropdown.Item className="dropdown" href="#/action-3">
-                    遊戲3
-                  </Dropdown.Item>
-                </DropdownButton>
-              </div>
-              <label className="mt-4 ml-4">品牌</label>
-              <div className="game-control ml-4 mr-4 mt-1 ">
-                <DropdownButton id="dropdown-basic-button" title="全部">
-                  <Dropdown.Item className="dropdown" href="#/action-1">
-                    品1
-                  </Dropdown.Item>
-                  <Dropdown.Item className="dropdown" href="#/action-2">
-                    品2
-                  </Dropdown.Item>
-                  <Dropdown.Item className="dropdown" href="#/action-3">
-                    品3
-                  </Dropdown.Item>
-                </DropdownButton>
-              </div>
-              <label className="mt-4 ml-4">價格</label>
-              <div className="mt-1 ml-4">1000以下</div>
-              <div className="range-controll">
-                <input type="range" name="money" min="0" max="10000" />
-              </div>
-              <Button className="searchit m-4 button button" block>
-                篩選商品
-              </Button>
-            </div>
-            <div className="cards">
-              <Link to="/ProductDetail">
-                <div className="gamecard">
-                  <Card style={{ width: '190px', height: '280px' }}>
-                    <Card.Img
-                      variant="top"
-                      src={process.env.PUBLIC_URL + '/images/product/game1.jpg'}
-                    />
-                    <Card.Body>
-                      <Card.Title>矮人礦坑</Card.Title>
-                      <Card.Text>NT 790</Card.Text>
-                    </Card.Body>
-                  </Card>
-                </div>
-              </Link>
-              <Link to="/ProductDetail">
-                <div className="gamecard">
-                  <Card
-                    className="gamecard1"
-                    style={{ width: '190px', height: '280px' }}
+                <label className="mt-4 ml-4">遊戲分類</label>
+                <div className="game-control ml-4 mr-4 mt-1 ">
+                  <select
+                    className="game-control mr-4 mt-1 "
+                    onChange={this.gettype}
+                    value={this.state.type}
                   >
-                    <Card.Img
-                      variant="top"
-                      src={process.env.PUBLIC_URL + '/images/product/game1.jpg'}
-                    />
-                    <Card.Body>
-                      <Card.Title>矮人礦坑</Card.Title>
-                      <Card.Text>NT 790</Card.Text>
-                    </Card.Body>
-                  </Card>
+                    {this.state.game_type.map((item, index, array) => (
+                      <option className="dropdown" value={item.type_id}>
+                        {item.type_name}
+                      </option>
+                    ))}
+                  </select>
+                </div>{' '}
+                <label className="mt-2 ml-4">SORT</label>
+                <div className="game-control ml-4 mr-4 mt-1 ">
+                  <select
+                    className="game-control"
+                    onChange={this.getsort}
+                    value={this.state.sort}
+                  >
+                    <option className="dropdown" value="hightolow">
+                      highTOlow
+                    </option>
+                    <option className="dropdown" value="lowtohigh">
+                      lowTOhigh
+                    </option>
+                  </select>
                 </div>
-              </Link>
-              <Link to="/ProductDetail">
-                <div className="gamecard">
-                  <Card style={{ width: '190px', height: '280px' }}>
-                    <Card.Img
-                      variant="top"
-                      src={process.env.PUBLIC_URL + '/images/product/game1.jpg'}
-                    />
-                    <Card.Body>
-                      <Card.Title>矮人礦坑</Card.Title>
-                      <Card.Text>NT 790</Card.Text>
-                    </Card.Body>
-                  </Card>
+                <label className="mt-4 ml-4">價格</label>
+                <div className="mt-1 ml-4 " id="rangeshow">
+                  {this.state.searchmoney}
+                  以下
                 </div>
-              </Link>
-              <Link to="/ProductDetail">
-                <div className="gamecard">
-                  <Card style={{ width: '190px', height: '280px' }}>
-                    <Card.Img
-                      variant="top"
-                      src={process.env.PUBLIC_URL + '/images/product/game1.jpg'}
-                    />
-                    <Card.Body>
-                      <Card.Title>矮人礦坑</Card.Title>
-                      <Card.Text>NT 790</Card.Text>
-                    </Card.Body>
-                  </Card>
+                <div className="range-controll">
+                  <input
+                    type="range"
+                    name="money"
+                    min="180"
+                    max="3000"
+                    id="searchmoney"
+                    onChange={this.range()}
+                  />
                 </div>
-              </Link>
-              <Link to="/ProductDetail">
-                <div className="gamecard">
-                  <Card style={{ width: '190px', height: '280px' }}>
-                    <Card.Img
-                      variant="top"
-                      src={process.env.PUBLIC_URL + '/images/product/game1.jpg'}
-                    />
-                    <Card.Body>
-                      <Card.Title>矮人礦坑</Card.Title>
-                      <Card.Text>NT 790</Card.Text>
-                    </Card.Body>
-                  </Card>
-                </div>
-              </Link>
-              <Link to="/ProductDetail">
-                <div className="gamecard">
-                  <Card style={{ width: '190px', height: '280px' }}>
-                    <Card.Img
-                      variant="top"
-                      src={process.env.PUBLIC_URL + '/images/product/game1.jpg'}
-                    />
-                    <Card.Body>
-                      <Card.Title>矮人礦坑</Card.Title>
-                      <Card.Text>NT 790</Card.Text>
-                    </Card.Body>
-                  </Card>
-                </div>
-              </Link>
-              <Link to="/ProductDetail">
-                <div className="gamecard">
-                  <Card style={{ width: '190px', height: '280px' }}>
-                    <Card.Img
-                      variant="top"
-                      src={process.env.PUBLIC_URL + '/images/product/game1.jpg'}
-                    />
-                    <Card.Body>
-                      <Card.Title>矮人礦坑</Card.Title>
-                      <Card.Text>NT 790</Card.Text>
-                    </Card.Body>
-                  </Card>
-                </div>
-              </Link>
-              <Link to="/ProductDetail">
-                <div className="gamecard">
-                  <Card style={{ width: '190px', height: '280px' }}>
-                    <Card.Img
-                      variant="top"
-                      src={process.env.PUBLIC_URL + '/images/product/game1.jpg'}
-                    />
-                    <Card.Body>
-                      <Card.Title>矮人礦坑</Card.Title>
-                      <Card.Text>NT 790</Card.Text>
-                    </Card.Body>
-                  </Card>
-                </div>
-              </Link>
+                <Button
+                  className="searchit m-4  button"
+                  block
+                  onClick={this.search()}
+                >
+                  篩選商品
+                </Button>
+              </div>
+              <div className="cards">
+                {this.state.data.map(item => (
+                  <div
+                    className="gamecard"
+                    key={item.id}
+                    onClick={this.gotodetail(item.sid)}
+                  >
+                    <Card style={{ width: '190px', height: '280px' }}>
+                      <Card.Img
+                        variant="top"
+                        src={
+                          // process.env.PUBLIC_URL + '/images/product/game1.jpg'
+                          'http://192.168.27.25/happy6/product_manage/' +
+                          item.image_path
+                        }
+                      />
+
+                      <Card.Body>
+                        <Card.Title>{item.productName}</Card.Title>
+                        <Card.Text>NT{item.price}</Card.Text>
+                      </Card.Body>
+                    </Card>
+                  </div>
+                ))}
+              </div>
             </div>
           </div>
+          <div className="scrolltop" />
         </div>
-        <div className="scrolltop" />
-        <Footer />
-      </div>
-    </>
-  )
+      </>
+    )
+  }
 }
-
-export default product

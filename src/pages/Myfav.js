@@ -1,7 +1,7 @@
 import React from 'react'
 import '../styles/cart/fav.scss'
 import { Button, Table } from 'react-bootstrap'
-import { BrowserRouter as Router, Route, Link, Switch } from 'react-router-dom'
+import { Link } from 'react-router-dom'
 const Myfav = () => {
   return (
     <>
