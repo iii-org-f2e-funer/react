@@ -31,9 +31,9 @@ const Pt_listitem = props => {
           <Card.Body className="card_bd">
             <div className="pt_title d-flex justify-content-between">
               <span>{props.data.pt_title}</span>
-              <a href="">
+              <Link to=''>
                 <i className="fas fa-ellipsis-v" />
-              </a>
+              </Link>
             </div>
             <div className="pt_time">
               <i className="fas fa-clock" />
