@@ -4,6 +4,7 @@ import TWzipcode from 'react-twzipcode'
 import actions from '../../redux/action/userInfo.js'
 import { connect } from 'react-redux'
 import { withRouter } from 'react-router'
+import { FaTimes, FaRegImage } from 'react-icons/fa'
 
 class FirmEditInput extends React.Component {
   constructor(props) {
@@ -11,6 +12,8 @@ class FirmEditInput extends React.Component {
     console.log(props)
     const data = this.props.firmData
     this.state = {
+      preViewImgs: [], // 預覽 base64 Data Array
+
       insert: this.props.insert,
       sid: data.sid,
       firm_id: this.props.firm_id,
@@ -35,6 +38,22 @@ class FirmEditInput extends React.Component {
     this.setState({
       dist: evt.district,
     })
+  // 新增圖片
+  handleFilesChange = event => {
+    const files = event.target.files
+    var _this = this
+    let preViewImgs = [] // 建立新陣列
+
+    for (let i = 0; i < files.length; i++) {
+      var reader = new FileReader()
+      reader.readAsDataURL(files[i]) //read file data as a base64 encoded string.
+      // reader loaded
+      reader.addEventListener('load', function(e) {
+        preViewImgs.push(e.target.result)
+        _this.setState({ preViewImgs: preViewImgs })
+      })
+    }
+  }
   updateAccount = () => {
     const data = {
       sid: this.state.sid,
@@ -52,13 +71,17 @@ class FirmEditInput extends React.Component {
       status: this.state.status,
     }
     if (this.state.insert) {
+      var fd = new FormData()
+      fd.append('data', JSON.stringify(data))
+      fd.append('files', this.fileInput.files[0])
+      // 圖片丟進 formData
+      for (let i = 0; i < this.inputFiles.files.length; i++) {
+        fd.append('photos', this.inputFiles.files[i])
+      }
       fetch('//localhost:3002/firm/insertAccount', {
         method: 'POST',
-        body: JSON.stringify(data),
+        body: fd,
         credentials: 'include',
-        headers: {
-          'Content-type': 'application/json',
-        },
       })
         .then(res => res.json())
         .then(obj => {
@@ -113,7 +136,23 @@ class FirmEditInput extends React.Component {
               店家照片
             </Form.Label>
             <Col sm={10}>
-              <Form.Control type="file" placeholder="" />
+              <label htmlFor="myFile">
+                <FaRegImage />
+              </label>
+              <input
+                multiple
+                id="myFile"
+                type="file"
+                style={{ display: 'none' }}
+                ref={el => (this.fileInput = el)}
+                onChange={this.handleFilesChange}
+              />
+              <div className="post-image">
+                {/* <img src={process.env.PUBLIC_URL + '/images/instagram/avatar.png'} alt="" /> */}
+                {this.state.preViewImgs.map((item, idx) => (
+                  <img key={idx} src={item} alt="" />
+                ))}
+              </div>
             </Col>
           </Form.Group>
           <Form.Group as={Row} controlId="formHorizontalPassword">
