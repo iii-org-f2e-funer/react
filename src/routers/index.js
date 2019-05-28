@@ -4,7 +4,9 @@ import { connect } from 'react-redux'
 import Demopage from '../pages/demopage.js'
 
 import GameMapDetail from '../pages/GameMapDetail.js'
+import GameMap from '../pages/Map_v2/Map'
 import Firm from '../pages/Firm.js'
+import Member from '../pages/Member'
 import Footer from '../components/Footer.js'
 import Product from '../pages/Product.js'
 import Navbar from '../components/Navbar'
@@ -45,10 +47,11 @@ class RootRouter extends React.Component {
         <>
           <Navbar />
           <Switch>
-            <Route exact path="/" component={Demopage} />
-            <Route path="/gamemap" component={GameMapDetail} />
+            <Route exact path="/" component={Product} />
+
             <Route path="/demo" component={Demopage} />
             <Route path="/firm" component={Firm} />
+            <Route path="/member" component={Member} />
             <Route path="/event" component={Event} />
             <Route path="/product" component={Product} />
             <Route path="/chatroom" component={ChatRoom} />
@@ -60,6 +63,8 @@ class RootRouter extends React.Component {
             <Route path="/Shopping3" component={Shopping3} />
             <Route path="/instagram" component={Instagram} />
             <Route path="/event" component={Event} />
+            <Route path="/gameMap" component={GameMap} />
+            <Route path="/gameMapDetail/:id" component={GameMapDetail} />
           </Switch>
           <Footer />
         </>

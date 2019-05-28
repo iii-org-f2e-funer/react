@@ -1,13 +1,245 @@
 import React from 'react'
 import '../styles/gameMap/gameMap.scss'
-import { Button, Tabs, Tab } from 'react-bootstrap'
-import { BrowserRouter as Router, Route, Link, Switch } from 'react-router-dom'
+import {
+  Button,
+  Tabs,
+  Tab,
+  Modal,
+  ButtonToolbar,
+  Row,
+  Col,
+} from 'react-bootstrap'
+import {
+  BrowserRouter as Router,
+  Route,
+  Link,
+  Switch,
+  Redirect,
+  withRouter,
+} from 'react-router-dom'
 import Slider from '../components/gameMap/ImgSlider'
 import * as fa from 'react-icons/fa'
 
 import 'react-image-gallery/styles/css/image-gallery.css'
 import ImageGallery from 'react-image-gallery'
+import DatePicker, { registerLocale } from 'react-datepicker'
+import zhCN from 'date-fns/locale/zh-CN'
 
+import 'react-datepicker/dist/react-datepicker.css'
+registerLocale('zh_cn', zhCN)
+
+class MyVerticallyCenteredModal extends React.Component {
+  constructor(props) {
+    super(props)
+    this.state = {
+      startDate: new Date(),
+      startPeo: 1,
+      startName: '',
+      startPhone: '',
+    }
+    this.handleDateChange = this.handleDateChange.bind(this)
+    this.isWeekday = this.isWeekday.bind(this)
+    this.calcDays = this.calcDays.bind(this)
+    this.handlePeoChange = this.handlePeoChange.bind(this)
+    this.handleNameChange = this.handleNameChange.bind(this)
+    this.handlePhoneChange = this.handlePhoneChange.bind(this)
+    this.handleSubmit = this.handleSubmit.bind(this)
+  }
+  handleDateChange(date) {
+    this.setState({
+      startDate: date,
+    })
+  }
+  handlePeoChange(modifyValue) {
+    if (this.state.startPeo + modifyValue === 0) {
+      return
+    }
+    this.setState({ startPeo: this.state.startPeo + modifyValue })
+  }
+
+  handleNameChange(evt) {
+    this.setState({ startName: evt.target.value })
+  }
+
+  handlePhoneChange(evt) {
+    this.setState({ startPhone: evt.target.value })
+  }
+  handleSubmit(event) {
+    event.preventDefault()
+    fetch('http://127.0.0.1:3002/gameMap/reservation', {
+      method: 'POST',
+      headers: {
+        Accept: 'application/json',
+        'Content-Type': 'application/json',
+        credentials: 'include',
+      },
+      body: JSON.stringify({
+        name: this.state.startName,
+        phone: this.state.startPhone,
+        people: this.state.startPeo,
+        date: this.state.startDate,
+      }),
+    })
+      .then(() => {
+        this.setState({
+          startDate: new Date(),
+          startPeo: 1,
+          startName: '',
+          startPhone: '',
+        })
+        return 1
+      })
+      .then(() => {
+        this.props.onHide()
+        window.location.href = '/gameMap'
+        return 1
+      })
+      .catch(err => {
+        throw err
+      })
+  }
+
+  isWeekday = date => {
+    if (this.props.public_holiday == null) {
+      return 1
+    }
+    let holidayArray = this.props.public_holiday.split(',')
+    // ["星期二", "星期三", "星期四", "星期五", "星期六"]
+    let resultArray = []
+
+    let checkDaysSample = [
+      '星期日',
+      '星期一',
+      '星期二',
+      '星期三',
+      '星期四',
+      '星期五',
+      '星期六',
+    ]
+    for (let index in holidayArray) {
+      resultArray.push('' + checkDaysSample.indexOf(holidayArray[index]))
+    }
+    let dd = resultArray.indexOf('' + date.getDay())
+    if (dd === -1) {
+      return 1
+    } else {
+      return 0
+    }
+  }
+
+  calcDays = (date, days) => {
+    return date.getTime() + days * 24 * 60 * 60 * 1000
+  }
+
+  render() {
+    return (
+      <Modal
+        {...this.props}
+        size="lg"
+        aria-labelledby="contained-modal-title-vcenter"
+        centered
+        dialogClassName="mtl-design"
+      >
+        <Modal.Header closeButton>
+          <Modal.Title id="contained-modal-title-vcenter">
+            {this.props.headertitle}
+          </Modal.Title>
+        </Modal.Header>
+        <Modal.Body>
+          <Row>
+            <Col>
+              <form>
+                <div className="group">
+                  <input
+                    type="text"
+                    required
+                    value={this.state.startName}
+                    onChange={this.handleNameChange}
+                  />
+                  <span className="highlight" />
+                  <span className="bar" />
+                  <label>姓名</label>
+                </div>
+
+                <div className="group">
+                  <input
+                    type="number"
+                    required
+                    value={this.state.startPhone}
+                    onChange={this.handlePhoneChange}
+                  />
+                  <span className="highlight" />
+                  <span className="bar" />
+                  <label>手機</label>
+                </div>
+              </form>
+              <div className="numberSpinner">
+                <p>人數</p>
+                <label className="label" htmlFor="number1" />
+                <div className="number">
+                  <button
+                    className="number__btn number__btn--down"
+                    onClick={() => this.handlePeoChange(-1)}
+                  />
+                  <input
+                    className="number__field"
+                    type="number"
+                    id="number1"
+                    min="1"
+                    max="30"
+                    step="1"
+                    value={this.state.startPeo}
+                    readOnly
+                  />
+                  <button
+                    className="number__btn number__btn--up"
+                    onClick={() => this.handlePeoChange(1)}
+                  />
+                </div>
+              </div>
+            </Col>
+
+            <Col style={{ width: '240px' }}>
+              <DatePicker
+                inline
+                selected={this.state.startDate}
+                onChange={this.handleDateChange}
+                filterDate={this.isWeekday}
+                locale="zh_cn"
+                minDate={this.calcDays(new Date(), 1)}
+                maxDate={this.calcDays(new Date(), 90)}
+                showTimeSelect
+                timeFormat="HH:mm"
+                timeIntervals={60}
+                timeCaption="時間"
+              />
+              <div style={{ color: 'orange' }}>
+                可預約日期:明天 至 90天前，
+                <br />
+                排除 店家公休日
+              </div>
+            </Col>
+          </Row>
+        </Modal.Body>
+        <Modal.Footer style={{ justifyContent: 'center' }}>
+          <Row>
+            <Col>
+              <Button onClick={this.handleSubmit} style={{ width: '100px' }}>
+                確認預約
+              </Button>
+            </Col>
+            <Col>
+              <Button onClick={this.props.onHide} style={{ width: '100px' }}>
+                {' '}
+                取消
+              </Button>
+            </Col>
+          </Row>
+        </Modal.Footer>
+      </Modal>
+    )
+  }
+}
 const images = [
   {
     original: 'https://s3.us-east-2.amazonaws.com/dzuz14/thumbnails/aurora.jpg',
@@ -27,76 +259,116 @@ const images = [
 ]
 
 class GameMapDetail extends React.Component {
-  constructor() {
-    super()
-    this.state = {}
+  constructor(props) {
+    super(props)
+    this.state = {
+      dataStore: [],
+      modalShow: false,
+      image: [],
+    }
   }
+
+  goBack = () => {
+    this.props.history.push('/gameMap')
+  }
+  componentDidMount() {
+    fetch('http://127.0.0.1:3002/gameMap/sid/' + this.props.match.params.id)
+      .then(res => res.json())
+      .then(data => {
+        this.setState({ dataStore: data[0] })
+        return this.state
+      })
+      .then(state => {
+        let newImageArray = []
+        for (let index in this.state.dataStore.imageArray) {
+          let imgString =
+            'http://192.168.27.25/happy6/site' +
+            this.state.dataStore.imageArray[index]
+          let imgObj = {
+            original: imgString,
+            thumbnail: imgString,
+          }
+          newImageArray.push(imgObj)
+        }
+        this.setState({ images: newImageArray })
+
+        console.log(this.state)
+      })
+      // .catch(err => console.log(err))
+      .catch(err => {
+        throw err
+      })
+  }
+
   render() {
+    let modalClose = () => this.setState({ modalShow: false })
+    {
+      console.log(this.state)
+    }
+
     return (
-      <>
+      <React.Fragment>
         <div className="bodyroot">
           <div className="container">
             <div className="mainBoard">
               <div className="flex">
                 <div className="imgCard">
                   <ImageGallery
-                    items={images}
+                    items={this.state.images}
                     showPlayButton={false}
                     autoPlay={true}
+                    showFullscreenButton={false}
+                    showIndex={true}
                   />
                 </div>
+
                 <div className="detailCard">
-                  <h2 className="shoptitle">Game Square 遊戲平方 中山店</h2>
+                  <h2 className="shoptitle">{this.state.dataStore.store}</h2>
                   <p>
                     <fa.FaMapMarkerAlt />
                     &nbsp;&nbsp;
-                    <span>台北市,中山區中山北路1段135巷9號2樓</span>
+                    <span>
+                      {this.state.dataStore.county}
+                      {this.state.dataStore.dist}
+                      {this.state.dataStore.address}
+                    </span>
                     <br />
                     <fa.FaPhone />
                     &nbsp;&nbsp;
-                    <span>02 2581 1191</span>
+                    <span>{this.state.dataStore.phone}</span>
                     <br />
                     <fa.FaRegClock />
                     &nbsp;&nbsp;
-                    <span>
-                      週一～週四 14:00 -22:00 <br />
-                      &nbsp;&nbsp;&nbsp;&nbsp;(22：00 後需當天21:30前預約)
-                      <br />
-                      &nbsp;&nbsp;&nbsp;&nbsp;週五～週日 13:00 - 02:00
-                      週五～週日及國定假日 <br />
-                    </span>
+                    <span>{this.state.dataStore.business_hours}</span>
+                    <br />
                     <fa.FaRegMoneyBillAlt />
                     &nbsp;&nbsp;
-                    <span>
-                      1hr 會員 $90 / 非會員 $100
-                      <br />
-                      &nbsp;&nbsp;&nbsp;&nbsp; 4hrs 會員$300 / 非會員 $400
-                    </span>
+                    <span>{this.state.dataStore.rule}</span>
                   </p>
-                  <Button className="actionButton " size="lg" block>
+                  <Button
+                    className="actionButton "
+                    size="lg"
+                    block
+                    onClick={() => this.setState({ modalShow: true })}
+                  >
                     預約場地
                   </Button>
                 </div>
               </div>
 
               <div className="subBoard">
-                <Tabs defaultActiveKey="profile" id="uncontrolled-tab-example">
+                <Tabs defaultActiveKey="home" id="uncontrolled-tab-example">
                   <Tab eventKey="home" title="關於我們">
-                    Game Square
-                    遊戲平方是一家複合式的休閒桌遊空間，店主是台灣相當知名的卡牌桌遊魔法風雲會的世界級現役競賽選手！
-                    在各國旅行比賽的過程中參訪過了世界各地的桌遊空間店，發現在歐美等地，桌遊與現代休閒是相當自然的流行著。
-                    於是我們就有了一個想法，想去創造一個可以輕鬆喝著飲料啤酒、一邊聊天一邊看著運動競賽、玩桌遊，且營業時間較符合都會需求的複合空間！
-                    歡迎大家在想放鬆或享受益智休閒的時候，來到我們店裡享受自己想要遊玩的桌遊或是一起為喜歡的隊伍加油！
-                    店內提供免費無線網路以及桌遊教學，另外備有MOD及100吋大螢幕投影及音響設備，歡迎聯誼活動、運動賽事觀賞、各式座談會等活動包場！
+                    <br />
+                    {this.state.dataStore.about}
                   </Tab>
                   <Tab eventKey="profile" title="場地規範">
-                    於是我們就有了一個想法，想去創造一個可以輕鬆喝著飲料啤酒、一邊聊天一邊看著運動競賽、玩桌遊，且營業時間較符合都會需求的複合空間！
-                    歡迎大家在想放鬆或享受益智休閒的時候，來到我們店裡享受自己想要遊玩的桌遊或是一起為喜歡的隊伍加油！
-                    店內提供免費無線網路以及桌遊教學，另外備有MOD及100吋大螢幕投影及音響設備，歡迎聯誼活動、運動賽事觀賞、各式座談會等活動包場！
+                    <br />
+                    {this.state.dataStore.charges}
                   </Tab>
                   <Tab eventKey="contact" title="評價">
-                    遊戲平方是一家複合式的休閒桌遊空間，店主是台灣相當知名的卡牌桌遊魔法風雲會的世界級現役競賽選手！
-                    在各國旅行比賽的過程中參訪過了世界各地的桌遊空間店，發現在歐美等地，桌遊與現代休閒是相當自然的流行著。
+                    <br />
+                    很棒~~~~~
                   </Tab>
                 </Tabs>
               </div>
@@ -109,12 +381,20 @@ class GameMapDetail extends React.Component {
               <div className="">
                 <Slider />
               </div>
+
+              <MyVerticallyCenteredModal
+                show={this.state.modalShow}
+                onHide={modalClose}
+                headertitle={this.state.dataStore.store}
+                public_holiday={this.state.dataStore.public_holiday}
+                goBack={this.goBack}
+              />
             </div>
           </div>
         </div>
-      </>
+      </React.Fragment>
     )
   }
 }
 
-export default GameMapDetail
+export default withRouter(GameMapDetail)
