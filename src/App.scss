@@ -1,265 +1,334 @@
-html, body {
-  margin: 0;
-  padding: 0;
-  height: 100%;
-  width: 100%;
-  background-color: #f6f6f6;
-  font-family: 'Roboto','Noto Sans TC', Arial,'微軟正黑體';
+html,
+body {
+	margin: 0;
+	padding: 0;
+	height: 100%;
+	width: 100%;
+	background-color: #f6f6f6;
+	font-family: 'Roboto', 'Noto Sans TC', Arial, '微軟正黑體';
 }
 /* layout */
-body .container{
-  padding: 0;
-  max-width: 1170px;
+body .container {
+	padding: 0;
+	max-width: 1170px;
 }
 
 /* Link*/
-a{
-  color: #484848;
-  text-decoration: none;
+a {
+	color: #484848;
+	text-decoration: none;
 }
-a:hover,a:active,a:focus{
-  color: #484848;
-  text-decoration: none;
+a:hover,
+a:active,
+a:focus {
+	color: #484848;
+	text-decoration: none;
 }
 
 /*List*/
-ul,li{
-  list-style: none;
-  margin: 0;
-  padding: 0;
+ul,
+li {
+	list-style: none;
+	margin: 0;
+	padding: 0;
 }
 
 /*Heading*/
-h1,h2,h3,h4,h5,p{
-  margin: 0;
-  color: #474747;
+h1,
+h2,
+h3,
+h4,
+h5,
+p {
+	margin: 0;
+	color: #474747;
 }
-h1{
-  font-size: 80px;
-  font-weight: 800;
-  margin-bottom: 24px;
+h1 {
+	font-size: 80px;
+	font-weight: 800;
+	margin-bottom: 24px;
 }
-h2{
-  font-size: 48px;
-  font-weight: 600;
-  margin-bottom: 24px;
+h2 {
+	font-size: 48px;
+	font-weight: 600;
+	margin-bottom: 24px;
 }
-h3{
-  font-size: 36px;
-  font-weight: 600;
-  margin-bottom: 24px;
-  line-height: 36px;
+h3 {
+	font-size: 36px;
+	font-weight: 600;
+	margin-bottom: 24px;
+	line-height: 36px;
 }
-h4{
-  font-size: 24px;
-  font-weight: 400;
-  margin-bottom: 16px;
-  line-height: 32px;
+h4 {
+	font-size: 24px;
+	font-weight: 400;
+	margin-bottom: 16px;
+	line-height: 32px;
 }
-h5{
-  font-size: 20px;
-  font-weight: 400;
-  margin-bottom: 16px;
-  line-height: 1;
+h5 {
+	font-size: 20px;
+	font-weight: 400;
+	margin-bottom: 16px;
+	line-height: 1;
 }
-p{
-  font-size: 18px;
-  font-weight: 400;
-  letter-spacing: 0;
-  margin-bottom: 16px;
-  line-height: 32px;
+p {
+	font-size: 18px;
+	font-weight: 400;
+	letter-spacing: 0;
+	margin-bottom: 16px;
+	line-height: 32px;
 }
 // mixin
-$blue : #6EC4D2;
-$red : #EC6A6A;
-$yellow : #F9C149;
-$black : #474747;
-$grey : #949494;
-$white : #FFF;
+$blue: #6ec4d2 !important;
+$red: #ec6a6a !important;
+$yellow: #f9c149 !important;
+$black: #474747 !important;
+$grey: #949494 !important;
+$white: #fff !important;
 
-$dark-blue : #4fb2c1;
-$dark-yellow : #F9A629;
+$dark-blue: #4fb2c1 !important;
+$dark-yellow: #f9a629 !important;
 
 /* background Color */
-.bg-color-blue{background-color: $blue;}
-.bg-color-lightblue{background-color: #D6EEF2;}
-.bg-color-red{background-color: $red;}
-.bg-color-black{background-color:$black;}
-.bg-color-grey{background-color:$grey ;}
-.bg-color-yellow{background-color:$yellow;}
-.bg-color-white{background-color:$white ;}
+.bg-color-blue {
+	background-color: $blue;
+}
+.bg-color-lightblue {
+	background-color: #d6eef2;
+}
+.bg-color-red {
+	background-color: $red;
+}
+.bg-color-black {
+	background-color: $black;
+}
+.bg-color-grey {
+	background-color: $grey;
+}
+.bg-color-yellow {
+	background-color: $yellow;
+}
+.bg-color-white {
+	background-color: $white;
+}
 
-/* text Color */ 
-.color-blue{color: $blue!important;}
-.color-red{color: $red!important;}
-.color-black{color:$black!important;}
-.color-grey{color:$grey!important;}
-.color-yellow{color:$yellow!important;}
-.color-white{color:$white!important;}
-
+/* text Color */
+.color-blue {
+	color: $blue !important;
+}
+.color-red {
+	color: $red !important;
+}
+.color-black {
+	color: $black !important;
+}
+.color-grey {
+	color: $grey !important;
+}
+.color-yellow {
+	color: $yellow !important;
+}
+.color-white {
+	color: $white !important;
+}
 
 /* button */
 /* 不叫btn是會和bootstrap衝突 */
-.button{
+.button {
 	display: inline-block;
 	vertical-align: top;
 	position: relative;
 	margin: 0;
 	padding: 0 16px;
-	height: 36px; 
+	height: 36px;
 	line-height: 36px;
 	min-width: 64px;
 	box-sizing: border-box;
 	font-size: 16px;
-	font-weight: 500; 
+	font-weight: 500;
 	text-align: center;
 	text-decoration: none;
 	letter-spacing: 0;
-  background-color: $blue;
+	background-color: $blue;
 	border: 0;
 	border-radius: 6px;
 	outline: 0;
 	cursor: pointer;
 	overflow: hidden;
-  transition: all 0.3s;
-  color: $white;
-  font-weight: 400;
+	transition: all 0.3s;
+	color: $white;
+	font-weight: 400;
 }
 .button:hover,
-.button:active, 
-.button:focus{
-  box-shadow: none;
-  background-color: $dark-blue;
-  color: $white;  
+.button:active,
+.button:focus {
+	box-shadow: none;
+	background-color: $dark-blue;
+	color: $white;
 	outline: 0;
 }
 /* yellow btn */
-.button.button--yellow{
+.button.button--yellow {
 	background-color: $yellow;
 	border-radius: 18px;
 }
-.button.button--yellow:hover, 
+.button.button--yellow:hover,
 .button.button--yellow:active,
-.button.button--yellow:focus{
-  background-color: $dark-yellow;
-  color: $white;  
+.button.button--yellow:focus {
+	background-color: $dark-yellow;
+	color: $white;
 	outline: 0;
 }
 /* white btn */
-.button.button-white{
-  color:$blue;
-  background-color: $white;
-  border: 2px solid $blue;
+.button.button-white {
+	color: $blue;
+	background-color: $white;
+	border: 2px solid $blue;
 }
 .button.button-white:hover,
 .button.button-white:active,
-.button.button-white:focus{
-  background-color: $white;
-  color: $blue;
-  border: 2px solid $blue;
+.button.button-white:focus {
+	background-color: $white;
+	color: $blue;
+	border: 2px solid $blue;
 }
 /* big btn */
-.button.button--lg{
-  font-size: 20px;
-  height: 48px;
+.button.button--lg {
+	font-size: 20px;
+	height: 48px;
 }
 
 /* form */
-input{
-  color: $black;
+input {
+	color: $black;
 }
 /* 帳密 */
 /* 要加classname="account" */
-.login-form{
-  input[type="text"],
-  input[type="email"],
-  input[type="number"],
-  input[type="password"]
-  {
-    padding: 8px 8px;
-    display: inline-block;
-    border: 2px solid #ccc;
-    background-color: #fff;
-    border-radius: 4px;
-    vertical-align: middle;
-    box-sizing: border-box;
-    width: 100%;
-    transition: all 0.3s;
-    padding-left: 40px;
-    height: 48px;
-    margin-bottom: 12px
-  }
+.login-form {
+	input[type="text"],
+	input[type="email"],
+	input[type="number"],
+	input[type="password"] {
+		padding: 8px 8px;
+		display: inline-block;
+		border: 2px solid #ccc;
+		background-color: #fff;
+		border-radius: 4px;
+		vertical-align: middle;
+		box-sizing: border-box;
+		width: 100%;
+		transition: all 0.3s;
+		padding-left: 40px;
+		height: 48px;
+		margin-bottom: 12px;
+	}
 }
 .login-form input[type="text"]:focus,
 .login-form input[type="email"]:focus,
 .login-form input[type="number"]:focus,
-.login-form input[type="password"]:focus
-  {
-    outline: none;
-    border-color: #3DB4E0;
-    border: 2px solid #3DB4E0;
-    box-shadow: none;
-  }
+.login-form input[type="password"]:focus {
+	outline: none;
+	border-color: #3db4e0;
+	border: 2px solid #3db4e0;
+	box-shadow: none;
+}
 /* focus藍色橫線 */
 input[type="text"],
 input[type="email"],
 input[type="tel"],
-input[type="number"]{
-  padding: 8px 8px;
-  display: inline-block;
-  border:none;
-  border-bottom: 2px solid #949494;
-  vertical-align: middle;
-  box-sizing: border-box;
-  width: 100%;
-  transition: all 0.3s;
-  position: relative;
-  transition: all 0.3s;
+input[type="number"] {
+	padding: 8px 8px;
+	display: inline-block;
+	border: none;
+	border-bottom: 2px solid #949494;
+	vertical-align: middle;
+	box-sizing: border-box;
+	width: 100%;
+	transition: all 0.3s;
+	position: relative;
+	transition: all 0.3s;
 }
 input[type="text"]:focus,
 input[type="email"]:focus,
 input[type="tel"]:focus,
-input[type="number"]:focus{
-  outline: none;
-  border-bottom: 2px solid #2095C1;
-  box-shadow: none;
+input[type="number"]:focus {
+	outline: none;
+	border-bottom: 2px solid #2095c1;
+	box-shadow: none;
 }
-/* search bar */ 
+/* search bar */
 /* 放大鏡icon自己加在外層，:before不能用 */
-input[type="search"]{
-  padding: 8px 16px;
-  display: inline-block;
-  border: 1px solid #949494;
-  background-color: #fff;
-  border-radius: 20px;
-  vertical-align: middle;
-  box-sizing: border-box;
-  width: 100%;
-  height: 36px;
-  transition: all 0.3s;
+input[type="search"] {
+	padding: 8px 16px;
+	display: inline-block;
+	border: 1px solid #949494;
+	background-color: #fff;
+	border-radius: 20px;
+	vertical-align: middle;
+	box-sizing: border-box;
+	width: 100%;
+	height: 36px;
+	transition: all 0.3s;
+}
+input[type="search"]:focus {
+	outline: none;
+	border: 2px solid #2095c1;
+	box-shadow: none;
+}
+select {
+	border-radius: 4px;
+	height: 36px;
+	margin-right: 12px;
+	box-shadow: none;
+	outline: none;
+}
 
-}
-input[type="search"]:focus{
-  outline: none;
-  border: 2px solid #2095C1;
-  box-shadow: none;
-}
-select{
-  border-radius: 4px;
-  height: 36px;
-  margin-right: 12px;
-  box-shadow: none;
-  outline: none;
-}
-  
 /* select */
 /* 請加classname="form-control" */
-body select.form-control:focus{
-  box-shadow: none;
+body select.form-control:focus {
+	box-shadow: none;
 }
 
-/* textarea  */ 
+/* textarea  */
 /* className="form-control */
-body textarea.form-control:focus{
-  box-shadow: none;
+body textarea.form-control:focus {
+	box-shadow: none;
+}
+
+html,
+body,
+h1,
+h2,
+h3,
+h4,
+h5,
+p,
+div * {
+	font-family: 'Roboto', 'Noto Sans TC', Arial, '微軟正黑體';
+	html,
+	body,
+	h1,
+	h2,
+	h3,
+	h4,
+	h5,
+	p,
+	div {
+		font-family: 'Roboto', 'Noto Sans TC', Arial, '微軟正黑體';
+	}
+}
+////reslove bootstrap-factory-style issue
+html > body {
+	background-color: #f6f6f6;
+}
+
+li > a {
+	color: #484848;
+	text-decoration: none;
+}
+li > a:hover,
+li > a:active,
+li > a:focus {
+	color: #484848;
+	text-decoration: none;
 }

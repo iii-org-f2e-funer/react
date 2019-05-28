@@ -47,7 +47,7 @@ class RootRouter extends React.Component {
         <>
           <Navbar />
           <Switch>
-            <Route exact path="/" component={Demopage} />
+            <Route exact path="/" component={Product} />
 
             <Route path="/demo" component={Demopage} />
             <Route path="/firm" component={Firm} />

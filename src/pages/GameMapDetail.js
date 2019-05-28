@@ -138,6 +138,7 @@ class MyVerticallyCenteredModal extends React.Component {
         size="lg"
         aria-labelledby="contained-modal-title-vcenter"
         centered
+        dialogClassName="mtl-design"
       >
         <Modal.Header closeButton>
           <Modal.Title id="contained-modal-title-vcenter">
@@ -198,7 +199,7 @@ class MyVerticallyCenteredModal extends React.Component {
               </div>
             </Col>
 
-            <Col>
+            <Col style={{ width: '240px' }}>
               <DatePicker
                 inline
                 selected={this.state.startDate}
