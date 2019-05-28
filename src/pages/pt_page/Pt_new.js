@@ -23,6 +23,7 @@ class Pt_new extends React.Component {
       pt_title: '',
       pt_info: '',
       modalshow: false,
+      locatefirm: [],
     }
   }
   //handler
@@ -76,10 +77,51 @@ class Pt_new extends React.Component {
     this.setState({
       pt_city: e.county,
     })
-  handledistChange = e =>
+  handledistChange = e =>{
     this.setState({
       pt_dist: e.district,
     })
+    if (this.state.pt_city !== '' && this.state.pt_dist !== '') {
+      let locate = JSON.stringify({
+        pt_city: this.state.pt_city,
+        pt_dist: this.state.pt_dist,
+      })
+      console.log('e')
+      fetch('//localhost:3002/event/loadadd', {
+        method: 'POST',
+        body: locate,
+        headers: {
+          'Content-type': 'application/json',
+        },
+      })
+        .then(res => res.json())
+        .then(obj => {
+          this.setState({ locatefirm: obj })
+        })
+    }
+  }
+
+  // handleloadadd = e => {
+  //   if (this.state.pt_city !== '' && this.state.pt_dist !== '') {
+  //     let locate = JSON.stringify({
+  //       pt_city: this.state.pt_city,
+  //       pt_dist: this.state.pt_dist,
+  //     })
+  //     console.log('e')
+  //     fetch('//localhost:3002/event/loadadd', {
+  //       method: 'POST',
+  //       body: locate,
+  //       headers: {
+  //         'Content-type': 'application/json',
+  //       },
+  //     })
+  //       .then(res => res.json())
+  //       .then(obj => {
+  //         this.setState({ locatefirm: obj })
+  //       })
+  //   }
+  // }
+
   handleaddChange = event => {
     this.setState({
       pt_add: event.target.value,
@@ -98,11 +140,9 @@ class Pt_new extends React.Component {
 
   handleformsubmit = e => {
     e.preventDefault()
-    // this.setState({ modalshow: true })
-    // console.log(this.form)
+
     const fd = new FormData(this.form)
-    // console.log(this.form.check.value)
-    // console.log(fd)
+
     fetch('//localhost:3002/event/newptsubmit', {
       method: 'POST',
       body: fd,
@@ -179,15 +219,20 @@ class Pt_new extends React.Component {
                 handleChangeDistrict={this.handledistChange}
               />
               <input
-                type="text"
                 id="pt_add"
                 name="pt_add"
+                list="addlist"
                 placeholder="地址/店家名稱"
                 value={this.state.add}
+                // onClick={e => this.handleloadadd(e)}
                 onChange={event => this.handleaddChange(event)}
               />
+              <datalist id="addlist">
+                {this.state.locatefirm.map(item => (
+                  <option key={item.sid} value={item.firmname} />
+                ))}
+              </datalist>
             </div>
-
             <div className="form-row">
               <label for="pt_time">桌遊時間</label>
               <Datetime

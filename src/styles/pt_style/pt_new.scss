@@ -22,6 +22,8 @@
   display: inline-block;
   width: 172px;
   margin-right: 16px;
+  border: none;
+  border-bottom: 2px solid #949494;
 }
 
 .form-control.zipcode {
@@ -86,7 +88,17 @@ label {
   width: 550px;
   border-radius: 0.25rem;
   padding-left: 10px;
+  border: none;
+  border-bottom: 2px solid #949494;
 }
+#pt_add:focus,
+.form-control.county-sel:focus,
+.form-control.district-sel:focus{
+  outline: none;
+  border-bottom: 2px solid #2095C1;
+  box-shadow: none;
+}
+
 
 textarea {
   width: 920px;
