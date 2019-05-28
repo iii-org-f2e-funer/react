@@ -32,7 +32,10 @@ class QueryBar extends Component {
           storeOpHr: data[0].s_ophr,
         })
       })
-      .catch(err => console.log(err))
+      // .catch(err => console.log(err))
+      .catch(err => {
+        throw err
+      })
   }
 
   // 取得符合搜尋字詞的場館，寫到上面去了目前沒用到
@@ -45,7 +48,10 @@ class QueryBar extends Component {
       // .then(res => this.setState({
       //     stores: res.data
       // }))
-      .catch(err => console.log(err))
+      // .catch(err => console.log(err))
+      .catch(err => {
+        throw err
+      })
   }
 
   // 輸入搜尋文字同時出現備選結果

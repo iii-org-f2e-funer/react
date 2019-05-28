@@ -139,7 +139,7 @@ class MapBody extends React.Component {
   render() {
     return (
       <GoogleMapsWrapper
-        googleMapURL="https://maps.googleapis.com/maps/api/js?key=AIzaSyBkwdLLMRVXuU7Bzc5zF-sv4ocxizjstEk&v=3"
+        googleMapURL="https://maps.googleapis.com/maps/api/js?key=AIzaSyCARlegJ8Niqm2gAW9EA5LOH9MKHgPbdIY&v=3"
         loadingElement={<div style={{ height: `100%` }} />}
         containerElement={<div style={{ height: `100%` }} />}
         mapElement={<div style={{ height: `100%` }} />}

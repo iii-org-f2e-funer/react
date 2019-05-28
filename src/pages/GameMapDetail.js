@@ -94,6 +94,9 @@ class MyVerticallyCenteredModal extends React.Component {
         window.location.href = '/gameMap'
         return 1
       })
+      .catch(err => {
+        throw err
+      })
   }
 
   isWeekday = date => {
@@ -290,7 +293,10 @@ class GameMapDetail extends React.Component {
 
         console.log(this.state)
       })
-      .catch(err => console.log(err))
+      // .catch(err => console.log(err))
+      .catch(err => {
+        throw err
+      })
   }
 
   render() {

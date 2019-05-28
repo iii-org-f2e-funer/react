@@ -102,7 +102,7 @@ class CitySelect extends Component {
           <option value="101">台北市</option>
           <option value="102">新北市</option>
 
-          <option value="">全台灣</option>
+          {/* <option value="">全台灣</option> */}
         </select>
       </React.Fragment>
     )

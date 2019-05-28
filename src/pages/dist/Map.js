@@ -84,7 +84,10 @@ class BoradGameMap extends React.Component {
       .then(res => {
         this.setState({ stores: res })
       })
-      .catch(err => console.log(err))
+      // .catch(err => console.log(err))
+      .catch(err => {
+        throw err
+      })
   }
 
   // TOBE FIXED: 取得文字搜尋回傳的地圖中心與比例尺與場館資料與遊戲資料
@@ -147,7 +150,10 @@ class BoradGameMap extends React.Component {
           fetchNearbyStores: false,
         })
       })
-      .catch(err => console.log(err))
+      // .catch(err => console.log(err))
+      .catch(err => {
+        throw err
+      })
   }
   //^^^^^^ componentDidUpdate^^^^^^^^res=>state.srores
 
