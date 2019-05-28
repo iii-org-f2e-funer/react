@@ -1,4 +1,4 @@
-import { BrowserRouter as Router, Route, Switch } from 'react-router-dom'
+import { BrowserRouter as Route, Switch } from 'react-router-dom'
 import React from 'react'
 import Pt_infointro from '../components/event/Pt_infointro'
 import Pt_qa from '../pages/pt_page/Pt_qa'

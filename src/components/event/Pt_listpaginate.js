@@ -33,7 +33,7 @@ export class Pt_listpaginate extends Component {
       offset: this.state.offset,
       limit: this.state.perPage,
     })
-    console.log(a)
+    // console.log(a)
     fetch('//localhost:3002/event/ptlist', {
       method: 'POST',
       body: a,
