@@ -65,7 +65,7 @@ export default class Mycart extends React.Component {
       var sss = 130
       this.setState({ method_money: 130 })
     } else if (method === 'toshop') {
-      var sss = 60
+      sss = 60
       this.setState({ method_money: 60 })
     }
     this.setState({

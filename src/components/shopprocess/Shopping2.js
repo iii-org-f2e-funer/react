@@ -1,45 +1,84 @@
 import React from 'react'
 import { Button, Form } from 'react-bootstrap'
 import '../../styles/product/shop.scss'
-import TWzipcode from 'react-twzipcode'
-// import { BrowserRouter as Router, Route, Link, Switch } from 'react-router-dom'
+
 import { Link } from 'react-router-dom'
-export default class Shopping2 extends React.Component {
+
+class Shopping2 extends React.Component {
   constructor() {
     super()
     this.state = {
-      years: '',
-      months: '',
-      csv: '',
-      card: '',
+      years: 0,
+      months: 0,
+      csv: 0,
+      card: 0,
+      paymethod: localStorage.paymethod,
+      getmethod: localStorage.method_funshop,
+      order: {},
     }
   }
   componentDidMount() {}
   finish2 = () => {
+    var temp_order = JSON.parse(localStorage.temp_order)
+    ///orderlist
+    var order = {
+      //////user_sid
+      login_user_sid: 1,
+      ////cartlist
+      allcart: localStorage.allcart,
+      ////card
+      year_card: this.state.year_card,
+      month_card: this.state.month_card,
+      csv: this.state.csv,
+      card_number: this.state.card_number,
+      ////how to
+      paymethod: localStorage.paymethod,
+      getmethod: localStorage.method_funshop,
+      ////price
+      Freight: 0,
+      totalprice: localStorage.funapptotal,
+      /////geter
+      geter_name: temp_order.geter_name,
+      geter_addr: temp_order.geter_addr,
+      geter_city: temp_order.geter_city,
+      geter_dist: temp_order.geter_dist,
+      geter_email: temp_order.geter_email,
+      geter_phone: temp_order.geter_phone,
+      /////order
+      order_name: temp_order.order_name,
+      order_city: temp_order.order_city,
+      order_dist: temp_order.order_dist,
+      order_addr: temp_order.order_addr,
+      order_email: temp_order.order_email,
+      order_phone: temp_order.order_phone,
+    }
     alert('訂單完成')
-    console.log(this.state)
+    if (localStorage.method_funshop === 'tohome') {
+      order.Freight = 130
+    } else {
+      order.Freight = 60
+    }
+    this.setState({ order: order })
+    console.log(order)
     ////////////////////////////////////////////////////////////////////////////////////存回去??
   }
   years = event => {
-    // alert(event.target.value)
-    this.setState({ years: event.target.value })
+    this.setState({ year_card: event.target.value })
   }
   months = event => {
-    // alert(event.target.value)
-    this.setState({ months: event.target.value })
+    this.setState({ month_card: event.target.value })
   }
   card = event => {
-    // alert(event.target.value)
-    this.setState({ card: event.target.value })
+    this.setState({ card_number: event.target.value })
   }
   csv = event => {
-    // alert(event.target.value)
     this.setState({ csv: event.target.value })
   }
   render() {
     if (localStorage.paymethod === 'MASTERCARD') {
       return (
         <>
+          {this.state.csv}
           <div className="Shopping2">
             <div className="container">
               <div className="container1">
@@ -274,3 +313,5 @@ export default class Shopping2 extends React.Component {
     }
   }
 }
+
+export default Shopping2

@@ -20,7 +20,11 @@ class ChatRoom extends React.Component {
       chatData: [],
       inputId: '',
       logInId: '',
+      doUpdate: '',
     }
+  }
+  handleUpdate = inputVal => {
+    this.setState({ doUpdate: inputVal })
   }
   componentDidMount() {
     // fetch('http://localhost:3002/chatroom/message/user_id1', {
@@ -64,7 +68,11 @@ class ChatRoom extends React.Component {
             <div className="container ">
               <div className="row">
                 <div className="col-lg-3 aside">
-                  <AsidePage logInId={this.state.logInId} />
+                  <AsidePage
+                    logInId={this.state.logInId}
+                    handleUpdate={this.handleUpdate}
+                    upDatetext={this.state.doUpdate}
+                  />
                 </div>
                 <div className="col-lg chatArea">
                   {/* 傳props 給子元件: */}
@@ -76,25 +84,46 @@ class ChatRoom extends React.Component {
                   <Switch>
                     {/*  在這邊map 所有Route出來  */}
                     {this.state.chatData.map(data => {
-                      return (
+                      return this.state.logInId == data.from_id ? (
                         <Route
-                          key={data.m_id}
+                          key={+new Date() + Math.random()}
                           path={
                             '/chatroom/Message/' +
                             'ID' +
                             this.state.logInId +
                             '/' +
                             'ID' +
-                            data.receiver_id
+                            data.to_id
                           }
                           render={() => (
-                            <ChatArea_socket logInId={this.state.logInId} />
+                            <ChatArea_socket
+                              logInId={this.state.logInId}
+                              handleUpdate={this.handleUpdate}
+                            />
+                          )}
+                        />
+                      ) : (
+                        <Route
+                          key={+new Date() + Math.random()}
+                          path={
+                            '/chatroom/Message/' +
+                            'ID' +
+                            this.state.logInId +
+                            '/' +
+                            'ID' +
+                            data.from_id
+                          }
+                          render={() => (
+                            <ChatArea_socket
+                              logInId={this.state.logInId}
+                              handleUpdate={this.handleUpdate}
+                            />
                           )}
                         />
                       )
                     })}
                     <Route
-                      path={'/chatroom/Message/'}
+                      path={'/chatroom/Message/' + 'ID' + this.state.logInId}
                       component={ChatAreaOriginal}
                     />
                   </Switch>

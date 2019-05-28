@@ -1,13 +1,6 @@
 import React from 'react'
 import '../styles/product/product.scss'
-import {
-  InputGroup,
-  FormControl,
-  DropdownButton,
-  Dropdown,
-  Button,
-  Card,
-} from 'react-bootstrap'
+import { InputGroup, FormControl, Button, Card } from 'react-bootstrap'
 
 export default class product extends React.Component {
   constructor() {
@@ -95,9 +88,9 @@ export default class product extends React.Component {
   search = () => () => {
     ///////////////// getstart ///////////////////
     this.setState({ data: this.state.oridata })
-    this.state.data = this.state.oridata
+    // this.state.data = this.state.oridata
     ///////////////////// searchtext ///////////////////////////////
-    let data = this.state.data
+    let data = this.state.oridata
     if (this.state.searchText && this.state.searchText.trim() !== '') {
       data = this.state.data.filter(item =>
         item.productName.includes(this.state.searchText)
@@ -121,10 +114,10 @@ export default class product extends React.Component {
     var type_id = this.state.type
     // console.log(type_id)
     var d2_leng = Object.keys(data).length
-    if (type_id == 0) {
+    if (type_id === 0) {
     } else {
       for (let i = 0; i < d2_leng; i++) {
-        if (data[i].gametype_id == type_id) {
+        if (data[i].gametype_id === type_id) {
           bbb.push(data[i])
         }
       }

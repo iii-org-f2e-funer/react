@@ -7,7 +7,6 @@ import FriendList from '../components/FriendList'
 function AsidePage(props) {
   return (
     <>
-      {props.logInId}
       <nav className="nav aside-page-box my-3 ">
         <NavLink
           className=" chat-link pb-1 px-3"
@@ -34,7 +33,13 @@ function AsidePage(props) {
       <Switch>
         <Route
           path={'/chatroom/message/' + 'ID' + props.logInId}
-          render={() => <Message logInId={props.logInId} />}
+          render={() => (
+            <Message
+              logInId={props.logInId}
+              handleUpdate={props.handleUpdate}
+              upDatetext={props.upDatetext}
+            />
+          )}
         />
         <Route
           path={'/chatroom/FriendList/' + 'ID' + props.logInId}

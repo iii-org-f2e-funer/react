@@ -1,10 +1,21 @@
 import React from 'react'
 import Carousel from './Carousel'
 import OldComment from './OldComment'
-import { FaHeart, FaRegHeart, FaBookmark, FaRegBookmark } from 'react-icons/fa'
+import {
+  FaHeart,
+  FaRegHeart,
+  FaBookmark,
+  FaRegBookmark,
+  FaEllipsisH,
+} from 'react-icons/fa'
 class OldStory extends React.Component {
+  constructor(props) {
+    super(props)
+    this.state = { editMenu: false, isEdit: false }
+  }
   componentDidMount() {
     this.text.innerText = this.props.data.content
+    console.log(this.props)
   }
   //發送留言
   handleSubmit = () => {
@@ -24,7 +35,6 @@ class OldStory extends React.Component {
         method: 'POST',
         body: JSON.stringify(data),
         headers: {
-          'user-agent': 'Mozilla/4.0 MDN Example',
           'content-type': 'application/json',
         },
       })
@@ -39,6 +49,66 @@ class OldStory extends React.Component {
     }
   }
 
+  handleFavorite = () => {
+    var data = { userID: 1, postID: this.props.data.post_id }
+    fetch('http://localhost:3002/instagram/changeFavorite', {
+      method: 'POST',
+      body: JSON.stringify(data),
+      headers: {
+        'content-type': 'application/json',
+      },
+    })
+      .then(res => res.json())
+      .then(data => {
+        if (data.success === true) {
+          //刷新
+          this.props.handleReFresh()
+        }
+      })
+  }
+  handleBookmark = () => {
+    var data = { userID: 1, postID: this.props.data.post_id }
+    fetch('http://localhost:3002/instagram/changeBookmark', {
+      method: 'POST',
+      body: JSON.stringify(data),
+      headers: {
+        'content-type': 'application/json',
+      },
+    })
+      .then(res => res.json())
+      .then(data => {
+        if (data.success === true) {
+          //刷新
+          this.props.handleReFresh()
+        }
+      })
+  }
+  handleEditMenu = () => {
+    this.setState({ editMenu: !this.state.editMenu })
+  }
+  handleEdit = () => {
+    this.setState({ isEdit: true })
+  }
+  handleOnBlur = () => {
+    this.setState({ isEdit: false })
+  }
+  handleDelete = () => {
+    var data = { userID: 1, postID: this.props.data.post_id }
+    fetch('http://localhost:3002/instagram/deleteStory', {
+      method: 'POST',
+      body: JSON.stringify(data),
+      headers: {
+        'content-type': 'application/json',
+      },
+    })
+      .then(res => res.json())
+      .then(data => {
+        if (data.success === true) {
+          //刷新
+          this.props.handleReFresh()
+        }
+      })
+  }
   render() {
     return (
       <>
@@ -49,6 +119,21 @@ class OldStory extends React.Component {
               <img src={this.props.data.avatar} alt="" />
               <span>{this.props.data.nickname}</span>
             </div>
+            {this.props.editable ? (
+              <div className="editable" onClick={this.handleEditMenu}>
+                <FaEllipsisH />
+                {this.state.editMenu ? (
+                  <div className="edit">
+                    <span onClick={this.handleEdit}>編輯</span>
+                    <span onClick={this.handleDelete}>刪除</span>
+                  </div>
+                ) : (
+                  ''
+                )}
+              </div>
+            ) : (
+              ''
+            )}
           </div>
           <hr />
           {/* body 內文 光箱 */}
@@ -62,9 +147,36 @@ class OldStory extends React.Component {
           </div>
           <div className="post-footer">
             {/* 愛心 */}
-            <FaRegHeart className="heart" />
+
+            <div>
+              {this.props.isFav ? (
+                <FaHeart
+                  className="heart hearted"
+                  onClick={this.handleFavorite}
+                />
+              ) : (
+                <FaRegHeart className="heart" onClick={this.handleFavorite} />
+              )}
+              <span className="favorites">
+                {this.props.data.favorites > 0
+                  ? this.props.data.favorites + '個喜歡'
+                  : ''}
+              </span>
+            </div>
+
             {/* 收藏 */}
-            <FaRegBookmark className="bookmark" />
+
+            {this.props.isBook ? (
+              <FaBookmark
+                className="bookmark bookmarked"
+                onClick={this.handleBookmark}
+              />
+            ) : (
+              <FaRegBookmark
+                className="bookmark"
+                onClick={this.handleBookmark}
+              />
+            )}
           </div>
 
           {/* 留言 */}
