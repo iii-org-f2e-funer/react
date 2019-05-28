@@ -3,6 +3,7 @@ import { NavLink } from 'react-router-dom'
 import '../styles/navbar.scss'
 import LoginModal from './login/LoginModal'
 import FirmRegisterModal from './login/FirmRegisterModal'
+import UserRegisterModal from './login/UserRegisterModal'
 import { FaComment, FaShoppingCart, FaBell, FaUserAlt } from 'react-icons/fa'
 import actions from '../redux/action/userInfo.js'
 import { connect } from 'react-redux'
@@ -15,6 +16,7 @@ class Navbar extends React.Component {
     this.state = {
       loginPopup: false,
       registerPopup: false,
+      userRegisterPopup: false,
     }
   }
 
@@ -22,6 +24,9 @@ class Navbar extends React.Component {
     this.setState({ registerPopup: false })
   }
   firmLogin = () => {
+    this.setState({ loginPopup: false })
+  }
+  userLogin = () => {
     this.setState({ loginPopup: false })
   }
   logOut = () => {
@@ -41,12 +46,22 @@ class Navbar extends React.Component {
   registerShow = () => {
     this.setState({ registerPopup: true, loginPopup: false })
   }
-
+  userRegisterShow = () => {
+    this.setState({ userRegisterPopup: true, loginPopup: false })
+  }
   registerHide = () => {
-    this.setState({ registerPopup: false })
+    this.setState({
+      userRegisterPopup: false,
+      registerPopup: false,
+      userRegisterPopup: false,
+    })
   }
   handleShow = () => {
-    this.setState({ loginPopup: true, registerPopup: false })
+    this.setState({
+      loginPopup: true,
+      userRegisterPopup: false,
+      registerPopup: false,
+    })
   }
 
   handleHide = () => {
@@ -105,11 +120,20 @@ class Navbar extends React.Component {
             )}
           </ul>
         </div>
+
         <LoginModal
           show={this.state.loginPopup}
           handleHide={this.handleHide}
           firmLogin={this.firmLogin}
+          userLogin={this.userLogin}
           register={this.registerShow}
+          userRegister={this.userRegisterShow}
+        />
+        <UserRegisterModal
+          show={this.state.userRegisterPopup}
+          handleHide={this.registerHide}
+          switch={this.handleShow}
+          registerSuccess={this.registerSuccess}
         />
         <FirmRegisterModal
           show={this.state.registerPopup}
