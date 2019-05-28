@@ -114,10 +114,10 @@ export default class product extends React.Component {
     var type_id = this.state.type
     // console.log(type_id)
     var d2_leng = Object.keys(data).length
-    if (type_id === 0) {
+    if (type_id == 0) {
     } else {
       for (let i = 0; i < d2_leng; i++) {
-        if (data[i].gametype_id === type_id) {
+        if (data[i].gametype_id == type_id) {
           bbb.push(data[i])
         }
       }

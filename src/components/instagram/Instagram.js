@@ -18,7 +18,7 @@ class Instagram extends React.Component {
   componentDidMount() {
     this.props.dispatch({ type: 'isFixed' })
   }
-  componentWillUnmount(){
+  componentWillUnmount() {
     this.props.dispatch({ type: 'unFixed' })
   }
 
