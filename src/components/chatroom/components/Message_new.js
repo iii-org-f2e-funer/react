@@ -1,5 +1,6 @@
 import React from 'react'
 import { Route, Link, Switch, NavLink } from 'react-router-dom'
+import socketIOClient from 'socket.io-client'
 
 class Message extends React.Component {
   constructor(props) {
@@ -7,9 +8,8 @@ class Message extends React.Component {
     this.state = {
       //{h_id: 1,h_sub: "BOB",m_id: 1,m_cont: "你好，BOB初次見面!",m_time: "2019-05-21T16:45:57.000Z",sender: 1,}
       chatDataAll: [],
-      chatDataNoRp: [],
-      doUpdate: '',
     }
+    this.ready()
   }
 
   //get data from database
@@ -26,6 +26,28 @@ class Message extends React.Component {
     console.log(data)
 
     await this.setState({ chatDataAll: data })
+  }
+
+  ready() {
+    const socket = socketIOClient(this.state.endpoint)
+    socket.on('all_message', obj => {
+      this.updateMsg(obj)
+      console.log(obj)
+    })
+  }
+
+  updateMsg(obj) {
+    let messages = this.state.messages
+    const newMsg = {
+      type: 'chat',
+      username: obj.username,
+      uid: obj.uid,
+      action: obj.message,
+      time: this.generateTime(),
+      msgId: this.generateMsgId(),
+    }
+    let messages_new = [...messages, newMsg]
+    this.setState({ messages: messages_new })
   }
 
   // async componentWillReceiveProps() {

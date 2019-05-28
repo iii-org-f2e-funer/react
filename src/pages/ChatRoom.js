@@ -66,11 +66,7 @@ class ChatRoom extends React.Component {
             <div className="container ">
               <div className="row">
                 <div className="col-lg-3 aside">
-                  <AsidePage
-                    logInId={this.state.logInId}
-                    handleUpdate={this.handleUpdate}
-                    upDatetext={this.state.doUpdate}
-                  />
+                  <AsidePage logInId={this.state.logInId} />
                 </div>
                 <div className="col-lg chatArea">
                   {/* 傳props 給子元件: */}
