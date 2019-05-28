@@ -3,17 +3,28 @@ import '../../styles/pt_style/pt_detail.scss'
 import { Link, NavLink } from 'react-router-dom'
 import Pt_detailrouter from '../../routers/Pt_detailrouter'
 import Pt_applymodal from '../../components/event/Pt_applymodal'
+import Pt_applyer from '../../components/event/Pt_applyer'
+
 import moment from 'moment'
 
 class Pt_detail extends React.Component {
   constructor() {
     super()
+
+    this.loadapplyer = this.loadapplyer.bind(this)
+
     this.state = {
       data: [],
+      applyer: [],
     }
   }
 
   componentDidMount() {
+    this.loadptinfo()
+    this.loadapplyer()
+  }
+
+  loadptinfo() {
     let data = JSON.stringify({ ptsid: window.location.pathname.slice('7') })
     // console.log(data)
     fetch('//localhost:3002/event/ptinfo', {
@@ -25,8 +36,24 @@ class Pt_detail extends React.Component {
     })
       .then(res => res.json())
       .then(obj => {
-        console.log(obj)
         this.setState({ data: obj })
+      })
+  }
+
+  loadapplyer() {
+    let data = JSON.stringify({ ptsid: window.location.pathname.slice('7') })
+
+    fetch('//localhost:3002/event/ptapplyer', {
+      method: 'POST',
+      body: data,
+      headers: {
+        'Content-type': 'application/json',
+      },
+    })
+      .then(res => res.json())
+      .then(obj => {
+        console.log(obj)
+        this.setState({ applyer: obj })
       })
   }
 
@@ -133,10 +160,13 @@ class Pt_detail extends React.Component {
                 </div>
                 <div className="pt_apply">
                   <div className="pt_apply_title">申請人</div>
-                  <div className="pt_applyer" />
+                  <Pt_applyer applyer={this.state.applyer} />
                 </div>
                 <div className="pt_applybtn" />
-                <Pt_applymodal ptapply={this.state.data}/>
+                <Pt_applymodal
+                  ptapply={this.state.data}
+                  handlerender={this.loadapplyer}
+                />
                 <div className="pt_share" />
               </div>
             </div>
