@@ -21,6 +21,7 @@ class ChatRoom extends React.Component {
       chatData: [],
       inputId: '',
       logInId: '',
+      refresh: 0,
     }
   }
 
@@ -55,6 +56,10 @@ class ChatRoom extends React.Component {
     console.log(data)
     await this.setState({ chatData: data })
   }
+  handleRefreh = () => {
+    let isRefresh = !this.state.refresh
+    this.setState({ refresh: isRefresh })
+  }
   render() {
     return (
       <Router>
@@ -66,7 +71,10 @@ class ChatRoom extends React.Component {
             <div className="container ">
               <div className="row">
                 <div className="col-lg-3 aside">
-                  <AsidePage logInId={this.state.logInId} />
+                  <AsidePage
+                    logInId={this.state.logInId}
+                    refreshID={this.state.refresh}
+                  />
                 </div>
                 <div className="col-lg chatArea">
                   {/* 傳props 給子元件: */}
@@ -93,6 +101,7 @@ class ChatRoom extends React.Component {
                             <ChatArea_socket_new
                               logInId={this.state.logInId}
                               userData={this.state.chatData}
+                              refresh={this.handleRefreh}
                             />
                           )}
                         />
@@ -111,6 +120,7 @@ class ChatRoom extends React.Component {
                             <ChatArea_socket_new
                               logInId={this.state.logInId}
                               userData={this.state.chatData}
+                              refresh={this.handleRefreh}
                             />
                           )}
                         />

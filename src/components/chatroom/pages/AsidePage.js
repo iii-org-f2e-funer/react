@@ -1,7 +1,7 @@
 import React from 'react'
 import { Route, Switch, NavLink } from 'react-router-dom'
 import { InputGroup, FormControl } from 'react-bootstrap'
-import Message from '../components/Message'
+import Message_new from '../components/Message_new'
 import FriendList from '../components/FriendList'
 
 function AsidePage(props) {
@@ -33,7 +33,9 @@ function AsidePage(props) {
       <Switch>
         <Route
           path={'/chatroom/message/' + 'ID' + props.logInId}
-          render={() => <Message logInId={props.logInId} />}
+          render={() => (
+            <Message_new logInId={props.logInId} refreshID={props.refresh} />
+          )}
         />
         <Route
           path={'/chatroom/FriendList/' + 'ID' + props.logInId}
