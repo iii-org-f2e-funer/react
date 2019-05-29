@@ -172,19 +172,24 @@
 .Pt_infointro {
   padding: 8px;
 }
-.applymodal {
+.modal-content{
+  width: 600px;
+  height: 200px;
+  justify-content: center;
+}
+.ptmodal {
   height: 100%;
   display: flex;
   flex-direction: column;
   text-align: center;
+  justify-content: space-around;
   .msgcol{
     color:#6A6A6A;
     margin: 24px 0;
   }
-.btncol{
-  margin:auto 0 24px 0;
-
-}
+  .btncol{
+      margin:auto 0 24px 0;
+  }
   button{
     border: none;
     background-color: #6EC4D2;
@@ -192,7 +197,9 @@
     height: 32px;
     border-radius: 6px;
     color: #fff;
-    font-size: 20px;
+    font-size: 14px;
     margin: 0 8px;
-  }
+}
+
+  
 }

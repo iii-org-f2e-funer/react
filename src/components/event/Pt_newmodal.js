@@ -18,9 +18,9 @@ class Pt_newmodal extends React.Component {
           onHide={this.props.handleHide}
         >
           <>
-            <div className="newmodal">
-              <div>
-                <h5>你的開團已成功</h5>
+            <div className="ptmodal">
+              <div className="msgcol">
+                <div>你的開團已成功</div>
               </div>
               <div className="btncol">
                 <button onClick={this.props.handleHide}>回揪團列表</button>

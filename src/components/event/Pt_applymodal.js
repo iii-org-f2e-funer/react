@@ -67,7 +67,7 @@ class Pt_applymodal extends React.Component {
           show={this.state.show}
           onHide={this.handleClose}
         >
-          <div className="applymodal">
+          <div className="ptmodal">
             <div className="msgcol">
               <div>你是否要參加 {this.props.ptapply.pt_sid} 這團 </div>
             </div>
@@ -84,7 +84,7 @@ class Pt_applymodal extends React.Component {
           show={this.state.show2}
           onHide={this.handleClose}
         >
-          <div className="applymodal">
+          <div className="ptmodal">
             {!this.state.applysuccess ? (
               <>
                 <div className="msgcol">

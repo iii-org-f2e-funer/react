@@ -7,7 +7,7 @@
   font-family: 'Noto Sans CJK TC';
 }
 
-.newptform {
+.ptform {
   margin: 10px;
 }
 
@@ -119,35 +119,8 @@ textarea {
 .pt_level {
   margin-top: 8px;
 }
-.modal-content{
-  width: 600px;
-  height: 200px;
-  justify-content: center;
-}
 
-.newmodal {
-  height: 100%;
-  display: flex;
-  flex-direction: column;
-  justify-content: space-around;
-  text-align: center;
-  h5 {
-    font-size: 24px;
-  }
 
-  .btncol {
-    display: flex;
-  }
-  button {
-    padding: 10px 50px;
-    border: none;
-    border-radius: 5px;
-    display: flex;
-    margin: 0 auto;
-    background-color: #6ec4d2;
-    color: #fff;
-  }
-}
 /*!
  * https://github.com/YouCanBookMe/react-datetime
  */
