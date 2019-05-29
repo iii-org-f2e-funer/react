@@ -1,10 +1,9 @@
 import React from 'react'
-import { Modal, Form, Col, Row } from 'react-bootstrap'
+import { Modal } from 'react-bootstrap'
 import actions from '../../redux/action/userInfo.js'
 import { connect } from 'react-redux'
 import { withRouter } from 'react-router'
 import FirmEditInput from './FirmEditInput'
-import { runInThisContext } from 'vm'
 
 class AccountEdit extends React.Component {
   constructor(props) {
@@ -26,6 +25,7 @@ class AccountEdit extends React.Component {
         rule: '',
         status: '',
       },
+      img: [],
     }
   }
   componentDidMount() {
@@ -35,14 +35,14 @@ class AccountEdit extends React.Component {
       .then(res => res.json())
       .then(obj => {
         if (obj.success) {
-          console.log(obj)
+          console.log(obj.img)
           this.setState({
             firmData: Object.assign(this.state.firmData, obj.body),
             firm_id: obj.firm_id,
             insert: false,
+            img: obj.img,
           })
         } else {
-          console.log(obj)
           this.setState({ firm_id: obj.firm_id })
         }
       })
@@ -83,6 +83,7 @@ class AccountEdit extends React.Component {
             cancelEdit={this.cancelEdit}
             insert={this.state.insert}
             firm_id={this.state.firm_id}
+            img={this.state.img}
           />
         </Modal>
       </>

@@ -54,7 +54,7 @@ class Account extends React.Component {
         {this.state.isEdit ? (
           <AccountEdit data={this.state.data} cancelEdit={this.cancelEdit} />
         ) : (
-          <div>
+          <div className="accountInfo">
             <div className="flex mb-3">
               <label className="col-2">店家帳號</label>
               <div className="col-7">{this.state.data.account}</div>

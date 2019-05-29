@@ -4,13 +4,13 @@ import TWzipcode from 'react-twzipcode'
 import actions from '../../redux/action/userInfo.js'
 import { connect } from 'react-redux'
 import { withRouter } from 'react-router'
-import { FaTimes, FaRegImage } from 'react-icons/fa'
+import { FaRegImage, FaTrashAlt } from 'react-icons/fa'
 
 class FirmEditInput extends React.Component {
   constructor(props) {
     super(props)
-    console.log(props)
     const data = this.props.firmData
+    console.log(this.props.img)
     this.state = {
       preViewImgs: [], // 預覽 base64 Data Array
 
@@ -30,6 +30,7 @@ class FirmEditInput extends React.Component {
       status: data.status,
     }
   }
+
   handlecityChange = evt =>
     this.setState({
       county: evt.county,
@@ -71,10 +72,12 @@ class FirmEditInput extends React.Component {
       status: this.state.status,
     }
     var fd = new FormData()
-    fd.append('data', JSON.stringify(data))
+    Object.keys(data).forEach(key => fd.append(key, data[key]))
+    // fd.append('data', data)
     for (let i = 0; i < this.fileInput.files.length; i++) {
       fd.append('files', this.fileInput.files[i])
     }
+    console.log(fd)
     if (this.state.insert) {
       fetch('//localhost:3002/firm/insertAccount', {
         method: 'POST',
@@ -94,11 +97,8 @@ class FirmEditInput extends React.Component {
     } else {
       fetch('//localhost:3002/firm/updateAccount', {
         method: 'POST',
-        body: JSON.stringify(data),
+        body: fd,
         credentials: 'include',
-        headers: {
-          'Content-type': 'application/json',
-        },
       })
         .then(res => res.json())
         .then(obj => {
@@ -134,7 +134,7 @@ class FirmEditInput extends React.Component {
               店家照片
             </Form.Label>
             <Col sm={10}>
-              <label htmlFor="myFile">
+              <label className="img_icon" htmlFor="myFile">
                 <FaRegImage />
               </label>
               <input
@@ -146,6 +146,14 @@ class FirmEditInput extends React.Component {
                 onChange={this.handleFilesChange}
               />
               <div className="post-image">
+                {this.props.img.map((item, index) => (
+                  <img
+                    key={index}
+                    src={'http://localhost:3002/images/firm/' + item.image_path}
+                    alt=""
+                  />
+                ))}
+
                 {/* <img src={process.env.PUBLIC_URL + '/images/instagram/avatar.png'} alt="" /> */}
                 {this.state.preViewImgs.map((item, idx) => (
                   <img key={idx} src={item} alt="" />

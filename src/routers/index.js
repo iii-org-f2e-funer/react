@@ -6,6 +6,7 @@ import Demopage from '../pages/demopage.js'
 import GameMapDetail from '../pages/GameMapDetail.js'
 import GameMap from '../pages/Map_v2/Map'
 import Firm from '../pages/Firm.js'
+import CheckCode from '../components/login/CheckCode.js'
 import Member from '../pages/Member'
 import Footer from '../components/Footer.js'
 import Product from '../pages/Product.js'
@@ -48,9 +49,9 @@ class RootRouter extends React.Component {
           <Navbar />
           <Switch>
             <Route exact path="/" component={Product} />
-
             <Route path="/demo" component={Demopage} />
             <Route path="/firm" component={Firm} />
+            <Route exact path="/checkCode" component={CheckCode} />
             <Route path="/member" component={Member} />
             <Route path="/event" component={Event} />
             <Route path="/product" component={Product} />
