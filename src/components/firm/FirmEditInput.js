@@ -70,14 +70,12 @@ class FirmEditInput extends React.Component {
       rule: this.state.rule,
       status: this.state.status,
     }
+    var fd = new FormData()
+    fd.append('data', JSON.stringify(data))
+    for (let i = 0; i < this.fileInput.files.length; i++) {
+      fd.append('files', this.fileInput.files[i])
+    }
     if (this.state.insert) {
-      var fd = new FormData()
-      fd.append('data', JSON.stringify(data))
-      fd.append('files', this.fileInput.files[0])
-      // 圖片丟進 formData
-      for (let i = 0; i < this.inputFiles.files.length; i++) {
-        fd.append('photos', this.inputFiles.files[i])
-      }
       fetch('//localhost:3002/firm/insertAccount', {
         method: 'POST',
         body: fd,
