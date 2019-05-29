@@ -32,44 +32,52 @@ class EventSlider extends React.Component {
     return (
       <>
         <div className="event_slider">
-          {/* list */}
-          <ul
-            className="eventList"
-            style={{ left: `-${this.state.pointer * 290}px` }}
-          >
-            {this.props.datas.map(item => (
-              <li key={item.pt_sid} className="eventItem">
-                <Link>
-                  <img src="" alt="" />
-                  <p className="eventTitle">{item.pt_tittle}</p>
-                  <p>
-                    <FaRegClock />
-                    {item.pt_time}
-                  </p>
-                  <p>
-                    <FaMapMarkerAlt />
-                    {item.pt_dist}
-                  </p>
-                </Link>
-              </li>
-            ))}
-          </ul>
-          {/* 上一張 按鈕 */}
-          {this.state.pointer > 0 ? (
-            <div className="slide_btn btn_prev" onClick={this.handlePrevClick}>
-              <FaAngleLeft />
-            </div>
-          ) : (
-            ''
-          )}
-          {/* 下一張 按鈕 */}
-          {this.state.pointer < this.props.datas.length - 4 ? (
-            <div className="slide_btn btn_next" onClick={this.handleNextClick}>
-              <FaAngleRight />
-            </div>
-          ) : (
-            ''
-          )}
+          <div className="slider_inner">
+            {/* list */}
+            <ul
+              className="eventList"
+              style={{ left: `-${this.state.pointer * 290}px` }}
+            >
+              {this.props.datas.map(item => (
+                <li key={item.pt_sid} className="eventItem">
+                  <Link>
+                    <img src="" alt="" />
+                    <p className="eventTitle">{item.pt_title}</p>
+                    <p>
+                      <FaRegClock />
+                      {item.pt_time}
+                    </p>
+                    <p>
+                      <FaMapMarkerAlt />
+                      {item.pt_add}
+                    </p>
+                  </Link>
+                </li>
+              ))}
+            </ul>
+            {/* 上一張 按鈕 */}
+            {this.state.pointer > 0 ? (
+              <div
+                className="slide_btn btn_prev"
+                onClick={this.handlePrevClick}
+              >
+                <FaAngleLeft />
+              </div>
+            ) : (
+              ''
+            )}
+            {/* 下一張 按鈕 */}
+            {this.state.pointer < this.props.datas.length - 4 ? (
+              <div
+                className="slide_btn btn_next"
+                onClick={this.handleNextClick}
+              >
+                <FaAngleRight />
+              </div>
+            ) : (
+              ''
+            )}
+          </div>
         </div>
       </>
     )

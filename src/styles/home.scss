@@ -6,8 +6,7 @@
   max-width: 1920px;
   margin: 0 auto;
   div {
-    // border: 1px solid rgba(255, 255, 255, 0);
-    border: 1px solid black;
+    border: 1px solid rgba(255, 255, 255, 0);
   }
   .home_landing {
     min-height: 1410px;
@@ -46,6 +45,7 @@
       }
     }
   }
+  //揪團
   .home_event {
     min-height: 740px;
     display: flex;
@@ -68,11 +68,14 @@
       left: -25px;
       border-radius: 50%;
     }
-    // event_slider
+    // event slider
     .event_slider {
       height: 470px;
       padding-top: 60px;
       position: relative;
+      .slider_inner {
+        overflow: hidden;
+      }
       ul.eventList {
         display: flex;
         width: 1160px;
@@ -80,10 +83,9 @@
         left: 0;
         transition: 0.4s;
         transition-timing-function: ease-in-out;
-        // overflow: hidden;
         .eventItem {
           a {
-            border: 1px solid black;
+            // border: 1px solid black;
             display: block;
             width: 220px;
             height: 350px;
@@ -94,7 +96,7 @@
               width: 200px;
               height: 200px;
               border-radius: 50%;
-              border: 1px solid black;
+              // border: 1px solid black;
             }
             p.eventTitle {
               font-size: 24px;
@@ -133,6 +135,7 @@
       }
     }
   }
+  //桌遊地圖
   .home_map {
     min-height: 830px;
     .container {
@@ -165,6 +168,7 @@
       }
     }
   }
+  //商品
   .home_product {
     min-height: 640px;
     display: flex;
@@ -191,6 +195,9 @@
     .product_slider {
       height: 380px;
       position: relative;
+      .slider_inner {
+        overflow: hidden;
+      }
       ul.productList {
         display: flex;
         width: 1160px;
@@ -198,30 +205,32 @@
         left: 0;
         transition: 0.4s;
         transition-timing-function: ease-in-out;
-        // overflow: hidden;
+        padding-bottom: 10px;
         .productItem {
           a {
-            border: 1px solid black;
             display: block;
             width: 200px;
             height: 280px;
             text-align: center;
             margin: 0 16px;
             margin-top: 40px;
+            overflow: hidden;
+            background-color: #fff;
+            border-radius: 6px;
+            box-shadow: 0px 0px 4px rgba(black, 0.2);
             img {
               display: inline-block;
               width: 195px;
               height: 195px;
               object-fit: contain;
-              border: 1px solid black;
             }
             p.productTitle {
-              font-size: 24px;
+              font-size: 16px;
               font-weight: bold;
-              margin-top: 28px;
+              margin-top: 14px;
             }
             p {
-              font-size: 18px;
+              font-size: 16px;
               color: #4b4b4b;
               margin-bottom: 0;
             }
@@ -254,5 +263,21 @@
   }
   .home_instagram {
     min-height: 890px;
+    .container {
+      border: 1px solid black;
+      display: flex;
+      justify-content: flex-end;
+      flex-direction: column;
+      align-items: flex-end;
+      h2 {
+        margin-top: 150px;
+        text-align: center;
+      }
+      .instagram_slider {
+        width: 615px;
+        height: 430px;
+        border: 1px solid black;
+      }
+    }
   }
 }

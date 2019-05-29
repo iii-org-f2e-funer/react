@@ -3,12 +3,13 @@ import { Link } from 'react-router-dom'
 import '../styles/home.scss'
 import EventSlider from './home/EventSlider'
 import ProductSlider from './home/ProductSlider'
+import InstagramSlider from './home/InstagramSlider'
 class Home extends React.Component {
   constructor(props) {
     super(props)
     this.state = {
       homeEvents: [],
-      homeProduct: [],
+      homeProducts: [],
     }
   }
   componentDidMount() {
@@ -17,6 +18,13 @@ class Home extends React.Component {
       .then(obj => {
         if (obj.success === true) {
           this.setState({ homeEvents: obj.data })
+        }
+      })
+    fetch('http://localhost:3002/home/homeProduct')
+      .then(res => res.json())
+      .then(obj => {
+        if (obj.success === true) {
+          this.setState({ homeProducts: obj.data })
         }
       })
   }
@@ -113,9 +121,7 @@ class Home extends React.Component {
           {/* 熱銷商品 */}
           <div className="home_product">
             <h2>熱銷商品</h2>
-            <div className="product_slider">
-              <ProductSlider datas={[1, 1, 1, 1, 1, 1, 1, 1, 1, 1]} />
-            </div>
+            <ProductSlider datas={this.state.homeProducts} />
             <div className="product_b">
               <Link to="/product">
                 <button className="button button--yellow">more</button>
@@ -123,7 +129,15 @@ class Home extends React.Component {
             </div>
           </div>
           {/* 桌遊動態 */}
-          <div className="home_instagram" />
+          <div className="home_instagram">
+            <div className="container">
+              <div className="l" />
+              <div className="r">
+                <h2>桌遊動態</h2>
+                <InstagramSlider />
+              </div>
+            </div>
+          </div>
         </div>
       </>
     )
