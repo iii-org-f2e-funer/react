@@ -70,10 +70,7 @@ class Pt_detail extends React.Component {
           <div className="ptdetail_info">
             <div className="ptinfo_up">
               <div className="ptinfo_img">
-                <img
-                  src="/images/pt_img/nature-wallpaper-hd-with-macro-photo-of-red-herbras-flower-600x400.jpg"
-                  alt=""
-                />
+                <img src={this.state.data.pt_img} alt="" />
               </div>
               <div className="ptinfo_colright">
                 <div className="ptinfo">

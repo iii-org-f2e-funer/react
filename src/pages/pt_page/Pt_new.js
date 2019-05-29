@@ -66,7 +66,7 @@ class Pt_new extends React.Component {
         .then(res => res.json())
         .then(obj => {
           console.log(obj)
-          this.setState({ pt_img: obj.filepath, imgurl: obj.filepath })
+          this.setState({ pt_img: obj.filepath })
         })
         .then()
     }
@@ -164,7 +164,7 @@ class Pt_new extends React.Component {
         <div className="pt_container">
           <form
             name="newptform"
-            className="newptform"
+            className="ptform"
             method="post"
             onSubmit={this.handleformsubmit}
             ref={el => (this.form = el)}
@@ -191,7 +191,7 @@ class Pt_new extends React.Component {
                 style={{ display: 'none' }}
               />
               <div className="imgfield">
-                {this.state.imgurl ? (
+                {this.state.pt_img ? (
                   <div className="imgpreview" onClick={this.handleuploadimg}>
                     <img src={this.state.pt_img} alt="" />
                   </div>
