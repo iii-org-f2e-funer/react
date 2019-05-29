@@ -11,6 +11,7 @@ class ProductDetail extends React.Component {
       images: [],
       number: 1,
       allcart: [],
+      type: '',
     }
   }
   componentDidMount() {
@@ -32,8 +33,65 @@ class ProductDetail extends React.Component {
             break
           }
         }
+        //換行處理
+        switch (gotit.gametype_id) {
+          case 0:
+            this.state.type = '全部'
+            break
+          case 1:
+            this.state.type = '紙牌遊戲'
+            break
+          case 1:
+            this.state.type = '骰子遊戲'
+            break
+          case 2:
+            this.state.type = '合作遊戲'
+            break
+          case 3:
+            this.state.type = '紙牌遊戲'
+            break
+          case 4:
+            this.state.type = '派對遊戲'
+            break
+          case 5:
+            this.state.type = '陣營遊戲'
+            break
+          case 6:
+            this.state.type = '猜心遊戲'
+            break
+          case 7:
+            this.state.type = '輕策略遊戲'
+            break
+          case 8:
+            this.state.type = '中策略遊戲'
+            break
+          case 9:
+            this.state.type = '重策略遊戲'
+            break
+          case 10:
+            this.state.type = '大腦遊戲'
+            break
+          case 11:
+            this.state.type = '言語遊戲'
+            break
+          case 12:
+            this.state.type = '巧手遊戲'
+            break
+          case 13:
+            this.state.type = '競速遊戲'
+            break
+          case 14:
+            this.state.type = '兒童遊戲'
+            break
+          case 15:
+            this.state.type = '闔家遊戲'
+            break
+        }
+        this.setState({ type: this.state.type })
+        gotit.createDate = gotit.createDate.slice(0, 10)
+        gotit.description = gotit.description.replace(/\s/g, '<br>')
         this.setState({ gotit: gotit })
-        // console.log(gotit)
+        console.log(gotit)
       })
       .catch(err => {
         console.log('錯誤:', err)
@@ -111,7 +169,7 @@ class ProductDetail extends React.Component {
       <>
         <div className="ProductDetail">
           <div className="container">
-            <div className="mainBoard">
+            <div className="mainBoard1">
               <div className="flex">
                 <div className="imgCard">
                   <ImageGallery
@@ -124,10 +182,10 @@ class ProductDetail extends React.Component {
                   <h3>{this.state.gotit.productName}</h3>
                   <p>出售商:{this.state.gotit.seller_sid}</p>
                   <p>上架日期:{this.state.gotit.createDate}</p>
-                  <p>分類 紙牌遊戲 ,輕策略遊戲</p>
-                  <p>
+                  <p>分類:{this.state.type}</p>
+                  <h4>
                     售價 <div className="seld">{this.state.gotit.price}</div>元
-                  </p>
+                  </h4>
                   <div className="addandsubtract">
                     <div className="add button" onClick={this.add()}>
                       <i className="fas fa-plus" />
@@ -139,9 +197,7 @@ class ProductDetail extends React.Component {
                   </div>
                   <div
                     className="actionButton1  button"
-                    size="lg"
                     onClick={this.addtoshop()}
-                    block
                   >
                     加入購物車
                   </div>
