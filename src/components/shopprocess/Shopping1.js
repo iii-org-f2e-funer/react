@@ -156,7 +156,43 @@ export default class Shopping1 extends React.Component {
                 <div className="step1-word word">購買成功</div>
               </div>
               <div className="orderdetail">
-                <table>
+                <div className="orderdetail-title">
+                  <h3>購買清單</h3>
+                </div>
+                {this.state.all.map((item, index, array) => (
+                  <div className="title-blocks">
+                    <div className="title-block">
+                      <div className="title-name">商品名稱:</div>
+                      <div className="title-productName">
+                        {this.state.all[index].productName}
+                      </div>
+                    </div>{' '}
+                    <div className="title-block">
+                      <div className="title-name">單價:</div>
+                      <div className="title-content">
+                        {this.state.all[index].price}
+                      </div>
+                    </div>
+                    <div className="title-block">
+                      <div className="title-name">數量:</div>
+                      <div className="title-content">
+                        {this.state.all[index].number}
+                      </div>
+                    </div>
+                  </div>
+                ))}
+
+                <div className="end-blocks">
+                  <div className="end-block aaa">
+                    <div className="title-name ">運費</div>
+                    <div className="end-money">60</div>
+                  </div>
+                  <div className="end-block">
+                    <div className="title-name">總金額</div>
+                    <div className="end-money2">{this.state.totall}</div>
+                  </div>
+                </div>
+                {/* <table>
                   <tr>
                     <th>name</th>
                     <th>number</th>
@@ -172,7 +208,7 @@ export default class Shopping1 extends React.Component {
                     </tr>
                   ))}
                 </table>
-                total:{this.state.totall}
+                total:{this.state.totall} */}
               </div>
               <div className="step1-form">
                 <div className="form-controll">
@@ -307,7 +343,7 @@ export default class Shopping1 extends React.Component {
                     </Form.Group>
                     <Form.Group controlId="formBasicEmail">
                       <h5>付款方式</h5>
-                      <select className="game-control" onBlur={this.paymethod}>
+                      <select className="pay-control" onBlur={this.paymethod}>
                         <option className="dropdown" value="ATM">
                           ATM轉帳
                         </option>
@@ -321,9 +357,11 @@ export default class Shopping1 extends React.Component {
                     </Form.Group>
 
                     <div className="buttons">
-                      <div className="buttonall">
-                        <div className="button2 button">回購物車</div>
-                      </div>
+                      <Link to="/Mycart">
+                        <div className="buttonall">
+                          <div className="button2 button">回購物車</div>
+                        </div>
+                      </Link>
                       <Link to="/Shopping2">
                         <div className="buttonall">
                           <div className="button1 button" onClick={this.goto2}>
