@@ -36,6 +36,31 @@ class Sidebar extends React.Component {
   handleHide = () => {
     this.setState({ editPopup: false })
   }
+  avatarUpdate = evt => {
+    const file = evt.target.files[0]
+    const fd = new FormData()
+    fd.append('firm_id', this.state.data.sid)
+    fd.append('file', file)
+    fetch('//localhost:3002/firm/avatarUpdate', {
+      method: 'POST',
+      body: fd,
+      credentials: 'include',
+    })
+      .then(res => res.json())
+      .then(obj => {
+        fetch('//localhost:3002/firm/userInfo', {
+          credentials: 'include',
+        })
+          .then(res => res.json())
+          .then(obj => {
+            if (obj.success) {
+              this.setState({ data: obj.body })
+            } else {
+              this.props.history.push('/')
+            }
+          })
+      })
+  }
   render() {
     const data = this.state.data
     return (
@@ -50,6 +75,7 @@ class Sidebar extends React.Component {
                       id="file-upload"
                       type="file"
                       accept=".png, .jpg, .jpeg"
+                      onChange={this.avatarUpdate}
                     />
                     <label htmlFor="file-upload" className="pen">
                       <FaPen />
@@ -59,8 +85,8 @@ class Sidebar extends React.Component {
                     <img
                       alt="無法顯示"
                       src={
-                        process.env.PUBLIC_URL +
-                        '/images/personalFolder/logo.png'
+                        'http://localhost:3002/images/firm/' +
+                        this.state.data.my_file
                       }
                     />
                   </div>
