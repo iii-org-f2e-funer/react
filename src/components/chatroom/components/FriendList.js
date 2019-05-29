@@ -1,16 +1,19 @@
 import React from 'react'
 import { Route, Link, Switch, NavLink } from 'react-router-dom'
+import avatar from '../avatar/ironman.jpg'
 
 class FriendList extends React.Component {
   constructor() {
     super()
-    this.state = {}
+    this.state = {
+      FriendData: [],
+    }
   }
 
   //get data from database
   async componentDidMount() {
     const response = await fetch(
-      `http://localhost:3002/chatroom/message/${this.props.logInId}`,
+      `http://localhost:3002/chatroom/friendList/${this.props.logInId}`,
       {
         method: 'GET',
         headers: { 'Content-type': 'application/json' },
@@ -18,59 +21,36 @@ class FriendList extends React.Component {
     )
     const data = await response.json()
 
-    console.log(data)
+    console.log('FriendData:', data)
 
-    await this.setState({ chatDataAll: data })
+    await this.setState({ FriendData: data })
   }
   render() {
     return (
       <>
         <div className="friendList">
           <div className="list-group">
-            {this.state.chatDataAll.map(data => {
-              return this.props.logInId == data.from_id ? (
+            {this.state.FriendData.map(data => {
+              return (
                 <NavLink
-                  key={data.to_id}
+                  key={data.friendID}
                   to={
-                    '/chatroom/message/' +
+                    '/chatroom/friendList/' +
                     'ID' +
                     this.props.logInId +
                     '/' +
                     'ID' +
-                    data.to_id
+                    data.friendID
                   }
-                  className="list-group-item "
+                  className="list-group-item text-center"
                   activeClassName="active"
                 >
-                  <div className="d-flex w-100 justify-content-between align-items-center">
-                    <h5 className="mb-1 text-nowrap  ">{data.y_toname}</h5>
-                    <span className="message-date  text-wrap ">
-                      {data.time}
-                    </span>
+                  <div className="d-flex w-100 justify-content-center align-items-center">
+                    <div className="avatar">
+                      <img src={avatar} alt="會員1頭像" />
+                    </div>
+                    <h5 className="mb-1 text-nowrap  ">{data.friendName}</h5>
                   </div>
-                  <small className="text-truncate">{data.subject}</small>
-                </NavLink>
-              ) : (
-                <NavLink
-                  key={data.from_id}
-                  to={
-                    '/chatroom/message/' +
-                    'ID' +
-                    this.props.logInId +
-                    '/' +
-                    'ID' +
-                    data.from_id
-                  }
-                  className="list-group-item "
-                  activeClassName="active"
-                >
-                  <div className="d-flex w-100 justify-content-between align-items-center">
-                    <h5 className="mb-1 text-nowrap  ">{data.x_fromname}</h5>
-                    <span className="message-date  text-wrap ">
-                      {data.time}
-                    </span>
-                  </div>
-                  <small className="text-truncate">{data.subject}</small>
                 </NavLink>
               )
             })}
