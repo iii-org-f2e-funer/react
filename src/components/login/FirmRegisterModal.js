@@ -228,7 +228,6 @@ class FirmRegisterModal extends React.Component {
                 onBlur={this.checkStore}
               />
               <Button
-                variant="primary"
                 type="submit"
                 className="button button--lg"
                 onClick={this.FirmRegisterRequest}
