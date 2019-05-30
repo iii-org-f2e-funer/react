@@ -47,8 +47,7 @@ class MemberInput extends React.Component {
           if (obj.data.success) {
             alert(obj.data.message)
             console.log(obj.data)
-            const account = this.state.account
-            const payload = { account: account }
+            const payload = { account: obj.data.member_id }
             this.props.userInfoAction(payload)
             this.props.userLogin(obj.data.user)
           } else {
