@@ -8,6 +8,7 @@ export default class Shopping1 extends React.Component {
   constructor() {
     super()
     this.state = {
+      login_user: '',
       order_name: '',
       order_city: '',
       order_dist: '',
