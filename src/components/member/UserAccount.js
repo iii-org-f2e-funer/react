@@ -1,8 +1,9 @@
+//帳號設定部分
 import React from 'react'
 import { withRouter } from 'react-router'
-import AccountEdit from './AccountEdit.js'
+import UserAccountEdit from './UserAccountEdit.js'
 
-class Account extends React.Component {
+class UserAccount extends React.Component {
   constructor(props) {
     super(props)
     this.state = {
@@ -11,7 +12,7 @@ class Account extends React.Component {
     }
   }
   componentDidMount() {
-    fetch('//localhost:3002/firm/userInfo', {
+    fetch('//localhost:3002/member/userInfo', {
       credentials: 'include',
     })
       .then(res => res.json())
@@ -31,7 +32,7 @@ class Account extends React.Component {
 
   cancelEdit = () => {
     this.setState({ isEdit: false })
-    fetch('//localhost:3002/firm/userInfo', {
+    fetch('//localhost:3002/member/userInfo', {
       credentials: 'include',
     })
       .then(res => res.json())
@@ -49,39 +50,47 @@ class Account extends React.Component {
   render() {
     return (
       <>
-        <h5>帳號設定及店家資料</h5>
+        <h5>會員帳號設定</h5>
         <hr />
         {this.state.isEdit ? (
-          <AccountEdit data={this.state.data} cancelEdit={this.cancelEdit} />
+          <UserAccountEdit
+            data={this.state.data}
+            cancelEdit={this.cancelEdit}
+          />
         ) : (
-          <div className="accountInfo">
+          <div>
             <div className="flex mb-3">
-              <label className="col-2">店家帳號</label>
-              <div className="col-7">{this.state.data.account}</div>
+              <label className="col-2">會員帳號</label>
+              <div className="col-7 ">{this.state.data.account}</div>
             </div>
             <div className="flex mb-3">
-              <label className="col-2">店家名稱</label>
-              <div className="col-7">{this.state.data.firmname}</div>
+              <label className="col-2">會員名稱</label>
+              <div className="col-7">{this.state.data.name}</div>
             </div>
             <div className="flex mb-3">
-              <label className="col-2">店家電話</label>
-              <div className="col-7">{this.state.data.phone}</div>
-            </div>
-            <div className="flex mb-3">
-              <label className="col-2">店家地址</label>
-              <div className="col-7">
-                {this.state.data.city +
-                  this.state.data.dist +
-                  this.state.data.address}
-              </div>
+              <label className="col-2">暱稱</label>
+              <div className="col-7">{this.state.data.nickname}</div>
             </div>
             <div className="flex mb-3">
               <label className="col-2">電子信箱</label>
               <div className="col-7">{this.state.data.email}</div>
             </div>
             <div className="flex mb-3">
-              <label className="col-2">負責人</label>
-              <div className="col-7">{this.state.data.contacter}</div>
+              <label className="col-2">手機號碼</label>
+              <div className="col-7">{this.state.data.mobile}</div>
+            </div>
+            <div className="flex mb-3">
+              <label className="col-2">地址</label>
+              <div className="col-7">
+                {this.state.data.city +
+                  this.state.data.site +
+                  this.state.data.street}
+              </div>
+            </div>
+
+            <div className="flex mb-3">
+              <label className="col-2">生日</label>
+              <div className="col-7">{this.state.data.birthday}</div>
             </div>
 
             <button className="button mt-3" onClick={this.edit}>
@@ -94,4 +103,4 @@ class Account extends React.Component {
   }
 }
 
-export default withRouter(Account)
+export default withRouter(UserAccount)
