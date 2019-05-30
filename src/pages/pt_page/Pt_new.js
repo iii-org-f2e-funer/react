@@ -311,7 +311,7 @@ class Pt_new extends React.Component {
                 type="text"
                 id="pt_title"
                 name="pt_title"
-                placeholder="請輸入你的桌遊標題"
+                placeholder="請輸入你的揪團標題"
                 value={this.state.pt_title}
                 onChange={event => this.handletitleChange(event)}
               />

@@ -28,7 +28,7 @@ class Pt_edit extends React.Component {
     }
   }
   componentDidMount() {
-    let data = JSON.stringify({ ptsid: window.location.pathname.split('/')[2] })
+    let data = JSON.stringify({ ptsid: window.location.pathname.split('/')[3] })
 
     fetch('//localhost:3002/event/ptinfo', {
       method: 'POST',

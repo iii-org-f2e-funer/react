@@ -149,36 +149,23 @@
   display: flex;
   flex-direction: column;
 }
-.ptinfo_bottom_nav {
-  border-bottom: 1px solid #c7c7c7;
-}
-
-.ptinfo_bottom_nav ul {
-  display: flex;
-  text-align: center;
-}
-.ptinfo_bottom_nav ul li {
-  display: inline-block;
-  height: 36px;
-  color: #7e7e7e;
-  font-size: 18px;
-  margin-right: 80px;
-}
-.ptinfo_bottom_nav ul a.active {
+.ptinfo_bottom .nav-tabs a.active {
+  border: none;
   color: #49b1c2;
   padding-bottom: 6px;
   border-bottom: 3px solid #49b1c2;
 }
+
 .Pt_infointro {
   padding: 8px;
 }
 .modal-content{
   width: 600px;
-  height: 200px;
+  // height: 200px;
   justify-content: center;
 }
 .ptmodal {
-  height: 100%;
+  height: 200px;
   display: flex;
   flex-direction: column;
   text-align: center;

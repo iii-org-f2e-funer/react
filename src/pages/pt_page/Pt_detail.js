@@ -1,9 +1,11 @@
 import React from 'react'
 import '../../styles/pt_style/pt_detail.scss'
 import { Link, NavLink } from 'react-router-dom'
-import Pt_detailrouter from '../../routers/Pt_detailrouter'
+import { Button, Tabs, Tab } from 'react-bootstrap'
 import Pt_applymodal from '../../components/event/Pt_applymodal'
 import Pt_applyer from '../../components/event/Pt_applyer'
+import Pt_infointro from '../../components/event/Pt_infointro'
+import Pt_qa from './Pt_qa'
 
 import moment from 'moment'
 
@@ -25,7 +27,7 @@ class Pt_detail extends React.Component {
   }
 
   loadptinfo() {
-    let data = JSON.stringify({ ptsid: window.location.pathname.slice('7') })
+    let data = JSON.stringify({ ptsid: window.location.pathname.split('/')[3] })
     // console.log(data)
     fetch('//localhost:3002/event/ptinfo', {
       method: 'POST',
@@ -41,7 +43,7 @@ class Pt_detail extends React.Component {
   }
 
   loadapplyer() {
-    let data = JSON.stringify({ ptsid: window.location.pathname.slice('7') })
+    let data = JSON.stringify({ ptsid: window.location.pathname.split('/')[3] })
 
     fetch('//localhost:3002/event/ptapplyer', {
       method: 'POST',
@@ -168,11 +170,19 @@ class Pt_detail extends React.Component {
               </div>
             </div>
             <div className="ptinfo_bottom">
-              <div className="ptinfo_bottom_nav">
+              <Tabs defaultActiveKey="profile" id="uncontrolled-tab-example">
+                <Tab eventKey="home" title="主揪介紹">
+                  <Pt_infointro />
+                </Tab>
+                <Tab eventKey="profile" title="留言">
+                <Pt_qa />
+                </Tab>
+              </Tabs>
+              {/* <div className="ptinfo_bottom_nav">
                 <ul>
                   <li>
                     <NavLink
-                      to={'/event/' + this.state.data.pt_sid}
+                      to={'/event/info/' + this.state.data.pt_sid}
                       activeClassName="active"
                       exact
                     >
@@ -181,7 +191,7 @@ class Pt_detail extends React.Component {
                   </li>
                   <li>
                     <NavLink
-                      to={'/event/' + this.state.data.pt_sid + '/quest'}
+                      to={'/event/info/' + this.state.data.pt_sid + '/quest'}
                       activeClassName="active"
                     >
                       留言
@@ -189,7 +199,7 @@ class Pt_detail extends React.Component {
                   </li>
                 </ul>
               </div>
-              <Pt_detailrouter />
+              <Pt_detailrouter ptsid={this.state.data.pt_sid}/> */}
             </div>
           </div>
         </div>
