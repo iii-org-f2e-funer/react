@@ -33,7 +33,7 @@ export class Pt_listpaginate extends Component {
       offset: this.state.offset,
       limit: this.state.perPage,
     })
-    console.log(a)
+    // console.log(a)
     fetch('//localhost:3002/event/ptlist', {
       method: 'POST',
       body: a,
@@ -68,8 +68,8 @@ export class Pt_listpaginate extends Component {
       <>
         <CommentList data={this.state.data} />
         <ReactPaginate
-          previousLabel={'前一頁'}
-          nextLabel={'下一頁'}
+          previousLabel={<i class="fas fa-chevron-left" />}
+          nextLabel={<i class="fas fa-chevron-right" />}
           breakLabel={'...'}
           breakClassName={'break-me'}
           pageCount={this.state.pageCount}

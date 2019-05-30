@@ -6,6 +6,8 @@
 
 .commentList{
   display: flex;
+  // justify-content: space-between;
+  align-content:space-between;
   flex-wrap:wrap;
 }
 
@@ -73,13 +75,29 @@
   .card_bd i {
     margin: 0px 5px;
   }
-}
-#react-paginate ul {
-  display: inline-block;
-  padding-left: 15px;
-  padding-right: 15px;
-}
-
-#react-paginate li {
-  display: inline-block;
+  ul.pagination {
+    display: flex;
+    padding-left: 15px;
+    padding-right: 15px;
+    justify-content: center;
+    margin: 36px 0;
+    .previous, .next{
+      margin: 0 24px;
+    }
+    li {
+      cursor: pointer;
+      display: inline-block;
+      margin: 0 8px;
+    }
+    li.disabled a {
+      cursor: default;
+      color: #CCC;
+    }
+    li.active a{
+      padding: 8px 12px;
+      background-color: #F9C149;
+      color: #fff !important; 
+      border-radius: 6px;
+    }
+  }
 }
