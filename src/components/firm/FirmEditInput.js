@@ -200,7 +200,6 @@ class FirmEditInput extends React.Component {
             <Col sm={10}>
               <Form.Control
                 type="text"
-                placeholder="Password"
                 value={this.state.phone}
                 onChange={e => this.setState({ phone: e.target.value })}
               />
