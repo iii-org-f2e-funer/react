@@ -21,7 +21,7 @@ class MemberMenu extends React.Component {
     }
   }
   componentDidMount() {
-    fetch('//localhost:3002/member/userInfo', {
+    fetch('//localhost:3002/firm/userInfo', {
       credentials: 'include',
     })
       .then(res => res.json())
@@ -75,7 +75,7 @@ class MemberMenu extends React.Component {
               </form>
               {/*            UserInfo         */}
               <div className="userinfo">
-                <h5>嗨 {data.nickname}</h5>
+                <h5>{data.nickname}</h5>
                 <div className="useraccount">{data.account}</div>
                 <button className="button btn-lg" onClick={this.handleShow}>
                   編輯個人資料
