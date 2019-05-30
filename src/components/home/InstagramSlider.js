@@ -81,13 +81,15 @@ class InstagramSlider extends React.Component {
                     </div>
                   </div>
                   <div className="card_body">
-                    <div className="card_content">
+                    <div
+                      className="card_content"
+                      dangerouslySetInnerHTML={{ __html: item.content }}
+                    >
                       {/* 有沒有人會主持瘋狂詭宅呢??
                       <br />
                       最近打算辦一團在卡卡城公館店，
                       <br />
                       來做個民調XDDD */}
-                      {item.content}
                     </div>
                   </div>
                   <div className="card_footer">
