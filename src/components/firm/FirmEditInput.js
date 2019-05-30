@@ -13,7 +13,7 @@ class FirmEditInput extends React.Component {
     console.log(this.props.img)
     this.state = {
       preViewImgs: [], // 預覽 base64 Data Array
-
+      img: this.props.img,
       insert: this.props.insert,
       sid: data.sid,
       firm_id: this.props.firm_id,
@@ -114,6 +114,7 @@ class FirmEditInput extends React.Component {
   }
 
   render() {
+    const img = this.props.img
     return (
       <>
         <Form>
@@ -146,14 +147,17 @@ class FirmEditInput extends React.Component {
                 onChange={this.handleFilesChange}
               />
               <div className="post-image">
-                {this.props.img.map((item, index) => (
-                  <img
-                    key={index}
-                    src={'http://localhost:3002/images/firm/' + item.image_path}
-                    alt=""
-                  />
-                ))}
-
+                {this.props.img
+                  ? this.props.img.map((item, index) => (
+                      <img
+                        key={index}
+                        src={
+                          'http://localhost:3002/images/firm/' + item.image_path
+                        }
+                        alt=""
+                      />
+                    ))
+                  : ''}
                 {/* <img src={process.env.PUBLIC_URL + '/images/instagram/avatar.png'} alt="" /> */}
                 {this.state.preViewImgs.map((item, idx) => (
                   <img key={idx} src={item} alt="" />
