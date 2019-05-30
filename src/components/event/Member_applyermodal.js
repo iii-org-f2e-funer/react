@@ -28,6 +28,7 @@ class Member_applyermodal extends React.Component {
           centered
           show={this.state.modalshow}
           onHide={this.handleClose}
+          bsPrefix="ptuse modal"
         >
           <>
             <div className="applyermodal">

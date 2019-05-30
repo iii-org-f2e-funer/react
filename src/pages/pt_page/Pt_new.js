@@ -5,13 +5,16 @@ import moment from 'moment'
 import TWzipcode from 'react-twzipcode'
 // import Pt_imgupload from '../../components/event/Pt_imgupload'
 import Pt_newmodal from '../../components/event/Pt_newmodal'
+import Account from '../../components/firm/Account'
+import actions from '../../redux/action/userInfo.js'
+import { connect } from 'react-redux'
+import { withRouter } from 'react-router'
 
 class Pt_new extends React.Component {
-  constructor() {
+  constructor(props) {
     super()
     this.state = {
       pt_img: '',
-      pt_host: '',
       pt_city: '',
       pt_dist: '',
       pt_add: '',
@@ -77,7 +80,7 @@ class Pt_new extends React.Component {
     this.setState({
       pt_city: e.county,
     })
-  handledistChange = e =>{
+  handledistChange = e => {
     this.setState({
       pt_dist: e.district,
     })
@@ -173,7 +176,11 @@ class Pt_new extends React.Component {
             <div className="form-row title">
               <h3>主揪一場新桌遊</h3>
             </div>
-            <input type="hidden" name="pt_host" value={this.state.pt_host} />
+            <input
+              type="hidden"
+              name="pt_host"
+              value={this.props.userInfo.account}
+            />
             <div className="form-row">
               <label for="pt_imgfile">桌遊封面</label>
               <input
@@ -344,5 +351,17 @@ class Pt_new extends React.Component {
     )
   }
 }
+function mapStateToProp(store) {
+  return {
+    userInfo: store.userInfo,
+  }
+}
 
-export default Pt_new
+export default withRouter(
+  connect(
+    mapStateToProp,
+    {
+      userInfoAction: actions.userInfo,
+    }
+  )(Pt_new)
+)
