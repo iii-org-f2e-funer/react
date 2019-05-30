@@ -32,8 +32,28 @@ class ChatArea_socket_new extends React.Component {
 
   async componentDidMount() {
     try {
-      var memberChatData = []
+      const socket = socketIOClient(this.state.endpoint)
+      //JOIN ROOM
       let theUrl = this.props.location.pathname
+      var fromID = theUrl.split('/')[3].replace('ID', '')
+      var toID = theUrl.split('/')[4].replace('ID', '')
+      var roomID = this.props.userData.filter((ele, index, arr) => {
+        if (
+          (ele.from_id == fromID || ele.from_id == toID) &&
+          (ele.to_id == fromID || ele.to_id == toID)
+        ) {
+          return arr[index]
+        }
+      })
+      roomID = roomID[0].id
+      socket.emit('join', roomID)
+      socket.on('join', data => {
+        console.log('join room ' + data)
+      })
+
+      //
+      var memberChatData = []
+
       let to_id = theUrl.split('/')[4].replace('ID', '')
       let from_id = theUrl.split('/')[3].replace('ID', '')
       console.log(theUrl)
@@ -192,6 +212,7 @@ class ChatArea_socket_new extends React.Component {
         })
         .then(data => {
           console.log(data)
+          this.props.refresh()
         })
       socket.emit('message', obj)
       // 发送消息后清空输入框
