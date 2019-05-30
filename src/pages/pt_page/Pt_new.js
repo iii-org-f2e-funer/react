@@ -15,6 +15,7 @@ class Pt_new extends React.Component {
     super()
     this.state = {
       pt_img: '',
+      pt_host: '',
       pt_city: '',
       pt_dist: '',
       pt_add: '',
@@ -29,6 +30,25 @@ class Pt_new extends React.Component {
       locatefirm: [],
     }
   }
+  // componentDidMount() {
+  //   console.log(this.props.userInfo.body)
+  //   fetch('//localhost:3002/event/loginaccount', {
+  //     method: 'POST',
+  //     body: JSON.stringify({ memder_id: this.props.userInfo.account }),
+  //     headers: {
+  //       'Content-type': 'application/json',
+  //     },
+  //   })
+  //     .then(res => res.json())
+  //     .then(obj => {
+  //       console.log(obj.body)
+  //       // if (obj.success) {
+  //       //   this.setState({ data: obj.body })
+  //       // } else {
+  //       //   this.props.history.push('/')
+  //       // }
+  //     })
+  // }
   //handler
   handlememberChange = event => {
     this.setState({
