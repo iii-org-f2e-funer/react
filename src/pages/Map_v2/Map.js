@@ -90,6 +90,33 @@ class BoradGameMap extends React.Component {
       })
   }
 
+  getSearch(data) {
+    // fetch(GetStore + '&lat=' + lat + '&lng=' + lng)
+    console.log(data)
+
+    fetch('http://127.0.0.1:3002/gameMap/All/' + data)
+      .then(res => res.json())
+      // .then(res => console.log(res))
+      .then(res => {
+        console.log(res)
+        this.setState({
+          stores: res,
+          fetchNearbyStores: false,
+          center: { lat: res[0].lat, lng: res[0].lng },
+          zoom: 13,
+        })
+        if (res[0] === 'nodata') {
+          this.setState({ nodata: 1 })
+        } else {
+          this.setState({ nodata: 0 })
+        }
+      })
+      // .catch(err => console.log(err))
+      .catch(err => {
+        throw new Error(err)
+      })
+  }
+
   // TOBE FIXED: 取得文字搜尋回傳的地圖中心與比例尺與場館資料與遊戲資料
   // getStoreByName(data){
   //   this.setState({
@@ -211,7 +238,10 @@ class BoradGameMap extends React.Component {
             />
           </div>
           <div className="queryBar">
-            <QueryBar getStoreByName={data => this.getStoreByName(data)} />
+            <QueryBar
+              getStoreByName={data => this.getStoreByName(data)}
+              getSearch={data => this.getSearch(data)}
+            />
           </div>
           <div className="citySelect">
             <CitySelect
@@ -236,6 +266,7 @@ class BoradGameMap extends React.Component {
               businessHour={this.state.businessHour}
               publicHoliday={this.state.publicHoliday}
               imageArray={this.state.imageArray}
+              dataStore={this.state.stores}
             />
             {/* <GameInfo gamesInfo={this.state.gamesInfo} /> */}
           </div>
