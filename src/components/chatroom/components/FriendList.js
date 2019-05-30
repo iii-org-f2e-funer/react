@@ -21,9 +21,15 @@ class FriendList extends React.Component {
     )
     const data = await response.json()
 
-    console.log('FriendData:', data)
+    //過濾掉delete的好友
+    let noDeleteData = data.filter(ele => {
+      return ele.status !== 'delete'
+    })
 
-    await this.setState({ FriendData: data })
+    console.log('FriendData:', data)
+    console.log('noDeleteFriendData:', noDeleteData)
+
+    await this.setState({ FriendData: noDeleteData })
   }
   render() {
     return (
@@ -42,7 +48,7 @@ class FriendList extends React.Component {
                     'ID' +
                     data.friendID
                   }
-                  className="list-group-item text-center"
+                  className={'list-group-item text-center'}
                   activeClassName="active"
                 >
                   <div className="d-flex w-100 justify-content-center align-items-center">
@@ -51,6 +57,13 @@ class FriendList extends React.Component {
                     </div>
                     <h5 className="mb-1 text-nowrap  ">{data.friendName}</h5>
                   </div>
+                  <small
+                    className={
+                      data.status == 'review' ? 'text-center pl-5' : 'd-none'
+                    }
+                  >
+                    待審核...
+                  </small>
                 </NavLink>
               )
             })}
