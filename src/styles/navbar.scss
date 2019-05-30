@@ -1,6 +1,6 @@
 $font-family: 'Roboto', 'Noto Sans TC', 'arial', '微軟正黑體';
 
-$color_blue: #49b1c2;
+$color_blue: #6ec4d2;
 $color_grey: #474747;
 $color_light: #949494;
 $color_orange: #f9c149;
@@ -13,7 +13,9 @@ $boder_radius: 6px;
 $font_title_size: 24px;
 $font_content_size: 18px;
 $shadow: 0px 1px 4px rgba(black, 0.2);
-
+.navbar.navblue {
+  background-color: #dcf1f6;
+}
 .navbar {
   width: 100%;
   background-color: white;
@@ -58,6 +60,11 @@ $shadow: 0px 1px 4px rgba(black, 0.2);
     .brand_logo {
       padding-left: 5px;
       flex: 1; // 讓web_nav置中用的
+      display: flex;
+      img{
+        position: relative;
+        bottom: 8px
+      }
     }
     // web_nav
     ul.web_nav {
@@ -89,6 +96,7 @@ $shadow: 0px 1px 4px rgba(black, 0.2);
           color: $color_blue;
         }
         .notice_btn {
+          cursor: pointer;
           position: relative;
           height: 72px;
           line-height: 72px;
@@ -130,6 +138,7 @@ $shadow: 0px 1px 4px rgba(black, 0.2);
           color: $color_blue;
         }
         .user_btn {
+          cursor: pointer;
           position: relative;
           height: 72px;
           line-height: 72px;

@@ -18,6 +18,83 @@ $shadow: 0px 1px 4px rgba(black, 0.2);
     width: 760px;
     background: $color_background;
   }
+  .text-mute {
+    color: red;
+  }
+  .orderdetail {
+    width: 100%;
+    background: #fff;
+    margin: 20px 0px;
+    padding: 5px 90px;
+    .title-blocks {
+      width: 100%;
+      border-bottom: 2px solid $color_border;
+      margin-bottom:10px; 
+    }
+    .orderdetail-title {
+      margin: 20px auto;
+      width: 100%;
+      border-bottom: 5px solid $color_orange;
+    }
+    .title-block {
+      width: 95%;
+      display: flex;
+      margin: 0 auto;
+      height: 40px;
+      .title-name {
+        width: 50%;
+        color: $color_light;
+        font-size: 20px;
+      }
+      .title-productName{
+        width: 50%;
+        color: $color_light;
+        font-size: 15px;
+        font-weight: 600;
+        text-align: right;
+      }
+      .title-content {
+        width: 50%;
+        color: $color_light;
+        font-size: 22px;
+        font-weight: 600;
+        text-align: right;
+      }
+    }
+    .end-blocks {
+      .aaa{
+        // border-bottom: 5px solid $color_orange;
+        height: 50px;
+         
+      }
+      .end-block {
+        display: flex;
+        width: 95%;
+        height: 30px;
+        margin: 30px auto;
+        
+        .title-name {
+          width: 50%;
+          font-size: 20px;
+          color: $color_light;
+        }
+        .end-money{
+          width: 50%;
+          text-align: right;
+          font-size: 22px;
+          color: $color_blue;
+          font-weight: 600;
+        }
+        .end-money2{
+          width: 50%;
+          text-align: right;
+          font-size:25px;
+          color: $color_red;
+          font-weight: 600;
+        }
+      }
+    }
+  }
   .stepall {
     display: flex;
     justify-content: center;
@@ -63,7 +140,7 @@ $shadow: 0px 1px 4px rgba(black, 0.2);
       height: 40px;
       color: $color_grey;
       font-size: 24px;
-      margin-top:20px; 
+      margin-top: 20px;
       border-bottom: #f9c149 5px solid;
     }
     .form-controll {
@@ -82,8 +159,267 @@ $shadow: 0px 1px 4px rgba(black, 0.2);
       margin: 10px;
     }
   }
-  .form-check{
-      margin: 30px;
-      font-size: 16px;
+  .form-check {
+    margin: 30px;
+    font-size: 16px;
   }
+  .pay-control{
+    width: 300px;
+    color: #949494;
+    padding: 2px;
+  }
+}
+
+//---------------------------------------------------------------------------------2
+.Shopping2 {
+  background: $color_background;
+  .container1 {
+    margin: 0 auto;
+    width: 80%;
+    background: $color_background;
+  }
+  .text-mute {
+    color: red;
+  }
+  .orderdetail {
+    width: 100%;
+    height: auto;
+    background: #49b1c2;
+  }
+  .stepall {
+    display: flex;
+    justify-content: center;
+    .step {
+      width: 48px;
+      height: 48px;
+      border-radius: 50%;
+      background: none;
+      border: solid 3px $color_blue;
+      margin: 40px;
+      text-align: center;
+      font-size: 30px;
+      font-weight: 600;
+      line-height: 48px;
+      color: $color_blue;
+    }
+    .step2 {
+      background: $color_blue;
+      color: #f6f6f6;
+    }
+    .line {
+      width: 100px;
+      margin: auto 0;
+      height: 2px;
+      background: #b9b3b3;
+    }
+  }
+  .step-word {
+    display: flex;
+    justify-content: center;
+    margin-bottom: 20px;
+    .word {
+      margin: 0 80px;
+      color: #949494;
+    }
+  }
+  .step1-form {
+    width: 100%;
+    height: 1200px;
+    background: #ffffff;
+    .title-people {
+      width: 120px;
+      height: 40px;
+      color: $color_grey;
+      font-size: 24px;
+      margin-top: 40px;
+      margin-bottom: 30px;
+      border-bottom: #f9c149 5px solid;
+    }
+    .form-controll {
+      width: 600px;
+      font-size: 20px;
+      margin: 0 auto;
+      .title-titles {
+        display: flex;
+      }
+    }
+  }
+  .control-line{
+      margin: 30px 0;
+  }
+  .years{
+    width: 200px;
+  }
+  .months{
+    width: 200px;
+  }
+  .buttons {
+    margin-left: 60%;
+    display: flex;
+    .buttonall {
+      margin: 10px;
+    }
+  }
+  .form-check {
+    margin: 30px;
+    font-size: 16px;
+  }
+}
+
+//--------------------------------------------------------------------------------------------3
+
+.Shopping3 {
+  background: $color_background;
+  .container1 {
+    margin: 0 auto;
+    width: 760px;
+    background: $color_background;
+  }
+  .text-mute {
+    color: red;
+  }
+  .stepall {
+    display: flex;
+    justify-content: center;
+    .step {
+      width: 48px;
+      height: 48px;
+      border-radius: 50%;
+      background: none;
+      border: solid 3px $color_blue;
+      margin: 40px;
+      text-align: center;
+      font-size: 30px;
+      font-weight: 600;
+      line-height: 48px;
+      color: $color_blue;
+    }
+    .step3 {
+      background: $color_blue;
+      color: #f6f6f6;
+    }
+    .line {
+      width: 100px;
+      margin: auto 0;
+      height: 2px;
+      background: #b9b3b3;
+    }
+  }
+  .step-word {
+    display: flex;
+    justify-content: center;
+    margin-bottom: 20px;
+    .word {
+      margin: 0 80px;
+      color: #949494;
+    }
+  }
+  .step1-form {
+    width: 100%;
+    height: 1200px;
+    background: #ffffff;
+    .title-people {
+      width: 120px;
+      height: 40px;
+      color: $color_grey;
+      font-size: 24px;
+      margin-top: 20px;
+      border-bottom: #f9c149 5px solid;
+    }
+    .form-controll {
+      width: 600px;
+      font-size: 20px;
+      margin: 0 auto;
+      .title-titles {
+        display: flex;
+      }
+    }
+  }
+  .logo2{
+    width: 30%;
+    margin: 0 auto;
+    text-align: center;
+    h3{
+      color: $color_light;
+      margin: 30px; 
+    }
+
+  }
+  .orderdetail {
+    width: 100%;
+    background: #fff;
+    margin: 20px 0px;
+    padding: 5px 90px;
+    border-radius: 4px;
+    .title-blocks {
+      width: 100%;
+      border-bottom: 2px solid $color_border;
+      margin-bottom:10px; 
+    }
+    .orderdetail-title {
+      margin: 20px auto;
+      width: 100%;
+      border-bottom: 5px solid $color_orange;
+    }
+    .title-block {
+      width: 95%;
+      display: flex;
+      margin: 0 auto;
+      height: 40px;
+      .title-name {
+        width: 50%;
+        color: $color_light;
+        font-size: 20px;
+      }
+      .title-productName{
+        width: 50%;
+        color: $color_light;
+        font-size: 15px;
+        font-weight: 600;
+        text-align: right;
+      }
+      .title-content {
+        width: 50%;
+        color: $color_light;
+        font-size: 22px;
+        font-weight: 600;
+        text-align: right;
+      }
+    }
+    .end-blocks {
+      .aaa{
+        // border-bottom: 5px solid $color_orange;
+        height: 50px;
+         
+      }
+      .end-block {
+        display: flex;
+        width: 95%;
+        height: 30px;
+        margin: 30px auto;
+        
+        .title-name {
+          width: 50%;
+          font-size: 20px;
+          color: $color_light;
+        }
+        .end-money{
+          width: 50%;
+          text-align: right;
+          font-size: 22px;
+          color: $color_blue;
+          font-weight: 600;
+        }
+        .end-money2{
+          width: 50%;
+          text-align: right;
+          font-size:25px;
+          color: $color_red;
+          font-weight: 600;
+        }
+      }
+    }
+  }
+ 
+  
 }

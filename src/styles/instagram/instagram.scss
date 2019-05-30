@@ -152,6 +152,10 @@
       }
     }
     // 舊貼文
+    .oldStory.editStory {
+      position: relative;
+      z-index: 251;
+    }
     .oldStory {
       //貼文header(作者、功能)
       .post-header {
@@ -171,6 +175,26 @@
             line-height: 30px;
             margin-left: 7px;
           }
+        }
+      }
+      // 編輯的 點點點
+      .editable {
+        line-height: 2;
+        padding: 0 5px;
+        position: relative;
+        // 編輯 刪除
+        .edit {
+          position: absolute;
+          right: 0;
+          z-index: 5;
+          width: 80px;
+          display: flex;
+          flex-direction: column;
+          text-align: center;
+          padding: 8px 0;
+          background-color: white;
+          border: 1px solid #dbdbdb;
+          border-radius: 6px;
         }
       }
       hr {
@@ -279,10 +303,26 @@
             padding-bottom: 100%; /* initial ratio of 1:1*/
           }
         }
+        //預覽圖
+        .post-image {
+          display: flex;
+          img {
+            display: block;
+            height: 80px;
+            width: 80px;
+            object-fit: contain;
+            margin: 5px;
+            border: 2px dashed #cacaca;
+          }
+        }
       }
       // 舊貼文 footer
       .post-footer {
         height: 55px;
+        width: 95%;
+        margin: 0 auto;
+        box-sizing: border-box;
+        padding: 5px 10px;
         display: flex;
         justify-content: space-between;
         align-items: center;
@@ -294,8 +334,27 @@
         .heart {
           margin-left: 20px;
         }
+        .hearted {
+          color: #ed4956;
+        }
+        .favorites {
+          vertical-align: middle;
+          margin-left: 6px;
+          font-size: 12px;
+        }
         .bookmark {
           margin-right: 20px;
+        }
+        .bookmarked {
+          color: #262626;
+        }
+        .oldStoryEdit {
+          margin-left: auto;
+          font-size: 14px;
+          // margin-right: 8px;
+        }
+        .oldStoryImageEdit {
+          // margin-left: 8px;
         }
       }
       // 留言區
@@ -325,6 +384,7 @@
               border-radius: 4px;
               // 留言人
               .sender {
+                white-space: nowrap;
                 color: #38bdd8;
               }
               // 留言內容
@@ -350,9 +410,10 @@
         // 每則留言
         .sub {
           display: flex;
-          width: 95%;
+          width: auto;
           margin: 5px auto;
           margin-left: 50px;
+          margin-right: 2.5%;
           // 頭像
           img.avatar {
             display: block;
@@ -443,8 +504,12 @@
     left: 0;
     // height: 100%;
     // width: 100%;
-    background-color: rgba(0, 0, 0, 0.7);
+    background-color: rgba(0, 0, 0, 0.2);
   }
+  .mask.editMask {
+    z-index: 250;
+  }
+
   //右邊揪團快訊
   .event {
     width: 265px;

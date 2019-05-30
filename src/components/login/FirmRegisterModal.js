@@ -8,6 +8,7 @@ class FirmRegisterModal extends React.Component {
       account: '',
       password: '',
       passwordCheck: '',
+      email: '',
       store: '',
       uniform: '',
       remindText: '',
@@ -37,6 +38,32 @@ class FirmRegisterModal extends React.Component {
             return
           } else {
             this.inputunicode.value = ''
+            alert(obj.data.message)
+          }
+        })
+    }
+  }
+  checkEmail = evt => {
+    if (evt.target.value !== '') {
+      let email = evt.target.value
+      let data = { email: evt.target.value }
+      fetch('//localhost:3002/firm/emailCheck', {
+        method: 'POST',
+        body: JSON.stringify(data),
+        credentials: 'include',
+        headers: {
+          'Content-type': 'application/json',
+        },
+      })
+        .then(res => res.json())
+        .then(obj => {
+          console.log(obj)
+          this.setState({ email: '' })
+          if (obj.data.success) {
+            this.setState({ email: email })
+            return
+          } else {
+            this.inputemail.value = ''
             alert(obj.data.message)
           }
         })
@@ -93,6 +120,7 @@ class FirmRegisterModal extends React.Component {
         password: this.state.password,
         store: this.state.store,
         uniform: this.state.uniform,
+        email: this.state.email,
       }
       fetch('//localhost:3002/firm/firmRegister', {
         method: 'POST',
@@ -137,7 +165,7 @@ class FirmRegisterModal extends React.Component {
                 <i className="fa fa-user" />
                 <Form.Control
                   type="text"
-                  placeholder="輸入信箱註冊"
+                  placeholder="輸入帳號"
                   className="account form-control"
                   onBlur={this.checkAccount}
                   required
@@ -173,8 +201,18 @@ class FirmRegisterModal extends React.Component {
                 />
                 <Form.Text className="red">{this.state.remindText}</Form.Text>
               </Form.Group>
+              <label htmlFor="uniform">email</label>
+              <input
+                className="pl-3"
+                name="uniform"
+                type="email"
+                required
+                onBlur={this.checkEmail}
+                ref={el => (this.inputemail = el)}
+              />
               <label htmlFor="uniform">統編</label>
               <input
+                className="pl-3"
                 name="uniform"
                 type="text"
                 required
@@ -183,6 +221,7 @@ class FirmRegisterModal extends React.Component {
               />
               <label htmlFor="store">店家</label>
               <input
+                className="pl-3"
                 name="store"
                 type="text"
                 required

@@ -1,4 +1,8 @@
 .ProductDetail{
+    .mainBoard1{
+        border: 1px solid rgba(0,0,0,0.1);
+        background: #fff;
+    }
     .imgCard {
         width: 300px;
         height: auto;
@@ -6,14 +10,15 @@
         margin:0 60px;
     }
 .product-Description-title{
-    width: 100%;
-    margin: 20px 0;
+    width: 92%;
+    margin: 20px 40px;
     border-bottom:solid 2px  #C7C7C7;
     font-size: 20px;
     font-weight: 800;   
 }
 .product-Description-contact{
     font-size: 18px;
+    padding: 10px 20px 20px 40px;
 }
 .seld{
     color: red;
@@ -22,21 +27,24 @@
 .detailCard{
     margin: 30px;
 }
+p{
+    letter-spacing: 2px;
+}
 .add{    
-width: 50px;
-height: 50px;
+width: 40px;
+height: 40px;
 font-size: 25px;
-padding: 6px;
+
 }
 .subtract{
-    width: 50px;
-    height: 50px;
+    width: 40px;
+    height: 40px;
     font-size: 40px;
     font-weight: 700;
-    padding: 6px;
+    
 }
 .addandsubtract{display: flex;
-margin-bottom: 30px;
+margin: 30px 0;
 font-size: 20px;
 }
 .product-many{
@@ -50,9 +58,10 @@ padding: 6px;
 	vertical-align: top;
 	position: relative;
 	margin: 0;
-	padding: 0 16px;
+    padding: 0 16px;
+    width: 300px;
 	height: 50px; 
-	line-height: 36px;
+	line-height: 48px;
 	min-width: 64px;
 	box-sizing: border-box;
 	font-size: 16px;
@@ -60,15 +69,15 @@ padding: 6px;
 	text-align: center;
 	text-decoration: none;
 	letter-spacing: 0;
-
 	border: 0;
 	border-radius: 6px;
 	outline: 0;
 	cursor: pointer;
 	overflow: hidden;
-  transition: all 0.3s;
-  color: #fff;
-  font-weight: 400
+    transition: all 0.3s;
+    color: #fff;
+    font-weight: 400;
+    
 }
 .actionButton1:focus{
     color: #fff;  

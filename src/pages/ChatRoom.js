@@ -9,6 +9,7 @@ import {
 import AsidePage from '../components/chatroom/pages/AsidePage'
 import ChatArea from '../components/chatroom/pages/ChatArea'
 import ChatArea_socket from '../components/chatroom/pages/ChatArea_socket'
+import ChatArea_socket_new from '../components/chatroom/pages/ChatArea_socket_new'
 import '../styles/chatroom/chatroomStyle.scss'
 import ChatAreaOriginal from '../components/chatroom/pages/ChatAreaOriginal'
 
@@ -18,50 +19,115 @@ class ChatRoom extends React.Component {
     this.state = {
       //{h_id: 1,h_sub: "BOB",m_id: 1,m_cont: "你好，BOB初次見面!",m_time: "2019-05-21T16:45:57.000Z",sender: 1,}
       chatData: [],
+      inputId: '',
+      logInId: '',
+      refresh: 0,
     }
   }
-  componentDidMount() {
-    fetch('http://localhost:3002/chatroom/message/user_id1', {
-      method: 'GET',
-      headers: { 'Content-type': 'application/json' },
-    })
-      .then(response => response.json())
-      .then(data => {
-        console.log('chatRoom:', data)
 
-        return this.setState({ chatData: data })
-      })
+  componentDidMount() {
+    // fetch('http://localhost:3002/chatroom/message/user_id1', {
+    //   method: 'GET',
+    //   headers: { 'Content-type': 'application/json' },
+    // })
+    //   .then(response => response.json())
+    //   .then(data => {
+    //     console.log('chatRoom:', data)
+    //     return this.setState({ chatData: data })
+    //   })
+  }
+  handleChange = event => {
+    this.setState({ inputId: event.target.value })
+  }
+  handleClick = async () => {
+    let logInId = this.state.inputId
+    await this.setState({ logInId: this.state.inputId, inputId: '' })
+
+    //login ok
+    console.log(logInId)
+    const response = await fetch(
+      `http://localhost:3002/chatroom/message/${logInId}`,
+      {
+        method: 'GET',
+        headers: { 'Content-type': 'application/json' },
+      }
+    )
+    const data = await response.json()
+    console.log(data)
+    await this.setState({ chatData: data })
+  }
+  handleRefreh = () => {
+    let isRefresh = !this.state.refresh
+    this.setState({ refresh: isRefresh })
   }
   render() {
     return (
       <Router>
         <>
+          <input value={this.state.inputId} onChange={this.handleChange} />
+          <button onClick={this.handleClick}>send</button>
+          {'welcome member: ' + this.state.logInId}
           <div className="chatroom">
             <div className="container ">
               <div className="row">
                 <div className="col-lg-3 aside">
-                  <AsidePage />
+                  <AsidePage
+                    logInId={this.state.logInId}
+                    refreshID={this.state.refresh}
+                  />
                 </div>
                 <div className="col-lg chatArea">
                   {/* 傳props 給子元件: */}
                   {/* <Route path="/abc" render={(props) => <TestWidget {...props} someProp={100} />} /> */}
                   {/* <Route
                       path="/chatroom/Message/user_id2"
-                      component={ChatArea}
+                      component={ChatArea_socket}
                     /> */}
                   <Switch>
                     {/*  在這邊map 所有Route出來  */}
                     {this.state.chatData.map(data => {
-                      return (
+                      return this.state.logInId == data.from_id ? (
                         <Route
-                          key={data.m_id}
-                          path={'/chatroom/Message/' + data.receiver}
-                          component={ChatArea_socket}
+                          key={data.to_id}
+                          path={
+                            '/chatroom/Message/' +
+                            'ID' +
+                            this.state.logInId +
+                            '/' +
+                            'ID' +
+                            data.to_id
+                          }
+                          render={() => (
+                            <ChatArea_socket_new
+                              logInId={this.state.logInId}
+                              userData={this.state.chatData}
+                              refresh={this.handleRefreh}
+                            />
+                          )}
+                        />
+                      ) : (
+                        <Route
+                          key={data.from_id}
+                          path={
+                            '/chatroom/Message/' +
+                            'ID' +
+                            this.state.logInId +
+                            '/' +
+                            'ID' +
+                            data.from_id
+                          }
+                          render={() => (
+                            <ChatArea_socket_new
+                              logInId={this.state.logInId}
+                              userData={this.state.chatData}
+                              refresh={this.handleRefreh}
+                            />
+                          )}
                         />
                       )
                     })}
                     <Route
-                      path={'/chatroom/Message/'}
+                      path={'/chatroom/Message/' + 'ID' + this.state.logInId}
                       component={ChatAreaOriginal}
                     />
                   </Switch>

@@ -1,6 +1,7 @@
 import React from 'react'
-import { Modal, Form, Button } from 'react-bootstrap'
+import { Modal } from 'react-bootstrap'
 import LoginInput from './LoginInput.js'
+import MemberInput from './MemberInput.js'
 
 class LoginModal extends React.Component {
   constructor(props) {
@@ -40,10 +41,13 @@ class LoginModal extends React.Component {
             </div>
           </Modal.Header>
           {this.state.userOn ? (
-            <div style={{ height: '300px' }}>會員登入元件</div> //會員登入的表單，我先用我的原件，之後放eason的元件
+            <MemberInput
+              userLogin={this.props.userLogin}
+              userRegister={this.props.userRegister}
+            />
           ) : (
             <LoginInput
-              login={this.props.login}
+              firmLogin={this.props.firmLogin}
               register={this.props.register}
             />
           ) //廠商登入的表單

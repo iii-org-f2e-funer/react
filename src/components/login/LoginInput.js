@@ -49,8 +49,8 @@ class LoginInput extends React.Component {
             console.log(obj.data)
             const account = this.state.account
             const payload = { account: account }
-            this.props.userInfoAction(payload)
-            this.props.login(obj.data.user)
+            this.props.firmInfoAction(payload)
+            this.props.firmLogin(obj.data.user)
           } else {
             this.inputTitle.value = ''
             alert(obj.data.message)
@@ -122,6 +122,6 @@ const mapStateToProp = store => {
 export default connect(
   mapStateToProp,
   {
-    userInfoAction: actions.userInfo,
+    firmInfoAction: actions.firmInfo,
   }
 )(LoginInput)

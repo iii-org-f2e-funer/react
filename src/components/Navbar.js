@@ -1,30 +1,31 @@
 import React from 'react'
 import { NavLink } from 'react-router-dom'
 import '../styles/navbar.scss'
-import Notice from './Notice'
-import UserMenu from './UserMenu'
 import LoginModal from './login/LoginModal'
 import FirmRegisterModal from './login/FirmRegisterModal'
+import UserRegisterModal from './login/UserRegisterModal'
 import { FaComment, FaShoppingCart, FaBell, FaUserAlt } from 'react-icons/fa'
 import actions from '../redux/action/userInfo.js'
 import { connect } from 'react-redux'
 import { withRouter } from 'react-router'
+import NavIcons from './NavIcons.js'
 
 class Navbar extends React.Component {
   constructor(props) {
     super(props)
     this.state = {
-      noticeOpen: false,
-      userMenuOpen: false,
       loginPopup: false,
       registerPopup: false,
+      userRegisterPopup: false,
     }
   }
-
   registerSuccess = () => {
     this.setState({ registerPopup: false })
   }
-  login = () => {
+  firmLogin = () => {
+    this.setState({ loginPopup: false })
+  }
+  userLogin = () => {
     this.setState({ loginPopup: false })
   }
   logOut = () => {
@@ -44,28 +45,36 @@ class Navbar extends React.Component {
   registerShow = () => {
     this.setState({ registerPopup: true, loginPopup: false })
   }
-
+  userRegisterShow = () => {
+    this.setState({ userRegisterPopup: true, loginPopup: false })
+  }
   registerHide = () => {
-    this.setState({ registerPopup: false })
+    this.setState({
+      userRegisterPopup: false,
+      registerPopup: false,
+      userRegisterPopup: false,
+    })
   }
   handleShow = () => {
-    this.setState({ loginPopup: true, registerPopup: false })
+    this.setState({
+      loginPopup: true,
+      userRegisterPopup: false,
+      registerPopup: false,
+    })
   }
 
   handleHide = () => {
     this.setState({ loginPopup: false })
   }
-  handleNoticeOpen = () => {
-    this.setState({ noticeOpen: !this.state.noticeOpen })
-  }
-  handleUserMenuOpen = () => {
-    this.setState({ userMenuOpen: !this.state.userMenuOpen })
-  }
 
   render() {
     window.scrollTo(0, 0) //滾到最上面 (for instagram)
     return (
-      <div className="navbar">
+      <div
+        className={
+          this.props.location.pathname === '/' ? 'navbar navblue' : 'navbar'
+        }
+      >
         <div className="container">
           <div className="brand_logo">
             <NavLink to="/">
@@ -93,46 +102,7 @@ class Navbar extends React.Component {
           </ul>
           <ul className="user_nav">
             {this.props.userInfo.login ? (
-              <>
-                <li>
-                  <NavLink to="/Mycart" activeClassName="active">
-                    <FaShoppingCart />
-                  </NavLink>
-                </li>
-                <li>
-                  <NavLink to="/chatroom/message" activeClassName="active">
-                    <FaComment />
-                  </NavLink>
-                </li>
-                <li>
-                  <div
-                    className={
-                      this.state.noticeOpen ? 'notice_btn active' : 'notice_btn'
-                    }
-                    onMouseEnter={this.handleNoticeOpen}
-                    onMouseLeave={this.handleNoticeOpen}
-                  >
-                    <FaBell />
-                    <Notice isOpen={this.state.noticeOpen} />
-                  </div>
-                </li>
-
-                <li>
-                  <div
-                    className={
-                      this.state.userMenuOpen ? 'user_btn active' : 'user_btn'
-                    }
-                    onMouseEnter={this.handleUserMenuOpen}
-                    onMouseLeave={this.handleUserMenuOpen}
-                  >
-                    <FaUserAlt />
-                    <UserMenu
-                      isOpen={this.state.userMenuOpen}
-                      logOut={this.logOut}
-                    />
-                  </div>
-                </li>
-              </>
+              <NavIcons logOut={this.logOut} />
             ) : (
               <>
                 <li>
@@ -153,11 +123,20 @@ class Navbar extends React.Component {
             )}
           </ul>
         </div>
+
         <LoginModal
           show={this.state.loginPopup}
           handleHide={this.handleHide}
-          login={this.login}
+          firmLogin={this.firmLogin}
+          userLogin={this.userLogin}
           register={this.registerShow}
+          userRegister={this.userRegisterShow}
+        />
+        <UserRegisterModal
+          show={this.state.userRegisterPopup}
+          handleHide={this.registerHide}
+          switch={this.handleShow}
+          registerSuccess={this.registerSuccess}
         />
         <FirmRegisterModal
           show={this.state.registerPopup}

@@ -10,6 +10,8 @@ export default class Mycart extends React.Component {
       data: [],
       totall: 0,
       allcart: [],
+      method_money: 60,
+      method_funshop: 'toshop',
     }
   }
   componentDidMount() {
@@ -28,6 +30,7 @@ export default class Mycart extends React.Component {
         totall: this.state.totall,
         allcart: allcart,
       })
+      // console.log(allcart)
     }
   }
 
@@ -46,7 +49,6 @@ export default class Mycart extends React.Component {
     this.setState({ data: allcart, totall: ttt })
 
     // console.log(a1)
-
     //刪除後重新設定
     // this.setState({ data: newItems })
     // alert(JSON.stringify(this.state.data))
@@ -55,8 +57,34 @@ export default class Mycart extends React.Component {
   goto = sid => () => {
     window.location.href = 'http://localhost:3000/ProductDetail/sid:' + sid
   }
+  paymethod = event => {
+    var method = event.target.value
+    console.log(event.target.value)
+    if (method === 'tohome') {
+      var sss = 130
+      this.setState({ method_money: 130 })
+    } else if (method === 'toshop') {
+      sss = 60
+      this.setState({ method_money: 60 })
+    }
+    this.setState({
+      totall2: this.state.totall + this.state.method_money,
+      method_funshop: method,
+    })
+  }
+  gotocheck = () => {
+    localStorage.setItem('method_funshop', this.state.method_funshop)
+    localStorage.setItem(
+      'funapptotal',
+      this.state.totall + this.state.method_money
+    )
+  }
   render() {
-    if (localStorage.allcart == undefined || localStorage.allcart === '[]') {
+    if (
+      localStorage.allcart == undefined ||
+      localStorage.allcart == '' ||
+      localStorage.allcart == '[]'
+    ) {
       return (
         <>
           <div className="cart">
@@ -85,7 +113,10 @@ export default class Mycart extends React.Component {
         <>
           <div className="cart">
             <div className="container">
-              <ul className="cart_nav">
+              <div className="cart-title">
+                <h2>我的購物車</h2>
+              </div>
+              {/* <ul className="cart_nav">
                 <li>
                   <Link to="/Mycart">
                     <div className="mycart">購物車</div>
@@ -96,13 +127,12 @@ export default class Mycart extends React.Component {
                     <div className="myfav">我的收藏</div>
                   </Link>
                 </li>
-              </ul>
-              <div className="myfav-table">
+              </ul> */}
+              <div className="myfav-table mb-5">
                 <Table striped bordered hover>
-                  <thead>
+                  <thead className="table_head">
                     <tr>
                       <th />
-                      <th>圖片</th>
                       <th>商品名稱</th>
                       <th>店家</th>
                       <th>單價</th>
@@ -115,34 +145,33 @@ export default class Mycart extends React.Component {
                     {this.state.data.map((item, index, array) => (
                       <tr>
                         <td key={index}>{index + 1}</td>
-                        <td />
                         <td>{this.state.data[index].productName}</td>
                         <td>{this.state.data[index].seller_sid}</td>
                         <td>{this.state.data[index].price}</td>
                         <td>{this.state.data[index].number}</td>
                         <td>{this.state.data[index].totall}</td>
                         <td>
-                          <Button
+                          <button
                             className="m-1 button button"
                             block
                             onClick={this.deleteit(index)}
                           >
                             刪除
-                          </Button>
-                          <Button
+                          </button>
+                          <button
                             className="m-1 button button"
                             block
                             onClick={this.goto(this.state.data[index].sid)}
                           >
-                            detail
-                          </Button>
+                            詳細資料
+                          </button>
                         </td>
                       </tr>
                     ))}
                   </tbody>
                 </Table>
               </div>
-              <div className="check">
+              <div className="check mt-5">
                 <div className="remind">
                   <label>提醒您</label>
                   <div>
@@ -158,30 +187,45 @@ export default class Mycart extends React.Component {
                     <h5>{this.state.totall}</h5>
                   </div>
                   <div className="paymethod money">
-                    <h5>付款方式</h5>
-                    <h5>??</h5>
+                    <h5>取貨方式</h5>
+                    <select className="GET-control" onChange={this.paymethod}>
+                      <option className="dropdown" value="toshop">
+                        超商取貨
+                      </option>
+                      <option className="dropdown" value="tohome">
+                        宅配到府
+                      </option>
+                    </select>
                   </div>
                   <div className="money">
                     <h5>運費</h5>
-                    <h5>0</h5>
+                    <h5>{this.state.method_money}</h5>
                   </div>
                   <div className="money">
                     <h5>訂單金額總計</h5>
-                    <h3 className="total">{this.state.totall}</h3>
+                    <h3 className="total">
+                      {this.state.totall + this.state.method_money}
+                    </h3>
                   </div>
                   <div className="checkbutton">
-                    <div className="m-4">
+                    <div className="">
                       <Link to="/product">
-                        <Button className="m-4 button " block>
+                        <button
+                          className=" button 
+                        checkbutton1"
+                        >
                           繼續購物
-                        </Button>
+                        </button>
                       </Link>
                     </div>
-                    <div className="m-4">
+                    <div className="">
                       <Link to="/Shopping1">
-                        <Button className="m-4 button" block>
+                        <button
+                          className="button checkbutton2"
+                          onClick={this.gotocheck}
+                        >
                           前往結帳
-                        </Button>
+                        </button>
                       </Link>
                     </div>
                   </div>

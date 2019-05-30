@@ -1,79 +1,106 @@
 import React from 'react'
-import { Modal, Form, Col } from 'react-bootstrap'
+import { Modal, Form, Col, Row } from 'react-bootstrap'
+import actions from '../../redux/action/userInfo.js'
+import { connect } from 'react-redux'
+import { withRouter } from 'react-router'
+import FirmEditInput from './FirmEditInput'
+import { runInThisContext } from 'vm'
 
 class AccountEdit extends React.Component {
   constructor(props) {
     super(props)
-    this.state = {}
+    this.state = {
+      insert: true,
+      firm_id: '',
+      firmData: {
+        sid: '',
+        store: '',
+        county: '',
+        dist: '',
+        address: '',
+        phone: '',
+        business_hours: '',
+        public_holiday: '',
+        charges: '',
+        about: '',
+        rule: '',
+        status: '',
+      },
+    }
+  }
+  componentDidMount() {
+    fetch('//localhost:3002/firm/firmInfo', {
+      credentials: 'include',
+    })
+      .then(res => res.json())
+      .then(obj => {
+        if (obj.success) {
+          console.log(obj)
+          this.setState({
+            firmData: Object.assign(this.state.firmData, obj.body),
+            firm_id: obj.firm_id,
+            insert: false,
+          })
+        } else {
+          console.log(obj)
+          this.setState({ firm_id: obj.firm_id })
+        }
+      })
+  }
+  cancelEdit = () => {
+    fetch('//localhost:3002/firm/firmInfo', {
+      credentials: 'include',
+    })
+      .then(res => res.json())
+      .then(obj => {
+        if (obj.success) {
+          console.log(obj)
+          this.setState({
+            firmData: Object.assign(this.state.firmData, obj.body),
+            firm_id: obj.firm_id,
+            insert: false,
+          })
+        } else {
+          console.log(obj)
+          this.setState({ firm_id: obj.firm_id })
+        }
+      })
+    this.props.handleHide()
   }
   render() {
     return (
       <>
         <Modal
-          className="login-form"
+          className="firmEdit"
           show={this.props.editPopup}
           onHide={this.props.handleHide}
           dialogClassName="modal-90w"
           aria-labelledby="example-custom-modal-styling-title"
         >
-          <div className="container">
-            <h4>店家基本資訊</h4>
-            <Form>
-              <Form.Row>
-                <Form.Group as={Col} controlId="formGridEmail">
-                  <Form.Label>Email</Form.Label>
-                  <Form.Control type="email" placeholder="Enter email" />
-                </Form.Group>
-
-                <Form.Group as={Col} controlId="formGridPassword">
-                  <Form.Label>Password</Form.Label>
-                  <Form.Control type="password" placeholder="Password" />
-                </Form.Group>
-              </Form.Row>
-
-              <Form.Group controlId="formGridAddress1">
-                <Form.Label>Address</Form.Label>
-                <Form.Control placeholder="1234 Main St" />
-              </Form.Group>
-
-              <Form.Group controlId="formGridAddress2">
-                <Form.Label>Address 2</Form.Label>
-                <Form.Control placeholder="Apartment, studio, or floor" />
-              </Form.Group>
-
-              <Form.Row>
-                <Form.Group as={Col} controlId="formGridCity">
-                  <Form.Label>City</Form.Label>
-                  <Form.Control />
-                </Form.Group>
-
-                <Form.Group as={Col} controlId="formGridState">
-                  <Form.Label>State</Form.Label>
-                  <Form.Control as="select">
-                    <option>Choose...</option>
-                    <option>...</option>
-                  </Form.Control>
-                </Form.Group>
-
-                <Form.Group as={Col} controlId="formGridZip">
-                  <Form.Label>Zip</Form.Label>
-                  <Form.Control />
-                </Form.Group>
-              </Form.Row>
-
-              <Form.Group id="formGridCheckbox">
-                <Form.Check type="checkbox" label="Check me out" />
-              </Form.Group>
-
-              <button variant="primary" type="submit" className="button">
-                Submit
-              </button>
-            </Form>
-          </div>
+          <h4 className="text-center">店家基本資訊</h4>
+          <FirmEditInput
+            firmData={this.state.firmData}
+            cancelEdit={this.cancelEdit}
+            insert={this.state.insert}
+            firm_id={this.state.firm_id}
+          />
         </Modal>
       </>
     )
   }
 }
 
-export default AccountEdit
+function mapStateToProp(store) {
+  return {
+    userInfo: store.userInfo,
+  }
+}
+
+export default withRouter(
+  connect(
+    mapStateToProp,
+    {
+      userInfoAction: actions.userInfo,
+    }
+  )(AccountEdit)
+)
