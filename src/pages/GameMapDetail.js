@@ -1,5 +1,5 @@
 import React from 'react'
-import '../styles/gameMap/gameMap.scss'
+import '../styles/gameMap/gameMapDetail.scss'
 import {
   Button,
   Tabs,
@@ -135,6 +135,7 @@ class MyVerticallyCenteredModal extends React.Component {
   }
 
   render() {
+    console.log(this.props)
     return (
       <Modal
         {...this.props}
@@ -173,7 +174,7 @@ class MyVerticallyCenteredModal extends React.Component {
                   />
                   <span className="highlight" />
                   <span className="bar" />
-                  <label>手機</label>
+                  <label>手機(0912456456)</label>
                 </div>
               </form>
               <div className="numberSpinner">
@@ -217,9 +218,11 @@ class MyVerticallyCenteredModal extends React.Component {
                 timeCaption="時間"
               />
               <div style={{ color: 'orange' }}>
-                可預約日期:明天 至 90天前，
+                可預約日期:明天 至 90天前
                 <br />
-                排除 店家公休日
+                {this.props.public_holiday == null
+                  ? ''
+                  : '排除 店家公休日/' + this.props.public_holiday}
               </div>
             </Col>
           </Row>

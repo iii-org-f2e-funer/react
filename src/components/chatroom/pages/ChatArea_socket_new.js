@@ -111,6 +111,7 @@ class ChatArea extends React.Component {
     socket.on('message', obj => {
       this.updateMsg(obj)
       console.log(obj)
+      this.props.refresh()
     })
     let theUrl = this.props.location.pathname
     var fromID = theUrl.split('/')[3].replace('ID', '')
@@ -191,7 +192,6 @@ class ChatArea extends React.Component {
         })
         .then(data => {
           console.log(data)
-          this.props.refresh()
         })
       socket.emit('message', obj)
       // 发送消息后清空输入框

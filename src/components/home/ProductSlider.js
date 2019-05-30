@@ -36,7 +36,11 @@ class ProductSlider extends React.Component {
               {this.props.datas.map(item => (
                 <li key={item.sid} className="productItem">
                   <Link>
-                    <img src={item.image_path} alt="" />
+                    {/* <img src={item.image_path} alt="" /> */}
+                    <img
+                      src={process.env.PUBLIC_URL + '/images/home/09.jpg'}
+                      alt=""
+                    />
                     <p className="productTitle">{item.productName}</p>
                     <p>NT {item.price}</p>
                   </Link>

@@ -63,10 +63,12 @@ class Message extends React.Component {
                   activeClassName="active"
                 >
                   <div className="d-flex w-100 justify-content-between align-items-center">
-                    <div className="avatar">
-                      <img src={avatar} alt="會員1頭像" />
+                    <div className="d-flex justify-content-center align-items-center">
+                      <div className="avatar">
+                        <img src={avatar} alt="會員1頭像" />
+                      </div>
+                      <h5 className="mb-1 text-nowrap  ">{data.y_toname}</h5>
                     </div>
-                    <h5 className="mb-1 text-nowrap  ">{data.y_toname}</h5>
                     <span className="message-date  text-wrap text-center ">
                       {data.time}
                     </span>

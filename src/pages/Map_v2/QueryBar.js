@@ -70,13 +70,13 @@ class QueryBar extends Component {
       text: text,
       keywordOpen: '',
     })
-    fetch('http://escape.bar:3000/map/name/' + text)
-      .then(res => res.json())
-      .then(({ data }) =>
-        this.setState({
-          textResults: data,
-        })
-      )
+    // fetch('http://127.0.0.1:3002/gameMap/All/' + encodeURI(text))
+    //   .then(res => res.json())
+    //   .then(({ data }) =>
+    //     this.setState({
+    //       textResults: data,
+    //     })
+    //   )
     console.log(this.state.textResults)
   }
 
@@ -105,6 +105,7 @@ class QueryBar extends Component {
     return (
       <React.Fragment>
         <div>
+          {/* <form onSubmit={this.handleSubmit}> */}
           <form onSubmit={this.handleSubmit}>
             <input
               type="text"
@@ -115,7 +116,7 @@ class QueryBar extends Component {
               onBlur={this.close}
             />
             <div className="keywordToBeSelected">
-              {this.state.textResults.map((text, i) => (
+              {/* {this.state.textResults.map((text, i) => (
                 <div
                   key={i}
                   className={'text_results' + ' ' + this.state.keywordOpen}
@@ -124,9 +125,16 @@ class QueryBar extends Component {
                 >
                   {text.s_name}
                 </div>
-              ))}
+              ))} */}
             </div>
-            <button type="submit" className="btn btn-warning queryBtn">
+            {/* <button type="submit" className="btn btn-warning queryBtn">
+              搜尋
+            </button> */}
+            <button
+              type="button"
+              className="btn btn-warning queryBtn"
+              onClick={() => this.props.getSearch(this.state.text)}
+            >
               搜尋
             </button>
           </form>

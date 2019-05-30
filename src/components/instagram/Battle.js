@@ -2,7 +2,9 @@ import React from 'react'
 const Battle = () => {
   return (
     <>
-      <h5>TIC TAC TOE</h5>
+      <div className="battle">
+        <h5>施工中</h5>
+      </div>
     </>
   )
 }
