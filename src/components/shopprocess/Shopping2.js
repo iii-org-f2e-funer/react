@@ -122,7 +122,7 @@ class Shopping2 extends React.Component {
                       <Form.Label>持卡人</Form.Label>
                       <Form.Control
                         type="text"
-                        placeholder="enter name"
+                        placeholder="輸入持卡人姓名"
                         onBlur={this.card}
                       />
                     </div>

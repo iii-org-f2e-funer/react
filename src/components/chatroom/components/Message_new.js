@@ -2,7 +2,7 @@ import React from 'react'
 import { Route, Link, Switch, NavLink } from 'react-router-dom'
 import avatar from '../avatar/ironman.jpg'
 
-class Message extends React.Component {
+class Message_new extends React.Component {
   constructor(props) {
     super(props)
     this.state = {
@@ -130,4 +130,4 @@ class Message extends React.Component {
   }
 }
 
-export default Message
+export default Message_new
