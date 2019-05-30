@@ -12,22 +12,7 @@ class Home extends React.Component {
       homeProducts: [],
     }
   }
-  componentDidMount() {
-    fetch('http://localhost:3002/home/homeEvent')
-      .then(res => res.json())
-      .then(obj => {
-        if (obj.success === true) {
-          this.setState({ homeEvents: obj.data })
-        }
-      })
-    fetch('http://localhost:3002/home/homeProduct')
-      .then(res => res.json())
-      .then(obj => {
-        if (obj.success === true) {
-          this.setState({ homeProducts: obj.data })
-        }
-      })
-  }
+  componentDidMount() {}
   render() {
     return (
       <>
@@ -85,7 +70,7 @@ class Home extends React.Component {
           {/* 最新揪團 */}
           <div className="home_event">
             <h2>最新揪團</h2>
-            <EventSlider datas={this.state.homeEvents} />
+            <EventSlider />
             <div className="event_b">
               <Link to="/event">
                 <button className="button button--yellow">more</button>
@@ -121,7 +106,7 @@ class Home extends React.Component {
           {/* 熱銷商品 */}
           <div className="home_product">
             <h2>熱銷商品</h2>
-            <ProductSlider datas={this.state.homeProducts} />
+            <ProductSlider />
             <div className="product_b">
               <Link to="/product">
                 <button className="button button--yellow">more</button>
