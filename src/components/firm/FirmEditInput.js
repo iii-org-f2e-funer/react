@@ -1,18 +1,22 @@
 import React from 'react'
-import { Modal, Form, Col, Row } from 'react-bootstrap'
+import { Form, Col, Row } from 'react-bootstrap'
 import TWzipcode from 'react-twzipcode'
 import actions from '../../redux/action/userInfo.js'
 import { connect } from 'react-redux'
 import { withRouter } from 'react-router'
+import { FaTimes, FaRegImage } from 'react-icons/fa'
 
 class FirmEditInput extends React.Component {
   constructor(props) {
     super(props)
+    console.log(props)
     const data = this.props.firmData
     this.state = {
-      insert: true,
+      preViewImgs: [], // 預覽 base64 Data Array
+
+      insert: this.props.insert,
       sid: data.sid,
-      firm_id: data.firm_id,
+      firm_id: this.props.firm_id,
       store: data.store,
       county: data.county,
       dist: data.dist,
@@ -24,6 +28,30 @@ class FirmEditInput extends React.Component {
       about: data.about,
       rule: data.rule,
       status: data.status,
+    }
+  }
+  handlecityChange = evt =>
+    this.setState({
+      county: evt.county,
+    })
+  handledistChange = evt =>
+    this.setState({
+      dist: evt.district,
+    })
+  // 新增圖片
+  handleFilesChange = event => {
+    const files = event.target.files
+    var _this = this
+    let preViewImgs = [] // 建立新陣列
+
+    for (let i = 0; i < files.length; i++) {
+      var reader = new FileReader()
+      reader.readAsDataURL(files[i]) //read file data as a base64 encoded string.
+      // reader loaded
+      reader.addEventListener('load', function(e) {
+        preViewImgs.push(e.target.result)
+        _this.setState({ preViewImgs: preViewImgs })
+      })
     }
   }
   updateAccount = () => {
@@ -42,23 +70,25 @@ class FirmEditInput extends React.Component {
       rule: this.state.rule,
       status: this.state.status,
     }
+    var fd = new FormData()
+    fd.append('data', JSON.stringify(data))
+    for (let i = 0; i < this.fileInput.files.length; i++) {
+      fd.append('files', this.fileInput.files[i])
+    }
     if (this.state.insert) {
       fetch('//localhost:3002/firm/insertAccount', {
         method: 'POST',
-        body: JSON.stringify(data),
+        body: fd,
         credentials: 'include',
-        headers: {
-          'Content-type': 'application/json',
-        },
       })
         .then(res => res.json())
         .then(obj => {
           if (obj.success) {
-            this.setState({
-              firmData: obj.body,
-            })
+            console.log(obj.message)
+            this.props.cancelEdit()
           } else {
             console.log(obj.message)
+            this.props.cancelEdit()
           }
         })
     } else {
@@ -73,11 +103,11 @@ class FirmEditInput extends React.Component {
         .then(res => res.json())
         .then(obj => {
           if (obj.success) {
-            this.setState({
-              firmData: obj.body,
-            })
+            console.log(obj.message)
+            this.props.cancelEdit()
           } else {
             console.log(obj.message)
+            this.props.cancelEdit()
           }
         })
     }
@@ -104,7 +134,23 @@ class FirmEditInput extends React.Component {
               店家照片
             </Form.Label>
             <Col sm={10}>
-              <Form.Control type="file" placeholder="" />
+              <label htmlFor="myFile">
+                <FaRegImage />
+              </label>
+              <input
+                multiple
+                id="myFile"
+                type="file"
+                style={{ display: 'none' }}
+                ref={el => (this.fileInput = el)}
+                onChange={this.handleFilesChange}
+              />
+              <div className="post-image">
+                {/* <img src={process.env.PUBLIC_URL + '/images/instagram/avatar.png'} alt="" /> */}
+                {this.state.preViewImgs.map((item, idx) => (
+                  <img key={idx} src={item} alt="" />
+                ))}
+              </div>
             </Col>
           </Form.Group>
           <Form.Group as={Row} controlId="formHorizontalPassword">
@@ -239,15 +285,15 @@ class FirmEditInput extends React.Component {
           </Form.Group>
 
           <div className="d-flex justify-content-center">
-            <button className="button mt-3 mr-3" onClick={this.updateAccount}>
+            <div className="button mt-3 mr-3" onClick={this.updateAccount}>
               確認更改
-            </button>
-            <button
+            </div>
+            <div
               className="button button-white mt-3"
               onClick={this.props.cancelEdit}
             >
               取消變更
-            </button>
+            </div>
           </div>
         </Form>
       </>

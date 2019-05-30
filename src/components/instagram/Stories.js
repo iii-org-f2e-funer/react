@@ -8,13 +8,16 @@ class Stories extends React.Component {
     this.state = {
       stories: [],
       storyState: [],
+      isRefreshing: true,
     }
   }
 
   componentDidMount() {
     this.fetchAllData()
     this.timer1 = setInterval(() => {
-      this.fetchAllData()
+      if (this.state.isRefreshing) {
+        this.fetchAllData()
+      }
     }, 5000)
   }
   componentWillUnmount() {
@@ -45,7 +48,11 @@ class Stories extends React.Component {
         this.setState({ stories: allStories, storyState: allState })
       })
   }
-
+  // 控制刷新
+  handleControlRefresh = state => {
+    this.setState({ isRefreshing: state })
+  }
+  // 強制刷新
   handleReFresh = () => {
     this.fetchAllData()
   }
@@ -59,6 +66,7 @@ class Stories extends React.Component {
               <OldStory
                 key={item.post_id}
                 data={item}
+                handleControlRefresh={this.handleControlRefresh}
                 handleReFresh={this.fetchAllData}
                 isFav={
                   this.state.storyState[0].indexOf(item.post_id) > -1

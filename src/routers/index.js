@@ -1,9 +1,10 @@
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom'
 import React from 'react'
 import { connect } from 'react-redux'
-import Demopage from '../pages/demopage.js'
 
+import Home from '../components/Home.js'
 import GameMapDetail from '../pages/GameMapDetail.js'
+import GameMap from '../pages/Map_v2/Map'
 import Firm from '../pages/Firm.js'
 import Member from '../pages/Member'
 import Footer from '../components/Footer.js'
@@ -46,9 +47,8 @@ class RootRouter extends React.Component {
         <>
           <Navbar />
           <Switch>
-            <Route exact path="/" component={Demopage} />
-            <Route path="/gamemap" component={GameMapDetail} />
-            <Route path="/demo" component={Demopage} />
+            <Route exact path="/" component={Home} />
+
             <Route path="/firm" component={Firm} />
             <Route path="/member" component={Member} />
             <Route path="/event" component={Event} />
@@ -62,6 +62,8 @@ class RootRouter extends React.Component {
             <Route path="/Shopping3" component={Shopping3} />
             <Route path="/instagram" component={Instagram} />
             <Route path="/event" component={Event} />
+            <Route path="/gameMap" component={GameMap} />
+            <Route path="/gameMapDetail/:id" component={GameMapDetail} />
           </Switch>
           <Footer />
         </>

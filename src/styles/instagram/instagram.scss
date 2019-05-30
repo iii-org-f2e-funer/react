@@ -152,6 +152,10 @@
       }
     }
     // 舊貼文
+    .oldStory.editStory {
+      position: relative;
+      z-index: 251;
+    }
     .oldStory {
       //貼文header(作者、功能)
       .post-header {
@@ -299,10 +303,26 @@
             padding-bottom: 100%; /* initial ratio of 1:1*/
           }
         }
+        //預覽圖
+        .post-image {
+          display: flex;
+          img {
+            display: block;
+            height: 80px;
+            width: 80px;
+            object-fit: contain;
+            margin: 5px;
+            border: 2px dashed #cacaca;
+          }
+        }
       }
       // 舊貼文 footer
       .post-footer {
         height: 55px;
+        width: 95%;
+        margin: 0 auto;
+        box-sizing: border-box;
+        padding: 5px 10px;
         display: flex;
         justify-content: space-between;
         align-items: center;
@@ -327,6 +347,14 @@
         }
         .bookmarked {
           color: #262626;
+        }
+        .oldStoryEdit {
+          margin-left: auto;
+          font-size: 14px;
+          // margin-right: 8px;
+        }
+        .oldStoryImageEdit {
+          // margin-left: 8px;
         }
       }
       // 留言區
@@ -478,15 +506,10 @@
     // width: 100%;
     background-color: rgba(0, 0, 0, 0.2);
   }
-  .mask_edit {
-    position: absolute;
-    z-index: 200;
-    top: 72px;
-    left: 0;
-    // height: 100%;
-    // width: 100%;
-    background-color: rgba(0, 0, 0, 0.2);
+  .mask.editMask {
+    z-index: 250;
   }
+
   //右邊揪團快訊
   .event {
     width: 265px;

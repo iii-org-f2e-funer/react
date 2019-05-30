@@ -49,7 +49,6 @@ export default class Mycart extends React.Component {
     this.setState({ data: allcart, totall: ttt })
 
     // console.log(a1)
-
     //刪除後重新設定
     // this.setState({ data: newItems })
     // alert(JSON.stringify(this.state.data))
@@ -81,7 +80,11 @@ export default class Mycart extends React.Component {
     )
   }
   render() {
-    if (localStorage.allcart == undefined || localStorage.allcart === '[]') {
+    if (
+      localStorage.allcart == undefined ||
+      localStorage.allcart == '' ||
+      localStorage.allcart == '[]'
+    ) {
       return (
         <>
           <div className="cart">
@@ -110,7 +113,10 @@ export default class Mycart extends React.Component {
         <>
           <div className="cart">
             <div className="container">
-              <ul className="cart_nav">
+              <div className="cart-title">
+                <h2>我的購物車</h2>
+              </div>
+              {/* <ul className="cart_nav">
                 <li>
                   <Link to="/Mycart">
                     <div className="mycart">購物車</div>
@@ -121,13 +127,12 @@ export default class Mycart extends React.Component {
                     <div className="myfav">我的收藏</div>
                   </Link>
                 </li>
-              </ul>
-              <div className="myfav-table">
+              </ul> */}
+              <div className="myfav-table mb-5">
                 <Table striped bordered hover>
-                  <thead>
+                  <thead className="table_head">
                     <tr>
                       <th />
-                      <th>圖片</th>
                       <th>商品名稱</th>
                       <th>店家</th>
                       <th>單價</th>
@@ -140,34 +145,33 @@ export default class Mycart extends React.Component {
                     {this.state.data.map((item, index, array) => (
                       <tr>
                         <td key={index}>{index + 1}</td>
-                        <td />
                         <td>{this.state.data[index].productName}</td>
                         <td>{this.state.data[index].seller_sid}</td>
                         <td>{this.state.data[index].price}</td>
                         <td>{this.state.data[index].number}</td>
                         <td>{this.state.data[index].totall}</td>
                         <td>
-                          <Button
+                          <button
                             className="m-1 button button"
                             block
                             onClick={this.deleteit(index)}
                           >
                             刪除
-                          </Button>
-                          <Button
+                          </button>
+                          <button
                             className="m-1 button button"
                             block
                             onClick={this.goto(this.state.data[index].sid)}
                           >
-                            detail
-                          </Button>
+                            詳細資料
+                          </button>
                         </td>
                       </tr>
                     ))}
                   </tbody>
                 </Table>
               </div>
-              <div className="check">
+              <div className="check mt-5">
                 <div className="remind">
                   <label>提醒您</label>
                   <div>
@@ -184,7 +188,7 @@ export default class Mycart extends React.Component {
                   </div>
                   <div className="paymethod money">
                     <h5>取貨方式</h5>
-                    <select className="game-control" onChange={this.paymethod}>
+                    <select className="GET-control" onChange={this.paymethod}>
                       <option className="dropdown" value="toshop">
                         超商取貨
                       </option>
@@ -204,22 +208,24 @@ export default class Mycart extends React.Component {
                     </h3>
                   </div>
                   <div className="checkbutton">
-                    <div className="m-4">
+                    <div className="">
                       <Link to="/product">
-                        <Button className="m-4 button " block>
+                        <button
+                          className=" button 
+                        checkbutton1"
+                        >
                           繼續購物
-                        </Button>
+                        </button>
                       </Link>
                     </div>
-                    <div className="m-4">
+                    <div className="">
                       <Link to="/Shopping1">
-                        <Button
-                          className="m-4 button"
-                          block
+                        <button
+                          className="button checkbutton2"
                           onClick={this.gotocheck}
                         >
                           前往結帳
-                        </Button>
+                        </button>
                       </Link>
                     </div>
                   </div>

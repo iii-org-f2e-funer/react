@@ -1,0 +1,283 @@
+.home {
+  //   background-color: white;
+  background: white url('/images/home/home.png') top left no-repeat;
+  background-size: 1920px 4510px;
+  min-height: 4510px;
+  max-width: 1920px;
+  margin: 0 auto;
+  div {
+    border: 1px solid rgba(255, 255, 255, 0);
+  }
+  .home_landing {
+    min-height: 1410px;
+    position: relative;
+    .landing_t {
+      height: 900px;
+      .container {
+        margin-top: 115px;
+        h1 {
+          font-size: 60px;
+          font-weight: bold;
+          color: #013b46;
+          line-height: 95px;
+        }
+        .btn_div {
+          button {
+            height: 58px;
+            font-size: 30px;
+            font-weight: bold;
+            padding: 14px 50px;
+            border-radius: 55px;
+          }
+        }
+      }
+    }
+    .landing_b {
+      height: 510px;
+
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      .landing_feature {
+        width: 325px;
+        height: 260px;
+        text-align: center;
+      }
+    }
+  }
+  //揪團
+  .home_event {
+    min-height: 740px;
+    display: flex;
+    // justify-content: center;
+    flex-direction: column;
+    align-items: center;
+    h2 {
+      margin-top: 100px;
+      position: relative;
+      z-index: 0;
+    }
+    h2::before {
+      content: '';
+      z-index: -1;
+      background-color: #f9c149;
+      width: 50px;
+      height: 50px;
+      position: absolute;
+      top: -25px;
+      left: -25px;
+      border-radius: 50%;
+    }
+    // event slider
+    .event_slider {
+      height: 470px;
+      padding-top: 60px;
+      position: relative;
+      .slider_inner {
+        overflow: hidden;
+      }
+      ul.eventList {
+        display: flex;
+        width: 1160px;
+        position: relative;
+        left: 0;
+        transition: 0.4s;
+        transition-timing-function: ease-in-out;
+        .eventItem {
+          a {
+            // border: 1px solid black;
+            display: block;
+            width: 220px;
+            height: 350px;
+            text-align: center;
+            margin: 0 35px;
+            img {
+              display: inline-block;
+              width: 200px;
+              height: 200px;
+              border-radius: 50%;
+              // border: 1px solid black;
+            }
+            p.eventTitle {
+              font-size: 24px;
+              font-weight: bold;
+              margin-top: 28px;
+            }
+            p {
+              font-size: 18px;
+              color: #4b4b4b;
+              margin-bottom: 0;
+            }
+          }
+        }
+      }
+      .slide_btn {
+        position: absolute;
+        font-size: 40px;
+        transform: translateY(-50%);
+      }
+      .btn_prev {
+        left: -50px;
+        top: 50%;
+      }
+      .btn_next {
+        right: -50px;
+        top: 50%;
+      }
+    }
+    .event_b {
+      button {
+        width: 145px;
+        height: 48px;
+        line-height: 48px;
+        font-size: 25px;
+        border-radius: 48px;
+      }
+    }
+  }
+  //桌遊地圖
+  .home_map {
+    min-height: 830px;
+    .container {
+      margin-top: 220px;
+      display: flex;
+      justify-content: flex-end;
+      .l {
+        flex: 4;
+      }
+      .m {
+        h2 {
+          font-size: 30px;
+          color: #474747;
+        }
+        p {
+          font-size: 24px;
+          line-height: 50px;
+          color: #8e8e8e;
+        }
+        button {
+          width: 165px;
+          height: 48px;
+          line-height: 48px;
+          font-size: 25px;
+          border-radius: 48px;
+        }
+      }
+      .r {
+        flex: 1;
+      }
+    }
+  }
+  //商品
+  .home_product {
+    min-height: 640px;
+    display: flex;
+    // justify-content: center;
+    flex-direction: column;
+    align-items: center;
+    h2 {
+      margin-top: 100px;
+      position: relative;
+      z-index: 0;
+    }
+    h2::before {
+      content: '';
+      z-index: -1;
+      background-color: #f9c149;
+      width: 50px;
+      height: 50px;
+      position: absolute;
+      top: -25px;
+      left: -25px;
+      border-radius: 50%;
+    }
+    //product slider
+    .product_slider {
+      height: 380px;
+      position: relative;
+      .slider_inner {
+        overflow: hidden;
+      }
+      ul.productList {
+        display: flex;
+        width: 1160px;
+        position: relative;
+        left: 0;
+        transition: 0.4s;
+        transition-timing-function: ease-in-out;
+        padding-bottom: 10px;
+        .productItem {
+          a {
+            display: block;
+            width: 200px;
+            height: 280px;
+            text-align: center;
+            margin: 0 16px;
+            margin-top: 40px;
+            overflow: hidden;
+            background-color: #fff;
+            border-radius: 6px;
+            box-shadow: 0px 0px 4px rgba(black, 0.2);
+            img {
+              display: inline-block;
+              width: 195px;
+              height: 195px;
+              object-fit: contain;
+            }
+            p.productTitle {
+              font-size: 16px;
+              font-weight: bold;
+              margin-top: 14px;
+            }
+            p {
+              font-size: 16px;
+              color: #4b4b4b;
+              margin-bottom: 0;
+            }
+          }
+        }
+      }
+      .slide_btn {
+        position: absolute;
+        font-size: 40px;
+        transform: translateY(-50%);
+      }
+      .btn_prev {
+        left: -50px;
+        top: 50%;
+      }
+      .btn_next {
+        right: -50px;
+        top: 50%;
+      }
+    }
+    .product_b {
+      button {
+        width: 145px;
+        height: 48px;
+        line-height: 48px;
+        font-size: 25px;
+        border-radius: 48px;
+      }
+    }
+  }
+  .home_instagram {
+    min-height: 890px;
+    .container {
+      border: 1px solid black;
+      display: flex;
+      justify-content: flex-end;
+      flex-direction: column;
+      align-items: flex-end;
+      h2 {
+        margin-top: 150px;
+        text-align: center;
+      }
+      .instagram_slider {
+        width: 615px;
+        height: 430px;
+        border: 1px solid black;
+      }
+    }
+  }
+}

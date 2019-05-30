@@ -12,7 +12,7 @@ class Event extends React.Component {
         <div className="event">
           <div className="header">
             <p>揪團快訊</p>
-            <span>設定</span>
+            {/* <span>設定</span> */}
           </div>
           <ul>
             <li>
