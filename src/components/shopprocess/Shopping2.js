@@ -1,7 +1,10 @@
 import React from 'react'
 import { Button, Form } from 'react-bootstrap'
 import '../../styles/product/shop.scss'
-
+import Account from '../../components/firm/Account'
+import actions from '../../redux/action/userInfo.js'
+import { connect } from 'react-redux'
+import { withRouter } from 'react-router'
 import { Link } from 'react-router-dom'
 
 class Shopping2 extends React.Component {
@@ -17,14 +20,16 @@ class Shopping2 extends React.Component {
       order: {},
     }
   }
-
+  componentDidMount() {
+    this.setState({ login: this.props.userInfo.account })
+  }
   finish2 = () => {
     var temp_order = JSON.parse(localStorage.temp_order)
     var order_str = localStorage.allcart
     //////////////////////////////////////////////////// orderlist ////////////////////////////
     var order = {
       //////user_sid
-      login_user_sid: 1,
+      login_user_sid: this.state.login,
       ////cartlist
       allcart: localStorage.allcart,
       ////how to
@@ -357,4 +362,17 @@ class Shopping2 extends React.Component {
   }
 }
 
-export default Shopping2
+function mapStateToProp(store) {
+  return {
+    userInfo: store.userInfo,
+  }
+}
+
+export default withRouter(
+  connect(
+    mapStateToProp,
+    {
+      userInfoAction: actions.userInfo,
+    }
+  )(Shopping2)
+)

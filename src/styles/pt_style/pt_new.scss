@@ -7,7 +7,7 @@
   font-family: 'Noto Sans CJK TC';
 }
 
-.newptform {
+.ptform {
   margin: 10px;
 }
 
@@ -22,6 +22,8 @@
   display: inline-block;
   width: 172px;
   margin-right: 16px;
+  border: none;
+  border-bottom: 2px solid #949494;
 }
 
 .form-control.zipcode {
@@ -86,7 +88,17 @@ label {
   width: 550px;
   border-radius: 0.25rem;
   padding-left: 10px;
+  border: none;
+  border-bottom: 2px solid #949494;
 }
+#pt_add:focus,
+.form-control.county-sel:focus,
+.form-control.district-sel:focus{
+  outline: none;
+  border-bottom: 2px solid #2095C1;
+  box-shadow: none;
+}
+
 
 textarea {
   width: 920px;
@@ -114,29 +126,7 @@ textarea {
 // }
 // 這個class大家都會用到，要更改的話可以外面包一層哦，謝謝!!
 
-.newmodal {
-  height: 100%;
-  display: flex;
-  flex-direction: column;
-  justify-content: space-around;
-  text-align: center;
-  h5 {
-    font-size: 24px;
-  }
 
-  .btncol {
-    display: flex;
-  }
-  button {
-    padding: 10px 50px;
-    border: none;
-    border-radius: 5px;
-    display: flex;
-    margin: 0 auto;
-    background-color: #6ec4d2;
-    color: #fff;
-  }
-}
 /*!
  * https://github.com/YouCanBookMe/react-datetime
  */
