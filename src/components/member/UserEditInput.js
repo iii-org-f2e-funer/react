@@ -1,22 +1,18 @@
 import React from 'react'
-import { Form, Col, Row } from 'react-bootstrap'
+import { Modal, Form, Col, Row } from 'react-bootstrap'
 import TWzipcode from 'react-twzipcode'
 import actions from '../../redux/action/userInfo.js'
 import { connect } from 'react-redux'
 import { withRouter } from 'react-router'
-import { FaRegImage, FaTrashAlt } from 'react-icons/fa'
 
-class FirmEditInput extends React.Component {
+class userEditInput extends React.Component {
   constructor(props) {
     super(props)
     const data = this.props.firmData
-    console.log(this.props.img)
     this.state = {
-      preViewImgs: [], // 預覽 base64 Data Array
-
-      insert: this.props.insert,
+      insert: true,
       sid: data.sid,
-      firm_id: this.props.firm_id,
+      firm_id: data.firm_id,
       store: data.store,
       county: data.county,
       dist: data.dist,
@@ -28,31 +24,6 @@ class FirmEditInput extends React.Component {
       about: data.about,
       rule: data.rule,
       status: data.status,
-    }
-  }
-
-  handlecityChange = evt =>
-    this.setState({
-      county: evt.county,
-    })
-  handledistChange = evt =>
-    this.setState({
-      dist: evt.district,
-    })
-  // 新增圖片
-  handleFilesChange = event => {
-    const files = event.target.files
-    var _this = this
-    let preViewImgs = [] // 建立新陣列
-
-    for (let i = 0; i < files.length; i++) {
-      var reader = new FileReader()
-      reader.readAsDataURL(files[i]) //read file data as a base64 encoded string.
-      // reader loaded
-      reader.addEventListener('load', function(e) {
-        preViewImgs.push(e.target.result)
-        _this.setState({ preViewImgs: preViewImgs })
-      })
     }
   }
   updateAccount = () => {
@@ -71,43 +42,42 @@ class FirmEditInput extends React.Component {
       rule: this.state.rule,
       status: this.state.status,
     }
-    var fd = new FormData()
-    Object.keys(data).forEach(key => fd.append(key, data[key]))
-    // fd.append('data', data)
-    for (let i = 0; i < this.fileInput.files.length; i++) {
-      fd.append('files', this.fileInput.files[i])
-    }
-    console.log(fd)
     if (this.state.insert) {
       fetch('//localhost:3002/firm/insertAccount', {
         method: 'POST',
-        body: fd,
+        body: JSON.stringify(data),
         credentials: 'include',
+        headers: {
+          'Content-type': 'application/json',
+        },
       })
         .then(res => res.json())
         .then(obj => {
           if (obj.success) {
-            console.log(obj.message)
-            this.props.cancelEdit()
+            this.setState({
+              firmData: obj.body,
+            })
           } else {
             console.log(obj.message)
-            this.props.cancelEdit()
           }
         })
     } else {
       fetch('//localhost:3002/firm/updateAccount', {
         method: 'POST',
-        body: fd,
+        body: JSON.stringify(data),
         credentials: 'include',
+        headers: {
+          'Content-type': 'application/json',
+        },
       })
         .then(res => res.json())
         .then(obj => {
           if (obj.success) {
-            console.log(obj.message)
-            this.props.cancelEdit()
+            this.setState({
+              firmData: obj.body,
+            })
           } else {
             console.log(obj.message)
-            this.props.cancelEdit()
           }
         })
     }
@@ -119,7 +89,7 @@ class FirmEditInput extends React.Component {
         <Form>
           <Form.Group as={Row} controlId="formHorizontalEmail">
             <Form.Label column sm={2}>
-              店家名稱
+              名稱
             </Form.Label>
             <Col sm={10}>
               <Form.Control
@@ -131,34 +101,10 @@ class FirmEditInput extends React.Component {
           </Form.Group>
           <Form.Group as={Row} controlId="formHorizontalEmail">
             <Form.Label column sm={2}>
-              店家照片
+              照片
             </Form.Label>
             <Col sm={10}>
-              <label className="img_icon" htmlFor="myFile">
-                <FaRegImage />
-              </label>
-              <input
-                multiple
-                id="myFile"
-                type="file"
-                style={{ display: 'none' }}
-                ref={el => (this.fileInput = el)}
-                onChange={this.handleFilesChange}
-              />
-              <div className="post-image">
-                {this.props.img.map((item, index) => (
-                  <img
-                    key={index}
-                    src={'http://localhost:3002/images/firm/' + item.image_path}
-                    alt=""
-                  />
-                ))}
-
-                {/* <img src={process.env.PUBLIC_URL + '/images/instagram/avatar.png'} alt="" /> */}
-                {this.state.preViewImgs.map((item, idx) => (
-                  <img key={idx} src={item} alt="" />
-                ))}
-              </div>
+              <Form.Control type="file" placeholder="" />
             </Col>
           </Form.Group>
           <Form.Group as={Row} controlId="formHorizontalPassword">
@@ -191,7 +137,7 @@ class FirmEditInput extends React.Component {
           </Form.Group>
           <Form.Group as={Row} controlId="formHorizontalPassword">
             <Form.Label column sm={2}>
-              店家電話
+              電話
             </Form.Label>
             <Col sm={10}>
               <Form.Control
@@ -293,15 +239,15 @@ class FirmEditInput extends React.Component {
           </Form.Group>
 
           <div className="d-flex justify-content-center">
-            <div className="button mt-3 mr-3" onClick={this.updateAccount}>
+            <button className="button mt-3 mr-3" onClick={this.updateAccount}>
               確認更改
-            </div>
-            <div
+            </button>
+            <button
               className="button button-white mt-3"
               onClick={this.props.cancelEdit}
             >
               取消變更
-            </div>
+            </button>
           </div>
         </Form>
       </>
@@ -321,5 +267,5 @@ export default withRouter(
     {
       userInfoAction: actions.userInfo,
     }
-  )(FirmEditInput)
+  )(userEditInput)
 )

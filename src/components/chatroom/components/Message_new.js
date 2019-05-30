@@ -1,6 +1,6 @@
 import React from 'react'
 import { Route, Link, Switch, NavLink } from 'react-router-dom'
-import socketIOClient from 'socket.io-client'
+import avatar from '../avatar/ironman.jpg'
 
 class Message extends React.Component {
   constructor(props) {
@@ -9,7 +9,6 @@ class Message extends React.Component {
       //{h_id: 1,h_sub: "BOB",m_id: 1,m_cont: "你好，BOB初次見面!",m_time: "2019-05-21T16:45:57.000Z",sender: 1,}
       chatDataAll: [],
     }
-    this.ready()
   }
 
   //get data from database
@@ -28,42 +27,20 @@ class Message extends React.Component {
     await this.setState({ chatDataAll: data })
   }
 
-  ready() {
-    const socket = socketIOClient(this.state.endpoint)
-    socket.on('all_message', obj => {
-      this.updateMsg(obj)
-      console.log(obj)
-    })
+  async componentWillReceiveProps() {
+    const response = await fetch(
+      `http://localhost:3002/chatroom/message/${this.props.logInId}`,
+      {
+        method: 'GET',
+        headers: { 'Content-type': 'application/json' },
+      }
+    )
+    const data = await response.json()
+
+    console.log(data)
+
+    await this.setState({ chatDataAll: data })
   }
-
-  updateMsg(obj) {
-    let messages = this.state.messages
-    const newMsg = {
-      type: 'chat',
-      username: obj.username,
-      uid: obj.uid,
-      action: obj.message,
-      time: this.generateTime(),
-      msgId: this.generateMsgId(),
-    }
-    let messages_new = [...messages, newMsg]
-    this.setState({ messages: messages_new })
-  }
-
-  // async componentWillReceiveProps() {
-  //   const response = await fetch(
-  //     `http://localhost:3002/chatroom/message/${this.props.logInId}`,
-  //     {
-  //       method: 'GET',
-  //       headers: { 'Content-type': 'application/json' },
-  //     }
-  //   )
-  //   const data = await response.json()
-
-  //   console.log(data)
-
-  //   await this.setState({ chatDataAll: data })
-  // }
 
   render() {
     return (
@@ -86,8 +63,13 @@ class Message extends React.Component {
                   activeClassName="active"
                 >
                   <div className="d-flex w-100 justify-content-between align-items-center">
-                    <h5 className="mb-1 text-nowrap  ">{data.y_toname}</h5>
-                    <span className="message-date  text-wrap ">
+                    <div className="d-flex justify-content-center align-items-center">
+                      <div className="avatar">
+                        <img src={avatar} alt="會員1頭像" />
+                      </div>
+                      <h5 className="mb-1 text-nowrap  ">{data.y_toname}</h5>
+                    </div>
+                    <span className="message-date  text-wrap text-center ">
                       {data.time}
                     </span>
                     {/* <span className="message-date  text-wrap ">
@@ -111,8 +93,13 @@ class Message extends React.Component {
                   activeClassName="active"
                 >
                   <div className="d-flex w-100 justify-content-between align-items-center">
-                    <h5 className="mb-1 text-nowrap  ">{data.x_fromname}</h5>
-                    <span className="message-date  text-wrap ">
+                    <div className="d-flex justify-content-center align-items-center">
+                      <div className="avatar">
+                        <img src={avatar} alt="會員1頭像" />
+                      </div>
+                      <h5 className="mb-1 text-nowrap  ">{data.x_fromname}</h5>
+                    </div>
+                    <span className="message-date  text-wrap text-center">
                       {data.time}
                     </span>
                     {/* <span className="message-date  text-wrap ">
@@ -136,6 +123,7 @@ class Message extends React.Component {
             </NavLink>
              */}
           </div>
+          <div className="d-none">{this.props.refreshID}</div>
         </div>
       </>
     )

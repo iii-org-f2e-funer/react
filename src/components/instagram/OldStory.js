@@ -13,10 +13,16 @@ import {
 class OldStory extends React.Component {
   constructor(props) {
     super(props)
-    this.state = { editMenu: false, isEdit: false, preViewImges: [] }
+    this.state = {
+      editMenu: false,
+      isEdit: false,
+      preViewImges: [],
+      originText: '',
+    }
   }
   componentDidMount() {
     this.text.innerText = this.props.data.content
+    // this.setState({ originText: this.props.data.content })
     // console.log(this.props)
   }
   //發送留言
@@ -97,6 +103,7 @@ class OldStory extends React.Component {
   }
   handleOnBlur = e => {
     e.stopPropagation()
+    this.text.innerText = this.props.data.content
     this.setState({ editMenu: false, isEdit: false, preViewImges: [] }, () => {
       this.props.handleControlRefresh(true)
     })

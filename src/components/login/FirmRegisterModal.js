@@ -199,9 +199,9 @@ class FirmRegisterModal extends React.Component {
                   required
                   ref={el => (this.inputPassword2 = el)}
                 />
-                <Form.Text className="red">{this.state.remindText}</Form.Text>
+                {/* <Form.Text className="red">{this.state.remindText}</Form.Text> */}
               </Form.Group>
-              <label htmlFor="uniform">email</label>
+              <label htmlFor="uniform">信箱</label>
               <input
                 className="pl-3"
                 name="uniform"

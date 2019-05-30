@@ -34,9 +34,9 @@ class Instagram extends React.Component {
         >
           <User />
           <Switch>
-            <Route exact path="/instagram" component={Stories} />
-            <Route exact path="/instagram/bookmark" component={Bookmark} />
-            <Route exact path="/instagram/battle" component={Battle} />
+            <Route exact path="/:instagram" component={Stories} />
+            <Route exact path="/:instagram/bookmark" component={Bookmark} />
+            <Route exact path="/:instagram/battle" component={Battle} />
           </Switch>
           <Event />
         </div>

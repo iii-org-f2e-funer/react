@@ -5,8 +5,22 @@
   .col {
     display: flex;
   }
+
+  .menu{
+    margin: 12px 0px;
+    margin-right: 12px;
+    padding: 32px 0;
+    background-color: #fff;
+    border-radius: 4px;
+    border: 1px solid rgba(black,0.1);
+    font-size: 18px;
+    width: 25%;
+    display: inline-block;
+    vertical-align: top;
+  }
+  
   .personal {
-    margin: 20px;
+    margin: 0px 0px 50px 0px;
   }
   .card {
     display: flex;
@@ -18,6 +32,10 @@
     // 照片hover效果
 
   }
+  .useraccount{
+    margin: 5px;
+  }
+  .usersidebar_link
 
   .btn-sm {
     background: #6ec4d2;
@@ -47,20 +65,21 @@
     height: 130px;
     margin: 5px;
   }
-  .info {
+  .userform {
     border: 1px solid rgb(223, 221, 221);
     box-shadow: 0px 0px 2px 0px #ccc;
     width: 100vh;
     height: 100vh;
     padding: 10px;
-    margin: 20px;
+    margin: 12px 20px;
+    background: rgb(255, 255, 255);
   }
   .form{
-    width: 100vh;
-    height: 100vh;
-    border: 1px solid rgb(223, 221, 221);
-    box-shadow: 0px 0px 2px 0px #ccc;
-    padding: 10px;
-    margin: 20px;
+    // width: 100vh;
+    // height: 100vh;
+    // border: 1px solid rgb(223, 221, 221);
+    // box-shadow: 0px 0px 2px 0px #ccc;
+    // padding: 10px;
+    // margin: 20px;
   }
 }

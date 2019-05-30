@@ -19,7 +19,6 @@ class Navbar extends React.Component {
       userRegisterPopup: false,
     }
   }
-
   registerSuccess = () => {
     this.setState({ registerPopup: false })
   }
@@ -71,7 +70,11 @@ class Navbar extends React.Component {
   render() {
     window.scrollTo(0, 0) //滾到最上面 (for instagram)
     return (
-      <div className="navbar">
+      <div
+        className={
+          this.props.location.pathname === '/' ? 'navbar navblue' : 'navbar'
+        }
+      >
         <div className="container">
           <div className="brand_logo">
             <NavLink to="/">

@@ -168,13 +168,16 @@ export default class product extends React.Component {
             <h2 className="banner-tittle">桌遊，知性與深度的休閒生活方式</h2>
             <img
               id="purplemonster"
-              src={process.env.PUBLIC_URL + '/images/product/redmonster.png'}
+              src={process.env.PUBLIC_URL + '/images/product/redmonster1.png'}
             />
           </div>
-          <div className="container">
+          <div className="product_container">
             <div className="outside">
               <div className="search">
-                <InputGroup className="mb-3">
+                <InputGroup
+                  className="inputsaerch
+                "
+                >
                   <FormControl
                     name="searchText"
                     placeholder="輸入商品名稱"
@@ -182,10 +185,10 @@ export default class product extends React.Component {
                     onChange={this.handleSearchTextChange}
                   />
                 </InputGroup>
-                <label className="mt-4 ml-4">遊戲分類</label>
-                <div className="game-control ml-4 mr-4 mt-1 ">
+                <div className="game-control">
+                  <label className="">遊戲分類</label>
                   <select
-                    className="game-control mr-4 mt-1 "
+                    className="p-1 drop-control"
                     onChange={this.gettype}
                     value={this.state.type}
                   >
@@ -195,36 +198,38 @@ export default class product extends React.Component {
                       </option>
                     ))}
                   </select>
-                </div>{' '}
-                <label className="mt-2 ml-4">SORT</label>
-                <div className="game-control ml-4 mr-4 mt-1 ">
+                </div>
+                <div className="game-control">
+                  <label className="">價格</label>
                   <select
-                    className="game-control"
+                    className="drop-control p-1"
                     onChange={this.getsort}
                     value={this.state.sort}
                   >
                     <option className="dropdown" value="hightolow">
-                      highTOlow
+                      價格:高到低
                     </option>
                     <option className="dropdown" value="lowtohigh">
-                      lowTOhigh
+                      價格:低到高
                     </option>
                   </select>
                 </div>
-                <label className="mt-4 ml-4">價格</label>
-                <div className="mt-1 ml-4 " id="rangeshow">
-                  {this.state.searchmoney}
-                  以下
-                </div>
-                <div className="range-controll">
-                  <input
-                    type="range"
-                    name="money"
-                    min="180"
-                    max="3000"
-                    id="searchmoney"
-                    onChange={this.range()}
-                  />
+                <div className="game-control">
+                  <label className="">價格設定</label>
+                  <div className="" id="rangeshow">
+                    {this.state.searchmoney}
+                    以下
+                  </div>
+                  <div className="range-controll">
+                    <input
+                      type="range"
+                      name="money"
+                      min="180"
+                      max="3000"
+                      id="searchmoney"
+                      onChange={this.range()}
+                    />
+                  </div>
                 </div>
                 <Button
                   className="searchit m-4  button"
@@ -241,7 +246,10 @@ export default class product extends React.Component {
                     key={item.id}
                     onClick={this.gotodetail(item.sid)}
                   >
-                    <Card style={{ width: '190px', height: '280px' }}>
+                    <Card
+                      style={{ width: '170px', height: '300px' }}
+                      className="allcard"
+                    >
                       <Card.Img
                         variant="top"
                         src={
@@ -250,11 +258,20 @@ export default class product extends React.Component {
                           item.image_path
                         }
                       />
-
-                      <Card.Body>
-                        <Card.Title>{item.productName}</Card.Title>
-                        <Card.Text>NT{item.price}</Card.Text>
-                      </Card.Body>
+                      <div>
+                        <Card.Title className="cardtitle">
+                          {item.productName}
+                        </Card.Title>
+                        <div className="card-priceall d-flex">
+                          <div className=" ">
+                            <img
+                              src="https://img.icons8.com/color/48/000000/money-bag.png"
+                              width="30px"
+                            />
+                          </div>
+                          <div className="p-1 card-price">{item.price}</div>
+                        </div>
+                      </div>
                     </Card>
                   </div>
                 ))}
