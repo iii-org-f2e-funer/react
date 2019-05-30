@@ -3,11 +3,19 @@ import Account from '../../components/firm/Account'
 import actions from '../../redux/action/userInfo.js'
 import { connect } from 'react-redux'
 import { withRouter } from 'react-router'
-import { BrowserRouter as Router, Route, Link, Switch } from 'react-router-dom'
-import FirmEdit from './FirmEdit.js'
-import Site_manage from './Site_manage.js'
+import {
+  BrowserRouter as Router,
+  Route,
+  Switch,
+  NavLink,
+} from 'react-router-dom'
 import { FaPen } from 'react-icons/fa'
 
+import FirmEdit from './FirmEdit.js'
+import Site_manage from './Site_manage.js'
+import Site_order from './Site_order.js'
+import product_manage from './product_manage.js'
+import product_order from './product_order.js'
 
 class Sidebar extends React.Component {
   constructor(props) {
@@ -96,7 +104,7 @@ class Sidebar extends React.Component {
 
               <div className="info">
                 <h5>{data.firmname}</h5>
-                <div className="email">{data.email}</div>
+                <div className="email">{data.account}</div>
                 <button className="button" onClick={this.handleShow}>
                   編輯店家資料
                 </button>
@@ -106,30 +114,32 @@ class Sidebar extends React.Component {
             <div className="sidebar_link">
               <ul>
                 <li>
-                  <Link to="/firm">帳號設定</Link>
+                  <NavLink to="/firm/account" activeClassName="active">
+                    帳號設定
+                  </NavLink>
                 </li>
                 <li>
-                  <Link to="/firm/product_manage">商品管理</Link>
+                  <NavLink to="/firm/product_manage">商品管理</NavLink>
                 </li>
                 <li>
-                  <Link to="/firm/product_order">商品訂單</Link>
+                  <NavLink to="/firm/product_order">商品訂單</NavLink>
                 </li>
                 <li>
-                  <Link to="/firm/site_manage">場地管理</Link>
+                  <NavLink to="/firm/site_manage">場地管理</NavLink>
                 </li>
                 <li>
-                  <Link to="/firm/site_order">場地預約訂單</Link>
+                  <NavLink to="/firm/site_order">場地預約訂單</NavLink>
                 </li>
               </ul>
             </div>
           </div>
-          <div className="manage_info">
+          <div className="firmManage_info">
             <Switch>
-              <Route path="/firm" component={Account} />
-              <Route path="/firm/product_manage" component={Account} />
-              <Route path="/firm/product_order" component={Account} />
+              <Route path="/firm/account" component={Account} />
+              <Route path="/firm/product_manage" component={product_manage} />
+              <Route path="/firm/product_order" component={product_order} />
               <Route path="/firm/site_manage" component={Site_manage} />
-              <Route path="/firm/site_order" component={Account} />
+              <Route path="/firm/site_order" component={Site_order} />
             </Switch>
           </div>
           <FirmEdit

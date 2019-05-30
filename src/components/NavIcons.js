@@ -28,16 +28,6 @@ class NavIcons extends React.Component {
         {this.props.userInfo.isFirm ? (
           <>
             <li>
-              <NavLink to="/Mycart" activeClassName="active">
-                <FaShoppingCart />
-              </NavLink>
-            </li>
-            <li>
-              <NavLink to="/chatroom/message" activeClassName="active">
-                <FaComment />
-              </NavLink>
-            </li>
-            <li>
               <div
                 className={
                   this.state.noticeOpen ? 'notice_btn active' : 'notice_btn'
