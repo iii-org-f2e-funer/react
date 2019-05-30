@@ -93,7 +93,7 @@ class UserRegisterModal extends React.Component {
         password: this.state.password,
         email: this.state.email,
       }
-      fetch('//localhost:3002/member/memberRegister', {
+      fetch('//localhost:3002/member/userRegister', {
         method: 'POST',
         body: JSON.stringify(data),
         credentials: 'include',
@@ -196,7 +196,7 @@ class UserRegisterModal extends React.Component {
                 variant="primary"
                 type="submit"
                 className="button button--lg"
-                onClick={this.UserRegisterRequest}
+                onClick={this.userRegister}
               >
                 註冊
               </Button>

@@ -1,9 +1,9 @@
 import React from 'react'
 import '../styles/member/member.scss'
 import { Button, Card, Table, Row, Col } from 'react-bootstrap'
-// import MemberInfo from '../components/member_info/MemberInfo'
-// import MemberMenu from '../components/member_info/MemberMenu'
-// import MemberForm from '../components/member_info/MemberForm'
+// import MemberInfo from '../components/member/MemberInfo'
+import MemberMenu from '../components/member/MemberMenu'
+// import MemberForm from '../components/member/MemberForm'
 
 import {
   BrowserRouter as Router,
@@ -20,9 +20,8 @@ const Member = () => {
         <div className="container">
           <Row>
             <Col>
-              <p>jeisf</p>
               {/* 個人資料 */}
-              {/* <MemberMenu /> */}
+              <MemberMenu />
               {/* 資訊欄 */}
               {/* <MemberInfo /> */}
               {/* 輸入頁 */}

@@ -50,6 +50,7 @@ $font_content_size: 18px;
         flex: 1;
         height: 100%;
         overflow: auto;
+        text-decoration: none;
         h5 {
           display: inline-block;
         }
@@ -77,6 +78,7 @@ $font_content_size: 18px;
         padding-right: 12px;
         padding-top: 0;
         padding-bottom: 0;
+        text-decoration: none;
       }
       .list-group-item.active {
         background-color: $color_blue_choose;
@@ -116,7 +118,9 @@ $font_content_size: 18px;
       }
       .list-group-item {
         width: 100%;
+        text-decoration: none;
       }
+
       .list-group-item.active {
         background-color: $color_blue_choose;
         border-color: $color_border;
