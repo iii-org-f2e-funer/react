@@ -10,91 +10,133 @@ $boder_radius: 6px;
 $font_title_size: 24px;
 $font_content_size: 18px;
 $shadow: 0px 1px 4px rgba(black, 0.2);
-  .cart{
-    ul{
-      list-style: none;
-    }
-    a{
-      display: block;
-      text-decoration: none;
-    }
-    > ul {
-      padding: 0px;
-      display: flex;
-      justify-content: left;
-      > li {
-        > a {
-          height: 100%;
-          line-height: 72px;
-          color: $color_grey;
-        }
+.cart {
+  .cart-title {
+    width: 200px;
+    height: 60px;
+    margin: 20px auto 0 auto;
+  }
+  ul {
+    list-style: none;
+  }
+  a {
+    display: block;
+    text-decoration: none;
+  }
+  > ul {
+    padding: 0px;
+    display: flex;
+    justify-content: left;
+    > li {
+      > a {
+        height: 100%;
+        line-height: 72px;
+        color: $color_grey;
       }
-    }
-    ul.cart_nav {
-        display: flex;
-      li {
-        .mycart{
-            color:$color_blue;
-        }
-        .myfav{
-            color:$color_grey;
-        }
-        a {
-          padding: 0 18px;
-        }
-         a:hover {
-            color: $color_blue;
-          }
-           a.active {
-            color: $color_blue;
-          }
-      }
-    }
-    .myfav-table{
-        tr{
-          font-size: 18px;
-          text-align: center;
-          line-height: 100%;
-        }     
-    }
-    .container{
-        position: relative;  
-        min-height: 80vh;      
-        .check{
-            width: 100%;
-            height: 300px;
-            // position: absolute;
-            bottom:0;            
-            display: flex;
-            justify-content:space-between;
-            .gotocheck{
-            width: 30%;            
-            .money{
-                display: flex;
-                justify-content:space-between;
-                height: 50px;
-                h5{
-                    margin: 0;
-                    color: $color_light; 
-                }
-                h3{
-                    margin: 0;
-                }
-                .total{
-                    color: $color_red;
-                }
-            }
-            }
-            .remind{
-            height: 20px;
-            width: 50%;
-            color: $color_light;           
-            }
-            .checkbutton{
-                width: 100%;
-                display: flex;
-            }
-        }
     }
   }
+  ul.cart_nav {
+    display: flex;
+    li {
+      .mycart {
+        color: $color_blue;
+      }
+      .myfav {
+        color: $color_grey;
+      }
+      a {
+        padding: 0 18px;
+      }
+      a:hover {
+        color: $color_blue;
+      }
+      a.active {
+        color: $color_blue;
+      }
+    }
+  }
+  .myfav-table {
+    margin-bottom: 150px;
+    .table_head {
+      background: #a0dce5;
+      color: $color_grey;
 
+      tr th {
+        border: none;
+      }
+    }
+    .table-bordered td {
+      border: none;
+    }
+    tr {
+      font-size: 18px;
+      text-align: center;
+      line-height: 100%;
+      border-bottom: 3px solid #f6f6f6;
+
+      td {
+        background: #ffffff;
+        margin: auto auto;
+        line-height: 50px;
+        color: $color_grey;
+      }
+    }
+  }
+  .container {
+    position: relative;
+    min-height: 80vh;
+    .check {
+      width: 100%;
+      height: 300px;
+      // position: absolute;
+      bottom: 0;
+      display: flex;
+      justify-content: space-between;
+      .gotocheck {
+        width: 40%;
+        .GET-control{
+          width: 200px;
+          border:1px solid #d3c9c9;
+          color: #9b8f8f;
+        }
+        .money {
+          display: flex;
+          justify-content: space-between;
+          height: 50px;
+          h5 {
+            margin: 0;
+            color: $color_light;
+          }
+          h3 {
+            margin: 0;
+          }
+          .total {
+            color: $color_red;
+          }
+        }
+      }
+      .remind {
+        height: 20px;
+        width: 50%;
+        color: $color_light;
+      }
+      .checkbutton {
+        padding: 0 auto;
+        width: 100%;
+        display: flex;
+        .checkbutton1{
+          width:200px;
+          height: 40px;
+        }
+        .checkbutton2{
+          width: 180px;
+          height: 40px;
+        }
+        .button{
+          margin: 25px;
+        }
+      }
+      
+    }
+  }
+}

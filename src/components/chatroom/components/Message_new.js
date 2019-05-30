@@ -1,5 +1,6 @@
 import React from 'react'
 import { Route, Link, Switch, NavLink } from 'react-router-dom'
+import avatar from '../avatar/ironman.jpg'
 
 class Message extends React.Component {
   constructor(props) {
@@ -62,8 +63,11 @@ class Message extends React.Component {
                   activeClassName="active"
                 >
                   <div className="d-flex w-100 justify-content-between align-items-center">
+                    <div className="avatar">
+                      <img src={avatar} alt="會員1頭像" />
+                    </div>
                     <h5 className="mb-1 text-nowrap  ">{data.y_toname}</h5>
-                    <span className="message-date  text-wrap ">
+                    <span className="message-date  text-wrap text-center ">
                       {data.time}
                     </span>
                     {/* <span className="message-date  text-wrap ">
@@ -87,8 +91,13 @@ class Message extends React.Component {
                   activeClassName="active"
                 >
                   <div className="d-flex w-100 justify-content-between align-items-center">
-                    <h5 className="mb-1 text-nowrap  ">{data.x_fromname}</h5>
-                    <span className="message-date  text-wrap ">
+                    <div className="d-flex justify-content-center align-items-center">
+                      <div className="avatar">
+                        <img src={avatar} alt="會員1頭像" />
+                      </div>
+                      <h5 className="mb-1 text-nowrap  ">{data.x_fromname}</h5>
+                    </div>
+                    <span className="message-date  text-wrap text-center">
                       {data.time}
                     </span>
                     {/* <span className="message-date  text-wrap ">

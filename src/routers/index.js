@@ -1,8 +1,8 @@
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom'
 import React from 'react'
 import { connect } from 'react-redux'
-import Demopage from '../pages/demopage.js'
 
+import Home from '../components/Home.js'
 import GameMapDetail from '../pages/GameMapDetail.js'
 import GameMap from '../pages/Map_v2/Map'
 import Firm from '../pages/Firm.js'
@@ -48,8 +48,8 @@ class RootRouter extends React.Component {
         <>
           <Navbar />
           <Switch>
-            <Route exact path="/" component={Product} />
-            <Route path="/demo" component={Demopage} />
+            <Route exact path="/" component={Home} />
+
             <Route path="/firm" component={Firm} />
             <Route exact path="/checkCode" component={CheckCode} />
             <Route path="/member" component={Member} />
