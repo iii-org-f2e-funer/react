@@ -1,51 +1,137 @@
+// 左方Sidebar + Link
 import React from 'react'
-import '../../styles/member/member.scss'
-import { Form, Card, Col, Button, Table } from 'react-bootstrap'
+import actions from '../../redux/action/userInfo.js'
+import UserAccount from './UserAccount'
+import UserEvent from './UserEvent'
+import UserShopping from './UserShopping'
+import UserMail from './UserMail'
+import { connect } from 'react-redux'
+import { withRouter } from 'react-router'
+import { BrowserRouter as Router, Route, Link, Switch } from 'react-router-dom'
+import MemberEdit from './MemberEdit.js'
+// import Site_manage from './Site_manage.js'
+import { FaPen } from 'react-icons/fa'
 
-const MemberMenu = () => {
-  return (
-    <>
-      {/* 個人資料 */}
-      <div className="personal">
-        <Card className="card">
-          <Col className="d-flex">
-            {/* 照片 */}
-            <Card.Img variant="top" src="../images/member/sticker.png" />
-            <Card.Body>
-              <Card.Title>姓名</Card.Title>
-              <Card.Text>mail</Card.Text>
-              <Button className="btn-sm text-nowrap" variant="primary">
-                編輯個人資料
-              </Button>
-            </Card.Body>
-          </Col>
-        </Card>
-        {/* 下選單 */}
-        <Table>
-          <tbody className="col-12">
-            <ul className="list-unstyled ">
-              <li className="">
-                <a href="">帳號設定</a>
-              </li>
-              <li className="">
-                <a href="">我的揪團</a>
-              </li>
-              <li>
-                <a href="">訂單查詢</a>
-              </li>
-              <li>
-                <a href="">場地預定</a>
-              </li>
-              <li>
-                <a href="">系統信件</a>
-              </li>
-            </ul>
-          </tbody>
-        </Table>
-      </div>
-      {/* 資訊欄 */}
-    </>
-  )
+class MemberMenu extends React.Component {
+  constructor(props) {
+    super(props)
+    this.state = {
+      editPopup: false,
+      data: [],
+    }
+  }
+  componentDidMount() {
+    fetch('//localhost:3002/member/userInfo', {
+      credentials: 'include',
+    })
+      .then(res => res.json())
+      .then(obj => {
+        if (obj.success) {
+          this.setState({ data: obj.body })
+        } else {
+          this.props.history.push('/')
+        }
+      })
+  }
+  handleShow = () => {
+    this.setState({ editPopup: true })
+  }
+
+  handleHide = () => {
+    this.setState({ editPopup: false })
+  }
+
+  render() {
+    const data = this.state.data
+    return (
+      <Router>
+        <>
+          {/* pho */}
+          <div className="sidebar">
+            <div className="person flex">
+              <form action="">
+                <div className="img-outter">
+                  <div className="avatar-edit">
+                    <input
+                      id="file-upload"
+                      type="file"
+                      accept=".png, .jpg, .jpeg"
+                    />
+                    <label htmlFor="file-upload" className="pen">
+                      <FaPen />
+                    </label>
+                  </div>
+                  <div className="circle">
+                    <img
+                      alt="無法顯示"
+                      src={
+                        process.env.PUBLIC_URL +
+                        '/images/personalFolder/logo.png'
+                      }
+                    />
+                  </div>
+                </div>
+              </form>
+              {/*            UserInfo         */}
+              <div className="userinfo">
+                <h5>嗨 {data.nickname}</h5>
+                <div className="useraccount">{data.account}</div>
+                <button className="button btn-lg" onClick={this.handleShow}>
+                  編輯個人資料
+                </button>
+              </div>
+            </div>
+            {/*            sidebar_link          */}
+            <div className="sidebar_link">
+              <ul>
+                <li>
+                  <Link to="/member">帳號設定</Link>
+                </li>
+                <li>
+                  <Link to="/userevent">我的揪團</Link>
+                </li>
+                <li>
+                  <Link to="/usershopping">訂單查詢</Link>
+                </li>
+                <li>
+                  <Link to="">場地預定查詢</Link>
+                </li>
+                <li>
+                  <Link to="/usermail">系統信件</Link>
+                </li>
+              </ul>
+            </div>
+          </div>
+          <div className="manage_info">
+            <Switch>
+              <Route path="/member" component={UserAccount} />
+              <Route path="/userevent" component={UserEvent} />
+              <Route path="/usershopping" component={UserShopping} />
+              {/* <Route path="/firm/site_manage" component={Site_manage} /> */}
+              <Route path="/usermail" component={UserMail} />
+            </Switch>
+          </div>
+          {/* <FirmEdit
+            editPopup={this.state.editPopup}
+            handleHide={this.handleHide}
+          /> */}
+        </>
+      </Router>
+    )
+  }
 }
 
-export default MemberMenu
+function mapStateToProp(store) {
+  return {
+    userInfo: store.userInfo,
+  }
+}
+
+export default withRouter(
+  connect(
+    mapStateToProp,
+    {
+      userInfoAction: actions.userInfo,
+    }
+  )(MemberMenu)
+)

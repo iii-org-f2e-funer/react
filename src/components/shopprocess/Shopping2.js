@@ -118,7 +118,15 @@ class Shopping2 extends React.Component {
                     <div className="title-titles">
                       <div className="title-people">信用卡填寫</div>{' '}
                     </div>
-                    <div className="">
+                    <div className="control-line">
+                      <Form.Label>持卡人</Form.Label>
+                      <Form.Control
+                        type="text"
+                        placeholder="enter name"
+                        onBlur={this.card}
+                      />
+                    </div>
+                    <div className="control-line">
                       <Form.Label>卡號</Form.Label>
                       <Form.Control
                         type="text"
@@ -126,9 +134,9 @@ class Shopping2 extends React.Component {
                         onBlur={this.card}
                       />
                     </div>
-                    <div className="">
-                      <h5>有效期限</h5>{' '}
-                      <select className="" onBlur={this.years}>
+                    <div className="control-line mt-5">
+                      <Form.Label>有效期限</Form.Label>
+                      <select className="years" onBlur={this.years}>
                         <option className="dropdown" value="2019">
                           2019
                         </option>
@@ -167,7 +175,7 @@ class Shopping2 extends React.Component {
                         </option>
                       </select>
                       年
-                      <select className="" onBlur={this.months}>
+                      <select className="months" onBlur={this.months}>
                         <option className="dropdown" value="1">
                           1
                         </option>
@@ -207,24 +215,41 @@ class Shopping2 extends React.Component {
                       </select>
                       月
                       <div>
-                        <Form.Label>驗證碼</Form.Label>
-                        <Form.Control
-                          type="text"
-                          placeholder="輸入驗證碼"
-                          onBlur={this.csv}
-                        />
+                        {/* csv  */}
+                        <div className="control-line">
+                          <Form.Label>驗證碼</Form.Label>
+                          <Form.Control
+                            type="text"
+                            placeholder="輸入驗證碼"
+                            onBlur={this.csv}
+                          />
+                        </div>
+                      </div>
+                      <div className="title-titles">
+                        <div className="title-people">注意事項</div>
+                      </div>{' '}
+                      <div>
+                        <p>
+                          1.請輸入以上信用卡資料、以便於向發卡行取得交易授權。完成交易授權只是發卡行確認信用卡的有效性及授權交易額度，您的信用卡信用額度在交易金額範圍內會被保留，但不代表您的付款已經完成，這筆交易也還不會出現在您的信用卡帳單中。
+                        </p>
+                        <p>
+                          2.如果您所訂購的商品仍有存貨、且交易條件經確認無誤，我們才會向發卡行請款，只有當我們收到信用卡交易款項時，您的付款程序才算完成。
+                        </p>
+                        <p>
+                          3.為確保網路交易安全，您同意本公司得就此筆交易向發卡銀行、收單行及持卡人核對是否屬實；您所填寫的身份證字號、出生年月日資料，亦將於核對完成後刪除。
+                        </p>
                       </div>
                     </div>
 
                     <div className="buttons">
                       <Link to="/Shopping1">
                         <div className="buttonall">
-                          <Button className="button2 button">上一步</Button>
+                          <button className="button2 button">上一步</button>
                         </div>
                       </Link>
                       <Link to="/Shopping3">
                         <div className="buttonall" onClick={this.finish2}>
-                          <Button className="button1 button">完成訂單</Button>
+                          <button className="button1 button">完成訂單</button>
                         </div>
                       </Link>
                     </div>

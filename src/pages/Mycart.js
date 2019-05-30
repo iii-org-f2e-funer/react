@@ -80,7 +80,11 @@ export default class Mycart extends React.Component {
     )
   }
   render() {
-    if (localStorage.allcart == undefined || localStorage.allcart === '[]') {
+    if (
+      localStorage.allcart == undefined ||
+      localStorage.allcart == '' ||
+      localStorage.allcart == '[]'
+    ) {
       return (
         <>
           <div className="cart">
