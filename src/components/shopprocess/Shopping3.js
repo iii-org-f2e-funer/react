@@ -86,23 +86,8 @@ export default class Shopping3 extends React.Component {
                     <div className="end-money2">{this.state.totall}</div>
                   </div>
                 </div>
-                {/* <table>
-                  <tr>
-                    <th>name</th>
-                    <th>number</th>
-                    <th>money</th>
-                    <th>moneys</th>
-                  </tr>
-                  {this.state.all.map((item, index, array) => (
-                    <tr>
-                      <td>{this.state.all[index].productName}</td>
-                      <td>{this.state.all[index].number}</td>
-                      <td>{this.state.all[index].price}</td>
-                      <td>{this.state.all[index].totall}</td>
-                    </tr>
-                  ))}
-                </table>
-                total:{this.state.totall} */}
+                <button className="button button3">回首頁</button>
+                <button className="button button3">回桌遊列表</button>
               </div>
             </div>
           </div>

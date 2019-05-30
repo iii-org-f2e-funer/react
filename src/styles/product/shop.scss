@@ -29,7 +29,7 @@ $shadow: 0px 1px 4px rgba(black, 0.2);
     .title-blocks {
       width: 100%;
       border-bottom: 2px solid $color_border;
-      margin-bottom:10px; 
+      margin-bottom: 10px;
     }
     .orderdetail-title {
       margin: 20px auto;
@@ -46,7 +46,7 @@ $shadow: 0px 1px 4px rgba(black, 0.2);
         color: $color_light;
         font-size: 20px;
       }
-      .title-productName{
+      .title-productName {
         width: 50%;
         color: $color_light;
         font-size: 15px;
@@ -62,33 +62,32 @@ $shadow: 0px 1px 4px rgba(black, 0.2);
       }
     }
     .end-blocks {
-      .aaa{
+      .aaa {
         // border-bottom: 5px solid $color_orange;
         height: 50px;
-         
       }
       .end-block {
         display: flex;
         width: 95%;
         height: 30px;
         margin: 30px auto;
-        
+
         .title-name {
           width: 50%;
           font-size: 20px;
           color: $color_light;
         }
-        .end-money{
+        .end-money {
           width: 50%;
           text-align: right;
           font-size: 22px;
           color: $color_blue;
           font-weight: 600;
         }
-        .end-money2{
+        .end-money2 {
           width: 50%;
           text-align: right;
-          font-size:25px;
+          font-size: 25px;
           color: $color_red;
           font-weight: 600;
         }
@@ -163,7 +162,7 @@ $shadow: 0px 1px 4px rgba(black, 0.2);
     margin: 30px;
     font-size: 16px;
   }
-  .pay-control{
+  .pay-control {
     width: 300px;
     color: #949494;
     padding: 2px;
@@ -201,6 +200,10 @@ $shadow: 0px 1px 4px rgba(black, 0.2);
       font-weight: 600;
       line-height: 48px;
       color: $color_blue;
+    }
+    .step1 {
+      background: $color_blue;
+      color: #f6f6f6;
     }
     .step2 {
       background: $color_blue;
@@ -244,13 +247,13 @@ $shadow: 0px 1px 4px rgba(black, 0.2);
       }
     }
   }
-  .control-line{
-      margin: 30px 0;
+  .control-line {
+    margin: 30px 0;
   }
-  .years{
+  .years {
     width: 200px;
   }
-  .months{
+  .months {
     width: 200px;
   }
   .buttons {
@@ -269,6 +272,9 @@ $shadow: 0px 1px 4px rgba(black, 0.2);
 //--------------------------------------------------------------------------------------------3
 
 .Shopping3 {
+  .button3{
+    margin: 20px;
+  }
   background: $color_background;
   .container1 {
     margin: 0 auto;
@@ -293,6 +299,14 @@ $shadow: 0px 1px 4px rgba(black, 0.2);
       font-weight: 600;
       line-height: 48px;
       color: $color_blue;
+    }
+    .step1 {
+      background: $color_blue;
+      color: #f6f6f6;
+    }
+    .step2 {
+      background: $color_blue;
+      color: #f6f6f6;
     }
     .step3 {
       background: $color_blue;
@@ -335,15 +349,14 @@ $shadow: 0px 1px 4px rgba(black, 0.2);
       }
     }
   }
-  .logo2{
+  .logo2 {
     width: 30%;
     margin: 0 auto;
     text-align: center;
-    h3{
+    h3 {
       color: $color_light;
-      margin: 30px; 
+      margin: 30px;
     }
-
   }
   .orderdetail {
     width: 100%;
@@ -354,7 +367,7 @@ $shadow: 0px 1px 4px rgba(black, 0.2);
     .title-blocks {
       width: 100%;
       border-bottom: 2px solid $color_border;
-      margin-bottom:10px; 
+      margin-bottom: 10px;
     }
     .orderdetail-title {
       margin: 20px auto;
@@ -371,7 +384,7 @@ $shadow: 0px 1px 4px rgba(black, 0.2);
         color: $color_light;
         font-size: 20px;
       }
-      .title-productName{
+      .title-productName {
         width: 50%;
         color: $color_light;
         font-size: 15px;
@@ -387,39 +400,36 @@ $shadow: 0px 1px 4px rgba(black, 0.2);
       }
     }
     .end-blocks {
-      .aaa{
+      .aaa {
         // border-bottom: 5px solid $color_orange;
         height: 50px;
-         
       }
       .end-block {
         display: flex;
         width: 95%;
         height: 30px;
         margin: 30px auto;
-        
+
         .title-name {
           width: 50%;
           font-size: 20px;
           color: $color_light;
         }
-        .end-money{
+        .end-money {
           width: 50%;
           text-align: right;
           font-size: 22px;
           color: $color_blue;
           font-weight: 600;
         }
-        .end-money2{
+        .end-money2 {
           width: 50%;
           text-align: right;
-          font-size:25px;
+          font-size: 25px;
           color: $color_red;
           font-weight: 600;
         }
       }
     }
   }
- 
-  
 }
