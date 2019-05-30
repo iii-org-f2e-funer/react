@@ -4,14 +4,10 @@ import Datetime from 'react-datetime'
 import moment from 'moment'
 import TWzipcode from 'react-twzipcode'
 // import Pt_imgupload from '../../components/event/Pt_imgupload'
-import Pt_newmodal from '../../components/event/Pt_newmodal'
-import Account from '../../components/firm/Account'
-import actions from '../../redux/action/userInfo.js'
-import { connect } from 'react-redux'
-import { withRouter } from 'react-router'
+import Pt_editmodal from '../../components/event/Pt_editmodal'
 
-class Pt_new extends React.Component {
-  constructor(props) {
+class Pt_edit extends React.Component {
+  constructor() {
     super()
     this.state = {
       pt_img: '',
@@ -28,27 +24,40 @@ class Pt_new extends React.Component {
       pt_info: '',
       modalshow: false,
       locatefirm: [],
+      editsuccess: [],
     }
   }
-  // componentDidMount() {
-  //   console.log(this.props.userInfo.body)
-  //   fetch('//localhost:3002/event/loginaccount', {
-  //     method: 'POST',
-  //     body: JSON.stringify({ memder_id: this.props.userInfo.account }),
-  //     headers: {
-  //       'Content-type': 'application/json',
-  //     },
-  //   })
-  //     .then(res => res.json())
-  //     .then(obj => {
-  //       console.log(obj.body)
-  //       // if (obj.success) {
-  //       //   this.setState({ data: obj.body })
-  //       // } else {
-  //       //   this.props.history.push('/')
-  //       // }
-  //     })
-  // }
+  componentDidMount() {
+    let data = JSON.stringify({ ptsid: window.location.pathname.split('/')[3] })
+
+    fetch('//localhost:3002/event/ptinfo', {
+      method: 'POST',
+      body: data,
+      headers: {
+        'Content-type': 'application/json',
+      },
+    })
+      .then(res => res.json())
+      .then(obj => {
+        console.log(obj)
+        this.setState({
+          pt_img: obj.pt_img,
+          pt_sid: obj.pt_sid,
+          pt_host: obj.host,
+          pt_city: obj.pt_city,
+          pt_dist: obj.pt_dist,
+          pt_add: obj.pt_add,
+          pt_time: moment(obj.pt_time),
+          pt_endtime: moment(obj.pt_endtime),
+          pt_member: obj.pt_member,
+          pt_maxm: obj.pt_maxm,
+          pt_level: obj.pt_level,
+          pt_title: obj.pt_title,
+          pt_info: obj.pt_info,
+        })
+      })
+  }
+
   //handler
   handlememberChange = event => {
     this.setState({
@@ -109,7 +118,6 @@ class Pt_new extends React.Component {
         pt_city: this.state.pt_city,
         pt_dist: this.state.pt_dist,
       })
-      console.log('e')
       fetch('//localhost:3002/event/loadadd', {
         method: 'POST',
         body: locate,
@@ -123,27 +131,6 @@ class Pt_new extends React.Component {
         })
     }
   }
-
-  // handleloadadd = e => {
-  //   if (this.state.pt_city !== '' && this.state.pt_dist !== '') {
-  //     let locate = JSON.stringify({
-  //       pt_city: this.state.pt_city,
-  //       pt_dist: this.state.pt_dist,
-  //     })
-  //     console.log('e')
-  //     fetch('//localhost:3002/event/loadadd', {
-  //       method: 'POST',
-  //       body: locate,
-  //       headers: {
-  //         'Content-type': 'application/json',
-  //       },
-  //     })
-  //       .then(res => res.json())
-  //       .then(obj => {
-  //         this.setState({ locatefirm: obj })
-  //       })
-  //   }
-  // }
 
   handleaddChange = event => {
     this.setState({
@@ -161,22 +148,23 @@ class Pt_new extends React.Component {
     })
   }
 
+  //送出修改
   handleformsubmit = e => {
     e.preventDefault()
 
     const fd = new FormData(this.form)
 
-    fetch('//localhost:3002/event/newptsubmit', {
+    fetch('//localhost:3002/event/editpt', {
       method: 'POST',
       body: fd,
     })
       .then(res => res.json())
       .then(obj => {
-        if (obj.success) {
-          this.setState({ modalshow: true })
-        }
+        console.log(obj)
+        this.setState({ editsuccess: obj, modalshow: true })
       })
   }
+
   handleClose = e => {
     this.setState({ modalshow: false })
   }
@@ -194,13 +182,10 @@ class Pt_new extends React.Component {
           >
             <input type="hidden" name="check" value="happy6" />
             <div className="form-row title">
-              <h3>主揪一場新桌遊</h3>
+              <h3>編輯你的揪團</h3>
             </div>
-            <input
-              type="hidden"
-              name="pt_host"
-              value={this.props.userInfo.account}
-            />
+            <input type="hidden" name="pt_host" value={this.state.pt_host} />
+            <input type="hidden" name="pt_sid" value={this.state.pt_sid} />
             <div className="form-row">
               <label for="pt_imgfile">桌遊封面</label>
               <input
@@ -312,6 +297,7 @@ class Pt_new extends React.Component {
                 type="radio"
                 name="pt_level"
                 value="easy"
+                checked={this.state.pt_level === 'easy'}
                 onChange={event => this.handlelevelChange(event)}
               />
               <span> 適合新手 </span>
@@ -320,6 +306,7 @@ class Pt_new extends React.Component {
                 type="radio"
                 name="pt_level"
                 value="normal"
+                checked={this.state.pt_level === 'normal'}
                 onChange={event => this.handlelevelChange(event)}
               />
               <span>適合已有基礎的玩家</span>
@@ -328,6 +315,7 @@ class Pt_new extends React.Component {
                 type="radio"
                 name="pt_level"
                 value="hard"
+                checked={this.state.pt_level === 'hard'}
                 onChange={event => this.handlelevelChange(event)}
               />
               <span>高難度重度策略</span>
@@ -338,7 +326,7 @@ class Pt_new extends React.Component {
                 type="text"
                 id="pt_title"
                 name="pt_title"
-                placeholder="請輸入你的揪團標題"
+                placeholder="請輸入你的桌遊標題"
                 value={this.state.pt_title}
                 onChange={event => this.handletitleChange(event)}
               />
@@ -355,11 +343,12 @@ class Pt_new extends React.Component {
             </div>
             <div className="form-row">
               <button type="submit" className="pt_submitbtn">
-                確認開團
+                確認修改
               </button>
-              <Pt_newmodal
+              <Pt_editmodal
                 show={this.state.modalshow}
                 handleHide={this.handleClose}
+                edited={this.state.editsuccess}
               />
             </div>
             <div className="form-row remind">
@@ -371,17 +360,5 @@ class Pt_new extends React.Component {
     )
   }
 }
-function mapStateToProp(store) {
-  return {
-    userInfo: store.userInfo,
-  }
-}
 
-export default withRouter(
-  connect(
-    mapStateToProp,
-    {
-      userInfoAction: actions.userInfo,
-    }
-  )(Pt_new)
-)
+export default Pt_edit

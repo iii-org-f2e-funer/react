@@ -2,18 +2,23 @@ import React from 'react'
 import '../styles/cart/cart.scss'
 import { Button, Table } from 'react-bootstrap'
 import { Link } from 'react-router-dom'
-
-export default class Mycart extends React.Component {
-  constructor() {
-    super()
+import Account from '../components/firm/Account'
+import actions from '../redux/action/userInfo.js'
+import { connect } from 'react-redux'
+import { withRouter } from 'react-router'
+class Mycart extends React.Component {
+  constructor(props) {
+    super(props)
     this.state = {
       data: [],
       totall: 0,
       allcart: [],
       method_money: 60,
       method_funshop: 'toshop',
+      login: '',
     }
   }
+
   componentDidMount() {
     if (localStorage.allcart) {
       const allcart = JSON.parse(localStorage.allcart)
@@ -30,6 +35,7 @@ export default class Mycart extends React.Component {
         totall: this.state.totall,
         allcart: allcart,
       })
+      this.setState({ login: this.props.userInfo.account })
       // console.log(allcart)
     }
   }
@@ -73,11 +79,15 @@ export default class Mycart extends React.Component {
     })
   }
   gotocheck = () => {
-    localStorage.setItem('method_funshop', this.state.method_funshop)
-    localStorage.setItem(
-      'funapptotal',
-      this.state.totall + this.state.method_money
-    )
+    if (this.state.login) {
+      localStorage.setItem('method_funshop', this.state.method_funshop)
+      localStorage.setItem(
+        'funapptotal',
+        this.state.totall + this.state.method_money
+      )
+    } else {
+      alert('沒登入')
+    }
   }
   render() {
     if (
@@ -227,6 +237,13 @@ export default class Mycart extends React.Component {
                           前往結帳
                         </button>
                       </Link>
+
+                      {/* <button
+                        className="button checkbutton2"
+                        onClick={this.gotocheck}
+                      >
+                        前往結帳
+                      </button> */}
                     </div>
                   </div>
                 </div>
@@ -238,3 +255,17 @@ export default class Mycart extends React.Component {
     }
   }
 }
+function mapStateToProp(store) {
+  return {
+    userInfo: store.userInfo,
+  }
+}
+
+export default withRouter(
+  connect(
+    mapStateToProp,
+    {
+      userInfoAction: actions.userInfo,
+    }
+  )(Mycart)
+)

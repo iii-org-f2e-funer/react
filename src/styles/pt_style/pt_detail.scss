@@ -40,7 +40,7 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
-  height: 600px;
+  height: 460px;
   margin-bottom: 24px;
 }
 .ptinfo_img {
@@ -65,14 +65,16 @@
   align-items: flex-start;
 }
 .infoicon {
+  align-self: flex-start;
   width: 32px;
+  .leveldot {
+    width: 15px;
+    height: 15px;
+    border-radius: 50%;
+    margin-top: 6px;
+  }
 }
-.leveldot {
-  width: 15px;
-  height: 15px;
-  border-radius: 50%;
-  background-color: #56b08d;
-}
+
 .ptinfo_title {
   font-size: 24px;
   color: #474747;
@@ -112,10 +114,25 @@
 }
 .pt_applyer {
   width: 100%;
-  min-height: 120px;
+  height: 148px;
   display: flex;
-  background-color: #ccc;
+  // background-color: #ccc;
   margin-bottom: 16px;
+  align-content:space-between;
+  flex-wrap:wrap;
+  overflow: auto;
+  .applyer{
+    width: 54px;
+    height: 54px;
+    border-radius: 50%;
+    overflow: hidden;
+    margin: 8px;
+  img{
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+  }
 }
 .applybtn {
   width: 100%;
@@ -132,31 +149,44 @@
   display: flex;
   flex-direction: column;
 }
-.ptinfo_bottom_nav {
-  border-bottom: 1px solid #c7c7c7;
-}
-
-.ptinfo_bottom_nav ul {
-  display: flex;
-  text-align: center;
-}
-.ptinfo_bottom_nav ul li {
-  display: inline-block;
-  height: 36px;
-  color: #7e7e7e;
-  font-size: 18px;
-  margin-right: 80px;
-}
-.ptinfo_bottom_nav ul a.active {
+.ptinfo_bottom .nav-tabs a.active {
+  border: none;
   color: #49b1c2;
-  padding-bottom:6px;
+  padding-bottom: 6px;
   border-bottom: 3px solid #49b1c2;
 }
-.Pt_infointro{
+
+.Pt_infointro {
   padding: 8px;
 }
-.applymodal{
+.modal-content{
+  // width: 600px;
+  // height: 200px;
+  // justify-content: center;
+}
+.ptmodal {
+  height: 200px;
   display: flex;
   flex-direction: column;
   text-align: center;
+  justify-content: space-around;
+  .msgcol{
+    color:#6A6A6A;
+    margin: 24px 0;
+  }
+  .btncol{
+      margin:auto 0 24px 0;
+  }
+  button{
+    border: none;
+    background-color: #6EC4D2;
+    width: 88px;
+    height: 32px;
+    border-radius: 6px;
+    color: #fff;
+    font-size: 14px;
+    margin: 0 8px;
+}
+
+  
 }

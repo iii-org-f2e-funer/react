@@ -4,15 +4,10 @@ class Pt_imgupload extends React.Component {
   constructor(props) {
     super(props)
 
-    // this.handleShow = this.handleShow.bind(this)
-    // this.handleClose = this.handleClose.bind(this)
-    // this.handleApply = this.handleApply.bind(this)
-
     this.state = {
       pt_img: '',
       imgurl: '',
-      //   show: false,
-      //   applysuccess: false,
+
     }
   }
   //上傳圖片
@@ -22,7 +17,7 @@ class Pt_imgupload extends React.Component {
 
   handleimgChange = e => {
     const imgfile = e.target.files[0]
-    // this.setState({ imgdata: imgfile })
+
     console.log(imgfile)
     const imgdata = new FormData()
     imgdata.append('pt_img', imgfile)

@@ -26,6 +26,7 @@ class MemberMenu extends React.Component {
     })
       .then(res => res.json())
       .then(obj => {
+        // console.log(obj.body)
         if (obj.success) {
           this.setState({ data: obj.body })
         } else {
