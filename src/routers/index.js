@@ -23,6 +23,10 @@ import Instagram from '../components/instagram/Instagram'
 import actions from '../redux/action/userInfo.js'
 
 class RootRouter extends React.Component {
+  constructor() {
+    super()
+    this.state = {}
+  }
   componentDidMount() {
     fetch('//localhost:3002/firm/userInfo', {
       credentials: 'include',
@@ -57,7 +61,10 @@ class RootRouter extends React.Component {
             <Route path="/member" component={Member} />
             <Route path="/event" component={Event} />
             <Route path="/product" component={Product} />
-            <Route path="/chatroom" component={ChatRoom} />
+            <Route
+              path={'/chatroom/message/' + 'ID' + this.props.userInfo.account}
+              component={ChatRoom}
+            />
             <Route path="/ProductDetail" component={ProductDetail} />
             <Route path="/Myfav" component={Myfav} />
             <Route path="/Mycart" component={Mycart} />
@@ -76,8 +83,10 @@ class RootRouter extends React.Component {
   }
 }
 
-const mapStateToProp = store => {
-  return store
+function mapStateToProp(store) {
+  return {
+    userInfo: store.userInfo,
+  }
 }
 
 export default connect(

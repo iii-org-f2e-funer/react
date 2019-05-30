@@ -7,11 +7,13 @@ import {
   NavLink,
 } from 'react-router-dom'
 import AsidePage from '../components/chatroom/pages/AsidePage'
-import ChatArea from '../components/chatroom/pages/ChatArea'
-import ChatArea_socket from '../components/chatroom/pages/ChatArea_socket'
 import ChatArea_socket_new from '../components/chatroom/pages/ChatArea_socket_new'
 import '../styles/chatroom/chatroomStyle.scss'
 import ChatAreaOriginal from '../components/chatroom/pages/ChatAreaOriginal'
+import Account from '../components/firm/Account'
+import actions from '../redux/action/userInfo.js'
+import { connect } from 'react-redux'
+import { withRouter } from 'react-router'
 
 class ChatRoom extends React.Component {
   constructor() {
@@ -25,28 +27,9 @@ class ChatRoom extends React.Component {
     }
   }
 
-  componentDidMount() {
-    // fetch('http://localhost:3002/chatroom/message/user_id1', {
-    //   method: 'GET',
-    //   headers: { 'Content-type': 'application/json' },
-    // })
-    //   .then(response => response.json())
-    //   .then(data => {
-    //     console.log('chatRoom:', data)
-    //     return this.setState({ chatData: data })
-    //   })
-  }
-  handleChange = event => {
-    this.setState({ inputId: event.target.value })
-  }
-  handleClick = async () => {
-    let logInId = this.state.inputId
-    await this.setState({ logInId: this.state.inputId, inputId: '' })
-
-    //login ok
-    console.log(logInId)
+  async componentDidMount() {
     const response = await fetch(
-      `http://localhost:3002/chatroom/message/${logInId}`,
+      `http://localhost:3002/chatroom/message/${this.props.userInfo.account}`,
       {
         method: 'GET',
         headers: { 'Content-type': 'application/json' },
@@ -56,6 +39,24 @@ class ChatRoom extends React.Component {
     console.log(data)
     await this.setState({ chatData: data })
   }
+
+  // handleClick = async () => {
+  //   let logInId = this.state.inputId
+  //   await this.setState({ logInId: this.state.inputId, inputId: '' })
+
+  //   //login ok
+  //   console.log(logInId)
+  //   const response = await fetch(
+  //     `http://localhost:3002/chatroom/message/${this.props.userInfo.member_id}`,
+  //     {
+  //       method: 'GET',
+  //       headers: { 'Content-type': 'application/json' },
+  //     }
+  //   )
+  //   const data = await response.json()
+  //   console.log(data)
+  //   await this.setState({ chatData: data })
+  // }
   handleRefreh = () => {
     let isRefresh = !this.state.refresh
     this.setState({ refresh: isRefresh })
@@ -64,15 +65,12 @@ class ChatRoom extends React.Component {
     return (
       <Router>
         <>
-          <input value={this.state.inputId} onChange={this.handleChange} />
-          <button onClick={this.handleClick}>send</button>
-          {'welcome member: ' + this.state.logInId}
           <div className="chatroom">
             <div className="container ">
               <div className="row">
                 <div className="col-lg-3 aside">
                   <AsidePage
-                    logInId={this.state.logInId}
+                    logInId={this.props.userInfo.account}
                     refreshID={this.state.refresh}
                   />
                 </div>
@@ -92,14 +90,14 @@ class ChatRoom extends React.Component {
                           path={
                             '/chatroom/Message/' +
                             'ID' +
-                            this.state.logInId +
+                            this.props.userInfo.account +
                             '/' +
                             'ID' +
                             data.to_id
                           }
                           render={() => (
                             <ChatArea_socket_new
-                              logInId={this.state.logInId}
+                              logInId={this.props.userInfo.account}
                               userData={this.state.chatData}
                               refresh={this.handleRefreh}
                             />
@@ -111,14 +109,14 @@ class ChatRoom extends React.Component {
                           path={
                             '/chatroom/Message/' +
                             'ID' +
-                            this.state.logInId +
+                            this.props.userInfo.account +
                             '/' +
                             'ID' +
                             data.from_id
                           }
                           render={() => (
                             <ChatArea_socket_new
-                              logInId={this.state.logInId}
+                              logInId={this.props.userInfo.account}
                               userData={this.state.chatData}
                               refresh={this.handleRefreh}
                             />
@@ -127,7 +125,11 @@ class ChatRoom extends React.Component {
                       )
                     })}
                     <Route
-                      path={'/chatroom/Message/' + 'ID' + this.state.logInId}
+                      path={
+                        '/chatroom/Message/' +
+                        'ID' +
+                        this.props.userInfo.account
+                      }
                       component={ChatAreaOriginal}
                     />
                   </Switch>
@@ -141,4 +143,17 @@ class ChatRoom extends React.Component {
   }
 }
 
-export default ChatRoom
+function mapStateToProp(store) {
+  return {
+    userInfo: store.userInfo,
+  }
+}
+
+export default withRouter(
+  connect(
+    mapStateToProp,
+    {
+      userInfoAction: actions.userInfo,
+    }
+  )(ChatRoom)
+)

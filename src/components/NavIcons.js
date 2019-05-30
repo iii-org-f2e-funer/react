@@ -73,7 +73,10 @@ class NavIcons extends React.Component {
               </NavLink>
             </li>
             <li>
-              <NavLink to="/chatroom/message" activeClassName="active">
+              <NavLink
+                to={'/chatroom/message/' + 'ID' + this.props.userInfo.account}
+                activeClassName="active"
+              >
                 <FaComment />
               </NavLink>
             </li>
