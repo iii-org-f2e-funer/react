@@ -32,7 +32,7 @@ class UserAccount extends React.Component {
 
   cancelEdit = () => {
     this.setState({ isEdit: false })
-    fetch('//localhost:3002/member/userInfo', {
+    fetch('//localhost:3002/firm/userInfo', {
       credentials: 'include',
     })
       .then(res => res.json())
