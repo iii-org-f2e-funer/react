@@ -72,7 +72,9 @@ class Navbar extends React.Component {
     return (
       <div
         className={
-          this.props.location.pathname === '/' ? 'navbar navblue' : 'navbar'
+          this.props.location.pathname === '/' || this.props.userInfo.isFirm
+            ? 'navbar navblue'
+            : 'navbar'
         }
       >
         <div className="container">
