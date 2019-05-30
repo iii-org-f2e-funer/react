@@ -9,7 +9,7 @@ import MessageList from '../components/MessageList'
 
 // export default withRouter(PathNow);
 
-class ChatArea extends React.Component {
+class ChatArea_socket_new extends React.Component {
   constructor(props) {
     super(props)
     this.state = {
@@ -282,4 +282,4 @@ class ChatArea extends React.Component {
   }
 }
 
-export default withRouter(ChatArea)
+export default withRouter(ChatArea_socket_new)

@@ -84,7 +84,7 @@ class ChatRoom extends React.Component {
                   <Switch>
                     {/*  在這邊map 所有Route出來  */}
                     {this.state.chatData.map(data => {
-                      return this.state.logInId == data.from_id ? (
+                      return this.props.userInfo.account == data.from_id ? (
                         <Route
                           key={data.to_id}
                           path={
