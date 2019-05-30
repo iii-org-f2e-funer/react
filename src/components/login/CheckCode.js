@@ -25,16 +25,13 @@ class CheckCode extends React.Component {
       .then(obj => {
         console.log(obj)
         if (obj.success) {
+          this.setState({ islive: true })
         } else {
         }
       })
   }
   render() {
-    return (
-      <>
-        <p>激活成功</p>
-      </>
-    )
+    return <>{this.state.islive ? <p>激活成功</p> : <p>激活失敗</p>}</>
   }
 }
 
