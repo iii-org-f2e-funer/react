@@ -90,7 +90,7 @@ class NewStory extends React.Component {
           <div className="post-header">
             <div className="poster">
               <img
-                src={process.env.PUBLIC_URL + '/images/instagram/avatar.png'}
+                src={process.env.PUBLIC_URL + '/images/home/avatar.jpg'}
                 alt=""
               />
               <span>Jerry</span>

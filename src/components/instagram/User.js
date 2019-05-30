@@ -6,13 +6,13 @@ const User = () => {
       <div className="user">
         <Link className="userInfo" to="">
           <img
-            src={process.env.PUBLIC_URL + '/images/instagram/avatar.png'}
+            src={process.env.PUBLIC_URL + '/images/home/avatar.jpg'}
             alt=""
           />
           <h5 className="userName">
             Jerry
             <br />
-            <span className="userEmail">theKnight@gmail.com</span>
+            <span className="userEmail">jerry905925@gmail.com</span>
           </h5>
         </Link>
 
@@ -54,18 +54,6 @@ const User = () => {
                 />
                 圈叉對戰
               </NavLink>
-            </li>
-            <li>
-              <Link to="#">
-                <img
-                  src={
-                    process.env.PUBLIC_URL +
-                    '/images/instagram/handshake-regular.svg'
-                  }
-                  alt=""
-                />
-                每日一抽
-              </Link>
             </li>
           </ul>
         </div>

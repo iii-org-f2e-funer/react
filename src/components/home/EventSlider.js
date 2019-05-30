@@ -41,7 +41,11 @@ class EventSlider extends React.Component {
               {this.props.datas.map(item => (
                 <li key={item.pt_sid} className="eventItem">
                   <Link>
-                    <img src="" alt="" />
+                    {/* <img src="" alt="" /> */}
+                    <img
+                      src={process.env.PUBLIC_URL + '/images/home/10.jpg'}
+                      alt=""
+                    />
                     <p className="eventTitle">{item.pt_title}</p>
                     <p>
                       <FaRegClock />
