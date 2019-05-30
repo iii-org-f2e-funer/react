@@ -4,7 +4,7 @@ import actions from '../../redux/action/userInfo.js'
 import UserAccount from './UserAccount'
 import UserEvent from './UserEvent'
 import UserShopping from './UserShopping'
-import UserMail from './UserMail'
+// import UserMail from './UserMail'
 import { connect } from 'react-redux'
 import { withRouter } from 'react-router'
 import { BrowserRouter as Router, Route, Link, Switch } from 'react-router-dom'
@@ -75,7 +75,7 @@ class MemberMenu extends React.Component {
               </form>
               {/*            UserInfo         */}
               <div className="userinfo">
-                <h5>嗨 {data.nickname}</h5>
+                <h5>{data.nickname}</h5>
                 <div className="useraccount">{data.account}</div>
                 <button className="button btn-lg" onClick={this.handleShow}>
                   編輯個人資料
@@ -92,13 +92,10 @@ class MemberMenu extends React.Component {
                   <Link to="/userevent">我的揪團</Link>
                 </li>
                 <li>
-                  <Link to="/usershopping">訂單查詢</Link>
+                  <Link to="/UserShopping">訂單查詢</Link>
                 </li>
                 <li>
                   <Link to="">場地預定查詢</Link>
-                </li>
-                <li>
-                  <Link to="/usermail">系統信件</Link>
                 </li>
               </ul>
             </div>
@@ -109,7 +106,7 @@ class MemberMenu extends React.Component {
               <Route path="/userevent" component={UserEvent} />
               <Route path="/usershopping" component={UserShopping} />
               {/* <Route path="/firm/site_manage" component={Site_manage} /> */}
-              <Route path="/usermail" component={UserMail} />
+              {/* <Route path="/usermail" component={UserMail} /> */}
             </Switch>
           </div>
           {/* <FirmEdit

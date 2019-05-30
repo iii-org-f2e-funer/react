@@ -1,4 +1,4 @@
-// 揪團部分
+// 訂單
 import React from 'react'
 import { withRouter } from 'react-router'
 import actions from '../../redux/action/userInfo.js'
