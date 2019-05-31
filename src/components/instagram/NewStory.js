@@ -55,7 +55,7 @@ class NewStory extends React.Component {
     if (this.inputText.innerText.trim() || this.inputFiles.files.length > 0) {
       // 文字丟進 formData
       var formData = new FormData()
-      formData.append('memberID', '1')
+      formData.append('memberID', this.props.userInfo.body.member_id)
       formData.append('content', this.inputText.innerText)
       // 圖片丟進 formData
       for (let i = 0; i < this.inputFiles.files.length; i++) {
@@ -65,6 +65,7 @@ class NewStory extends React.Component {
       fetch('http://localhost:3002/instagram/newStory', {
         method: 'POST',
         body: formData,
+        credentials: 'include',
       })
         .then(res => res.json())
         .then(obj => {
@@ -90,10 +91,16 @@ class NewStory extends React.Component {
           <div className="post-header">
             <div className="poster">
               <img
-                src={process.env.PUBLIC_URL + '/images/home/avatar.jpg'}
+                src={
+                  this.props.userInfo.isFirm
+                    ? 'http://localhost:3002/images/firm/' +
+                      this.props.userInfo.body.photo
+                    : 'http://localhost:3002/images/member/' +
+                      this.props.userInfo.body.photo
+                }
                 alt=""
               />
-              <span>Jerry</span>
+              <span>{this.props.userInfo.body.nickname}</span>
             </div>
             <div className="setting">
               {this.state.isEditing ? (
@@ -116,7 +123,9 @@ class NewStory extends React.Component {
               ref={el => (this.inputText = el)}
             />
             {this.state.content === '' ? (
-              <div className="placeholder">Jerry，在想些什麼</div>
+              <div className="placeholder">
+                {this.props.userInfo.body.nickname}，在想些什麼
+              </div>
             ) : (
               ''
             )}

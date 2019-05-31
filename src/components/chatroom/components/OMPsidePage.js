@@ -14,14 +14,14 @@ class OMPsidePage extends React.Component {
         <div className="iconDetail row  align-items-center">
           <div className="col-md text-center">
             <div>
-              <i class="fas fa-dice-five" />
+              <i className="fas fa-dice-five" />
             </div>
             <h5>10</h5>
             <p>參團</p>
           </div>
           <div className="col-md text-center">
             <div>
-              <i class="fas fa-user-friends" />
+              <i className="fas fa-user-friends" />
             </div>
             <h5>10</h5>
             <p>好友</p>
@@ -29,11 +29,11 @@ class OMPsidePage extends React.Component {
         </div>
         <div className="COM_btn row mx-0 mt-2 align-items-center">
           <div className="addFriend col-md text-center mx-2 button">
-            <i class="fas fa-plus" />
+            <i className="fas fa-plus" />
             <span> 加入好友</span>
           </div>
           <div className="startChat col-md text-center mx-2 button">
-            <i class="far fa-comment-dots" />
+            <i className="far fa-comment-dots" />
             <span> 開始聊聊</span>
           </div>
         </div>

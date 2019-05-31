@@ -25,7 +25,7 @@ class EventSlider extends React.Component {
       .then(res => res.json())
       .then(obj => {
         if (obj.success === true) {
-          console.log(obj.data)
+          // console.log(obj.data)
           var arr = [
             obj.data[obj.data.length - 4],
             obj.data[obj.data.length - 3],

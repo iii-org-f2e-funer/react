@@ -71,7 +71,7 @@ class RootRouter extends React.Component {
               path={'/chatroom/message/' + 'ID' + this.props.userInfo.account}
               component={ChatRoom}
             />
-            <Route path="/OpenMemberPage" component={OpenMemberPage} />
+            <Route path="/chatroom/openMemberPage" component={OpenMemberPage} />
             <Route path="/ProductDetail" component={ProductDetail} />
             <Route path="/Myfav" component={Myfav} />
             <Route

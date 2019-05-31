@@ -5,38 +5,43 @@ import User from './User'
 import Stories from './Stories'
 import Bookmark from './Bookmark'
 import Event from './Event'
-import Battle from './Battle'
-
-// import actions from '../redux/action/instagram'
-import { connect } from 'react-redux'
-
+import { withRouter } from 'react-router-dom'
 class Instagram extends React.Component {
   constructor(props) {
     super(props)
-    this.state = {}
+    this.state = { userInfo: {}, isGuest: true }
   }
-  componentDidMount() {
-    this.props.dispatch({ type: 'isFixed' })
+  componentWillMount() {
+    fetch('//localhost:3002/firm/userInfo', {
+      credentials: 'include',
+    })
+      .then(res => res.json())
+      .then(obj => {
+        if (obj.success) {
+          if (obj.isFirm) {
+            // 整理廠商格式
+            obj.body.member_id = 'f_' + obj.body.sid
+            obj.body.nickname = obj.body.firmname
+            obj.body.photo = obj.body.my_file
+          }
+          this.setState({ userInfo: obj, isGuest: false })
+        } else {
+          alert('請先登入')
+          this.props.history.push('/')
+        }
+      })
   }
-  componentWillUnmount() {
-    this.props.dispatch({ type: 'unFixed' })
-  }
+  componentDidMount() {}
 
   render() {
+    if (this.state.isGuest) return null
     return (
       <>
-        <div
-          className={
-            this.props.isFixed
-              ? 'instagram container navfixed'
-              : 'instagram container'
-          }
-        >
-          <User />
+        <div className="instagram container navfixed">
+          <User userInfo={this.state.userInfo} />
           <Switch>
             <Route exact path="/:instagram" component={Stories} />
             <Route exact path="/:instagram/bookmark" component={Bookmark} />
-            <Route exact path="/:instagram/battle" component={Battle} />
           </Switch>
           <Event />
         </div>
@@ -44,13 +49,4 @@ class Instagram extends React.Component {
     )
   }
 }
-
-// export default Instagram
-
-function mapStateToProp(store) {
-  return {
-    isFixed: store.isFixed,
-  }
-}
-
-export default connect(mapStateToProp)(Instagram)
+export default withRouter(Instagram)
