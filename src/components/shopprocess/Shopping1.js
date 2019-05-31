@@ -1,12 +1,12 @@
-import React from 'react'
-import { Form } from 'react-bootstrap'
-import '../../styles/product/shop.scss'
-import TWzipcode from 'react-twzipcode'
+import React from 'react';
+import { Form } from 'react-bootstrap';
+import '../../styles/product/shop.scss';
+import TWzipcode from 'react-twzipcode';
 // import { BrowserRouter as Router, Route, Link, Switch } from 'react-router-dom'
-import { Link } from 'react-router-dom'
+import { Link } from 'react-router-dom';
 export default class Shopping1 extends React.Component {
   constructor() {
-    super()
+    super();
     this.state = {
       login_user: '',
       order_name: '',
@@ -23,11 +23,11 @@ export default class Shopping1 extends React.Component {
       geter_email: '',
       all: [],
       allprice: 0,
-    }
+    };
   }
   componentDidMount() {
     if (localStorage.temp_order) {
-      var data = JSON.parse(localStorage.temp_order)
+      var data = JSON.parse(localStorage.temp_order);
       this.setState({
         order_name: data.order_name,
         order_city: data.order_city,
@@ -41,102 +41,107 @@ export default class Shopping1 extends React.Component {
         geter_addr: data.geter_addr,
         geter_phone: data.geter_phone,
         geter_email: data.geter_email,
-      })
-      document.getElementById('name1').value = data.order_name
-      document.getElementById('name2').value = data.geter_name
-      document.getElementById('addr1').value = data.order_addr
-      document.getElementById('addr2').value = data.geter_addr
-      document.getElementById('phone1').value = data.order_phone
-      document.getElementById('phone2').value = data.geter_phone
-      document.getElementById('email1').value = data.order_email
-      document.getElementById('email2').value = data.geter_email
+      });
+      document.getElementById('name1').value = data.order_name;
+      document.getElementById('name2').value = data.geter_name;
+      document.getElementById('addr1').value = data.order_addr;
+      document.getElementById('addr2').value = data.geter_addr;
+      document.getElementById('phone1').value = data.order_phone;
+      document.getElementById('phone2').value = data.geter_phone;
+      document.getElementById('email1').value = data.order_email;
+      document.getElementById('email2').value = data.geter_email;
     }
-    var funapptotal = localStorage.funapptotal
-    var all = JSON.parse(localStorage.allcart)
-    this.setState({ all: all, totall: funapptotal })
+    var funapptotal = localStorage.funapptotal;
+    var all = JSON.parse(localStorage.choose_order);
+    this.setState({ all: all, totall: funapptotal });
+    if (localStorage.method_funshop == 'tohome') {
+      this.setState({ fee: 130 });
+    } else {
+      this.setState({ fee: 60 });
+    }
   }
   getordername = event => {
-    this.setState({ order_name: event.target.value })
-    var aaa = event.target.value
+    this.setState({ order_name: event.target.value });
+    var aaa = event.target.value;
     if (aaa === '') {
-      document.getElementById('name1-mute').innerText = 'name error'
+      document.getElementById('name1-mute').innerText = 'name error';
     } else {
-      document.getElementById('name1-mute').innerText = ''
+      document.getElementById('name1-mute').innerText = '';
     }
-  }
+  };
   handlecityChange = event => {
-    this.setState({ order_city: event.county })
-  }
+    this.setState({ order_city: event.county });
+  };
   handledistChange = event => {
-    this.setState({ order_dist: event.district })
-    console.log(this.state)
-  }
+    this.setState({ order_dist: event.district });
+    console.log(this.state);
+  };
   getorderadd = event => {
-    this.setState({ order_addr: event.target.value })
+    this.setState({ order_addr: event.target.value });
     // console.log(this.state)
-    var aaa = event.target.value
+    var aaa = event.target.value;
     if (aaa === '') {
-      document.getElementById('addr1-mute').innerText = 'addr error'
+      document.getElementById('addr1-mute').innerText = 'addr error';
     } else {
-      document.getElementById('addr1-mute').innerText = ''
+      document.getElementById('addr1-mute').innerText = '';
     }
-  }
+  };
   getorderphone = event => {
-    this.setState({ order_phone: event.target.value })
-    var aaa = event.target.value
-    var aaaa = /^(09)[0-9]{8}$/.test(aaa)
+    this.setState({ order_phone: event.target.value });
+    var aaa = event.target.value;
+    var aaaa = /^(09)[0-9]{8}$/.test(aaa);
     if (aaaa === false) {
-      document.getElementById('phone1-mute').innerText = 'phone error'
+      document.getElementById('phone1-mute').innerText = 'phone error';
     } else {
-      document.getElementById('phone1-mute').innerText = ''
+      document.getElementById('phone1-mute').innerText = '';
     }
-  }
+  };
   getorderemail = event => {
-    this.setState({ order_email: event.target.value })
-    console.log(event.target.value)
-    var aaa = event.target.value
+    this.setState({ order_email: event.target.value });
+    console.log(event.target.value);
+    var aaa = event.target.value;
     var aaaa = /^([a-zA-Z0-9_\.\-\+])+\@(([a-zA-Z0-9\-])+\.)+([a-zA-Z0-9]{2,4})+$/.test(
       aaa
-    )
-    console.log(aaaa)
+    );
+    console.log(aaaa);
     if (aaaa === false) {
-      document.getElementById('email1-mute').innerText = 'email error'
+      document.getElementById('email1-mute').innerText = 'email error';
     } else {
-      document.getElementById('email1-mute').innerText = ''
+      document.getElementById('email1-mute').innerText = '';
     }
-  }
+  };
   getordername2 = event => {
-    this.setState({ geter_name: event.target.value })
-  }
+    this.setState({ geter_name: event.target.value });
+  };
   handlecityChange2 = event => {
-    this.setState({ geter_city: event.county })
-  }
+    this.setState({ geter_city: event.county });
+  };
   handledistChange2 = event => {
-    this.setState({ geter_dist: event.district })
-    console.log(this.state)
-  }
+    this.setState({ geter_dist: event.district });
+    console.log(this.state);
+  };
   getorderadd2 = event => {
-    this.setState({ geter_addr: event.target.value })
-    console.log(this.state)
-  }
+    this.setState({ geter_addr: event.target.value });
+    console.log(this.state);
+  };
   getorderphone2 = event => {
-    this.setState({ geter_phone: event.target.value })
-    console.log(this.state)
-  }
+    this.setState({ geter_phone: event.target.value });
+    console.log(this.state);
+  };
   getorderemail2 = event => {
-    this.setState({ geter_email: event.target.value })
-    console.log(this.state)
-  }
+    this.setState({ geter_email: event.target.value });
+    console.log(this.state);
+  };
   goto2 = () => {
-    console.log(this.state)
-    var data = JSON.stringify(this.state)
-    console.log(data)
-    localStorage.setItem('temp_order', data)
-  }
+    console.log(this.state);
+    var data = JSON.stringify(this.state);
+    console.log(data);
+    localStorage.setItem('temp_order', data);
+  };
   paymethod = event => {
     // alert(event.target.value)
-    localStorage.setItem('paymethod', event.target.value)
-  }
+    localStorage.setItem('paymethod', event.target.value);
+  };
 
   render() {
     return (
@@ -171,7 +176,7 @@ export default class Shopping1 extends React.Component {
                     <div className="title-block">
                       <div className="title-name">單價:</div>
                       <div className="title-content">
-                        {this.state.all[index].price}
+                        {this.state.all[index].product_price}
                       </div>
                     </div>
                     <div className="title-block">
@@ -180,36 +185,25 @@ export default class Shopping1 extends React.Component {
                         {this.state.all[index].number}
                       </div>
                     </div>
+                    <div className="title-block">
+                      <div className="title-name">total:</div>
+                      <div className="title-content">
+                        {this.state.all[index].total}
+                      </div>
+                    </div>
                   </div>
                 ))}
 
                 <div className="end-blocks">
                   <div className="end-block aaa">
                     <div className="title-name ">運費</div>
-                    <div className="end-money">60</div>
+                    <div className="end-money">{this.state.fee}</div>
                   </div>
                   <div className="end-block">
                     <div className="title-name">總金額</div>
                     <div className="end-money2">{this.state.totall}</div>
                   </div>
                 </div>
-                {/* <table>
-                  <tr>
-                    <th>name</th>
-                    <th>number</th>
-                    <th>money</th>
-                    <th>moneys</th>
-                  </tr>
-                  {this.state.all.map((item, index, array) => (
-                    <tr>
-                      <td>{this.state.all[index].productName}</td>
-                      <td>{this.state.all[index].number}</td>
-                      <td>{this.state.all[index].price}</td>
-                      <td>{this.state.all[index].totall}</td>
-                    </tr>
-                  ))}
-                </table>
-                total:{this.state.totall} */}
               </div>
               <div className="step1-form">
                 <div className="form-controll">
@@ -378,6 +372,6 @@ export default class Shopping1 extends React.Component {
           </div>
         </div>
       </>
-    )
+    );
   }
 }
