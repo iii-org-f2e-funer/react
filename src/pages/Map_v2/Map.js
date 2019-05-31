@@ -97,8 +97,13 @@ class BoradGameMap extends React.Component {
     fetch('http://127.0.0.1:3002/gameMap/All/' + data)
       .then(res => res.json())
       // .then(res => console.log(res))
+
       .then(res => {
         console.log(res)
+        if (res[0] === 'nodata') {
+          alert('搜尋沒有結果')
+          return ''
+        }
         this.setState({
           stores: res,
           fetchNearbyStores: false,
@@ -115,6 +120,12 @@ class BoradGameMap extends React.Component {
       .catch(err => {
         throw new Error(err)
       })
+  }
+
+  clearSearch(data) {
+    this.setState({ storeStore: '' })
+
+    this.getSearch('')
   }
 
   // TOBE FIXED: 取得文字搜尋回傳的地圖中心與比例尺與場館資料與遊戲資料
@@ -267,6 +278,8 @@ class BoradGameMap extends React.Component {
               publicHoliday={this.state.publicHoliday}
               imageArray={this.state.imageArray}
               dataStore={this.state.stores}
+              getSearch={data => this.getSearch(data)}
+              clearSearch={() => this.clearSearch()}
             />
             {/* <GameInfo gamesInfo={this.state.gamesInfo} /> */}
           </div>

@@ -32,7 +32,7 @@ class InstagramSlider extends React.Component {
     // 開起輪播
     this.timer = setInterval(() => {
       this.handleNextClick()
-    }, 5000)
+    }, 3000)
   }
   componentWillUnmount() {
     clearInterval(this.timer)

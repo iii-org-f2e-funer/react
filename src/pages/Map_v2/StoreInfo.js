@@ -10,6 +10,7 @@ import {
   Tooltip,
   Media,
   Card,
+  ButtonGroup,
 } from 'react-bootstrap'
 import * as fa from 'react-icons/fa'
 import { BrowserRouter, Route, Link, NavLink } from 'react-router-dom'
@@ -33,62 +34,73 @@ class StoreInfo extends Component {
               style={{ width: '200px' }}
             />
             {console.log(this.props)}
-          </ListGroup.Item>
-          <ListGroup.Item>
+
             {/* <div>{this.props.storeSid}</div>
             <div>{this.props.storeFirm_id}</div> */}
-            <div>
-              <i
-                className="fas fa-store fa-2x fa-fw"
-                style={{ verticalAlign: 'middle', color: 'gray' }}
-              />
-              <span style={{ display: 'inline-block', width: '10px' }} />
-              {this.props.storeStore}
+            <div clasName="cardList">
+              <div>
+                <p>
+                  {' '}
+                  <i
+                    className="fas fa-store"
+                    style={{ verticalAlign: 'middle', color: 'gray' }}
+                  />
+                  {this.props.storeStore}
+                </p>
+              </div>
+
+              <div>
+                <p>
+                  {' '}
+                  <i
+                    className="fas fa-location-arrow  fa-fw"
+                    style={{ verticalAlign: 'middle', color: 'gray' }}
+                  />{' '}
+                  {this.props.storeCounty}
+                  {this.props.storeDist}
+                  {this.props.storeAddress}
+                </p>
+              </div>
+              <div>
+                <p>
+                  {' '}
+                  <i
+                    className="fas fa-phone  fa-fw"
+                    style={{ verticalAlign: 'middle', color: 'gray' }}
+                  />
+                  {this.props.storePhone}
+                </p>
+              </div>
+
+              <div>
+                <p>
+                  {' '}
+                  <i
+                    className="fas fa-clock  fa-fw"
+                    style={{ verticalAlign: 'middle', color: 'gray' }}
+                  />
+                  {this.props.businessHour}
+                </p>
+              </div>
+              <div>
+                <p>
+                  {' '}
+                  <i
+                    className="fas fa-bed  fa-fw"
+                    style={{ verticalAlign: 'middle', color: 'gray' }}
+                  />{' '}
+                  {this.props.publicHoliday}
+                </p>
+              </div>
             </div>
           </ListGroup.Item>
-          <ListGroup.Item>
-            <div>
-              <i
-                className="fas fa-location-arrow fa-2x fa-fw"
-                style={{ verticalAlign: 'middle', color: 'gray' }}
-              />
-              <span style={{ display: 'inline-block', width: '10px' }} />
-              {this.props.storeCounty}
-              {this.props.storeDist}
-              {this.props.storeAddress}
-            </div>
-            <div>
-              <i
-                className="fas fa-phone fa-2x fa-fw"
-                style={{ verticalAlign: 'middle', color: 'gray' }}
-              />
-              <span style={{ display: 'inline-block', width: '10px' }} />
-              {this.props.storePhone}
-            </div>
-          </ListGroup.Item>
-          <ListGroup.Item>
-            <div>
-              <i
-                className="fas fa-clock fa-2x fa-fw"
-                style={{ verticalAlign: 'middle', color: 'gray' }}
-              />
-              <span style={{ display: 'inline-block', width: '10px' }} />
-              {this.props.businessHour}
-            </div>
-            <div>
-              <i
-                className="fas fa-bed fa-2x fa-fw"
-                style={{ verticalAlign: 'middle', color: 'gray' }}
-              />
-              <span style={{ display: 'inline-block', width: '10px' }} />
-              {this.props.publicHoliday}
-            </div>
-          </ListGroup.Item>
-          <NavLink to={{ pathname: `/gamemapDetail/${this.props.storeSid}` }}>
-            <Button className="actionButton " size="lg" block>
-              場地詳細資訊
-            </Button>
-          </NavLink>
+          <div className="middle">
+            <Link to={{ pathname: `/gamemapDetail/${this.props.storeSid}` }}>
+              <button className="button button--lg middle" size="lg" block>
+                場地詳細資訊
+              </button>
+            </Link>
+          </div>
         </ListGroup>
         {/* <div>=========</div> */}
         {/* <div>{this.props.storeLogoUrl}</div> */}
@@ -101,13 +113,19 @@ class StoreInfo extends Component {
   }
 
   CardInfo = () => {
-    if (!this.props.dataStore[0].imageArray) {
+    console.log(this.props.dataStore)
+
+    if (!this.props.dataStore.length) {
       return ''
     } else {
       return (
         <div className="cardInfo">
           {this.props.dataStore.map((item, idx, array) => (
-            <Card style={{ width: '95%' }}>
+            <Card
+              style={{ width: '95%' }}
+              bsPrefix="content"
+              onClick={() => this.props.getSearch(item.store)}
+            >
               <Media>
                 <img
                   width={64}
@@ -130,9 +148,34 @@ class StoreInfo extends Component {
               </Media>
             </Card>
           ))}
+          <div className="middle">
+            <button
+              className="button button--lg middle button-white"
+              size="lg"
+              block
+              onClick={this.props.clearSearch}
+            >
+              清除篩選
+            </button>
+          </div>
         </div>
       )
     }
+  }
+
+  ClearButton = () => {
+    return (
+      <div className="middle">
+        <button
+          className="button button--lg middle button-white"
+          size="lg"
+          block
+          onClick={this.props.clearSearch}
+        >
+          清除篩選
+        </button>
+      </div>
+    )
   }
 
   render() {
@@ -144,7 +187,7 @@ class StoreInfo extends Component {
           {console.log(this.props.dataStore)}
           {this.props.storeStore ? this.DisplayInfo() : this.CardInfo()}
           {/* <NavLink to={{ pathname: `/games/game/${game.ID}` }}> */}
-          {}
+          {this.props.storeStore ? this.ClearButton() : ''}
         </React.Fragment>
       )
     }
