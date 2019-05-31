@@ -56,6 +56,7 @@ class UserShopping extends React.Component {
               <th scope="col">收貨方法</th>
               <th scope="col">付款方式</th>
               <th scope="col">我要退貨</th>
+              <th scope="col">date</th>
             </tr>
           </thead>
           <tbody>
@@ -66,6 +67,7 @@ class UserShopping extends React.Component {
                 <td>{this.state.data[index].order_name}</td>
                 <td>{this.state.data[index].getmethod}</td>
                 <td>{this.state.data[index].paymethod}</td>
+                <td>{this.state.data[index].cre_date}</td>
                 <td>
                   <a href="#">退貨</a>
                 </td>
