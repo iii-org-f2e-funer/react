@@ -1,18 +1,18 @@
-import React from 'react'
-import { Link } from 'react-router-dom'
+import React from 'react';
+import { Link } from 'react-router-dom';
 
-import { FaAngleLeft, FaAngleRight } from 'react-icons/fa'
+import { FaAngleLeft, FaAngleRight } from 'react-icons/fa';
 class ProductSlider extends React.Component {
   constructor(props) {
-    super(props)
+    super(props);
     this.state = {
       position: 0,
       datas: [],
-    }
-    this.pointer = 0 // 初始化pointer
-    this.numbers = 5 // 顯示個數
-    this.slideWidth = 232 //寬度
-    this.position = -1 * this.slideWidth * this.numbers // -1 * 顯示個數 * 每個寬度
+    };
+    this.pointer = 0; // 初始化pointer
+    this.numbers = 5; // 顯示個數
+    this.slideWidth = 232; //寬度
+    this.position = -1 * this.slideWidth * this.numbers; // -1 * 顯示個數 * 每個寬度
   }
   componentDidMount() {
     fetch('http://localhost:3002/home/homeProduct')
@@ -31,62 +31,65 @@ class ProductSlider extends React.Component {
             obj.data[2],
             obj.data[3],
             obj.data[4],
-          ]
+          ];
           this.setState({ datas: arr }, () => {
-            this.data_length = obj.data.length // 原始資料長度
-            this.carousel.style.left = this.position + 'px' // 設定初始位置
-          })
+            this.data_length = obj.data.length; // 原始資料長度
+            // this.carousel.style.left = this.position + 'px'; // 設定初始位置
+          });
         }
-      })
+      });
 
     // 開起輪播
     this.timer = setInterval(() => {
-      this.handleNextClick()
-    }, 5000)
+      this.handleNextClick();
+    }, 5000);
   }
   componentWillUnmount() {
-    clearInterval(this.timer)
+    clearInterval(this.timer);
   }
   // 按上一個
   handlePrevClick = () => {
-    this.pointer -= 1
+    this.pointer -= 1;
     if (this.pointer === -1 * (this.numbers + 1)) {
-      this.carousel.style.transition = 'none'
-      this.pointer = this.data_length - this.numbers
-      this.position = -1 * this.data_length * this.slideWidth
-      this.carousel.style.left = this.position + 'px'
+      this.carousel.style.transition = 'none';
+      this.pointer = this.data_length - this.numbers;
+      this.position = -1 * this.data_length * this.slideWidth;
+      this.carousel.style.left = this.position + 'px';
       setTimeout(() => {
-        this.carousel.style.transition = '0.4s'
-        this.pointer -= 1
-        this.position += this.slideWidth
-        this.carousel.style.left = this.position + 'px'
-      }, 20)
+        this.carousel.style.transition = '0.4s';
+        this.pointer -= 1;
+        this.position += this.slideWidth;
+        this.carousel.style.left = this.position + 'px';
+      }, 20);
     } else {
-      this.position += this.slideWidth
-      this.carousel.style.left = this.position + 'px'
+      this.position += this.slideWidth;
+      this.carousel.style.left = this.position + 'px';
     }
-  }
+  };
   // 按下一個
   handleNextClick = () => {
-    this.pointer += 1
+    this.pointer += 1;
     if (this.pointer === this.data_length + 1) {
-      this.carousel.style.transition = 'none'
-      this.pointer = 0
-      this.position = -this.numbers * this.slideWidth
-      this.carousel.style.left = this.position + 'px'
+      this.carousel.style.transition = 'none';
+      this.pointer = 0;
+      this.position = -this.numbers * this.slideWidth;
+      this.carousel.style.left = this.position + 'px';
       setTimeout(() => {
-        this.carousel.style.transition = '0.4s'
-        this.pointer += 1
-        this.position -= this.slideWidth
-        this.carousel.style.left = this.position + 'px'
-      }, 20)
+        this.carousel.style.transition = '0.4s';
+        this.pointer += 1;
+        this.position -= this.slideWidth;
+        this.carousel.style.left = this.position + 'px';
+      }, 20);
     } else {
-      this.position -= this.slideWidth
-      this.carousel.style.left = this.position + 'px'
+      this.position -= this.slideWidth;
+      // this.carousel.style.left = this.position + 'px';
     }
-  }
+  };
 
   render() {
+    if (this.state.datas) {
+      return '';
+    }
     return (
       <>
         <div className="product_slider">
@@ -119,7 +122,7 @@ class ProductSlider extends React.Component {
           </div>
         </div>
       </>
-    )
+    );
   }
 }
-export default ProductSlider
+export default ProductSlider;
