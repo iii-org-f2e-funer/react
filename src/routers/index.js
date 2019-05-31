@@ -52,7 +52,7 @@ class RootRouter extends React.Component {
     return (
       <Router>
         <>
-          <Navbar login={this.handleShow} />
+          <Navbar />
           <Switch>
             <Route exact path="/" component={Home} />
 
