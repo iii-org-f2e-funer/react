@@ -1,4 +1,45 @@
 .cardInfo {
 	height: 95vh;
 	overflow: scroll;
+
+	.content {
+		position: relative;
+		display: flex;
+		flex-direction: column;
+		min-width: 0;
+		word-wrap: break-word;
+		background-color: #fff;
+		background-clip: border-box;
+		border: 1px solid rgba(0, 0, 0, .125);
+		border-radius: .25rem;
+		transition-duration: 0.3s;
+		transition-timing-function: ease;
+		left: 0;
+		line-height: 20px;
+		padding: 20px 12px;
+		&:hover {
+			// left: 20px;
+			background-color: #d6eef2;
+		}
+	}
+}
+.middle {
+	a,
+	a:active {
+		text-decoration: none !important;
+	}
+	button {
+		width: 200px;
+		display: block;
+		margin: 20px auto;
+		text-decoration: none !important;
+		&:hover {
+			text-decoration: none !important;
+		}
+	}
+}
+
+.cardList p {
+	line-height: 30px;
+	font-size: 24px;
 }

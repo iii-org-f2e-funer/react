@@ -17,16 +17,16 @@ class UserMenu extends React.Component {
               </div>
             </li>
             <li>
-              <Link to="/member">會員中心</Link>
+              <Link to="/member/account">會員中心</Link>
             </li>
             <li>
-              <Link to="#">聊天紀錄</Link>
+              <Link to="/member/userevent">我的揪團</Link>
             </li>
             <li>
-              <Link to="#">我的揪團</Link>
+              <Link to="/member/UserShopping">訂單查詢</Link>
             </li>
             <li>
-              <Link to="#">訂單紀錄</Link>
+              <Link to="/member/userSite">場地預定</Link>
             </li>
             <hr />
             <li>
