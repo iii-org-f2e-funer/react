@@ -291,9 +291,14 @@ body select.form-control:focus {
 }
 
 /* textarea  */
+body textarea.form-control{
+	border: 2px solid #ccc;
+	resize : none;
+}	
 /* className="form-control */
 body textarea.form-control:focus {
 	box-shadow: none;
+	border: 2px solid $blue;
 }
 
 html,

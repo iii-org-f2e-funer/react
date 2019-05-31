@@ -37,7 +37,12 @@ class Navbar extends React.Component {
       .then(res => res.json())
       .then(obj => {
         this.props.logout()
-        if (this.props.location.pathname === '/firm') {
+        if (
+          this.props.location.pathname === '/firm/account' ||
+          '/firm/product_order' ||
+          '/firm/site_order' ||
+          '/firm/propduct_manage'
+        ) {
           this.props.history.push('/')
         }
       })

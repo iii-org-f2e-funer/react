@@ -1,11 +1,15 @@
 import React from 'react'
 import '../../styles/pt_style/pt_detail.scss'
-import { Link, NavLink } from 'react-router-dom'
-import { Button, Tabs, Tab } from 'react-bootstrap'
+
+import { Tabs, Tab } from 'react-bootstrap'
 import Pt_applymodal from '../../components/event/Pt_applymodal'
 import Pt_applyer from '../../components/event/Pt_applyer'
 import Pt_infointro from '../../components/event/Pt_infointro'
 import Pt_qa from './Pt_qa'
+
+import actions from '../../redux/action/userInfo.js'
+import { connect } from 'react-redux'
+import { withRouter } from 'react-router'
 
 import moment from 'moment'
 
@@ -18,12 +22,31 @@ class Pt_detail extends React.Component {
     this.state = {
       data: [],
       applyer: [],
+      account: [],
     }
   }
 
   componentDidMount() {
+    //抓揪團資料
     this.loadptinfo()
+
+    //抓申請人資料
     this.loadapplyer()
+
+    //抓登入資料
+    if (this.props.userInfo.login) {
+
+      fetch('//localhost:3002/firm/userInfo', {
+        credentials: 'include',
+      })
+        .then(res => res.json())
+        .then(obj => {
+          console.log(obj.body)
+          this.setState({
+            account: obj.body.account,
+          })
+        })
+    }
   }
 
   loadptinfo() {
@@ -72,7 +95,19 @@ class Pt_detail extends React.Component {
           <div className="ptdetail_info">
             <div className="ptinfo_up">
               <div className="ptinfo_img">
-                <img src={this.state.data.pt_img} alt="" />
+                {this.state.data.pt_img !== '' ? (
+                  <img
+                    src={
+                      '//localhost:3002/images/event/' + this.state.data.pt_img
+                    }
+                    alt=""
+                  />
+                ) : (
+                  <img
+                    src="//localhost:3002/images/event/defaulteventimg.jpg"
+                    alt=""
+                  />
+                )}
               </div>
               <div className="ptinfo_colright">
                 <div className="ptinfo">
@@ -165,41 +200,20 @@ class Pt_detail extends React.Component {
                 <Pt_applymodal
                   ptapply={this.state.data}
                   handlerender={this.loadapplyer}
+                  account={this.state.account}
                 />
                 <div className="pt_share" />
               </div>
             </div>
             <div className="ptinfo_bottom">
-              <Tabs defaultActiveKey="profile" id="uncontrolled-tab-example">
+              <Tabs defaultActiveKey="home" id="uncontrolled-tab-example">
                 <Tab eventKey="home" title="主揪介紹">
-                  <Pt_infointro />
+                  <Pt_infointro intro={this.state.data.pt_info} />
                 </Tab>
                 <Tab eventKey="profile" title="留言">
-                <Pt_qa />
+                  <Pt_qa />
                 </Tab>
               </Tabs>
-              {/* <div className="ptinfo_bottom_nav">
-                <ul>
-                  <li>
-                    <NavLink
-                      to={'/event/info/' + this.state.data.pt_sid}
-                      activeClassName="active"
-                      exact
-                    >
-                      主揪介紹
-                    </NavLink>
-                  </li>
-                  <li>
-                    <NavLink
-                      to={'/event/info/' + this.state.data.pt_sid + '/quest'}
-                      activeClassName="active"
-                    >
-                      留言
-                    </NavLink>
-                  </li>
-                </ul>
-              </div>
-              <Pt_detailrouter ptsid={this.state.data.pt_sid}/> */}
             </div>
           </div>
         </div>
@@ -207,5 +221,17 @@ class Pt_detail extends React.Component {
     )
   }
 }
+function mapStateToProp(store) {
+  return {
+    userInfo: store.userInfo,
+  }
+}
 
-export default Pt_detail
+export default withRouter(
+  connect(
+    mapStateToProp,
+    {
+      userInfoAction: actions.userInfo,
+    }
+  )(Pt_detail)
+)
