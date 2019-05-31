@@ -94,7 +94,7 @@ class ProductSlider extends React.Component {
             {/* list */}
             <ul className="productList" ref={el => (this.carousel = el)}>
               {this.state.datas.map((item, idx) => (
-                <li key={item.sid} className="productItem">
+                <li key={idx} className="productItem">
                   <Link>
                     {/* <img src={item.image_path} alt="" /> */}
                     <img

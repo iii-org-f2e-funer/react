@@ -20,7 +20,7 @@ class InstagramSlider extends React.Component {
       .then(res => res.json())
       .then(obj => {
         if (obj.success === true) {
-          console.log(obj.data)
+          // console.log(obj.data)
           var arr = [obj.data[obj.data.length - 1], ...obj.data, obj.data[0]]
           this.setState({ datas: arr }, () => {
             this.data_length = obj.data.length // 原始資料長度
@@ -70,7 +70,12 @@ class InstagramSlider extends React.Component {
                   <div className="card_head">
                     <div className="card_container">
                       <img
-                        src={process.env.PUBLIC_URL + '/images/home/avatar.jpg'}
+                        src={
+                          item.isFirm
+                            ? 'http://localhost:3002/images/firm/' + item.avatar
+                            : 'http://localhost:3002/images/member/' +
+                              item.avatar
+                        }
                         alt=""
                       />
                       <span>

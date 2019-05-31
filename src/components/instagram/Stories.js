@@ -6,6 +6,8 @@ class Stories extends React.Component {
   constructor() {
     super()
     this.state = {
+      userInfo: {},
+      isGuest: true,
       stories: [],
       storyState: [],
       isRefreshing: true,
@@ -13,20 +15,42 @@ class Stories extends React.Component {
   }
 
   componentDidMount() {
-    this.fetchAllData()
-    this.timer1 = setInterval(() => {
-      if (this.state.isRefreshing) {
-        this.fetchAllData()
-      }
-    }, 5000)
+    fetch('//localhost:3002/firm/userInfo', {
+      credentials: 'include',
+    })
+      .then(res => res.json())
+      .then(obj => {
+        if (obj.success) {
+          if (obj.isFirm) {
+            // 整理廠商格式
+            obj.body.member_id = 'f_' + obj.body.sid
+            obj.body.nickname = obj.body.firmname
+            obj.body.photo = obj.body.my_file
+          }
+          // setState
+          this.setState({ userInfo: obj, isGuest: false }, () => {
+            //refresh
+            this.fetchAllData()
+            this.timer1 = setInterval(() => {
+              if (this.state.isRefreshing) {
+                this.fetchAllData()
+              }
+            }, 5000)
+          })
+        } else {
+          alert('請先登入')
+          this.props.history.push('/')
+        }
+      })
   }
+
   componentWillUnmount() {
     clearInterval(this.timer1)
   }
   fetchAllData = () => {
-    var userID = { userId: '1' }
+    var userID = { userId: this.state.userInfo.body.member_id }
     var allStories = []
-    var allState = []
+    var allState = [[], [], []]
     // fetch 所有貼文
     fetch('http://localhost:3002/instagram/allData')
       .then(res => res.json())
@@ -44,6 +68,7 @@ class Stories extends React.Component {
       })
       .then(res => res.json())
       .then(data => {
+        // console.log(data)
         allState = data
         this.setState({ stories: allStories, storyState: allState })
       })
@@ -57,53 +82,42 @@ class Stories extends React.Component {
     this.fetchAllData()
   }
   render() {
-    if (this.state.storyState.length !== 0) {
-      return (
-        <>
-          <div className="stories">
-            <NewStory handleReFresh={this.handleReFresh} />
-            {this.state.stories.map(item => (
-              <OldStory
-                key={item.post_id}
-                data={item}
-                handleControlRefresh={this.handleControlRefresh}
-                handleReFresh={this.fetchAllData}
-                isFav={
-                  this.state.storyState[0].indexOf(item.post_id) > -1
-                    ? true
-                    : false
-                }
-                isBook={
-                  this.state.storyState[1].indexOf(item.post_id) > -1
-                    ? true
-                    : false
-                }
-                editable={
-                  this.state.storyState[2].indexOf(item.post_id) > -1
-                    ? true
-                    : false
-                }
-              />
-            ))}
-          </div>
-        </>
-      )
-    } else {
-      return (
-        <>
-          <div className="stories">
-            <NewStory handleReFresh={this.handleReFresh} />
-            {this.state.stories.map(item => (
-              <OldStory
-                key={item.post_id}
-                data={item}
-                handleReFresh={this.fetchAllData}
-              />
-            ))}
-          </div>
-        </>
-      )
-    }
+    if (this.state.isGuest) return null
+    return (
+      <>
+        <div className="stories">
+          <NewStory
+            handleReFresh={this.handleReFresh}
+            userInfo={this.state.userInfo}
+          />
+          {this.state.stories.map(item => (
+            <OldStory
+              key={item.post_id}
+              data={item}
+              userInfo={this.state.userInfo}
+              handleControlRefresh={this.handleControlRefresh}
+              handleReFresh={this.fetchAllData}
+              isFav={
+                this.state.storyState[0].indexOf(item.post_id) > -1
+                  ? true
+                  : false
+              }
+              isBook={
+                this.state.storyState[1].indexOf(item.post_id) > -1
+                  ? true
+                  : false
+              }
+              editable={
+                this.state.storyState[2].indexOf(item.post_id) > -1
+                  ? true
+                  : false
+              }
+            />
+          ))}
+        </div>
+      </>
+    )
   }
 }
+
 export default Stories
