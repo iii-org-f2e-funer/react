@@ -1,9 +1,9 @@
-import React from 'react'
+import React from 'react';
 // //withRouter 匯入這個方法來讓子元件可以得到ROUTER的URL屬性
-import { withRouter } from 'react-router'
-import avatar from '../avatar/ironman.jpg'
-import socketIOClient from 'socket.io-client'
-import MessageList from '../components/MessageList'
+import { withRouter } from 'react-router';
+import avatar from '../avatar/ironman.jpg';
+import socketIOClient from 'socket.io-client';
+import MessageList from '../components/MessageList';
 
 // const PathNow = props => <div>目前位置 {props.location.pathname}</div>;
 
@@ -11,7 +11,7 @@ import MessageList from '../components/MessageList'
 
 class ChatArea_socket_new extends React.Component {
   constructor(props) {
-    super(props)
+    super(props);
     this.state = {
       //{h_id: 1,h_sub: "BOB",m_id: 1,m_cont: "你好，BOB初次見面!",m_time: "2019-05-21T16:45:57.000Z",sender: 1,}
       chatDataAll: [],
@@ -26,43 +26,43 @@ class ChatArea_socket_new extends React.Component {
       inputContent: '',
       messages: [],
       roomID: '',
-    }
-    this.ready()
+    };
+    this.ready();
   }
 
   async componentDidMount() {
     try {
-      const socket = socketIOClient(this.state.endpoint)
+      const socket = socketIOClient(this.state.endpoint);
       //JOIN ROOM
-      let theUrl = this.props.location.pathname
-      var fromID = theUrl.split('/')[3].replace('ID', '')
-      var toID = theUrl.split('/')[4].replace('ID', '')
+      let theUrl = this.props.location.pathname;
+      var fromID = theUrl.split('/')[3].replace('ID', '');
+      var toID = theUrl.split('/')[4].replace('ID', '');
       var roomID = this.props.userData.filter((ele, index, arr) => {
         if (
           (ele.from_id == fromID || ele.from_id == toID) &&
           (ele.to_id == fromID || ele.to_id == toID)
         ) {
-          return arr[index]
+          return arr[index];
         }
-      })
-      roomID = roomID[0].id
-      socket.emit('join', roomID)
+      });
+      roomID = roomID[0].id;
+      socket.emit('join', roomID);
       socket.on('join', data => {
-        console.log('join room ' + data)
-      })
+        console.log('join room ' + data);
+      });
 
       //
-      var memberChatData = []
+      var memberChatData = [];
 
-      let to_id = theUrl.split('/')[4].replace('ID', '')
-      let from_id = theUrl.split('/')[3].replace('ID', '')
-      console.log(theUrl)
+      let to_id = theUrl.split('/')[4].replace('ID', '');
+      let from_id = theUrl.split('/')[3].replace('ID', '');
+      console.log(theUrl);
       await this.setState({
         to_member_name: to_id,
         to_u_id: to_id,
         from_member_name: from_id,
         from_u_id: from_id,
-      })
+      });
 
       //fecth data from database(chat history)
       const response = await fetch(
@@ -71,38 +71,38 @@ class ChatArea_socket_new extends React.Component {
           method: 'GET',
           headers: { 'Content-type': 'application/json' },
         }
-      )
-      if (!response.ok) throw new Error(response.statusText)
-      const data = await response.json()
-      console.log(data)
+      );
+      if (!response.ok) throw new Error(response.statusText);
+      const data = await response.json();
+      console.log(data);
 
       memberChatData = data.filter(ele => {
-        return ele.m_receiver_id == to_id || ele.m_sender_id == to_id
-      })
+        return ele.m_receiver_id == to_id || ele.m_sender_id == to_id;
+      });
       memberChatData = memberChatData.sort(function(a, b) {
-        return a.m_time > b.m_time ? 1 : -1
-      })
+        return a.m_time > b.m_time ? 1 : -1;
+      });
 
       await this.setState({
         chatDataAll: data,
         member_chat_data: memberChatData,
         start_chat_time: memberChatData[0].h_stime,
-      })
+      });
 
-      console.log(this.state.chatDataAll)
-      console.log(this.state.member_chat_data)
+      console.log(this.state.chatDataAll);
+      console.log(this.state.member_chat_data);
     } catch (e) {
-      console.log(e)
+      console.log(e);
     }
   }
 
   componentDidUpdate() {
-    console.log(this.chatUl)
-    this.chatUl.scrollTop = this.chatUl.scrollHeight
+    console.log(this.chatUl);
+    this.chatUl.scrollTop = this.chatUl.scrollHeight;
   }
   //////
   async updateMsg(obj) {
-    let messages = this.state.messages
+    let messages = this.state.messages;
     const newMsg = {
       type: 'chat',
       username: obj.username,
@@ -110,79 +110,79 @@ class ChatArea_socket_new extends React.Component {
       action: obj.message,
       time: obj.time,
       msgId: this.generateMsgId(),
-    }
-    let messages_new = [...messages, newMsg]
-    await this.setState({ messages: messages_new })
-    console.log(this.state.messages)
+    };
+    let messages_new = [...messages, newMsg];
+    await this.setState({ messages: messages_new });
+    console.log(this.state.messages);
   }
   generateMsgId() {
-    return new Date().getTime() + '' + Math.floor(Math.random() * 899 + 100)
+    return new Date().getTime() + '' + Math.floor(Math.random() * 899 + 100);
   }
   generateTime = () => {
-    let tzoffset = new Date().getTimezoneOffset() * 60000 //offset in milliseconds
+    let tzoffset = new Date().getTimezoneOffset() * 60000; //offset in milliseconds
     let localISOTime = new Date(Date.now() - tzoffset) //get local time
       .toISOString()
       .replace(/\.\d{3}\Z/, ' ')
-      .replace('T', ' ')
-    return localISOTime
-  }
+      .replace('T', ' ');
+    return localISOTime;
+  };
   ready() {
-    const socket = socketIOClient(this.state.endpoint)
+    const socket = socketIOClient(this.state.endpoint);
     socket.on('message', obj => {
-      this.updateMsg(obj)
-      console.log(obj)
-      this.props.refresh()
-    })
-    let theUrl = this.props.location.pathname
-    var fromID = theUrl.split('/')[3].replace('ID', '')
-    var toID = theUrl.split('/')[4].replace('ID', '')
+      this.updateMsg(obj);
+      console.log(obj);
+      this.props.refresh();
+    });
+    let theUrl = this.props.location.pathname;
+    var fromID = theUrl.split('/')[3].replace('ID', '');
+    var toID = theUrl.split('/')[4].replace('ID', '');
     var roomID = this.props.userData.filter((ele, index, arr) => {
       if (
         (ele.from_id == fromID || ele.from_id == toID) &&
         (ele.to_id == fromID || ele.to_id == toID)
       ) {
-        return arr[index]
+        return arr[index];
       }
-    })
-    roomID = roomID[0].id
-    socket.emit('join', roomID)
+    });
+    roomID = roomID[0].id;
+    socket.emit('join', roomID);
     socket.on('join', data => {
-      console.log('join room ' + data)
-    })
+      console.log('join room ' + data);
+    });
   }
 
   getRoomID = () => {
-    let theUrl = this.props.location.pathname
-    let fromID = theUrl.split('/')[3].replace('ID', '')
-    let toID = theUrl.split('/')[4].replace('ID', '')
+    let theUrl = this.props.location.pathname;
+    let fromID = theUrl.split('/')[3].replace('ID', '');
+    let toID = theUrl.split('/')[4].replace('ID', '');
     var roomID = this.props.userData.filter((ele, index, arr) => {
       if (
         (ele.from_id == fromID || ele.from_id == toID) &&
         (ele.to_id == fromID || ele.to_id == toID)
       ) {
-        return arr[index]
+        return arr[index];
       }
-    })
-    this.setState({ roomID: roomID[0].id })
-  }
+    });
+    this.setState({ roomID: roomID[0].id });
+  };
 
   // uid: this.state.u_id,
   // username: this.state.member_name,
   // message: inputContent,
   //////
   handleChange = event => {
-    console.log(event.target.value)
-    this.setState({ inputContent: event.target.value })
-  }
+    console.log(event.target.value);
+    this.setState({ inputContent: event.target.value });
+  };
   handleClick = () => {
-    console.log('btn click!')
-    return this.sendMessage()
-  }
+    console.log('btn click!');
+    return this.sendMessage();
+  };
   sendMessage = async () => {
-    const inputContent = this.state.inputContent
-    const socket = socketIOClient(this.state.endpoint)
+    const inputContent = this.state.inputContent;
+    const socket = socketIOClient(this.state.endpoint);
 
-    await this.getRoomID()
+    await this.getRoomID();
     if (inputContent) {
       const obj = {
         uid: this.state.from_u_id,
@@ -194,7 +194,7 @@ class ChatArea_socket_new extends React.Component {
         roomID: this.state.roomID,
         h_id: this.state.member_chat_data[0].h_id,
         is_readed: 0,
-      }
+      };
       ////////////POST to DATA BASE/////////
       fetch(
         `http://localhost:3002/chatroom/message/${this.props.logInId}/${
@@ -208,17 +208,17 @@ class ChatArea_socket_new extends React.Component {
         }
       )
         .then(res => {
-          return res.json()
+          return res.json();
         })
         .then(data => {
-          console.log(data)
-          this.props.refresh()
-        })
-      socket.emit('message', obj)
+          console.log(data);
+          this.props.refresh();
+        });
+      socket.emit('message', obj);
       // 发送消息后清空输入框
-      this.setState({ inputContent: '' })
+      this.setState({ inputContent: '' });
     }
-  }
+  };
 
   render() {
     return (
@@ -255,7 +255,7 @@ class ChatArea_socket_new extends React.Component {
                     </div>
                     <small>{element.m_time}</small>
                   </li>
-                )
+                );
               })}
               <MessageList
                 u_id={this.state.from_u_id}
@@ -299,8 +299,8 @@ class ChatArea_socket_new extends React.Component {
           </div>
         </div>
       </>
-    )
+    );
   }
 }
 
-export default withRouter(ChatArea_socket_new)
+export default withRouter(ChatArea_socket_new);
