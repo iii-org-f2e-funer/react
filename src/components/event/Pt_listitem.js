@@ -2,24 +2,35 @@ import React from 'react'
 import { Link } from 'react-router-dom'
 import { Card } from 'react-bootstrap'
 import moment from 'moment'
+import actions from '../../redux/action/userInfo.js'
+import { connect } from 'react-redux'
+import { withRouter } from 'react-router'
 
 const Pt_listitem = props => {
-
   return (
     <>
       <div className={'card' + ' ' + props.data.pt_level}>
         <Link to={'/event/info/' + props.data.pt_sid}>
           <div>
             <div className="img_contain">
-              <Card.Img
+              {/* <Card.Img
                 className="card_img"
                 variant="top"
-                src={props.data.pt_img}
-                // {
-                //   process.env.PUBLIC_URL +
-                //   '/images/pt_img/nature-wallpaper-hd-with-macro-photo-of-red-herbras-flower-600x400.jpg'
-                // }
-              />
+                src={'//localhost:3002/images/event/' + props.data.pt_img}
+              /> */}
+              {props.data.pt_img !== '' ? (
+                <Card.Img
+                  className="card_img"
+                  variant="top"
+                  src={'//localhost:3002/images/event/' + props.data.pt_img}
+                />
+              ) : (
+                <Card.Img
+                  className="card_img"
+                  variant="top"
+                  src="//localhost:3002/images/event/defaulteventimg.jpg"
+                />
+              )}
             </div>
             <div className="pt_host d-flex">
               <div className="host_pic">
@@ -33,9 +44,9 @@ const Pt_listitem = props => {
             <Card.Body className="card_bd">
               <div className="pt_title d-flex justify-content-between">
                 <span>{props.data.pt_title}</span>
-                <Link to="">
+                {/* <Link to="">
                   <i className="fas fa-ellipsis-v" />
-                </Link>
+                </Link> */}
               </div>
               <div className="pt_time">
                 <i className="fas fa-clock" />
@@ -52,5 +63,18 @@ const Pt_listitem = props => {
     </>
   )
 }
+function mapStateToProp(store) {
+  return {
+    userInfo: store.userInfo,
+  }
+}
 
-export default Pt_listitem
+export default withRouter(
+  connect(
+    mapStateToProp,
+    {
+      userInfoAction: actions.userInfo,
+    }
+  )(Pt_listitem)
+)
+

@@ -124,9 +124,9 @@ class Sidebar extends React.Component {
                 <li>
                   <NavLink to="/firm/product_order">商品訂單</NavLink>
                 </li>
-                <li>
+                {/* <li>
                   <NavLink to="/firm/site_manage">場地管理</NavLink>
-                </li>
+                </li> */}
                 <li>
                   <NavLink to="/firm/site_order">場地預約訂單</NavLink>
                 </li>
