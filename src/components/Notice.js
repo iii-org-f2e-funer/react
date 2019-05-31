@@ -22,7 +22,7 @@ class Notice extends React.Component {
     })
       .then(res => res.json())
       .then(obj => {
-        console.log(obj)
+        // console.log(obj)
         //判斷是否有新通知
         var haveNewNotice = false
         for (let i = 0; i < obj.notices.length; i++) {

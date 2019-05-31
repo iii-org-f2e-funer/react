@@ -45,13 +45,22 @@ class EventSlider extends React.Component {
       })
 
     // 開起輪播
-    this.timer = setInterval(() => {
-      this.handleNextClick()
-    }, 5000)
+    this.handleAutoSlide()
   }
   componentWillUnmount() {
     clearInterval(this.timer)
   }
+  //自動播放
+  handleAutoSlide = () => {
+    this.timer = setInterval(() => {
+      this.handleNextClick()
+    }, 4500)
+  }
+  //停止播放
+  handleStopSlide = () => {
+    clearInterval(this.timer)
+  }
+
   // 按上一個
   handlePrevClick = () => {
     this.pointer -= 1
@@ -94,13 +103,17 @@ class EventSlider extends React.Component {
   render() {
     return (
       <>
-        <div className="event_slider">
+        <div
+          className="event_slider"
+          onMouseEnter={this.handleStopSlide}
+          onMouseLeave={this.handleAutoSlide}
+        >
           <div className="slider_inner">
             {/* list */}
             <ul className="eventList" ref={el => (this.carousel = el)}>
               {this.state.datas.map((item, idx) => (
                 <li key={idx} className="eventItem">
-                  <Link>
+                  <Link to="#">
                     {/* <img src="" alt="" /> */}
                     <img
                       src={process.env.PUBLIC_URL + '/images/home/10.jpg'}

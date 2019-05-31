@@ -7,7 +7,7 @@ class User extends React.Component {
     this.state = {}
   }
   render() {
-    console.log(this.props.userInfo.body)
+    // console.log(this.props.userInfo.body)
     return (
       <>
         <div className="user">
