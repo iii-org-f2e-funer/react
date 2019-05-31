@@ -1,18 +1,18 @@
-import React from 'react'
-import { Link } from 'react-router-dom'
-import { FaHeart, FaRegCommentDots } from 'react-icons/fa'
+import React from 'react';
+import { Link } from 'react-router-dom';
+import { FaHeart, FaRegCommentDots } from 'react-icons/fa';
 
 class InstagramSlider extends React.Component {
   constructor(props) {
-    super(props)
+    super(props);
     this.state = {
       position: 0,
       datas: [],
-    }
-    this.pointer = 0 // 初始化pointer
-    this.numbers = 1 // 顯示個數
-    this.slideHeight = 385 //高度
-    this.position = -1 * this.slideHeight * this.numbers // -1 * 顯示個數 * 每個高度
+    };
+    this.pointer = 0; // 初始化pointer
+    this.numbers = 1; // 顯示個數
+    this.slideHeight = 385; //高度
+    this.position = -1 * this.slideHeight * this.numbers; // -1 * 顯示個數 * 每個高度
   }
   componentDidMount() {
     // this.props.events
@@ -21,42 +21,42 @@ class InstagramSlider extends React.Component {
       .then(obj => {
         if (obj.success === true) {
           // console.log(obj.data)
-          var arr = [obj.data[obj.data.length - 1], ...obj.data, obj.data[0]]
+          var arr = [obj.data[obj.data.length - 1], ...obj.data, obj.data[0]];
           this.setState({ datas: arr }, () => {
-            this.data_length = obj.data.length // 原始資料長度
-            this.carousel.style.top = this.position + 'px' // 設定初始位置
-          })
+            this.data_length = obj.data.length; // 原始資料長度
+            this.carousel.style.top = this.position + 'px'; // 設定初始位置
+          });
         }
-      })
+      });
 
     // 開起輪播
     this.timer = setInterval(() => {
-      this.handleNextClick()
-    }, 3000)
+      this.handleNextClick();
+    }, 3000);
   }
   componentWillUnmount() {
-    clearInterval(this.timer)
+    clearInterval(this.timer);
   }
 
   // 往下滾
   handleNextClick = () => {
-    this.pointer += 1
+    this.pointer += 1;
     if (this.pointer === this.data_length + 1) {
-      this.carousel.style.transition = 'none'
-      this.pointer = 0
-      this.position = -this.numbers * this.slideHeight
-      this.carousel.style.top = this.position + 'px'
+      this.carousel.style.transition = 'none';
+      this.pointer = 0;
+      this.position = -this.numbers * this.slideHeight;
+      this.carousel.style.top = this.position + 'px';
       setTimeout(() => {
-        this.carousel.style.transition = '0.4s'
-        this.pointer += 1
-        this.position -= this.slideHeight
-        this.carousel.style.top = this.position + 'px'
-      }, 20)
+        this.carousel.style.transition = '0.4s';
+        this.pointer += 1;
+        this.position -= this.slideHeight;
+        this.carousel.style.top = this.position + 'px';
+      }, 20);
     } else {
-      this.position -= this.slideHeight
-      this.carousel.style.top = this.position + 'px'
+      this.position -= this.slideHeight;
+      this.carousel.style.top = this.position + 'px';
     }
-  }
+  };
 
   render() {
     return (
@@ -112,7 +112,7 @@ class InstagramSlider extends React.Component {
           </div>
         </div>
       </>
-    )
+    );
   }
 }
-export default InstagramSlider
+export default InstagramSlider;
