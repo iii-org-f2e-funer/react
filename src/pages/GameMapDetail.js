@@ -94,7 +94,8 @@ class MyVerticallyCenteredModal extends React.Component {
       })
       .then(() => {
         this.props.onHide()
-        window.location.href = '/gameMap'
+        // window.location.href = '/gameMap'
+        this.props.history.push('/gameMap')
         return 1
       })
       .catch(err => {
@@ -402,6 +403,7 @@ class GameMapDetail extends React.Component {
                 public_holiday={this.state.dataStore.public_holiday}
                 goBack={this.goBack}
                 datastore={this.state.dataStore}
+                history={this.props.history}
               />
             </div>
           </div>

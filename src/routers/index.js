@@ -72,7 +72,10 @@ class RootRouter extends React.Component {
             />
             <Route path="/ProductDetail" component={ProductDetail} />
             <Route path="/Myfav" component={Myfav} />
-            <Route path="/Mycart" component={Mycart} />
+            <Route
+              path="/Mycart"
+              component={() => <Mycart show={this.state.show} />}
+            />
             <Route path="/Shopping1" component={Shopping1} />
             <Route path="/Shopping2" component={Shopping2} />
             <Route path="/Shopping3" component={Shopping3} />
