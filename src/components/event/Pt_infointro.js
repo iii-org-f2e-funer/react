@@ -1,9 +1,9 @@
 import React from 'react'
 
-const Pt_infointro = () => {
+const Pt_infointro = props => {
   return (
     <>
-      <div className="Pt_infointro">我是簡介</div>
+      <div className="Pt_infointro">{props.intro}</div>
     </>
   )
 }
