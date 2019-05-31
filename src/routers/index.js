@@ -52,12 +52,17 @@ class RootRouter extends React.Component {
     return (
       <Router>
         <>
-          <Navbar />
+          <Navbar login={this.handleShow} />
           <Switch>
             <Route exact path="/" component={Home} />
 
-            <Route path="/firm" component={Firm} />
+            <Route path="/firm/account" component={Firm} />
+            <Route path="/firm/product_manage" component={Firm} />
+            <Route path="/firm/product_order" component={Firm} />
+            <Route path="/firm/site_manage" component={Firm} />
+            <Route path="/firm/site_order" component={Firm} />
             <Route exact path="/checkCode" component={CheckCode} />
+
             <Route path="/member" component={Member} />
             <Route path="/event" component={Event} />
             <Route path="/product" component={Product} />
@@ -67,7 +72,10 @@ class RootRouter extends React.Component {
             />
             <Route path="/ProductDetail" component={ProductDetail} />
             <Route path="/Myfav" component={Myfav} />
-            <Route path="/Mycart" component={Mycart} />
+            <Route
+              path="/Mycart"
+              component={() => <Mycart show={this.state.show} />}
+            />
             <Route path="/Shopping1" component={Shopping1} />
             <Route path="/Shopping2" component={Shopping2} />
             <Route path="/Shopping3" component={Shopping3} />

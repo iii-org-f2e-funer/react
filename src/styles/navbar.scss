@@ -47,13 +47,14 @@ $shadow: 0px 1px 4px rgba(black, 0.2);
     }
     // a 共通 color
     a {
-      color: $color_light;
+      color: $color_grey;
     }
     a:hover {
       color: $color_blue;
     }
     a.active {
       color: $color_blue;
+
     }
 
     // Logo
@@ -75,6 +76,9 @@ $shadow: 0px 1px 4px rgba(black, 0.2);
           padding: 0 18px;
           height: 72px;
           line-height: 72px;
+        }
+        a.active{
+          border-bottom: 5px solid #6ec4d2;
         }
       }
     }

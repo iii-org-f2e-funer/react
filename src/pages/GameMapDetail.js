@@ -230,15 +230,23 @@ class MyVerticallyCenteredModal extends React.Component {
         <Modal.Footer style={{ justifyContent: 'center' }}>
           <Row>
             <Col>
-              <Button onClick={this.handleSubmit} style={{ width: '100px' }}>
+              <button
+                className="button"
+                onClick={this.handleSubmit}
+                style={{ width: '100px' }}
+              >
                 確認預約
-              </Button>
+              </button>
             </Col>
             <Col>
-              <Button onClick={this.props.onHide} style={{ width: '100px' }}>
+              <button
+                className="button button-white"
+                onClick={this.props.onHide}
+                style={{ width: '100px' }}
+              >
                 {' '}
                 取消
-              </Button>
+              </button>
             </Col>
           </Row>
         </Modal.Footer>
@@ -351,14 +359,13 @@ class GameMapDetail extends React.Component {
                     &nbsp;&nbsp;
                     <span>{this.state.dataStore.rule}</span>
                   </p>
-                  <Button
-                    className="actionButton "
-                    size="lg"
+                  <button
+                    className="button button--lg"
                     block
                     onClick={() => this.setState({ modalShow: true })}
                   >
                     預約場地
-                  </Button>
+                  </button>
                 </div>
               </div>
 

@@ -146,8 +146,10 @@ class Maylike extends React.Component {
                     src={`${item}`}
                   />
                   <Card.Body>
-                    <Card.Title />
-                    {/* <Card.Text>NT 790</Card.Text> */}
+                    <div className="maymoney">
+                      <Card.Title>NT 790</Card.Title>
+                    </div>
+                    <Card.Text />
                   </Card.Body>
                 </Card>
               </div>

@@ -1,7 +1,7 @@
 import React from 'react'
-import { Button, Table } from 'react-bootstrap'
+import { Table } from 'react-bootstrap'
 
-class Site_order extends React.Component {
+class product_order extends React.Component {
   constructor(props) {
     super(props)
     this.state = {
@@ -12,14 +12,14 @@ class Site_order extends React.Component {
   render() {
     return (
       <>
-        <h5>場地訂單</h5>
+        <h5>商品訂單紀錄</h5>
         <hr />
         <div className="cart">
           <div className="myfav-table mb-5">
             <Table striped bordered hover>
               <thead className="table_head">
                 <tr>
-                  <th>預約單編號</th>
+                  <th />
                   <th>商品名稱</th>
                   <th>店家</th>
                   <th>單價</th>
@@ -64,4 +64,4 @@ class Site_order extends React.Component {
   }
 }
 
-export default Site_order
+export default product_order

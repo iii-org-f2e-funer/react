@@ -262,14 +262,10 @@ export default class product extends React.Component {
                         <Card.Title className="cardtitle">
                           {item.productName}
                         </Card.Title>
-                        <div className="card-priceall d-flex">
-                          <div className=" ">
-                            <img
-                              src="https://img.icons8.com/color/48/000000/money-bag.png"
-                              width="30px"
-                            />
+                        <div className="card-priceall ">
+                          <div className="p-1 card-price">
+                            <h4>${item.price}</h4>
                           </div>
-                          <div className="p-1 card-price">{item.price}</div>
                         </div>
                       </div>
                     </Card>

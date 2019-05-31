@@ -15,14 +15,14 @@ body .container {
 
 /* Link*/
 a {
-	color: #484848 ;
-	text-decoration: none !important;
+	color: #484848;
+	text-decoration: none;
 }
 a:hover,
 a:active,
 a:focus {
-	color: #484848 ;
-	text-decoration: none !important;
+	color: #484848;
+	text-decoration: none;
 }
 
 /*List*/
@@ -150,7 +150,8 @@ $dark-yellow: #f9a629 !important;
 	text-decoration: none;
 	letter-spacing: 0;
 	background-color: $blue;
-	border: 0;
+	border-color: transparent;
+	border: none;
 	border-radius: 6px;
 	outline: 0;
 	cursor: pointer;
