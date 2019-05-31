@@ -36,16 +36,16 @@ class FirmMenu extends React.Component {
               </div>
             </li>
             <li>
-              <Link to="/firm">會員中心</Link>
+              <Link to="/firm/account">會員中心</Link>
             </li>
             <li>
-              <Link to="#">訂單紀錄</Link>
+              <Link to="/firm/product_manage">商品管理</Link>
             </li>
             <li>
-              <Link to="#">商品管理</Link>
+              <Link to="/firm/product_order">商品訂單</Link>
             </li>
             <li>
-              <Link to="#">場地管理</Link>
+              <Link to="/firm/site_order">場地預約</Link>
             </li>
             <hr />
             <li>

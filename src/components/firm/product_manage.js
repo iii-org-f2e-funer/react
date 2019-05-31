@@ -1,6 +1,6 @@
 import React from 'react'
 
-class Site_manage extends React.Component {
+class Product_manage extends React.Component {
   constructor(props) {
     super(props)
     this.state = {
@@ -11,11 +11,11 @@ class Site_manage extends React.Component {
   render() {
     return (
       <>
-        <h5>場地管理</h5>
+        <h5>商品管理</h5>
         <hr />
       </>
     )
   }
 }
 
-export default Site_manage
+export default Product_manage

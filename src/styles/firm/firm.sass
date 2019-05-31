@@ -83,16 +83,23 @@
             width: 0px
             background-color: #3DB4E0
         &:hover
-            background-color: #F6F6F6
             color:  #3DB4E0
             font-weight: 500
-            &:before
-                width: 4px
+
+
+.sidebar_link
+    a.active
+        background-color: #F6F6F6
+        color:  #3DB4E0
+        font-weight: 500
+        &:before
+            width: 4px
+
 
 // --------------------------------------
 // Firm_manage
 // -------------------------------------- 
-.manage_info
+.firmManage_info
     display: inline-block
     vertical-align: top
     min-height: 70vh
@@ -103,6 +110,8 @@
     width: calc(75% - 12px)
     font-size: 18px
     padding: 32px 28px
+    h5
+        margin: 0
 // account
 .col-7.account
     line-height: 45px
@@ -202,7 +211,16 @@ label.col-2
                 padding: 8px
             &.active
                 color: #474747
-    
+// --------------------------------------
+// register
+// --------------------------------------
+.codeCheck 
+    margin: auto
+    min-height: 55vh
+    max-width: 800px
+    width: 100%
+    .code_form
+        padding: 0 50px
 
 
 
