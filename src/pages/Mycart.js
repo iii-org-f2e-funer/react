@@ -1,6 +1,6 @@
 import React from 'react'
 import '../styles/cart/cart.scss'
-import { Button, Table } from 'react-bootstrap'
+import { Button, Table, InputGroup } from 'react-bootstrap'
 import { Link } from 'react-router-dom'
 import Account from '../components/firm/Account'
 import actions from '../redux/action/userInfo.js'
@@ -88,10 +88,14 @@ import { IoMdCart } from 'react-icons/io'
 //         this.state.totall + this.state.method_money
 //       )
 //     } else {
-//       alert('沒登入')
+//       alert('')
+//       // this.props.login()
 //     }
 //   }
 //   render() {
+//     {
+//       this.props.onShow()
+//     }
 //     if (
 //       localStorage.allcart == undefined ||
 //       localStorage.allcart == '' ||
@@ -318,6 +322,9 @@ class Mycart extends React.Component {
       data1: [],
       data2: [],
       data3: [],
+      input1: 0,
+      input2: 0,
+      input3: 0,
     }
   }
 
@@ -345,33 +352,27 @@ class Mycart extends React.Component {
         seller_tep.seller = allcart[i].seller_sid
         seller.push(seller_tep)
       }
-      // console.log(seller)
+
       var aaa = []
       for (let i = 0; i < seller.length; i++) {
         aaa.push(seller[i].seller)
       }
-      //   index = seller[i].seller
+
       var result = aaa.filter(function(element, index, arr) {
         return arr.indexOf(element) === index
       })
-      //   // a[i].push(seller[i])
-      // console.log(aaa)
-      // console.log(result)
+
       var sss = result.length
-      // console.log(sss)
+
       var mmm = []
       var obj = {}
       for (let i = 0; i < sss; i++) {
         mmm = []
         for (let j = 0; j < seller.length; j++) {
-          // console.log(result[i])
-          // console.log(seller.seller[j])
           if (result[i] == seller[j].seller) {
             mmm.push(seller[j])
           }
-          // obj.s[j] = mmm
         }
-        // console.log(obj)
         if (i == 0) {
           var data1 = mmm
           this.setState({ data1: mmm })
@@ -390,32 +391,79 @@ class Mycart extends React.Component {
         } else {
         }
       }
-      // }
+      console.log(this.state.data2)
     }
   }
+  deleteit1 = index => () => {
+    var data1 = []
+    var ddd = this.state.data1.length
+    for (let i = 0; i < ddd; i++) {
+      if (i !== index) {
+        data1.push(this.state.data1[i])
+      }
+    }
 
+    this.setState({ data1: data1 })
+    console.log(data1)
+  }
+  deleteit2 = index => () => {
+    var data2 = []
+    var ddd = this.state.data2.length
+    for (let i = 0; i < ddd; i++) {
+      if (i !== index) {
+        data2.push(this.state.data2[i])
+      }
+    }
+    this.setState({ data2: data2 })
+    console.log(data2)
+  }
+  deleteit3 = index => () => {
+    var data3 = []
+    var ddd = this.state.data3.length
+    for (let i = 0; i < ddd; i++) {
+      if (i !== index) {
+        data3.push(this.state.data3[i])
+      }
+    }
+    this.setState({ data3: data3 })
+    console.log(data3)
+  }
+  goto = sid => () => {
+    // console.log(sid)
+    localStorage.setItem('item.sid', sid)
+    window.location.href = 'http://localhost:3000/ProductDetail/sid:' + sid
+  }
+  check1 = () => {
+    if (this.state.input1 == 0) {
+      this.setState({ input1: 1 })
+    } else {
+      this.setState({ input1: 0 })
+    }
+  }
+  check2 = () => {
+    if (this.state.input2 == 0) {
+      this.setState({ input2: 1 })
+    } else {
+      this.setState({ input2: 0 })
+    }
+  }
+  check3 = () => {
+    if (this.state.input3 == 0) {
+      this.setState({ input3: 1 })
+    } else {
+      this.setState({ input3: 0 })
+    }
+  }
   render() {
     if (
-      localStorage.allcart == undefined ||
-      localStorage.allcart == '' ||
-      localStorage.allcart == '[]'
+      this.state.data1.length == 0 &&
+      this.state.data2.length == 0 &&
+      this.state.data3.length == 0
     ) {
       return (
         <>
           <div className="cart">
             <div className="container">
-              <ul className="cart_nav">
-                <li>
-                  <Link to="/Mycart">
-                    <div className="mycart">購物車</div>
-                  </Link>
-                </li>
-                <li>
-                  <Link to="/Myfav" activeClassName="active">
-                    <div className="myfav">我的收藏</div>
-                  </Link>
-                </li>
-              </ul>
               <div className="myfav0-table">
                 <div className="cart-img">
                   <img
@@ -450,52 +498,68 @@ class Mycart extends React.Component {
                 </li>
               </ul>
               {/* {this.state.data1[].seller} */}
-              <div className="myfav-table mb-5">
-                {this.state.name1}
-                <Table striped bordered hover>
-                  <thead className="table_head">
-                    <tr>
-                      <th />
-                      <th>商品名稱</th>
-                      <th>店家</th>
-                      <th>單價</th>
-                      <th>數量</th>
-                      <th>小計</th>
-                      <th>操作</th>
-                    </tr>
-                  </thead>
-                  <tbody>
-                    {this.state.data1.map((item, index, array) => (
-                      <tr>
-                        <td key={index}>{index + 1}</td>
-                        <td>{this.state.data1[index].productName}</td>
-                        <td>{this.state.data1[index].seller}</td>
-                        <td>{this.state.data1[index].product_price}</td>
-                        <td>{this.state.data1[index].number}</td>
-                        <td>{this.state.data1[index].total}</td>
-                        <td>
-                          <button
-                            className="m-1 button button"
-                            block
-                            // onClick={this.deleteit(index)}
-                          >
-                            刪除
-                          </button>
-                          <button
-                            className="m-1 button button"
-                            block
-                            // onClick={this.goto(this.state.data[index].sid)}
-                          >
-                            詳細資料
-                          </button>
-                        </td>
-                      </tr>
-                    ))}
-                  </tbody>
-                </Table>
-              </div>
-              {this.state.data2 !== [] ? (
+              {/* ////////////////////////////////////////////////////////////data1//////////////////////////////////////////////// */}
+              {this.state.data1 == [] ||
+              this.state.data1 == undefined ||
+              this.state.data1 == '' ? (
+                ''
+              ) : (
                 <div className="myfav-table mb-5">
+                  <input type="checkbox" aria-label="" onClick={this.check1} />
+                  {this.state.name1}
+                  <Table striped bordered hover>
+                    <thead className="table_head">
+                      <tr>
+                        <th />
+                        <th>商品名稱</th>
+                        <th>店家</th>
+                        <th>單價</th>
+                        <th>數量</th>
+                        <th>小計</th>
+                        <th>操作</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      {this.state.data1.map((item, index, array) => (
+                        <tr>
+                          <td key={index}>{index + 1}</td>
+                          <td>{this.state.data1[index].productName}</td>
+                          <td>{this.state.data1[index].seller}</td>
+                          <td>{this.state.data1[index].product_price}</td>
+                          <td>{this.state.data1[index].number}</td>
+                          <td>{this.state.data1[index].total}</td>
+                          <td>
+                            <button
+                              className="m-1 button button"
+                              block
+                              onClick={this.deleteit1(index)}
+                            >
+                              刪除
+                            </button>
+                            <button
+                              className="m-1 button button"
+                              block
+                              onClick={this.goto(
+                                this.state.data1[index].product_sid
+                              )}
+                            >
+                              詳細資料
+                            </button>
+                          </td>
+                        </tr>
+                      ))}
+                    </tbody>
+                  </Table>
+                </div>
+              )}
+              {/* ////////////////////////////////////////////////////////////data2//////////////////////////////////////////////// */}
+              {this.state.data2 == [] ||
+              this.state.data2 == undefined ||
+              this.state.data2 == '' ? (
+                ''
+              ) : (
+                <div className="myfav-table mb-5">
+                  <input type="checkbox" aria-label="" onClick={this.check2} />
                   {this.state.name2}
                   <Table striped bordered hover>
                     <thead className="table_head">
@@ -522,14 +586,16 @@ class Mycart extends React.Component {
                             <button
                               className="m-1 button button"
                               block
-                              // onClick={this.deleteit(index)}
+                              onClick={this.deleteit2(index)}
                             >
                               刪除
                             </button>
                             <button
                               className="m-1 button button"
                               block
-                              // onClick={this.goto(this.state.data[index].sid)}
+                              onClick={this.goto(
+                                this.state.data2[index].product_sid
+                              )}
                             >
                               詳細資料
                             </button>
@@ -539,11 +605,15 @@ class Mycart extends React.Component {
                     </tbody>
                   </Table>
                 </div>
-              ) : (
-                ''
               )}
-              {this.state.data2 !== [] ? (
+              {/* ////////////////////////////////////////////////////////////data3//////////////////////////////////////////////// */}
+              {this.state.data3 == [] ||
+              this.state.data3 == undefined ||
+              this.state.data3 == '' ? (
+                ''
+              ) : (
                 <div className="myfav-table mb-5">
+                  <input type="checkbox" aria-label="" onClick={this.check3} />
                   {this.state.name3}
                   <Table striped bordered hover>
                     <thead className="table_head">
@@ -570,14 +640,16 @@ class Mycart extends React.Component {
                             <button
                               className="m-1 button button"
                               block
-                              // onClick={this.deleteit(index)}
+                              onClick={this.deleteit3(index)}
                             >
                               刪除
                             </button>
                             <button
                               className="m-1 button button"
                               block
-                              // onClick={this.goto(this.state.data[index].sid)}
+                              onClick={this.goto(
+                                this.state.data3[index].product_sid
+                              )}
                             >
                               詳細資料
                             </button>
@@ -587,10 +659,8 @@ class Mycart extends React.Component {
                     </tbody>
                   </Table>
                 </div>
-              ) : (
-                ''
               )}
-
+              {/* /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////// */}
               <div className="check mt-5">
                 <div className="remind">
                   <label>提醒您</label>
