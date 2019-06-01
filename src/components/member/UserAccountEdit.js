@@ -131,12 +131,34 @@ class UserAccountEdit extends React.Component {
         {/* gender */}
         <div className="flex mb-3">
           <label className="col-2">性別</label>
-          <input
-            type="text"
-            className="col-7"
-            value={this.state.gender}
-            onChange={e => this.setState({ gender: e.target.value })}
-          />
+          <div className="form-check member">
+            <input
+              className="form-check-input"
+              type="radio"
+              name="exampleRadios"
+              id="exampleRadios1"
+              value="男"
+              checked={this.state.gender === '男'}
+              onChange={e => this.setState({ gender: e.target.value })}
+            />
+            <label className="form-check-label" htmlFor="exampleRadios1">
+              男
+            </label>
+          </div>
+          <div className="form-check ml-5 member">
+            <input
+              className="form-check-input"
+              type="radio"
+              name="exampleRadios"
+              id="exampleRadios2"
+              value="女"
+              checked={this.state.gender === '女'}
+              onChange={e => this.setState({ gender: e.target.value })}
+            />
+            <label className="form-check-label" htmlFor="exampleRadios2">
+              女
+            </label>
+          </div>
         </div>
 
         {/* mail */}
@@ -169,7 +191,7 @@ class UserAccountEdit extends React.Component {
               css={[
                 'form-control county-sel',
                 'form-control district-sel',
-                'form-control zipcode',
+                'form-control zipcode d-none',
               ]}
               handleChangeCounty={this.handlecityChange}
               handleChangeDistrict={this.handledistChange}

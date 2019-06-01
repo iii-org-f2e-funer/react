@@ -109,6 +109,10 @@ class CheckCode extends React.Component {
               </h5>
               <div className="code_form" onSubmit="return false">
                 <div className="d-flex justify-content-center">
+                  <label className="text-center">店家logo</label>
+                </div>
+
+                <div className="d-flex justify-content-center">
                   <label htmlFor="myFile">
                     <div className="post-image">
                       {this.state.preViewImgs.length ? (
@@ -134,7 +138,6 @@ class CheckCode extends React.Component {
                     onChange={this.handleFilesChange}
                   />
                 </div>
-
                 <div className="flex mb-3">
                   <label className="col-4">店家名稱</label>
                   <input

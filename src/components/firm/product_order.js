@@ -1,36 +1,36 @@
-import React from 'react';
-import { Table } from 'react-bootstrap';
+import React from 'react'
+import { Table } from 'react-bootstrap'
 
 class product_order extends React.Component {
   constructor(props) {
-    super(props);
+    super(props)
     this.state = {
       isEdit: false,
       data: [],
       firm_sid: 99,
-    };
+    }
   }
   componentDidMount() {
     fetch('//localhost:3002/product/firm_order', {})
       //fetch order
       .then(response => {
-        return response.json();
+        return response.json()
       })
       .then(jsonData => {
-        this.setState({ orderall: jsonData });
+        this.setState({ orderall: jsonData })
         // console.log(this.state.game_type);
-        var aaa = this.state.orderall.length;
-        var gotit = [];
+        var aaa = this.state.orderall.length
+        var gotit = []
         for (let i = 0; i < aaa; i++) {
           if (this.state.orderall[i].seller == this.state.firm_sid) {
-            gotit.push(this.state.orderall[i]);
+            gotit.push(this.state.orderall[i])
           }
         }
-        this.setState({ data: gotit });
+        this.setState({ data: gotit })
       })
       .catch(err => {
         // console.log('錯誤:', err)
-      });
+      })
   }
   render() {
     return (
@@ -83,8 +83,8 @@ class product_order extends React.Component {
           </div>
         </div>
       </>
-    );
+    )
   }
 }
 
-export default product_order;
+export default product_order

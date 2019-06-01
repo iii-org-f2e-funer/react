@@ -17,11 +17,11 @@ class FirmEditInput extends React.Component {
       insert: this.props.insert,
       sid: data.sid,
       firm_id: this.props.firm_id,
-      store: data.store,
-      county: data.county,
-      dist: data.dist,
-      address: data.address,
-      phone: data.phone,
+      store: this.props.data.firmname,
+      county: this.props.data.city,
+      dist: this.props.data.dist,
+      address: this.props.data.address,
+      phone: this.props.data.phone,
       business_hours: data.business_hours,
       public_holiday: data.public_holiday,
       charges: data.charges,
@@ -114,7 +114,7 @@ class FirmEditInput extends React.Component {
   }
 
   render() {
-    const img = this.props.img
+    const address = this.state.county + this.state.dist + this.state.address
     return (
       <>
         <Form>
@@ -123,11 +123,12 @@ class FirmEditInput extends React.Component {
               店家名稱
             </Form.Label>
             <Col sm={5}>
-              <Form.Control
+              <p>{this.state.store}</p>
+              {/* <Form.Control
                 type="text"
                 value={this.state.store}
                 onChange={e => this.setState({ store: e.target.value })}
-              />
+              /> */}
             </Col>
           </Form.Group>
 
@@ -137,7 +138,7 @@ class FirmEditInput extends React.Component {
             </Form.Label>
             <Col sm={5}>
               <div className="firmEdit_address">
-                <TWzipcode
+                {/* <TWzipcode
                   countyFieldName="pt_city"
                   districtFieldName="pt_dist"
                   countyValue={this.state.county}
@@ -149,13 +150,14 @@ class FirmEditInput extends React.Component {
                   ]}
                   handleChangeCounty={this.handlecityChange}
                   handleChangeDistrict={this.handledistChange}
-                />
-                <input
+                /> */}
+                <p>{address}</p>
+                {/* <input
                   className="addressinput mt-2"
                   type="text"
                   value={this.state.address}
                   onChange={e => this.setState({ address: e.target.value })}
-                />
+                /> */}
               </div>
             </Col>
           </Form.Group>
@@ -164,11 +166,12 @@ class FirmEditInput extends React.Component {
               店家電話
             </Form.Label>
             <Col sm={5}>
-              <Form.Control
+              <p>{this.state.phone}</p>
+              {/* <Form.Control
                 type="text"
                 value={this.state.phone}
                 onChange={e => this.setState({ phone: e.target.value })}
-              />
+              /> */}
             </Col>
           </Form.Group>
           <Form.Group as={Row} controlId="formHorizontalPassword">
@@ -230,7 +233,7 @@ class FirmEditInput extends React.Component {
               是否開放
             </Form.Label>
             <Col sm={10} className="d-flex align-items-center">
-              <div className="form-check">
+              <div className="form-check member">
                 <input
                   className="form-check-input"
                   type="radio"
@@ -244,7 +247,7 @@ class FirmEditInput extends React.Component {
                   場地開放預約
                 </label>
               </div>
-              <div className="form-check">
+              <div className="form-check ml-5">
                 <input
                   className="form-check-input"
                   type="radio"

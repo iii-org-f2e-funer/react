@@ -22,7 +22,7 @@ class Sidebar extends React.Component {
     super(props)
     this.state = {
       editPopup: false,
-      data: [],
+      data: {},
     }
   }
   componentDidMount() {
@@ -33,6 +33,7 @@ class Sidebar extends React.Component {
       .then(obj => {
         if (obj.success) {
           this.setState({ data: obj.body })
+          console.log(this.state.data)
         } else {
           this.props.history.push('/')
         }
@@ -113,7 +114,7 @@ class Sidebar extends React.Component {
                 <h5>{data.firmname}</h5>
                 <div className="email">{data.account}</div>
                 <button className="button" onClick={this.handleShow}>
-                  編輯店家資料
+                  店家場地資訊
                 </button>
               </div>
             </div>
@@ -145,13 +146,14 @@ class Sidebar extends React.Component {
               <Route path="/firm/account" component={Account} />
               <Route path="/firm/product_manage" component={Product_manage} />
               <Route path="/firm/product_order" component={Product_order} />
-              <Route path={'/firm/site_manage'} component={Site_manage} />
+              <Route path="/firm/site_manage" component={Site_manage} />
               <Route path="/firm/site_order" component={Site_order} />
             </Switch>
           </div>
           <FirmEdit
             editPopup={this.state.editPopup}
             handleHide={this.handleHide}
+            data={this.state.data}
           />
         </>
       </Router>

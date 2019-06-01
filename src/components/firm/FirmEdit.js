@@ -5,7 +5,7 @@ import { connect } from 'react-redux'
 import { withRouter } from 'react-router'
 import FirmEditInput from './FirmEditInput'
 
-class AccountEdit extends React.Component {
+class FirmEdit extends React.Component {
   constructor(props) {
     super(props)
     this.state = {
@@ -68,6 +68,9 @@ class AccountEdit extends React.Component {
     this.props.handleHide()
   }
   render() {
+    if (!this.props.data) {
+      return null
+    }
     return (
       <>
         <Modal
@@ -77,13 +80,14 @@ class AccountEdit extends React.Component {
           dialogClassName="modal-90w"
           aria-labelledby="example-custom-modal-styling-title"
         >
-          <h4 className="text-center mb-3">店家基本資訊</h4>
+          <h4 className="text-center mb-4">桌遊地圖公開資訊</h4>
           <FirmEditInput
             firmData={this.state.firmData}
             cancelEdit={this.cancelEdit}
             insert={this.state.insert}
             firm_id={this.state.firm_id}
             img={this.state.img}
+            data={this.props.data}
           />
         </Modal>
       </>
@@ -103,5 +107,5 @@ export default withRouter(
     {
       userInfoAction: actions.userInfo,
     }
-  )(AccountEdit)
+  )(FirmEdit)
 )
