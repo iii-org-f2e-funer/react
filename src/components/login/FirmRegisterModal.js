@@ -9,7 +9,6 @@ class FirmRegisterModal extends React.Component {
       password: '',
       passwordCheck: '',
       email: '',
-      store: '',
       uniform: '',
       remindText: '',
     }
@@ -118,7 +117,6 @@ class FirmRegisterModal extends React.Component {
       var data = {
         account: this.state.account,
         password: this.state.password,
-        store: this.state.store,
         uniform: this.state.uniform,
         email: this.state.email,
       }
@@ -219,21 +217,13 @@ class FirmRegisterModal extends React.Component {
                 onBlur={this.checkuniform}
                 ref={el => (this.inputuniform = el)}
               />
-              <label htmlFor="store">店家</label>
-              <input
-                className="pl-3"
-                name="store"
-                type="text"
-                required
-                onBlur={this.checkStore}
-              />
-              <Button
+              <button
                 type="submit"
                 className="button button--lg"
                 onClick={this.FirmRegisterRequest}
               >
                 註冊
-              </Button>
+              </button>
             </form>
             <div className="register center">
               註冊即同意<span className="blue">隱私權政策</span>和

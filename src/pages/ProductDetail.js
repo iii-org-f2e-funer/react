@@ -154,11 +154,28 @@ class ProductDetail extends React.Component {
     var product_num = this.state.number
     this.state.gotit.number = product_num
     console.log(this.state.gotit)
-    var arr = []
-    if (localStorage.allcart) {
-      arr = JSON.parse(localStorage.allcart)
+
+    // arr 撈 LocalStorage
+    if (
+      localStorage.allcart === '' ||
+      localStorage.allcart === undefined ||
+      localStorage.allcart === null
+    ) {
+      var arr = []
+    } else {
+      var arr = JSON.parse(localStorage.allcart)
     }
-    arr.push(this.state.gotit)
+
+    // 在allcart裡找gotit
+    let index = arr.findIndex(item => item.sid === this.state.gotit.sid)
+    if (index !== -1) {
+      // 有找到 就更改數量
+      arr[index].number += this.state.gotit.number
+    } else {
+      // 找不到 就新增
+      arr.push(this.state.gotit)
+    }
+
     localStorage.setItem('allcart', JSON.stringify(arr))
     this.setState({ allcart: arr })
     // console.log(this.state.allcart)

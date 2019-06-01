@@ -22,6 +22,7 @@
             .circle
                 border-radius: 100%
                 overflow: hidden
+                border: 1px solid #ccc
                 width: 100%
                 height: 100%
                 img
@@ -227,14 +228,36 @@ $w: 80px
         position: relative
         max-width: 500px
         width: 100%
+        .address
+            width: 100%
+            .code
+                width: 48%
+                margin-right: 4px
         h1
             font-weight: 900
         .code_form
             font-size: 20px
-            padding: 50px
+            padding: 30px 50px
             background-color: #fff
-            border-radius: 6px
-            box-shadow: 0 1px 4px rgba(0,0,0,0.1)
+            border-radius: 10px
+            box-shadow: 0 1px 5px rgba(0,0,0,0.1)
+            label
+                width: 80px
+            .post-image
+                width: 80px
+                height: 80px
+                border-radius: 100%
+                border: 1px solid #ccc
+                overflow: hidden
+                cursor: pointer
+                .code_avatar
+                    line-height: 75px
+                    text-align: center
+                    background-color: #ccc
+                    color: #fff
+                    width: 100%
+                    height: 100%
+                    font-size: 25px
         .funner_pic
             animation: jumping 0.8s infinite alternate
             position: relative

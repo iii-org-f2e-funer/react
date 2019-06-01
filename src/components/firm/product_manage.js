@@ -30,27 +30,9 @@ class Product_manage extends React.Component {
 
   handleHide = () => {
     this.setState({ editPopup: false })
+    //重新拉資料
   }
-  cancelEdit = () => {
-    // fetch('//localhost:3002/firm/firmInfo', {
-    //   credentials: 'include',
-    // })
-    //   .then(res => res.json())
-    //   .then(obj => {
-    //     if (obj.success) {
-    //       console.log(obj)
-    //       this.setState({
-    //         firmData: Object.assign(this.state.firmData, obj.body),
-    //         firm_id: obj.firm_id,
-    //         insert: false,
-    //       })
-    //     } else {
-    //       console.log(obj)
-    //       this.setState({ firm_id: obj.firm_id })
-    //     }
-    //   })
-    this.handleHide()
-  }
+
   render() {
     return (
       <>

@@ -22,6 +22,8 @@ class Member_cancelapply extends React.Component {
 
   handleClose = e => {
     this.setState({ modalshow: false })
+    console.log(this.props.applysid)
+    this.props.cancel(this.props.applysid)
   }
 
   render() {

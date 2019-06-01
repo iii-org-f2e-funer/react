@@ -1,7 +1,8 @@
 import React from 'react'
 import queryString from 'query-string'
-import { Form, Col, Row } from 'react-bootstrap'
 import TWzipcode from 'react-twzipcode'
+import { withRouter } from 'react-router'
+import { FaCamera } from 'react-icons/fa'
 
 class CheckCode extends React.Component {
   constructor(props) {
@@ -9,8 +10,23 @@ class CheckCode extends React.Component {
     this.state = {
       islive: '',
       data: [],
+      firmname: '',
+      phone: '',
+      city: '',
+      dist: '',
+      address: '',
+      contacter: '',
+      preViewImgs: [],
     }
   }
+  handlecityChange = evt =>
+    this.setState({
+      city: evt.county,
+    })
+  handledistChange = evt =>
+    this.setState({
+      dist: evt.district,
+    })
   componentDidMount() {
     const values = queryString.parse(this.props.location.search)
     const code = values.code
@@ -26,10 +42,47 @@ class CheckCode extends React.Component {
     })
       .then(res => res.json())
       .then(obj => {
-        console.log(obj)
         if (obj.success) {
           this.setState({ islive: true, data: obj.body })
         } else {
+        }
+      })
+  }
+  // 新增圖片
+  handleFilesChange = event => {
+    const files = event.target.files
+    var reader = new FileReader()
+    reader.readAsDataURL(files) //read file data as a base64 encoded string.
+    // reader loaded
+    reader.addEventListener('load', function(e) {
+      this.setState({ preViewImgs: files })
+    })
+  }
+  updateAccount = () => {
+    const data = {
+      sid: this.state.data.sid,
+      firmname: this.state.firmname,
+      phone: this.state.phone,
+      city: this.state.city,
+      dist: this.state.dist,
+      address: this.state.address,
+      contacter: this.state.contacter,
+    }
+    fetch('//localhost:3002/firm/codeInfo', {
+      method: 'POST',
+      body: JSON.stringify(data),
+      credentials: 'include',
+      headers: {
+        'Content-type': 'application/json',
+      },
+    })
+      .then(res => res.json())
+      .then(obj => {
+        if (obj.success) {
+          alert('填寫完成，請登入!')
+          this.props.history.push('/')
+        } else {
+          alert(obj.massage)
         }
       })
   }
@@ -49,73 +102,103 @@ class CheckCode extends React.Component {
                 <div className="mouth" />
               </div>
               <h1 className="text-center mb-2 mt-3">恭喜成為FUNer會員!</h1>
-              <p className="text-center mb-3">認證成功!請完成基本資料並登入!</p>
-              <Form className="code_form">
-                <Form.Group as={Row} controlId="formPlaintextEmail">
-                  <Form.Label column sm="4">
-                    店家
-                  </Form.Label>
-                  <Col sm="8">
-                    <Form.Control
-                      plaintext
-                      readOnly
-                      defaultValue={this.state.data.firmname}
-                    />
-                  </Col>
-                </Form.Group>
-                <Form.Group as={Row} controlId="formPlaintext">
-                  <Form.Label column sm="4">
-                    店家電話
-                  </Form.Label>
-                  <Col sm="8">
-                    <Form.Control type="text" />
-                  </Col>
-                </Form.Group>
-                <Form.Group as={Row} controlId="formPlaintext">
-                  <Form.Label column sm="4">
-                    店家地址
-                  </Form.Label>
-                  <Col sm="8">
-                    <div>
-                      <TWzipcode
-                        countyFieldName="pt_city"
-                        districtFieldName="pt_dist"
-                        countyValue={this.state.city}
-                        districtValue={this.state.dist}
-                        css={[
-                          'form-control county-sel',
-                          'form-control district-sel',
-                          'form-control zipcode',
-                        ]}
-                        handleChangeCounty={this.handlecityChange}
-                        handleChangeDistrict={this.handledistChange}
-                      />
-                      <input
-                        className="addressinput mt-2"
-                        type="text"
-                        value={this.state.address}
-                        onChange={e =>
-                          this.setState({ address: e.target.value })
-                        }
-                      />
+              <h5 className="text-center mb-4 mt-3">
+                認證成功! 完成基本資料即可登入!
+              </h5>
+              <div className="code_form" onSubmit="return false">
+                <div className="d-flex justify-content-center">
+                  <label htmlFor="myFile">
+                    <div className="post-image">
+                      {this.state.preViewImgs.length ? (
+                        <img
+                          src={
+                            'http://localhost:3002/images/firm/' +
+                            this.state.preViewImgs
+                          }
+                          alt=""
+                        />
+                      ) : (
+                        <div className="code_avatar">
+                          <FaCamera />
+                        </div>
+                      )}
                     </div>
-                  </Col>
-                </Form.Group>
-                <Form.Group as={Row} controlId="formPlaintext">
-                  <Form.Label column sm="4">
-                    負責人
-                  </Form.Label>
-                  <Col sm="8">
-                    <Form.Control type="text" />
-                  </Col>
-                </Form.Group>
-                <button className="button mt-3" onClick={this.updateAccount}>
-                  提交資料
-                </button>
-              </Form>
+                  </label>
+                  <input
+                    multiple
+                    id="myFile"
+                    type="file"
+                    style={{ display: 'none' }}
+                    ref={el => (this.fileInput = el)}
+                    onChange={this.handleFilesChange}
+                  />
+                </div>
+
+                <div className="flex mb-3">
+                  <label className="col-4">店家名稱</label>
+                  <input
+                    type="text"
+                    className="col-8"
+                    value={this.state.firmname}
+                    onChange={e => this.setState({ firmname: e.target.value })}
+                  />
+                </div>
+                <div className="flex mb-3">
+                  <label className="col-4">店家電話</label>
+                  <input
+                    className="col-8"
+                    type="text"
+                    value={this.state.phone}
+                    onChange={e => this.setState({ phone: e.target.value })}
+                  />
+                </div>
+                <div className="flex mb-3">
+                  <label className="col-4">店家地址</label>
+                  <div className="address">
+                    <TWzipcode
+                      countyFieldName="pt_city"
+                      districtFieldName="pt_dist"
+                      countyValue={this.state.city}
+                      districtValue={this.state.dist}
+                      css={[
+                        'form-control county-sel code',
+                        'form-control district-sel code',
+                        'form-control zipcode',
+                      ]}
+                      handleChangeCounty={this.handlecityChange}
+                      handleChangeDistrict={this.handledistChange}
+                    />
+                    <input
+                      className="addressinput mt-2"
+                      type="text"
+                      value={this.state.address}
+                      onChange={e => this.setState({ address: e.target.value })}
+                    />
+                  </div>
+                </div>
+                <div className="flex mb-3">
+                  <label className="col-4">負責人</label>
+                  <input
+                    type="text"
+                    className="col-8"
+                    value={this.state.contacter}
+                    onChange={e => this.setState({ contacter: e.target.value })}
+                  />
+                </div>
+                <div className="d-flex justify-content-center">
+                  <button
+                    className="button button--lg mt-3"
+                    onClick={this.updateAccount}
+                  >
+                    提交基本資料
+                  </button>
+                </div>
+              </div>
             </div>
           ) : (
-            <h2>帳號認證失敗</h2>
+            <div className="container">
+              <h2>帳號認證失敗</h2>
+            </div>
           )}
         </div>
       </>
@@ -123,4 +206,4 @@ class CheckCode extends React.Component {
   }
 }
 
-export default CheckCode
+export default withRouter(CheckCode)
