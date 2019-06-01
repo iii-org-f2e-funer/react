@@ -1,8 +1,8 @@
-import React from 'react';
-import { withRouter } from 'react-router';
+import React from 'react'
+import { withRouter } from 'react-router'
 class OMPdetail extends React.Component {
   constructor() {
-    super();
+    super()
     this.state = {
       nickName: '',
       age: 0,
@@ -10,20 +10,18 @@ class OMPdetail extends React.Component {
       location: '',
       game: [],
       about: '',
-    };
+    }
   }
   componentDidMount() {
-    let theUrl = this.props.location.pathname;
-    console.log(theUrl.split('/'));
-    var toID = theUrl
-      .split('/')
-      [theUrl.split('/').length - 1].replace('ID', '');
+    let theUrl = this.props.location.pathname
+    console.log(theUrl.split('/'))
+    var toID = theUrl.split('/')[theUrl.split('/').length - 1].replace('ID', '')
     fetch('http://localhost:3002/chatroom/openMemberPage/' + toID, {
       method: 'GET',
       headers: { 'Content-type': 'application/json' },
     })
       .then(res => {
-        return res.json();
+        return res.json()
       })
       .then(obj => {
         var gameName = [
@@ -42,21 +40,21 @@ class OMPdetail extends React.Component {
           '競速遊戲',
           '兒童遊戲',
           '闔家遊戲',
-        ];
-        var specialtyGame = [];
-        var theGame = [];
+        ]
+        var specialtyGame = []
+        var theGame = []
         for (let k in obj[0]) {
-          theGame = [...theGame, obj[0][k]];
+          theGame = [...theGame, obj[0][k]]
         }
-        theGame.splice(0, 1);
-        console.log(theGame);
+        theGame.splice(0, 1)
+        console.log(theGame)
         theGame.filter((ele, ind) => {
           if (ele == 1) {
-            specialtyGame = [...specialtyGame, gameName[ind]];
+            specialtyGame = [...specialtyGame, gameName[ind]]
           }
-        });
-        console.log(specialtyGame);
-        console.log(obj);
+        })
+        console.log(specialtyGame)
+        console.log(obj)
         this.setState({
           nickName: obj[1].nickname,
           age: obj[1].birthday,
@@ -64,8 +62,8 @@ class OMPdetail extends React.Component {
           location: obj[1].location,
           about: obj[1].about,
           game: specialtyGame,
-        });
-      });
+        })
+      })
   }
   render() {
     return (
@@ -101,7 +99,7 @@ class OMPdetail extends React.Component {
                   <span key={ind} className="mr-2">
                     {ele}
                   </span>
-                );
+                )
               })}
             </div>
           </div>
@@ -114,8 +112,8 @@ class OMPdetail extends React.Component {
           </div>
         </div>
       </div>
-    );
+    )
   }
 }
 
-export default withRouter(OMPdetail);
+export default withRouter(OMPdetail)
