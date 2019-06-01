@@ -38,11 +38,14 @@ class Instagram extends React.Component {
     return (
       <>
         <div className="instagram container navfixed">
-          <User userInfo={this.state.userInfo} />
-          <Switch>
-            <Route exact path="/:instagram" component={Stories} />
-            <Route exact path="/:instagram/bookmark" component={Bookmark} />
-          </Switch>
+          <div className="left_box">
+            <User userInfo={this.state.userInfo} />
+            <Switch>
+              <Route exact path="/:instagram" component={Stories} />
+              <Route exact path="/:instagram/bookmark" component={Bookmark} />
+            </Switch>
+          </div>
+
           <Event />
         </div>
       </>
