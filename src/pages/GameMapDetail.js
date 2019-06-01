@@ -136,7 +136,6 @@ class MyVerticallyCenteredModal extends React.Component {
   }
 
   render() {
-    console.log(this.props)
     return (
       <Modal
         {...this.props}
@@ -279,14 +278,19 @@ class GameMapDetail extends React.Component {
     this.state = {
       dataStore: [],
       modalShow: false,
-      image: [],
+      images: [],
+      reloadState: 0,
     }
   }
 
   goBack = () => {
     this.props.history.push('/gameMap')
   }
-  componentDidMount() {
+  componentDidMount(prevProps, prevState) {
+    if (1) {
+      console.log(prevProps)
+    }
+
     fetch('http://127.0.0.1:3002/gameMap/sid/' + this.props.match.params.id)
       .then(res => res.json())
       .then(data => {
@@ -306,8 +310,6 @@ class GameMapDetail extends React.Component {
           newImageArray.push(imgObj)
         }
         this.setState({ images: newImageArray })
-
-        console.log(this.state)
       })
       // .catch(err => console.log(err))
       .catch(err => {
@@ -317,9 +319,6 @@ class GameMapDetail extends React.Component {
 
   render() {
     let modalClose = () => this.setState({ modalShow: false })
-    {
-      console.log(this.state)
-    }
 
     return (
       <React.Fragment>
@@ -360,13 +359,16 @@ class GameMapDetail extends React.Component {
                     &nbsp;&nbsp;
                     <span>{this.state.dataStore.rule}</span>
                   </p>
-                  <button
-                    className="button button--lg"
-                    block
-                    onClick={() => this.setState({ modalShow: true })}
-                  >
-                    預約場地
-                  </button>
+                  <div className="middle">
+                    <button
+                      className="button button--lg"
+                      block
+                      onClick={() => this.setState({ modalShow: true })}
+                      style={{ width: '300px', marginTop: '80px' }}
+                    >
+                      預約場地
+                    </button>
+                  </div>
                 </div>
               </div>
 
@@ -393,7 +395,7 @@ class GameMapDetail extends React.Component {
               <hr />
 
               <div className="">
-                <Slider />
+                <Slider history={this.props.history} />
               </div>
 
               <MyVerticallyCenteredModal

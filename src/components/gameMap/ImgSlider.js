@@ -3,6 +3,19 @@ import React from 'react'
 // Check out my free youtube video on how to build a thumbnail gallery in react
 // https://www.youtube.com/watch?v=GZ4d3HEn9zg
 
+import {
+  Button,
+  Tabs,
+  Tab,
+  Modal,
+  ButtonToolbar,
+  Row,
+  Col,
+  Card,
+} from 'react-bootstrap'
+
+import { BrowserRouter, Route, Link, NavLink } from 'react-router-dom'
+
 class Slider extends React.Component {
   constructor(props) {
     super(props)
@@ -19,40 +32,40 @@ class Slider extends React.Component {
         'https://s3.us-east-2.amazonaws.com/dzuz14/thumbnails/tree-of-life.jpg',
         'https://s3.us-east-2.amazonaws.com/dzuz14/thumbnails/aurora.jpg',
         'https://s3.us-east-2.amazonaws.com/dzuz14/thumbnails/canyon.jpg',
-        'https://s3.us-east-2.amazonaws.com/dzuz14/thumbnails/city.jpg',
-        'https://s3.us-east-2.amazonaws.com/dzuz14/thumbnails/desert.jpg',
-        'https://s3.us-east-2.amazonaws.com/dzuz14/thumbnails/mountains.jpg',
-        'https://s3.us-east-2.amazonaws.com/dzuz14/thumbnails/redsky.jpg',
-        'https://s3.us-east-2.amazonaws.com/dzuz14/thumbnails/sandy-shores.jpg',
-        'https://s3.us-east-2.amazonaws.com/dzuz14/thumbnails/tree-of-life.jpg',
-        'https://s3.us-east-2.amazonaws.com/dzuz14/thumbnails/aurora.jpg',
-        'https://s3.us-east-2.amazonaws.com/dzuz14/thumbnails/canyon.jpg',
-        'https://s3.us-east-2.amazonaws.com/dzuz14/thumbnails/city.jpg',
-        'https://s3.us-east-2.amazonaws.com/dzuz14/thumbnails/desert.jpg',
-        'https://s3.us-east-2.amazonaws.com/dzuz14/thumbnails/mountains.jpg',
-        'https://s3.us-east-2.amazonaws.com/dzuz14/thumbnails/redsky.jpg',
-        'https://s3.us-east-2.amazonaws.com/dzuz14/thumbnails/sandy-shores.jpg',
-        'https://s3.us-east-2.amazonaws.com/dzuz14/thumbnails/tree-of-life.jpg',
-        'https://s3.us-east-2.amazonaws.com/dzuz14/thumbnails/aurora.jpg',
-        'https://s3.us-east-2.amazonaws.com/dzuz14/thumbnails/canyon.jpg',
-        'https://s3.us-east-2.amazonaws.com/dzuz14/thumbnails/city.jpg',
-        'https://s3.us-east-2.amazonaws.com/dzuz14/thumbnails/desert.jpg',
-        'https://s3.us-east-2.amazonaws.com/dzuz14/thumbnails/mountains.jpg',
-        'https://s3.us-east-2.amazonaws.com/dzuz14/thumbnails/redsky.jpg',
-        'https://s3.us-east-2.amazonaws.com/dzuz14/thumbnails/sandy-shores.jpg',
-        'https://s3.us-east-2.amazonaws.com/dzuz14/thumbnails/tree-of-life.jpg',
-        'https://s3.us-east-2.amazonaws.com/dzuz14/thumbnails/aurora.jpg',
-        'https://s3.us-east-2.amazonaws.com/dzuz14/thumbnails/canyon.jpg',
-        'https://s3.us-east-2.amazonaws.com/dzuz14/thumbnails/city.jpg',
-        'https://s3.us-east-2.amazonaws.com/dzuz14/thumbnails/desert.jpg',
-        'https://s3.us-east-2.amazonaws.com/dzuz14/thumbnails/mountains.jpg',
-        'https://s3.us-east-2.amazonaws.com/dzuz14/thumbnails/redsky.jpg',
-        'https://s3.us-east-2.amazonaws.com/dzuz14/thumbnails/sandy-shores.jpg',
-        'https://s3.us-east-2.amazonaws.com/dzuz14/thumbnails/tree-of-life.jpg',
       ],
       currentIndex: 0,
       translateValue: 0,
+      dataStore: [],
+      change: 1,
     }
+  }
+
+  gopage = sid => {
+    this.props.history.push(`/gamemapDetail/${sid}`)
+  }
+
+  getSearch(data) {
+    // fetch(GetStore + '&lat=' + lat + '&lng=' + lng)
+    console.log(data)
+
+    fetch('http://127.0.0.1:3002/gameMap/All/')
+      .then(res => res.json())
+      .then(data => {
+        console.log('AAAAAAAAA', data)
+        this.setState({ dataStore: data })
+        return 'ok'
+      })
+      .then(() => {
+        return ''
+      })
+      // .catch(err => console.log(err))
+      .catch(err => {
+        throw new Error(err)
+      })
+  }
+
+  componentDidMount() {
+    this.getSearch('')
   }
 
   goToPrevSlide = () => {
@@ -86,32 +99,58 @@ class Slider extends React.Component {
     return document.querySelector('.slide').clientWidth
   }
 
+  changePage = () => {
+    this.setState({ change: this.state.change++ })
+    // this.forceUpdate()
+  }
+
   render() {
-    return (
-      <div className="slider">
-        <div
-          className="slider-wrapper"
-          style={{
-            transform: `translateX(${this.state.translateValue}px)`,
-            transition: 'transform ease-out 0.45s',
-          }}
-        >
-          {this.state.images.map((image, i) => (
-            <Slide key={i} image={image} />
-          ))}
+    if (this.state.dataStore.length === 0) {
+      return <p>資料讀取中..</p>
+    } else {
+      console.log(this.state.dataStore)
+      return (
+        <div className="slider">
+          <div
+            className="slider-wrapper"
+            style={{
+              transform: `translateX(${this.state.translateValue}px)`,
+              transition: 'transform ease-out 0.45s',
+            }}
+          >
+            {/* {for(let idx in dataStore){
+
+  let imgPath=dataStore[idx].imageArray[0]
+  let imgSrc=data.Store[idx]
+
+
+
+}} */}
+
+            {this.state.dataStore.map((item, i) => (
+              <Slide
+                key={i}
+                image={item.imageArray[0]}
+                src={item.sid}
+                changePage={() => {
+                  this.changePage()
+                }}
+              />
+            ))}
+          </div>
+
+          <LeftArrow goToPrevSlide={this.goToPrevSlide} />
+
+          <RightArrow goToNextSlide={this.goToNextSlide} />
         </div>
-
-        <LeftArrow goToPrevSlide={this.goToPrevSlide} />
-
-        <RightArrow goToNextSlide={this.goToNextSlide} />
-      </div>
-    )
+      )
+    }
   }
 }
 
-const Slide = ({ image }) => {
+const Slide = ({ image, src }) => {
   const styles = {
-    backgroundImage: `url(${image})`,
+    backgroundImage: `url(http://192.168.27.25/happy6/site/${image})`,
     backgroundSize: 'cover',
     backgroundRepeat: 'no-repeat',
     backgroundPosition: '50% 60%',
@@ -119,7 +158,14 @@ const Slide = ({ image }) => {
     height: '200px',
     margin: '10px',
   }
-  return <div className="slide" style={styles} />
+  return (
+    <Link
+      to={{ pathname: `/gamemapDetail/${src}` }}
+      onClick={() => this.props.changePage()}
+    >
+      <div className="slide" style={styles} src={src} />
+    </Link>
+  )
 }
 
 const LeftArrow = props => {
