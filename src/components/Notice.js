@@ -10,7 +10,7 @@ class Notice extends React.Component {
     this.getNoticeData()
     this.timer = setInterval(() => {
       this.getNoticeData()
-    }, 5000)
+    }, 2000)
   }
   componentWillUnmount() {
     clearInterval(this.timer)
