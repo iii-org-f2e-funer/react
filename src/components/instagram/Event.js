@@ -6,6 +6,14 @@ class Event extends React.Component {
     super()
     this.state = {}
   }
+  componentDidMount() {
+    fetch('//localhost:3002/instagram/getEvents')
+      .then(res => res.json())
+      .then(obj => {
+        console.log(obj)
+        this.setState({ datas: obj.data })
+      })
+  }
   render() {
     return (
       <>
