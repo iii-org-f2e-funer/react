@@ -150,7 +150,7 @@ class Mycart extends React.Component {
         localStorage.setItem('method_funshop', this.state.method_funshop)
         localStorage.setItem(
           'funapptotal',
-          this.state.total + this.state.method_money
+          this.state.choosetotal + this.state.method_money
         )
         var aaa = JSON.stringify(this.state.choose)
         localStorage.setItem('choose_order', aaa)
