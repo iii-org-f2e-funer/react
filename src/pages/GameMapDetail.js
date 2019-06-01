@@ -91,6 +91,7 @@ class MyVerticallyCenteredModal extends React.Component {
         date: this.state.startDate,
         firm_id: this.props.datastore.firm_id,
         store: this.props.datastore.store,
+        userId: this.props.userInfo.account,
       }),
     })
       .then(() => {
@@ -172,7 +173,7 @@ class MyVerticallyCenteredModal extends React.Component {
                   />
                   <span className="highlight" />
                   <span className="bar" />
-                  <label>姓名</label>
+                  <label>聯絡人</label>
                 </div>
 
                 <div className="group">
@@ -484,6 +485,7 @@ class GameMapDetail extends React.Component {
                 goBack={this.goBack}
                 datastore={this.state.dataStore}
                 history={this.props.history}
+                userInfo={this.props.userInfo}
               />
             </div>
           </div>
