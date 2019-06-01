@@ -4,10 +4,16 @@ import actions from '../../redux/action/userInfo.js'
 import UserAccount from './UserAccount'
 import UserEvent from './UserEvent'
 import UserShopping from './UserShopping'
+import site_reservation from './site_reservation'
 // import UserMail from './UserMail'
 import { connect } from 'react-redux'
 import { withRouter } from 'react-router'
-import { BrowserRouter as Router, Route, Link, Switch } from 'react-router-dom'
+import {
+  BrowserRouter as Router,
+  Route,
+  Switch,
+  NavLink,
+} from 'react-router-dom'
 import MemberEdit from './MemberEdit.js'
 // import Site_manage from './Site_manage.js'
 import { FaPen } from 'react-icons/fa'
@@ -74,10 +80,10 @@ class MemberMenu extends React.Component {
                 </div>
               </form>
               {/*            UserInfo         */}
-              <div className="userinfo">
+              <div className="info">
                 <h5>{data.nickname}</h5>
-                <div className="useraccount">{data.account}</div>
-                <button className="button btn-lg" onClick={this.handleShow}>
+                <div className="email">{data.account}</div>
+                <button className="button" onClick={this.handleShow}>
                   編輯個人資料
                 </button>
               </div>
@@ -86,33 +92,38 @@ class MemberMenu extends React.Component {
             <div className="sidebar_link">
               <ul>
                 <li>
-                  <Link to="/member">帳號設定</Link>
+                  <NavLink to="/member/account" activeClassName="active">
+                    帳號設定
+                  </NavLink>
                 </li>
                 <li>
-                  <Link to="/userevent">我的揪團</Link>
+                  <NavLink to="/member/userevent">我的揪團</NavLink>
                 </li>
                 <li>
-                  <Link to="/UserShopping">訂單查詢</Link>
+                  <NavLink to="/member/UserShopping">訂單查詢</NavLink>
                 </li>
                 <li>
-                  <Link to="">場地預定查詢</Link>
+                  <NavLink to="/member/site_reservation">場地預定查詢</NavLink>
                 </li>
               </ul>
             </div>
           </div>
-          <div className="manage_info">
+          <div className="firmManage_info">
             <Switch>
-              <Route path="/member" component={UserAccount} />
-              <Route path="/userevent" component={UserEvent} />
-              <Route path="/usershopping" component={UserShopping} />
-              {/* <Route path="/firm/site_manage" component={Site_manage} /> */}
+              <Route path="/member/account" component={UserAccount} />
+              <Route path="/member/userevent" component={UserEvent} />
+              <Route path="/member/usershopping" component={UserShopping} />
+              <Route
+                path="/member/site_reservation"
+                component={site_reservation}
+              />
               {/* <Route path="/usermail" component={UserMail} /> */}
             </Switch>
           </div>
-          {/* <FirmEdit
+          <MemberEdit
             editPopup={this.state.editPopup}
             handleHide={this.handleHide}
-          /> */}
+          />
         </>
       </Router>
     )

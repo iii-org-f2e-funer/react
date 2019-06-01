@@ -13,6 +13,9 @@ $boder_radius: 6px;
 $font_title_size: 24px;
 $font_content_size: 18px;
 $shadow: 0px 1px 4px rgba(black, 0.2);
+.dp-none {
+  display: none;
+}
 .navbar.navblue {
   background-color: #dcf1f6;
 }
@@ -54,7 +57,6 @@ $shadow: 0px 1px 4px rgba(black, 0.2);
     }
     a.active {
       color: $color_blue;
-
     }
 
     // Logo
@@ -62,9 +64,9 @@ $shadow: 0px 1px 4px rgba(black, 0.2);
       padding-left: 5px;
       flex: 1; // 讓web_nav置中用的
       display: flex;
-      img{
+      img {
         position: relative;
-        bottom: 8px
+        bottom: 8px;
       }
     }
     // web_nav
@@ -77,7 +79,7 @@ $shadow: 0px 1px 4px rgba(black, 0.2);
           height: 72px;
           line-height: 72px;
         }
-        a.active{
+        a.active {
           border-bottom: 5px solid #6ec4d2;
         }
       }
@@ -96,6 +98,22 @@ $shadow: 0px 1px 4px rgba(black, 0.2);
           line-height: 72px;
         }
         //通知按鈕
+        .notice_btn.newNotice {
+          color: $color_blue;
+          position: relative;
+        }
+        .notice_btn.newNotice:after {
+          content: '';
+          display: block;
+          width: 8px;
+          height: 8px;
+          background-color: #ec6a6a;
+          border: 0.5px solid rgba(255, 255, 255, 0.9);
+          border-radius: 50%;
+          position: absolute;
+          top: 28px;
+          left: 23.5px;
+        }
         .notice_btn.active {
           color: $color_blue;
         }
@@ -105,14 +123,17 @@ $shadow: 0px 1px 4px rgba(black, 0.2);
           height: 72px;
           line-height: 72px;
           padding: 0 12.5px;
-          color: $color_light;
+          color: $color_grey;
           //通知List (component -> notice.js)
           ul {
             width: 260px;
+            max-height: 300px;
             padding: 10px 0 5px 0;
             background-color: white;
             border-radius: 6px;
             box-shadow: $shadow;
+            overflow: scroll;
+            overflow-x: hidden;
 
             position: absolute;
             z-index: 2;
@@ -124,16 +145,47 @@ $shadow: 0px 1px 4px rgba(black, 0.2);
             li.notice_header {
               color: #949494;
               font-size: 16px;
-              padding: 0 0 4px 20px;
+              padding: 0 0 4px 24px;
             }
             // 每則通知
+            li.unread {
+              background-color: #dcf1f6;
+            }
             li {
-              a {
+              .item {
                 color: $color_grey;
                 height: 80px;
-                padding: 4px 5px;
+                padding: 0 12px;
                 border-top: 1px solid $color_border;
+                display: flex;
+                align-items: center;
+                img {
+                  display: block;
+                  width: 35px;
+                  height: 35px;
+                  object-fit: cover;
+                  margin: 0 10px;
+                  border-radius: 50%;
+                  border: 1px solid #949494;
+                  flex-shrink: 0;
+                }
+                .content {
+                  margin-left: 8px;
+                  .text {
+                    height: 45px;
+                    font-size: 14px;
+                    color: #686868;
+                  }
+                  .time {
+                    margin-top: -8px;
+                    color: #949494;
+                    font-size: 12px;
+                  }
+                }
               }
+            }
+            a {
+              display: block;
             }
           }
         }
@@ -147,7 +199,7 @@ $shadow: 0px 1px 4px rgba(black, 0.2);
           height: 72px;
           line-height: 72px;
           padding: 0 12.5px;
-          color: $color_light;
+          color: $color_grey;
           //會員功能List
           ul {
             width: 160px;

@@ -1,22 +1,23 @@
 import React from 'react'
-import { Modal, Form, Col, Row } from 'react-bootstrap'
+import { Modal } from 'react-bootstrap'
 import actions from '../../redux/action/userInfo.js'
 import { connect } from 'react-redux'
 import { withRouter } from 'react-router'
-// import FirmEditInput from './FirmEditInput'
+import UserEditInput from './UserEditInput'
 
 class AccountEdit extends React.Component {
   constructor(props) {
     super(props)
     this.state = {
-      memberData: {
-        member_sid: '',
-        account: '',
+      insert: true,
+      member_id: '',
+      UserData: {
+        member_id: '',
         store: '',
         county: '',
         dist: '',
         address: '',
-        mobile: '',
+        phone: '',
         business_hours: '',
         public_holiday: '',
         charges: '',
@@ -24,23 +25,47 @@ class AccountEdit extends React.Component {
         rule: '',
         status: '',
       },
+      img: [],
     }
   }
   componentDidMount() {
-    fetch('//localhost:3002/member/member', {
+    fetch('//localhost:3002/firm/firmInfo', {
       credentials: 'include',
     })
       .then(res => res.json())
       .then(obj => {
         if (obj.success) {
+          console.log(obj.img)
           this.setState({
-            memberData: Object.assign(this.state.memberData, obj.body),
+            UserData: Object.assign(this.state.UserData, obj.body),
+            member_id: obj.firm_id,
+            insert: false,
+            img: obj.img,
           })
-          console.log(this.state.memberData)
         } else {
-          console.log(obj.message)
+          this.setState({ firm_id: obj.firm_id })
         }
       })
+  }
+  cancelEdit = () => {
+    fetch('//localhost:3002/member/memberInfo', {
+      credentials: 'include',
+    })
+      .then(res => res.json())
+      .then(obj => {
+        if (obj.success) {
+          console.log(obj)
+          this.setState({
+            UserData: Object.assign(this.state.UserData, obj.body),
+            member_id: obj.member_id,
+            insert: false,
+          })
+        } else {
+          console.log(obj)
+          this.setState({ member_id: obj.member_id })
+        }
+      })
+    this.props.handleHide()
   }
   render() {
     return (
@@ -52,11 +77,14 @@ class AccountEdit extends React.Component {
           dialogClassName="modal-90w"
           aria-labelledby="example-custom-modal-styling-title"
         >
-          {/* <h4 className="text-center">店家基本資訊</h4>
-          <FirmEditInput
-            firmData={this.state.firmData}
-            cancelEdit={this.props.handleHide}
-          /> */}
+          <h4 className="text-center">個人基本資訊</h4>
+          <UserEditInput
+            UserData={this.state.UserData}
+            cancelEdit={this.cancelEdit}
+            insert={this.state.insert}
+            firm_id={this.state.firm_id}
+            img={this.state.img}
+          />
         </Modal>
       </>
     )

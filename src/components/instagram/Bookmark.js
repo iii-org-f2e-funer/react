@@ -5,27 +5,50 @@ class Bookmark extends React.Component {
   constructor() {
     super()
     this.state = {
+      userInfo: {},
       stories: [],
       storyState: [],
       isRefreshing: true,
+      isGuest: true,
     }
   }
-
   componentDidMount() {
-    this.fetchAllData()
-    this.timer1 = setInterval(() => {
-      if (this.state.isRefreshing) {
-        this.fetchAllData()
-      }
-    }, 5000)
+    fetch('//localhost:3002/firm/userInfo', {
+      credentials: 'include',
+    })
+      .then(res => res.json())
+      .then(obj => {
+        if (obj.success) {
+          if (obj.isFirm) {
+            // 整理廠商格式
+            obj.body.member_id = 'f_' + obj.body.sid
+            obj.body.nickname = obj.body.firmname
+            obj.body.avatar = obj.body.my_file
+          }
+          // setState
+          this.setState({ userInfo: obj, isGuest: false }, () => {
+            //refresh
+            this.fetchAllData()
+            this.timer1 = setInterval(() => {
+              if (this.state.isRefreshing) {
+                this.fetchAllData()
+              }
+            }, 5000)
+          })
+        } else {
+          alert('請先登入')
+          this.props.history.push('/')
+        }
+      })
   }
+
   componentWillUnmount() {
     clearInterval(this.timer1)
   }
   fetchAllData = () => {
-    var userID = { userId: '1' }
+    var userID = { userId: this.state.userInfo.body.member_id }
     var allStories = []
-    var allState = []
+    var allState = [[], [], []]
     // fetch 所有貼文
     fetch('http://localhost:3002/instagram/allData')
       .then(res => res.json())
@@ -65,6 +88,7 @@ class Bookmark extends React.Component {
                 <OldStory
                   key={item.post_id}
                   data={item}
+                  userInfo={this.state.userInfo}
                   handleControlRefresh={this.handleControlRefresh}
                   handleReFresh={this.fetchAllData}
                   isFav={

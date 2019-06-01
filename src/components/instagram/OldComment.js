@@ -16,12 +16,9 @@ class OldComment extends React.Component {
     // this.textInput.innerText
     if (this.textInput.innerText.trim()) {
       // console.log(this.props)
-      const userID = 1
-      const commentID = this.props.data.comment_id
-
       const data = {
-        commentID: commentID,
-        userID: userID,
+        commentID: this.props.data.comment_id,
+        userID: this.props.userInfo.body.member_id,
         content: this.textInput.innerText,
       }
 
@@ -48,7 +45,16 @@ class OldComment extends React.Component {
       <>
         {/* 留言 */}
         <div key={this.props.data.comment_id} className="comment">
-          <img src="" alt="" className="avatar" />
+          <img
+            src={
+              this.props.data.isFirm
+                ? 'http://localhost:3002/images/firm/' + this.props.data.avatar
+                : 'http://localhost:3002/images/member/' +
+                  this.props.data.avatar
+            }
+            alt=""
+            className="avatar"
+          />
           <div className="comment_inner">
             <div className="text">
               <span className="sender">{this.props.data.nickname}</span>
@@ -68,7 +74,15 @@ class OldComment extends React.Component {
         {/* 留言的留言 */}
         {this.props.data.subcomments.map(item => (
           <div key={item.subcomment_id} className="sub comment">
-            <img src="" alt="" className="avatar" />
+            <img
+              src={
+                item.isFirm
+                  ? 'http://localhost:3002/images/firm/' + item.avatar
+                  : 'http://localhost:3002/images/member/' + item.avatar
+              }
+              alt=""
+              className="avatar"
+            />
             <div className="comment_inner">
               <div className="text">
                 <span className="sender">{item.nickname}</span>

@@ -30,12 +30,9 @@ class OldStory extends React.Component {
     // this.props.userID
     // this.textInput.innerText
     if (this.textInput.innerText.trim()) {
-      const userID = 1
-      const postID = this.props.data.post_id
-
       const data = {
-        postID: postID,
-        userID: userID,
+        postID: this.props.data.post_id,
+        userID: this.props.userInfo.body.member_id,
         content: this.textInput.innerText,
       }
 
@@ -58,7 +55,10 @@ class OldStory extends React.Component {
   }
 
   handleFavorite = () => {
-    var data = { userID: 1, postID: this.props.data.post_id }
+    var data = {
+      userID: this.props.userInfo.body.member_id,
+      postID: this.props.data.post_id,
+    }
     fetch('http://localhost:3002/instagram/changeFavorite', {
       method: 'POST',
       body: JSON.stringify(data),
@@ -75,7 +75,10 @@ class OldStory extends React.Component {
       })
   }
   handleBookmark = () => {
-    var data = { userID: 1, postID: this.props.data.post_id }
+    var data = {
+      userID: this.props.userInfo.body.member_id,
+      postID: this.props.data.post_id,
+    }
     fetch('http://localhost:3002/instagram/changeBookmark', {
       method: 'POST',
       body: JSON.stringify(data),
@@ -110,7 +113,10 @@ class OldStory extends React.Component {
   }
   // 刪除貼文
   handleDelete = () => {
-    var data = { userID: 1, postID: this.props.data.post_id }
+    var data = {
+      userID: this.props.userInfo.body.member_id,
+      postID: this.props.data.post_id,
+    }
     fetch('http://localhost:3002/instagram/deleteStory', {
       method: 'POST',
       body: JSON.stringify(data),
@@ -151,7 +157,7 @@ class OldStory extends React.Component {
     console.log(this.text.innerText)
     // 文字丟進 formData
     var formData = new FormData()
-    formData.append('memberID', '1')
+    formData.append('memberID', this.props.userInfo.body.member_id)
     formData.append('postID', this.props.data.post_id)
     formData.append('content', this.text.innerText)
     // 圖片丟進 formData
@@ -190,7 +196,16 @@ class OldStory extends React.Component {
           {/* header 使用者頭像、取消編輯按鈕 */}
           <div className="post-header">
             <div className="poster">
-              <img src={this.props.data.avatar} alt="" />
+              <img
+                src={
+                  this.props.data.isFirm
+                    ? 'http://localhost:3002/images/firm/' +
+                      this.props.data.avatar
+                    : 'http://localhost:3002/images/member/' +
+                      this.props.data.avatar
+                }
+                alt=""
+              />
               <span>{this.props.data.nickname}</span>
             </div>
             {this.props.editable ? (
@@ -316,6 +331,7 @@ class OldStory extends React.Component {
               <div className="comments">
                 {this.props.data.comments.map(item => (
                   <OldComment
+                    userInfo={this.props.userInfo}
                     key={item.comment_id}
                     data={item}
                     handleReFresh={this.props.handleReFresh}
