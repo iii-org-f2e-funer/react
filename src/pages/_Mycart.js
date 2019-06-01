@@ -18,30 +18,33 @@ class Mycart extends React.Component {
       method_money: 60,
       method_funshop: 'toshop',
       login: '',
+      data1: [],
+      data2: [],
+      data3: [],
       input1: 0,
       input2: 0,
       input3: 0,
       choose: [],
-      zzz: [],
     }
   }
 
   componentDidMount() {
-    this.refreshCart()
-  }
-  refreshCart = () => {
-    fetch('//localhost:3002/product/firm')
+    fetch('//localhost:3002/product/firm', {})
       .then(response => {
         return response.json()
       })
       .then(jsonData => {
         this.setState({ firm: jsonData })
+        var firm = jsonData
+        // console.log(this.state.firm);
         if (localStorage.allcart) {
           const allcart = JSON.parse(localStorage.allcart)
-
-          var products = []
-          for (let i = 0; i < allcart.length; i++) {
-            var product = {
+          var d1_leng = allcart.length
+          var seller = []
+          var ggg = []
+          var index = 0
+          for (let i = 0; i < d1_leng; i++) {
+            var seller_tep = {
               product_sid: 0,
               productName: '',
               number: 0,
@@ -49,67 +52,104 @@ class Mycart extends React.Component {
               total: 0,
               seller: 0,
             }
-            product.productName = allcart[i].productName
-            product.product_sid = allcart[i].sid
-            product.product_price = allcart[i].price
-            product.number = allcart[i].number
-            product.total = allcart[i].price * allcart[i].number
-            product.seller = allcart[i].seller_sid
-            products.push(product)
+            seller_tep.productName = allcart[i].productName
+            seller_tep.product_sid = allcart[i].sid
+            seller_tep.product_price = allcart[i].price
+            seller_tep.number = allcart[i].number
+            seller_tep.total = allcart[i].price * allcart[i].number
+            seller_tep.seller = allcart[i].seller_sid
+            seller.push(seller_tep)
           }
 
-          // 開始分組
-          var xxx = {} //全部資料 {"店家ID":商品[],"店家ID":商品[],"店家ID":商品[]}
-          for (let i = 0; i < products.length; i++) {
-            if (xxx[products[i].seller] !== undefined) {
-              xxx[products[i].seller].push(products[i])
+          var aaa = []
+          for (let i = 0; i < seller.length; i++) {
+            aaa.push(seller[i].seller)
+          }
+
+          var result = aaa.filter(function(element, index, arr) {
+            return arr.indexOf(element) === index
+          })
+
+          var sss = result.length
+          var mmm = []
+          var obj = {}
+          for (let i = 0; i < sss; i++) {
+            mmm = []
+            for (let j = 0; j < seller.length; j++) {
+              if (result[i] == seller[j].seller) {
+                mmm.push(seller[j])
+              }
+            }
+
+            if (i == 0) {
+              var data1 = mmm
+              this.setState({ data1: mmm })
+              /////firm comparent
+              for (let i = 0; i < this.state.firm.length - 1; i++) {
+                if (this.state.firm[i].sid == data1[0].seller) {
+                  this.setState({ name1: this.state.firm[i].firmname })
+                  console.log(this.state.name1)
+                }
+              }
+              // this.setState({ name1: data1[0].seller });
+            } else if (i == 1) {
+              var data2 = mmm
+              this.setState({ data2: mmm })
+              for (let i = 0; i < this.state.firm.length - 1; i++) {
+                if (this.state.firm[i].sid == data2[0].seller) {
+                  this.setState({ name2: this.state.firm[i].firmname })
+                }
+              }
+            } else if (i == 2) {
+              var data3 = mmm
+              this.setState({ data3: mmm })
+              // console.log(data3)
+              for (let i = 0; i < this.state.firm.length - 1; i++) {
+                if (this.state.firm[i].sid == data3[0].seller) {
+                  this.setState({ name3: this.state.firm[i].firmname })
+                }
+              }
             } else {
-              xxx[products[i].seller] = []
-              xxx[products[i].seller].push(products[i])
             }
           }
-          // xxx  全部資料 {"店家ID":商品[],"店家ID":商品[],"店家ID":商品[]}
-          // zzz  [{ seller_id:1,products:[] },{ seller_id:2,products:[] }]
-          var zzz = []
-          for (let k in xxx) {
-            let index = this.state.firm.findIndex(item => item.sid === +k)
-            if (index !== -1) {
-              var obj = {
-                seller_id: k,
-                seller: this.state.firm[index].firmname,
-                products: xxx[k],
-              }
-              zzz.push(obj)
-            } else {
-              var obj = {
-                seller_id: k,
-                seller: '',
-                products: xxx[k],
-              }
-              zzz.push(obj)
-            }
-          }
-          console.log(xxx)
-          console.log(zzz)
-          this.setState({ zzz: zzz })
+          // console.log(this.state.data2);
         }
       })
-      .catch(err => console.log(err))
+      .catch(err => {})
   }
-
-  // here
-  deleteit = product_sid => () => {
-    var arr = JSON.parse(localStorage.allcart)
-    var new_arr = []
-    for (let i = 0; i < arr.length; i++) {
-      if (arr[i].sid !== product_sid) {
-        new_arr.push(arr[i])
+  deleteit1 = index => () => {
+    var data1 = []
+    var ddd = this.state.data1.length
+    for (let i = 0; i < ddd; i++) {
+      if (i !== index) {
+        data1.push(this.state.data1[i])
       }
     }
-    localStorage.setItem('allcart', JSON.stringify(new_arr))
-    this.refreshCart()
+    this.setState({ data1: data1 })
+    console.log(data1)
   }
-
+  deleteit2 = index => () => {
+    var data2 = []
+    var ddd = this.state.data2.length
+    for (let i = 0; i < ddd; i++) {
+      if (i !== index) {
+        data2.push(this.state.data2[i])
+      }
+    }
+    this.setState({ data2: data2 })
+    console.log(data2)
+  }
+  deleteit3 = index => () => {
+    var data3 = []
+    var ddd = this.state.data3.length
+    for (let i = 0; i < ddd; i++) {
+      if (i !== index) {
+        data3.push(this.state.data3[i])
+      }
+    }
+    this.setState({ data3: data3 })
+    console.log(data3)
+  }
   goto = sid => () => {
     // console.log(sid)
     localStorage.setItem('item.sid', sid)
@@ -204,7 +244,11 @@ class Mycart extends React.Component {
     window.location.href = 'http://localhost:3000/Mycart'
   }
   render() {
-    if (this.state.zzz.length === 0) {
+    if (
+      this.state.data1.length == 0 &&
+      this.state.data2.length == 0 &&
+      this.state.data3.length == 0
+    ) {
       return (
         <>
           <div className="cart">
@@ -230,12 +274,16 @@ class Mycart extends React.Component {
               <div className="cart-title">
                 <h2>我的購物車</h2>
               </div>
+              {/* {this.state.data1[].seller} */}
               {/* ////////////////////////////////////////////////////////////data1//////////////////////////////////////////////// */}
-
-              {this.state.zzz.map(item => (
+              {this.state.data1 == [] ||
+              this.state.data1 == undefined ||
+              this.state.data1 == '' ? (
+                ''
+              ) : (
                 <div className="myfav-table mb-5">
                   <label class="container1">
-                    {item.seller}
+                    {this.state.name1}
                     <input type="radio" name="rr" onClick={this.check1} />
                     <span class="checkmark" />
                   </label>
@@ -251,25 +299,28 @@ class Mycart extends React.Component {
                       </tr>
                     </thead>
                     <tbody>
-                      {item.products.map((item, index, array) => (
-                        <tr key={item.product_sid}>
-                          <td>{index + 1}</td>
-                          <td>{item.productName}</td>
-                          <td>{item.product_price}</td>
-                          <td>{item.number}</td>
-                          <td>{item.total}</td>
+                      {this.state.data1.map((item, index, array) => (
+                        <tr>
+                          <td key={index}>{index + 1}</td>
+                          <td>{this.state.data1[index].productName}</td>
+
+                          <td>{this.state.data1[index].product_price}</td>
+                          <td>{this.state.data1[index].number}</td>
+                          <td>{this.state.data1[index].total}</td>
                           <td>
                             <button
                               className="m-1 button button"
                               block
-                              onClick={this.deleteit(item.product_sid)}
+                              onClick={this.deleteit1(index)}
                             >
                               刪除
                             </button>
                             <button
                               className="m-1 button button"
                               block
-                              onClick={this.goto(item.product_sid)}
+                              onClick={this.goto(
+                                this.state.data1[index].product_sid
+                              )}
                             >
                               詳細資料
                             </button>
@@ -279,9 +330,123 @@ class Mycart extends React.Component {
                     </tbody>
                   </Table>
                 </div>
-              ))}
-              {/* //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////// */}
-              {/* footer */}
+              )}
+              {/* ////////////////////////////////////////////////////////////data2//////////////////////////////////////////////// */}
+              {this.state.data2 == [] ||
+              this.state.data2 == undefined ||
+              this.state.data2 == '' ? (
+                ''
+              ) : (
+                <div className="myfav-table mb-5">
+                  <div className="d-flex">
+                    <label class="container1">
+                      {this.state.name2}
+                      <input type="radio" name="rr" onClick={this.check2} />
+                      <span class="checkmark" />
+                    </label>
+                  </div>
+                  <Table striped bordered hover>
+                    <thead className="table_head">
+                      <tr>
+                        <th />
+                        <th>商品名稱</th>
+                        <th>單價</th>
+                        <th>數量</th>
+                        <th>小計</th>
+                        <th>操作</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      {this.state.data2.map((item, index, array) => (
+                        <tr>
+                          <td key={index}>{index + 1}</td>
+                          <td>{this.state.data2[index].productName}</td>
+
+                          <td>{this.state.data2[index].product_price}</td>
+                          <td>{this.state.data2[index].number}</td>
+                          <td>{this.state.data2[index].total}</td>
+                          <td>
+                            <button
+                              className="m-1 button button"
+                              block
+                              onClick={this.deleteit2(index)}
+                            >
+                              刪除
+                            </button>
+                            <button
+                              className="m-1 button button"
+                              block
+                              onClick={this.goto(
+                                this.state.data2[index].product_sid
+                              )}
+                            >
+                              詳細資料
+                            </button>
+                          </td>
+                        </tr>
+                      ))}
+                    </tbody>
+                  </Table>
+                </div>
+              )}
+              {/* ////////////////////////////////////////////////////////////data3//////////////////////////////////////////////// */}
+              {this.state.data3 == [] ||
+              this.state.data3 == undefined ||
+              this.state.data3 == '' ? (
+                ''
+              ) : (
+                <div className="myfav-table mb-5">
+                  <div className="d-flex">
+                    <label class="container1">
+                      {this.state.name3}
+                      <input type="radio" name="rr" onClick={this.check3} />
+                      <span class="checkmark" />
+                    </label>
+                  </div>
+                  <Table striped bordered hover>
+                    <thead className="table_head">
+                      <tr>
+                        <th />
+                        <th>商品名稱</th>
+                        <th>單價</th>
+                        <th>數量</th>
+                        <th>小計</th>
+                        <th>操作</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      {this.state.data3.map((item, index, array) => (
+                        <tr>
+                          <td key={index}>{index + 1}</td>
+                          <td>{this.state.data3[index].productName}</td>
+                          <td>{this.state.data3[index].product_price}</td>
+                          <td>{this.state.data3[index].number}</td>
+                          <td>{this.state.data3[index].total}</td>
+                          <td>
+                            <button
+                              className="m-1 button button"
+                              block
+                              onClick={this.deleteit3(index)}
+                            >
+                              刪除
+                            </button>
+                            <button
+                              className="m-1 button button"
+                              block
+                              onClick={this.goto(
+                                this.state.data3[index].product_sid
+                              )}
+                            >
+                              詳細資料
+                            </button>
+                          </td>
+                        </tr>
+                      ))}
+                    </tbody>
+                  </Table>
+                </div>
+              )}
+              {/* /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////// */}
               <div className="check mt-5">
                 <div className="remind">
                   <label>提醒您</label>
@@ -317,7 +482,7 @@ class Mycart extends React.Component {
                     <h3 className="total">
                       {this.state.total + this.state.method_money}
                     </h3>
-                  </div>
+                  </div>{' '}
                   <div className="checkbutton">
                     <div className="">
                       <Link to="/product">
