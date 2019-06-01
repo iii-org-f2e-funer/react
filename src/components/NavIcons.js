@@ -13,7 +13,7 @@ class NavIcons extends React.Component {
     this.state = {
       noticeOpen: false,
       userMenuOpen: false,
-      newNotice: true,
+      newNotice: false,
     }
   }
   handleNoticeOpen = () => {

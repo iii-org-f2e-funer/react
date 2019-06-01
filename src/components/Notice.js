@@ -57,18 +57,33 @@ class Notice extends React.Component {
         {this.props.isOpen ? (
           <ul>
             <li className="notice_header">通知</li>
-            {this.state.notices.map(item => (
-              <li
-                key={item.notice_id}
-                className={item.isRead ? '' : 'unread'}
-                onClick={
-                  item.isRead ? '' : this.handleReadChange(item.notice_id)
-                }
-              >
-                {item.link !== '' ? (
-                  <Link to={item.link}>
+            {this.state.notices.length !== 0 ? (
+              this.state.notices.map(item => (
+                <li
+                  key={item.notice_id}
+                  className={item.isRead ? '' : 'unread'}
+                  onClick={
+                    item.isRead ? '' : this.handleReadChange(item.notice_id)
+                  }
+                >
+                  {item.link !== '' ? (
+                    <Link to={item.link}>
+                      <div className="item">
+                        <img src={item.img} alt="" />
+                        <div className="content">
+                          <div
+                            className="text"
+                            dangerouslySetInnerHTML={{
+                              __html: item.content,
+                            }}
+                          />
+                          <div className="time"> {item.time}</div>
+                        </div>
+                      </div>
+                    </Link>
+                  ) : (
                     <div className="item">
-                      <img src={item.img} alt="" />
+                      <img src="" alt="" />
                       <div className="content">
                         <div
                           className="text"
@@ -79,23 +94,19 @@ class Notice extends React.Component {
                         <div className="time"> {item.time}</div>
                       </div>
                     </div>
-                  </Link>
-                ) : (
-                  <div className="item">
-                    <img src="" alt="" />
-                    <div className="content">
-                      <div
-                        className="text"
-                        dangerouslySetInnerHTML={{
-                          __html: item.content,
-                        }}
-                      />
-                      <div className="time"> {item.time}</div>
-                    </div>
+                  )}
+                </li>
+              ))
+            ) : (
+              <li>
+                <div className="item">
+                  <div className="content">
+                    <div className="text">目前沒有任何通知</div>
+                    <div className="time" />
                   </div>
-                )}
+                </div>
               </li>
-            ))}
+            )}
           </ul>
         ) : (
           ''
