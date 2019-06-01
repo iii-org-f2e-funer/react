@@ -122,7 +122,7 @@ class FirmEditInput extends React.Component {
             <Form.Label column sm={2}>
               店家名稱
             </Form.Label>
-            <Col sm={10}>
+            <Col sm={5}>
               <Form.Control
                 type="text"
                 value={this.state.store}
@@ -135,16 +135,16 @@ class FirmEditInput extends React.Component {
             <Form.Label column sm={2}>
               地址
             </Form.Label>
-            <Col sm={10}>
-              <div>
+            <Col sm={5}>
+              <div className="firmEdit_address">
                 <TWzipcode
                   countyFieldName="pt_city"
                   districtFieldName="pt_dist"
                   countyValue={this.state.county}
                   districtValue={this.state.dist}
                   css={[
-                    'form-control county-sel',
-                    'form-control district-sel',
+                    'form-control county-sel code',
+                    'form-control district-sel code',
                     'form-control zipcode',
                   ]}
                   handleChangeCounty={this.handlecityChange}
@@ -163,7 +163,7 @@ class FirmEditInput extends React.Component {
             <Form.Label column sm={2}>
               店家電話
             </Form.Label>
-            <Col sm={10}>
+            <Col sm={5}>
               <Form.Control
                 type="text"
                 value={this.state.phone}

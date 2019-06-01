@@ -57,11 +57,11 @@ class RootRouter extends React.Component {
           <Switch>
             <Route exact path="/" component={Home} />
 
-            <Route path="/firm/account" component={Firm} />
-            <Route path="/firm/product_manage" component={Firm} />
-            <Route path="/firm/product_order" component={Firm} />
-            <Route path="/firm/site_manage" component={Firm} />
-            <Route path="/firm/site_order" component={Firm} />
+            <Route path="/firm/account" component={() => <Firm />} />
+            <Route path="/firm/product_manage" component={() => <Firm />} />
+            <Route path="/firm/product_order" component={() => <Firm />} />
+            <Route path="/firm/site_manage" component={() => <Firm />} />
+            <Route path="/firm/site_order" component={() => <Firm />} />
             <Route exact path="/checkCode" component={CheckCode} />
 
             <Route path="/member" component={Member} />

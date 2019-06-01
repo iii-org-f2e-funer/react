@@ -50,15 +50,18 @@ class CheckCode extends React.Component {
   }
   // 新增圖片
   handleFilesChange = event => {
-    const files = event.target.files
+    let _this = this
     var reader = new FileReader()
-    reader.readAsDataURL(files) //read file data as a base64 encoded string.
+    reader.readAsDataURL(event.target.files[0]) //read file data as a base64 encoded string.
     // reader loaded
     reader.addEventListener('load', function(e) {
-      this.setState({ preViewImgs: files })
+      let preViewImgs = []
+      preViewImgs.push(e.target.result)
+      _this.setState({ preViewImgs: preViewImgs })
     })
   }
   updateAccount = () => {
+    var fd = new FormData()
     const data = {
       sid: this.state.data.sid,
       firmname: this.state.firmname,
@@ -68,13 +71,12 @@ class CheckCode extends React.Component {
       address: this.state.address,
       contacter: this.state.contacter,
     }
+    Object.keys(data).forEach(key => fd.append(key, data[key]))
+    fd.append('files', this.fileInput.files[0])
     fetch('//localhost:3002/firm/codeInfo', {
       method: 'POST',
-      body: JSON.stringify(data),
+      body: fd,
       credentials: 'include',
-      headers: {
-        'Content-type': 'application/json',
-      },
     })
       .then(res => res.json())
       .then(obj => {
@@ -110,13 +112,12 @@ class CheckCode extends React.Component {
                   <label htmlFor="myFile">
                     <div className="post-image">
                       {this.state.preViewImgs.length ? (
-                        <img
-                          src={
-                            'http://localhost:3002/images/firm/' +
-                            this.state.preViewImgs
-                          }
-                          alt=""
-                        />
+                        <>
+                          <img src={this.state.preViewImgs[0]} alt="" />
+                          <div className="avatar_hover">
+                            <FaCamera />
+                          </div>
+                        </>
                       ) : (
                         <div className="code_avatar">
                           <FaCamera />

@@ -14,8 +14,8 @@ import { FaPen } from 'react-icons/fa'
 import FirmEdit from './FirmEdit.js'
 import Site_manage from './Site_manage.js'
 import Site_order from './Site_order.js'
-import product_manage from './product_manage.js'
-import product_order from './product_order.js'
+import Product_manage from './product_manage.js'
+import Product_order from './product_order.js'
 
 class Sidebar extends React.Component {
   constructor(props) {
@@ -91,13 +91,20 @@ class Sidebar extends React.Component {
                     </label>
                   </div>
                   <div className="circle">
-                    <img
-                      alt="無法顯示"
-                      src={
-                        'http://localhost:3002/images/firm/' +
-                        this.state.data.my_file
-                      }
-                    />
+                    {this.state.data.my_file ? (
+                      <img
+                        alt="無法顯示"
+                        src={
+                          'http://localhost:3002/images/firm/' +
+                          this.state.data.my_file
+                        }
+                      />
+                    ) : (
+                      <img
+                        alt=""
+                        src="/public/images/member/preset_avatar.png"
+                      />
+                    )}
                   </div>
                 </div>
               </form>
@@ -136,9 +143,9 @@ class Sidebar extends React.Component {
           <div className="firmManage_info">
             <Switch>
               <Route path="/firm/account" component={Account} />
-              <Route path="/firm/product_manage" component={product_manage} />
-              <Route path="/firm/product_order" component={product_order} />
-              <Route path="/firm/site_manage" component={Site_manage} />
+              <Route path="/firm/product_manage" component={Product_manage} />
+              <Route path="/firm/product_order" component={Product_order} />
+              <Route path={'/firm/site_manage'} component={Site_manage} />
               <Route path="/firm/site_order" component={Site_order} />
             </Switch>
           </div>

@@ -144,6 +144,13 @@ label.col-2
             width: 80px
             object-fit: cover
             margin: 5px
+    .firmEdit_address
+        .code
+            width: 48%
+            margin-right: 6px
+            display: inline-block
+        .zipcode
+            display: none
 
 // --------------------------------------
 // login
@@ -219,8 +226,8 @@ $h: 80px
 $w: 80px
 
 .codeCheck 
-    background-color: #dcf1f6
-    // background-color: #fff
+    // background-color: #dcf1f6
+    background-color: #fff
     min-height: 100vh
     width: 100%
     margin: auto
@@ -228,11 +235,18 @@ $w: 80px
         position: relative
         max-width: 500px
         width: 100%
+        label 
+            margin-bottom: 0
+            line-height: 48px
         .address
             width: 100%
             .code
+                display: inline-block
                 width: 48%
                 margin-right: 4px
+                margin-top: 6px
+            .zipcode
+                display: none
         h1
             font-weight: 900
         .code_form
@@ -240,24 +254,56 @@ $w: 80px
             padding: 30px 50px
             background-color: #fff
             border-radius: 10px
-            box-shadow: 0 1px 5px rgba(0,0,0,0.1)
-            label
-                width: 80px
+            // box-shadow: 0 1px 5px rgba(0,0,0,0.1)
+            border: 8px solid #f9c149
+            box-shadow: 0 1px 15px rgba(0,0,0,0.2)
             .post-image
-                width: 80px
-                height: 80px
+                width: 100px
+                height: 100px
                 border-radius: 100%
                 border: 1px solid #ccc
                 overflow: hidden
-                cursor: pointer
+                position: relative
+                margin-bottom: 30px
+                line-height: 90px
+                img
+                    width: 100%
+                    height: 100%
+                    object-fit: cover
+                    cursor: pointer
+                .avatar_hover
+                    position: absolute
+                    top: 0
+                    left: 0
+                    background-color: rgba(0,0,0,0)
+                    width: 100%
+                    height: 100%
+                    cursor: pointer
+                    transition: all
+                    font-size: 25px
+                    text-align: center
+                    color: #fff
+                    transition: all 0.3s
+                    svg
+                        opacity: 0
+                        transition: all 0.3s
                 .code_avatar
-                    line-height: 75px
+                    cursor: pointer
+                    transition: all
+                    vertical-align: middle
                     text-align: center
                     background-color: #ccc
                     color: #fff
                     width: 100%
                     height: 100%
                     font-size: 25px
+                &:hover
+                    .code_avatar
+                        background-color: #949494
+                    .avatar_hover
+                        background-color: rgba(0,0,0,0.3)
+                        svg
+                            opacity: 1
         .funner_pic
             animation: jumping 0.8s infinite alternate
             position: relative

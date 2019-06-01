@@ -77,7 +77,7 @@ class AccountEdit extends React.Component {
           dialogClassName="modal-90w"
           aria-labelledby="example-custom-modal-styling-title"
         >
-          <h4 className="text-center">店家基本資訊</h4>
+          <h4 className="text-center mb-3">店家基本資訊</h4>
           <FirmEditInput
             firmData={this.state.firmData}
             cancelEdit={this.cancelEdit}
