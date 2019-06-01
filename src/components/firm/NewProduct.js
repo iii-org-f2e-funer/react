@@ -64,10 +64,10 @@ class NewProduct extends React.Component {
       .then(obj => {
         if (obj.success) {
           console.log(obj.message)
-          this.props.cancelEdit()
+          this.props.handleHide()
         } else {
           console.log(obj.message)
-          this.props.cancelEdit()
+          this.props.handleHide()
         }
       })
   }
