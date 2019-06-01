@@ -1,4 +1,14 @@
 import React from 'react'
+
+import actions from '../redux/action/userInfo.js'
+import { connect } from 'react-redux'
+
+// 跳出登入畫面的import 請copy以下並改成自己的from路徑
+import LoginModal from '../components/login/LoginModal'
+import FirmRegisterModal from '../components/login//FirmRegisterModal'
+import UserRegisterModal from '../components/login/UserRegisterModal'
+//以上
+
 import '../styles/gameMap/gameMapDetail.scss'
 import {
   Button,
@@ -280,8 +290,44 @@ class GameMapDetail extends React.Component {
       modalShow: false,
       images: [],
       reloadState: 0,
+
+      //跳出登入畫面的state 請copy以下
+      loginPopup: false,
+      registerPopup: false,
+      userRegisterPopup: false,
+      //以上
     }
   }
+
+  //跳出登入畫面的function 請copy以下
+  userLogin = () => {
+    this.setState({ loginPopup: false })
+  }
+  registerShow = () => {
+    this.setState({ registerPopup: true, loginPopup: false })
+  }
+  userRegisterShow = () => {
+    this.setState({ userRegisterPopup: true, loginPopup: false })
+  }
+  registerHide = () => {
+    this.setState({
+      userRegisterPopup: false,
+      registerPopup: false,
+      userRegisterPopup: false,
+    })
+  }
+  handleShow = () => {
+    this.setState({
+      loginPopup: true,
+      userRegisterPopup: false,
+      registerPopup: false,
+    })
+  }
+
+  handleHide = () => {
+    this.setState({ loginPopup: false })
+  }
+  //以上
 
   goBack = () => {
     this.props.history.push('/gameMap')
@@ -317,11 +363,44 @@ class GameMapDetail extends React.Component {
       })
   }
 
+  logincheck = () => {
+    if (this.props.userInfo.login) {
+      this.setState({ modalShow: true })
+    } else {
+      this.handleShow()
+    }
+  }
+
   render() {
+    {
+      console.log(this.props.userInfo)
+    }
     let modalClose = () => this.setState({ modalShow: false })
 
     return (
       <React.Fragment>
+        {/* 跳出登入畫面的modal 請copy以下 */}
+        <LoginModal
+          show={this.state.loginPopup}
+          handleHide={this.handleHide}
+          firmLogin={this.firmLogin}
+          userLogin={this.userLogin}
+          register={this.registerShow}
+          userRegister={this.userRegisterShow}
+        />
+        <UserRegisterModal
+          show={this.state.userRegisterPopup}
+          handleHide={this.registerHide}
+          switch={this.handleShow}
+          registerSuccess={this.registerSuccess}
+        />
+        <FirmRegisterModal
+          show={this.state.registerPopup}
+          handleHide={this.registerHide}
+          switch={this.handleShow}
+          registerSuccess={this.registerSuccess}
+        />
+        {/* 以上 */}
         <div className="bodyroot">
           <div className="container">
             <div className="mainBoard">
@@ -363,7 +442,7 @@ class GameMapDetail extends React.Component {
                     <button
                       className="button button--lg"
                       block
-                      onClick={() => this.setState({ modalShow: true })}
+                      onClick={this.logincheck}
                       style={{ width: '300px', marginTop: '80px' }}
                     >
                       預約場地
@@ -397,7 +476,6 @@ class GameMapDetail extends React.Component {
               <div className="">
                 <Slider history={this.props.history} />
               </div>
-
               <MyVerticallyCenteredModal
                 show={this.state.modalShow}
                 onHide={modalClose}
@@ -415,4 +493,17 @@ class GameMapDetail extends React.Component {
   }
 }
 
-export default withRouter(GameMapDetail)
+function mapStateToProp(store) {
+  return {
+    userInfo: store.userInfo,
+  }
+}
+
+export default withRouter(
+  connect(
+    mapStateToProp,
+    {
+      userInfoAction: actions.userInfo,
+    }
+  )(GameMapDetail)
+)
