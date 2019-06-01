@@ -50,9 +50,10 @@ class Member_applyermodal extends React.Component {
     })
       .then(res => res.json())
       .then(obj => {
-        console.log(obj)
+        // console.log(obj)
         alert('你已審核成功')
       })
+      .then(this.refreshapplyer(id))
   }
 
   handlereject = id => e => {
@@ -68,16 +69,25 @@ class Member_applyermodal extends React.Component {
     })
       .then(res => res.json())
       .then(obj => {
-        console.log(obj)
+        // console.log(obj)
         alert('你已審核成功')
       })
+      .then(this.refreshapplyer(id))
+  }
+
+  refreshapplyer = id => {
+    console.log(id)
+    const newapplyer = this.state.applyer.filter(element => {
+      return element.pt_applysid !== id
+    })
+    this.setState({ applyer: newapplyer })
   }
 
   render() {
     // if (this.state.pt_sid !== '') {
     return (
       <>
-        <button className="applyclick" id='commit' onClick={this.showmodal}>
+        <button className="applyclick" id="commit" onClick={this.showmodal}>
           審核申請
         </button>
         <Modal

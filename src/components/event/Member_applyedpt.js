@@ -9,9 +9,7 @@ class Member_applyedpt extends React.Component {
   constructor() {
     super()
 
-    this.state = {
-      data: [],
-    }
+    this.state = {}
   }
 
   render() {
@@ -52,7 +50,7 @@ class Member_applyedpt extends React.Component {
               </div>
             </div>
             <div className="ptinfo_member">
-              <div>6人已報名，3人已參加</div>
+              {/* <div>6人已報名，3人已參加</div> */}
             </div>
           </div>
 
@@ -78,7 +76,10 @@ class Member_applyedpt extends React.Component {
                   break
               }
             })()}
-            <Member_cancelapply applysid={this.props.data.pt_applysid} />
+            <Member_cancelapply
+              applysid={this.props.data.pt_applysid}
+              cancel={this.props.cancel}
+            />
           </div>
         </div>
       </>

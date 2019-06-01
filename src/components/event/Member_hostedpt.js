@@ -52,7 +52,7 @@ class Member_hostedpt extends React.Component {
               </div>
             </div>
             <div className="ptinfo_member">
-              <div>6人已報名，3人已參加</div>
+              {/* <div>6人已報名，3人已參加</div> */}
             </div>
           </div>
 

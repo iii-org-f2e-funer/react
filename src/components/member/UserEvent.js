@@ -53,6 +53,13 @@ class UserEvent extends React.Component {
         })
     }
   }
+  handlecancel = pt_applysid => {
+    const newapplyed = this.state.applyed.filter(element => {
+      return element.pt_applysid !== pt_applysid
+    })
+    this.setState({ applyed: newapplyed })
+  }
+
   render() {
     if (!this.state.applyeddone || !this.state.hostedptdone) {
       return <></>
@@ -60,14 +67,33 @@ class UserEvent extends React.Component {
       return (
         <>
           <h5>參加中的揪團</h5>
-          {this.state.applyed.map(item => (
-            <Member_applyedpt key={item.pt_applysid} data={item} />
-          ))}
-
+          {this.state.applyed == '' ? (
+            <div className="applyed none">
+              <div>你目前沒有參加的揪團</div>
+            </div>
+          ) : (
+            <>
+              {this.state.applyed.map(item => (
+                <Member_applyedpt
+                  key={item.pt_applysid}
+                  data={item}
+                  cancel={this.handlecancel}
+                />
+              ))}
+            </>
+          )}
           <h5>你主揪的揪團</h5>
-          {this.state.hostedpt.map(item => (
-            <Member_hostedpt key={item.pt_sid} data={item} />
-          ))}
+          {this.state.hostedpt == '' ? (
+            <div className="applyed none">
+              <div>你目前沒有舉辦的揪團</div>
+            </div>
+          ) : (
+            <>
+              {this.state.hostedpt.map(item => (
+                <Member_hostedpt key={item.pt_sid} data={item} />
+              ))}
+            </>
+          )}
         </>
       )
     }
