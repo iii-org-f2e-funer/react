@@ -1,7 +1,7 @@
 import React from 'react'
 import '../styles/product/product.scss'
 import { InputGroup, FormControl, Button, Card } from 'react-bootstrap'
-
+import { Link } from 'react-router-dom'
 export default class product extends React.Component {
   constructor() {
     super()
@@ -82,7 +82,7 @@ export default class product extends React.Component {
   }
   gotodetail = sid => () => {
     // console.log(sid)
-    window.location.href = 'http://localhost:3000/ProductDetail/sid:' + sid
+    // window.location.href = 'http://localhost:3000/ProductDetail/sid:' + sid
     localStorage.setItem('item.sid', sid)
   }
   search = () => () => {
@@ -241,39 +241,37 @@ export default class product extends React.Component {
               </div>
               <div className="cards">
                 {this.state.data.map(item => (
-                  <div
-                    className="gamecard"
-                    key={item.id}
-                    onClick={this.gotodetail(item.sid)}
-                  >
-                    <Card
-                      style={{ width: '170px', height: '300px' }}
-                      className="allcard"
+                  <Link to={'ProductDetail/sid:' + item.sid}>
+                    <div
+                      className="gamecard"
+                      key={item.id}
+                      onClick={this.gotodetail(item.sid)}
                     >
-                      <Card.Img
-                        variant="top"
-                        src={
-                          // process.env.PUBLIC_URL + '/images/product/game1.jpg'
-                          'http://192.168.27.25/happy6/product_manage/' +
-                          item.image_path
-                        }
-                      />
-                      <div>
-                        <Card.Title className="cardtitle">
-                          {item.productName}
-                        </Card.Title>
-                        <div className="card-priceall d-flex">
-                          <div className=" ">
-                            <img
-                              src="https://img.icons8.com/color/48/000000/money-bag.png"
-                              width="30px"
-                            />
+                      <Card
+                        style={{ width: '170px', height: '300px' }}
+                        className="allcard"
+                      >
+                        <Card.Img
+                          variant="top"
+                          src={
+                            // process.env.PUBLIC_URL + '/images/product/game1.jpg'
+                            'http://192.168.27.25/happy6/product_manage/' +
+                            item.image_path
+                          }
+                        />
+                        <div>
+                          <Card.Title className="cardtitle">
+                            {item.productName}
+                          </Card.Title>
+                          <div className="card-priceall ">
+                            <div className="p-1 card-price">
+                              <h4>${item.price}</h4>
+                            </div>
                           </div>
-                          <div className="p-1 card-price">{item.price}</div>
                         </div>
-                      </div>
-                    </Card>
-                  </div>
+                      </Card>
+                    </div>
+                  </Link>
                 ))}
               </div>
             </div>

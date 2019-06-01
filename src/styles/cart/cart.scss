@@ -56,15 +56,69 @@ $shadow: 0px 1px 4px rgba(black, 0.2);
     }
   }
   .myfav-table {
+    /////////////////////radio///////////////
+    .container1 {
+      display: block;
+      position: relative;
+      padding-left: 35px;
+      margin-bottom: 12px;
+      width: 100%;
+      cursor: pointer;
+      font-size: 18px;
+      -webkit-user-select: none;
+      -moz-user-select: none;
+      -ms-user-select: none;
+      user-select: none;
+    }
+    .container1 input {
+      position: absolute;
+      opacity: 0;
+      cursor: pointer;
+    }
+    .checkmark {
+      position: absolute;
+      top: 0;
+      left: 0;
+      height: 25px;
+      width: 25px;
+      background-color: #eee;
+      border-radius: 50%;
+    }
+    .container1:hover input ~ .checkmark {
+      background-color: rgb(204, 204, 204);
+    }
+    .container1 input:checked ~ .checkmark {
+      background-color: $color_orange;
+    }
+    .checkmark:after {
+      content: "";
+      position: absolute;
+      display: none;
+    }
+    .container1 input:checked ~ .checkmark:after {
+      display: block;
+    }
+    .container1 .checkmark:after {
+       top: 9px;
+      left: 9px;
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      background: white;
+    }
+    /////////////////////radio///////////////
     margin-bottom: 150px;
     .table_head {
-      background: #a0dce5;
+      background: #D6EEF2;
       color: $color_grey;
 
       tr th {
         border: none;
+        font-weight: 400;
       }
+
     }
+    
     .table-bordered td {
       border: none;
     }
@@ -82,17 +136,34 @@ $shadow: 0px 1px 4px rgba(black, 0.2);
       }
     }
   }
+  .myfav0-table{
+    margin: 0 auto;
+    .cart-img{
+      padding: 100px 400px;
+      
+    }
+    .words{
+      margin: 0 auto;
+      padding: 100px 60px;
+      text-align: center;
+      font-size: 24px;
+    }
+  }
   .container {
     position: relative;
     min-height: 80vh;
     .check {
       width: 100%;
-      height: 300px;
+      height: 400px;
       // position: absolute;
       bottom: 0;
       display: flex;
       justify-content: space-between;
       .gotocheck {
+        .clear{
+          width: 200px;
+          height: 40px;
+        }
         width: 40%;
         .GET-control{
           width: 200px;

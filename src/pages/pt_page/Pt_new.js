@@ -3,16 +3,16 @@ import '../../styles/pt_style/pt_new.scss'
 import Datetime from 'react-datetime'
 import moment from 'moment'
 import TWzipcode from 'react-twzipcode'
-// import Pt_imgupload from '../../components/event/Pt_imgupload'
+
 import Pt_newmodal from '../../components/event/Pt_newmodal'
-import Account from '../../components/firm/Account'
+
 import actions from '../../redux/action/userInfo.js'
 import { connect } from 'react-redux'
 import { withRouter } from 'react-router'
 
 class Pt_new extends React.Component {
   constructor(props) {
-    super()
+    super(props)
     this.state = {
       pt_img: '',
       pt_host: '',
@@ -30,25 +30,22 @@ class Pt_new extends React.Component {
       locatefirm: [],
     }
   }
-  // componentDidMount() {
-  //   console.log(this.props.userInfo.body)
-  //   fetch('//localhost:3002/event/loginaccount', {
-  //     method: 'POST',
-  //     body: JSON.stringify({ memder_id: this.props.userInfo.account }),
-  //     headers: {
-  //       'Content-type': 'application/json',
-  //     },
-  //   })
-  //     .then(res => res.json())
-  //     .then(obj => {
-  //       console.log(obj.body)
-  //       // if (obj.success) {
-  //       //   this.setState({ data: obj.body })
-  //       // } else {
-  //       //   this.props.history.push('/')
-  //       // }
-  //     })
-  // }
+
+  componentDidMount() {
+    //抓登入資料
+    fetch('//localhost:3002/firm/userInfo', {
+      credentials: 'include',
+    })
+      .then(res => res.json())
+      .then(obj => {
+        console.log(obj.body)
+        this.setState({
+          pt_host: obj.body.account,
+          pt_city: obj.body.city,
+          pt_dist: obj.body.site,
+        })
+      })
+  }
   //handler
   handlememberChange = event => {
     this.setState({
@@ -109,7 +106,7 @@ class Pt_new extends React.Component {
         pt_city: this.state.pt_city,
         pt_dist: this.state.pt_dist,
       })
-      console.log('e')
+      // console.log('e')
       fetch('//localhost:3002/event/loadadd', {
         method: 'POST',
         body: locate,
@@ -123,27 +120,6 @@ class Pt_new extends React.Component {
         })
     }
   }
-
-  // handleloadadd = e => {
-  //   if (this.state.pt_city !== '' && this.state.pt_dist !== '') {
-  //     let locate = JSON.stringify({
-  //       pt_city: this.state.pt_city,
-  //       pt_dist: this.state.pt_dist,
-  //     })
-  //     console.log('e')
-  //     fetch('//localhost:3002/event/loadadd', {
-  //       method: 'POST',
-  //       body: locate,
-  //       headers: {
-  //         'Content-type': 'application/json',
-  //       },
-  //     })
-  //       .then(res => res.json())
-  //       .then(obj => {
-  //         this.setState({ locatefirm: obj })
-  //       })
-  //   }
-  // }
 
   handleaddChange = event => {
     this.setState({
@@ -196,13 +172,9 @@ class Pt_new extends React.Component {
             <div className="form-row title">
               <h3>主揪一場新桌遊</h3>
             </div>
-            <input
-              type="hidden"
-              name="pt_host"
-              value={this.props.userInfo.account}
-            />
+            <input type="hidden" name="pt_host" value={this.state.pt_host} />
             <div className="form-row">
-              <label for="pt_imgfile">桌遊封面</label>
+              <label htmlFor="pt_imgfile">桌遊封面</label>
               <input
                 type="hidden"
                 id="pt_img"
@@ -220,7 +192,10 @@ class Pt_new extends React.Component {
               <div className="imgfield">
                 {this.state.pt_img ? (
                   <div className="imgpreview" onClick={this.handleuploadimg}>
-                    <img src={this.state.pt_img} alt="" />
+                    <img
+                      src={'//localhost:3002/images/event/' + this.state.pt_img}
+                      alt=""
+                    />
                   </div>
                 ) : (
                   <div className="pt_imgupload" onClick={this.handleuploadimg}>
@@ -231,7 +206,7 @@ class Pt_new extends React.Component {
             </div>
 
             <div className="form-row">
-              <label for="pt_locate">地點</label>
+              <label htmlFor="pt_locate">地點</label>
               <TWzipcode
                 countyFieldName="pt_city"
                 districtFieldName="pt_dist"
@@ -261,7 +236,7 @@ class Pt_new extends React.Component {
               </datalist>
             </div>
             <div className="form-row">
-              <label for="pt_time">桌遊時間</label>
+              <label htmlFor="pt_time">桌遊時間</label>
               <Datetime
                 className="flex"
                 dateFormat="YYYY/MM/DD"
@@ -273,7 +248,7 @@ class Pt_new extends React.Component {
             </div>
 
             <div className="form-row">
-              <label for="pt_endtime">審核截止時間</label>
+              <label htmlFor="pt_endtime">審核截止時間</label>
               <Datetime
                 className="flex"
                 dateFormat="YYYY/MM/DD"
@@ -284,7 +259,7 @@ class Pt_new extends React.Component {
               />
             </div>
             <div className="form-row">
-              <label for="pt_member">成團人數</label>
+              <label htmlFor="pt_member">成團人數</label>
               <input
                 type="number"
                 min="1"
@@ -295,7 +270,7 @@ class Pt_new extends React.Component {
               />
             </div>
             <div className="form-row">
-              <label for="pt_maxm">上限人數</label>
+              <label htmlFor="pt_maxm">上限人數</label>
               <input
                 type="number"
                 min="1"
@@ -306,7 +281,7 @@ class Pt_new extends React.Component {
               />
             </div>
             <div className="form-row" id="pt_level">
-              <label for="pt_level">遊戲難度</label>
+              <label htmlFor="pt_level">遊戲難度</label>
               <input
                 className="pt_level"
                 type="radio"
@@ -333,7 +308,7 @@ class Pt_new extends React.Component {
               <span>高難度重度策略</span>
             </div>
             <div className="form-row">
-              <label for="pt_title">開團標題</label>
+              <label htmlFor="pt_title">開團標題</label>
               <input
                 type="text"
                 id="pt_title"
@@ -344,7 +319,7 @@ class Pt_new extends React.Component {
               />
             </div>
             <div className="form-row">
-              <label for="pt_info">詳細描述</label>
+              <label htmlFor="pt_info">詳細描述</label>
               <textarea
                 id="pt_info"
                 name="pt_info"

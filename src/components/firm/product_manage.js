@@ -1,25 +1,74 @@
 import React from 'react'
-import { Button, Table } from 'react-bootstrap'
+import { Table } from 'react-bootstrap'
+import { FaPlus } from 'react-icons/fa'
+import NewProduct from './NewProduct.js'
 
-class Site_order extends React.Component {
+class Product_manage extends React.Component {
   constructor(props) {
     super(props)
     this.state = {
-      isEdit: false,
+      editPopup: false,
       data: [],
     }
+  }
+  componentDidMount() {
+    fetch('//localhost:3002/firm/userInfo', {
+      credentials: 'include',
+    })
+      .then(res => res.json())
+      .then(obj => {
+        if (obj.success) {
+          this.setState({ data: obj.body })
+        } else {
+          this.props.history.push('/')
+        }
+      })
+  }
+  handleShow = () => {
+    this.setState({ editPopup: true })
+  }
+
+  handleHide = () => {
+    this.setState({ editPopup: false })
+  }
+  cancelEdit = () => {
+    // fetch('//localhost:3002/firm/firmInfo', {
+    //   credentials: 'include',
+    // })
+    //   .then(res => res.json())
+    //   .then(obj => {
+    //     if (obj.success) {
+    //       console.log(obj)
+    //       this.setState({
+    //         firmData: Object.assign(this.state.firmData, obj.body),
+    //         firm_id: obj.firm_id,
+    //         insert: false,
+    //       })
+    //     } else {
+    //       console.log(obj)
+    //       this.setState({ firm_id: obj.firm_id })
+    //     }
+    //   })
+    this.handleHide()
   }
   render() {
     return (
       <>
-        <h5>場地訂單</h5>
+        <h5>商品管理</h5>
         <hr />
+        <div className="d-flex flex-row-reverse">
+          <buton className="button mb-3 " onClick={this.handleShow}>
+            <FaPlus className="mr-2" />
+            新增商品
+          </buton>
+        </div>
+
         <div className="cart">
           <div className="myfav-table mb-5">
             <Table striped bordered hover>
               <thead className="table_head">
                 <tr>
-                  <th>預約單編號</th>
+                  <th />
                   <th>商品名稱</th>
                   <th>店家</th>
                   <th>單價</th>
@@ -28,7 +77,7 @@ class Site_order extends React.Component {
                   <th>操作</th>
                 </tr>
               </thead>
-              <tbody>
+              {/* <tbody>
                 {this.state.data.map((item, index, array) => (
                   <tr>
                     <td key={index}>{index + 1}</td>
@@ -55,13 +104,18 @@ class Site_order extends React.Component {
                     </td>
                   </tr>
                 ))}
-              </tbody>
+              </tbody> */}
             </Table>
           </div>
         </div>
+        <NewProduct
+          editPopup={this.state.editPopup}
+          handleHide={this.handleHide}
+          data={this.state.data}
+        />
       </>
     )
   }
 }
 
-export default Site_order
+export default Product_manage

@@ -13,6 +13,7 @@ class NavIcons extends React.Component {
     this.state = {
       noticeOpen: false,
       userMenuOpen: false,
+      newNotice: true,
     }
   }
   handleNoticeOpen = () => {
@@ -21,6 +22,9 @@ class NavIcons extends React.Component {
   handleUserMenuOpen = () => {
     this.setState({ userMenuOpen: !this.state.userMenuOpen })
   }
+  handleNewNotice = value => {
+    this.setState({ newNotice: value })
+  }
 
   render() {
     return (
@@ -28,25 +32,23 @@ class NavIcons extends React.Component {
         {this.props.userInfo.isFirm ? (
           <>
             <li>
-              <NavLink to="/Mycart" activeClassName="active">
-                <FaShoppingCart />
-              </NavLink>
-            </li>
-            <li>
-              <NavLink to="/chatroom/message" activeClassName="active">
-                <FaComment />
-              </NavLink>
-            </li>
-            <li>
               <div
                 className={
-                  this.state.noticeOpen ? 'notice_btn active' : 'notice_btn'
+                  this.state.newNotice
+                    ? 'notice_btn newNotice'
+                    : this.state.noticeOpen
+                    ? 'notice_btn active'
+                    : 'notice_btn'
                 }
                 onMouseEnter={this.handleNoticeOpen}
                 onMouseLeave={this.handleNoticeOpen}
               >
                 <FaBell />
-                <Notice isOpen={this.state.noticeOpen} />
+                <Notice
+                  isOpen={this.state.noticeOpen}
+                  handleNewNotice={this.handleNewNotice}
+                  userInfo={this.props.userInfo}
+                />
               </div>
             </li>
             <li>
@@ -83,13 +85,21 @@ class NavIcons extends React.Component {
             <li>
               <div
                 className={
-                  this.state.noticeOpen ? 'notice_btn active' : 'notice_btn'
+                  this.state.newNotice
+                    ? 'notice_btn newNotice'
+                    : this.state.noticeOpen
+                    ? 'notice_btn active'
+                    : 'notice_btn'
                 }
                 onMouseEnter={this.handleNoticeOpen}
                 onMouseLeave={this.handleNoticeOpen}
               >
                 <FaBell />
-                <Notice isOpen={this.state.noticeOpen} />
+                <Notice
+                  isOpen={this.state.noticeOpen}
+                  handleNewNotice={this.handleNewNotice}
+                  userInfo={this.props.userInfo}
+                />
               </div>
             </li>
             <li>

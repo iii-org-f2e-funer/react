@@ -130,41 +130,7 @@ class FirmEditInput extends React.Component {
               />
             </Col>
           </Form.Group>
-          <Form.Group as={Row} controlId="formHorizontalEmail">
-            <Form.Label column sm={2}>
-              店家照片
-            </Form.Label>
-            <Col sm={10}>
-              <label className="img_icon" htmlFor="myFile">
-                <FaRegImage />
-              </label>
-              <input
-                multiple
-                id="myFile"
-                type="file"
-                style={{ display: 'none' }}
-                ref={el => (this.fileInput = el)}
-                onChange={this.handleFilesChange}
-              />
-              <div className="post-image">
-                {this.props.img
-                  ? this.props.img.map((item, index) => (
-                      <img
-                        key={index}
-                        src={
-                          'http://localhost:3002/images/firm/' + item.image_path
-                        }
-                        alt=""
-                      />
-                    ))
-                  : ''}
-                {/* <img src={process.env.PUBLIC_URL + '/images/instagram/avatar.png'} alt="" /> */}
-                {this.state.preViewImgs.map((item, idx) => (
-                  <img key={idx} src={item} alt="" />
-                ))}
-              </div>
-            </Col>
-          </Form.Group>
+
           <Form.Group as={Row} controlId="formHorizontalPassword">
             <Form.Label column sm={2}>
               地址
@@ -200,7 +166,6 @@ class FirmEditInput extends React.Component {
             <Col sm={10}>
               <Form.Control
                 type="text"
-                placeholder="Password"
                 value={this.state.phone}
                 onChange={e => this.setState({ phone: e.target.value })}
               />
@@ -213,7 +178,7 @@ class FirmEditInput extends React.Component {
             <Col sm={10}>
               <Form.Control
                 as="textarea"
-                rows="3"
+                rows="5"
                 value={this.state.business_hours}
                 onChange={e =>
                   this.setState({ business_hours: e.target.value })
@@ -241,7 +206,7 @@ class FirmEditInput extends React.Component {
             <Col sm={10}>
               <Form.Control
                 as="textarea"
-                rows="5"
+                rows="6"
                 value={this.state.about}
                 onChange={e => this.setState({ about: e.target.value })}
               />
@@ -254,7 +219,7 @@ class FirmEditInput extends React.Component {
             <Col sm={10}>
               <Form.Control
                 as="textarea"
-                rows="5"
+                rows="6"
                 value={this.state.rule}
                 onChange={e => this.setState({ rule: e.target.value })}
               />
@@ -295,7 +260,41 @@ class FirmEditInput extends React.Component {
               </div>
             </Col>
           </Form.Group>
-
+          <Form.Group as={Row} controlId="formHorizontalEmail">
+            <Form.Label column sm={2}>
+              店家照片
+            </Form.Label>
+            <Col sm={10}>
+              <label className="img_icon" htmlFor="myFile">
+                <FaRegImage />
+              </label>
+              <input
+                multiple
+                id="myFile"
+                type="file"
+                style={{ display: 'none' }}
+                ref={el => (this.fileInput = el)}
+                onChange={this.handleFilesChange}
+              />
+              <div className="post-image">
+                {this.props.img
+                  ? this.props.img.map((item, index) => (
+                      <img
+                        key={index}
+                        src={
+                          'http://localhost:3002/images/firm/' + item.image_path
+                        }
+                        alt=""
+                      />
+                    ))
+                  : ''}
+                {/* <img src={process.env.PUBLIC_URL + '/images/instagram/avatar.png'} alt="" /> */}
+                {this.state.preViewImgs.map((item, idx) => (
+                  <img key={idx} src={item} alt="" />
+                ))}
+              </div>
+            </Col>
+          </Form.Group>
           <div className="d-flex justify-content-center">
             <div className="button mt-3 mr-3" onClick={this.updateAccount}>
               確認更改
