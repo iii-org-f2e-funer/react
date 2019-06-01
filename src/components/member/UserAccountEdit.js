@@ -14,6 +14,7 @@ class UserAccountEdit extends React.Component {
       site: this.props.data.site,
       street: this.props.data.street,
       nickname: this.props.data.nickname,
+      gender: this.props.data.gender,
       email: this.props.data.email,
       password: '',
       password2: '',
@@ -50,11 +51,12 @@ class UserAccountEdit extends React.Component {
       member_id: this.state.member_id,
       account: this.state.account,
       name: this.state.name,
+      nickname: this.state.nickname,
+      gender: this.state.gender,
       mobile: this.state.mobile,
       city: this.state.city,
       site: this.state.site,
       street: this.state.street,
-      nickname: this.state.nickname,
       email: this.state.email,
       birthday: this.state.birthday,
     }
@@ -126,6 +128,18 @@ class UserAccountEdit extends React.Component {
             onChange={e => this.setState({ nickname: e.target.value })}
           />
         </div>
+        {/* gender */}
+        <div className="flex mb-3">
+          <label className="col-2">性別</label>
+          <input
+            type="text"
+            className="col-7"
+            value={this.state.gender}
+            onChange={e => this.setState({ gender: e.target.value })}
+          />
+        </div>
+
+        {/* mail */}
         <div className="flex mb-3">
           <label className="col-2">電子信箱</label>
           <input
@@ -172,7 +186,7 @@ class UserAccountEdit extends React.Component {
           <label className="col-2">生日</label>
           <input
             className="col-7"
-            type="text"
+            type="date"
             value={this.state.birthday}
             onChange={e => this.setState({ birthday: e.target.value })}
           />

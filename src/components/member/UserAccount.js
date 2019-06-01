@@ -72,9 +72,13 @@ class UserAccount extends React.Component {
               <div className="col-7">{this.state.data.nickname}</div>
             </div>
             <div className="flex mb-3">
+              <label className="col-2">性別</label>
+              <div className="col-7">{this.state.data.gender}</div>
+            </div>
+            <div className="flex mb-3">
               <label className="col-2">電子信箱</label>
               <div className="col-7">{this.state.data.email}</div>
-            </div>
+            </div>  
             <div className="flex mb-3">
               <label className="col-2">手機號碼</label>
               <div className="col-7">{this.state.data.mobile}</div>
