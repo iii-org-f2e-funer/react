@@ -1,16 +1,16 @@
-import React from 'react';
-import '../styles/cart/cart.scss';
-import { Button, Table, InputGroup } from 'react-bootstrap';
-import { Link } from 'react-router-dom';
-import Account from '../components/firm/Account';
-import actions from '../redux/action/userInfo.js';
-import { connect } from 'react-redux';
-import { withRouter } from 'react-router';
-import { IoMdCart } from 'react-icons/io';
+import React from 'react'
+import '../styles/cart/cart.scss'
+import { Button, Table, InputGroup } from 'react-bootstrap'
+import { Link } from 'react-router-dom'
+import Account from '../components/firm/Account'
+import actions from '../redux/action/userInfo.js'
+import { connect } from 'react-redux'
+import { withRouter } from 'react-router'
+import { IoMdCart } from 'react-icons/io'
 
 class Mycart extends React.Component {
   constructor(props) {
-    super(props);
+    super(props)
     this.state = {
       data: [],
       total: 0,
@@ -25,24 +25,24 @@ class Mycart extends React.Component {
       input2: 0,
       input3: 0,
       choose: [],
-    };
+    }
   }
 
   componentDidMount() {
     fetch('//localhost:3002/product/firm', {})
       .then(response => {
-        return response.json();
+        return response.json()
       })
       .then(jsonData => {
-        this.setState({ firm: jsonData });
-        var firm = jsonData;
+        this.setState({ firm: jsonData })
+        var firm = jsonData
         // console.log(this.state.firm);
         if (localStorage.allcart) {
-          const allcart = JSON.parse(localStorage.allcart);
-          var d1_leng = allcart.length;
-          var seller = [];
-          var ggg = [];
-          var index = 0;
+          const allcart = JSON.parse(localStorage.allcart)
+          var d1_leng = allcart.length
+          var seller = []
+          var ggg = []
+          var index = 0
           for (let i = 0; i < d1_leng; i++) {
             var seller_tep = {
               product_sid: 0,
@@ -51,62 +51,62 @@ class Mycart extends React.Component {
               product_price: 0,
               total: 0,
               seller: 0,
-            };
-            seller_tep.productName = allcart[i].productName;
-            seller_tep.product_sid = allcart[i].sid;
-            seller_tep.product_price = allcart[i].price;
-            seller_tep.number = allcart[i].number;
-            seller_tep.total = allcart[i].price * allcart[i].number;
-            seller_tep.seller = allcart[i].seller_sid;
-            seller.push(seller_tep);
+            }
+            seller_tep.productName = allcart[i].productName
+            seller_tep.product_sid = allcart[i].sid
+            seller_tep.product_price = allcart[i].price
+            seller_tep.number = allcart[i].number
+            seller_tep.total = allcart[i].price * allcart[i].number
+            seller_tep.seller = allcart[i].seller_sid
+            seller.push(seller_tep)
           }
 
-          var aaa = [];
+          var aaa = []
           for (let i = 0; i < seller.length; i++) {
-            aaa.push(seller[i].seller);
+            aaa.push(seller[i].seller)
           }
 
           var result = aaa.filter(function(element, index, arr) {
-            return arr.indexOf(element) === index;
-          });
+            return arr.indexOf(element) === index
+          })
 
-          var sss = result.length;
-          var mmm = [];
-          var obj = {};
+          var sss = result.length
+          var mmm = []
+          var obj = {}
           for (let i = 0; i < sss; i++) {
-            mmm = [];
+            mmm = []
             for (let j = 0; j < seller.length; j++) {
               if (result[i] == seller[j].seller) {
-                mmm.push(seller[j]);
+                mmm.push(seller[j])
               }
             }
 
             if (i == 0) {
-              var data1 = mmm;
-              this.setState({ data1: mmm });
+              var data1 = mmm
+              this.setState({ data1: mmm })
               /////firm comparent
               for (let i = 0; i < this.state.firm.length - 1; i++) {
                 if (this.state.firm[i].sid == data1[0].seller) {
-                  this.setState({ name1: this.state.firm[i].firmname });
-                  console.log(this.state.name1);
+                  this.setState({ name1: this.state.firm[i].firmname })
+                  console.log(this.state.name1)
                 }
               }
               // this.setState({ name1: data1[0].seller });
             } else if (i == 1) {
-              var data2 = mmm;
-              this.setState({ data2: mmm });
+              var data2 = mmm
+              this.setState({ data2: mmm })
               for (let i = 0; i < this.state.firm.length - 1; i++) {
                 if (this.state.firm[i].sid == data2[0].seller) {
-                  this.setState({ name2: this.state.firm[i].firmname });
+                  this.setState({ name2: this.state.firm[i].firmname })
                 }
               }
             } else if (i == 2) {
-              var data3 = mmm;
-              this.setState({ data3: mmm });
+              var data3 = mmm
+              this.setState({ data3: mmm })
               // console.log(data3)
               for (let i = 0; i < this.state.firm.length - 1; i++) {
                 if (this.state.firm[i].sid == data3[0].seller) {
-                  this.setState({ name3: this.state.firm[i].firmname });
+                  this.setState({ name3: this.state.firm[i].firmname })
                 }
               }
             } else {
@@ -115,134 +115,134 @@ class Mycart extends React.Component {
           // console.log(this.state.data2);
         }
       })
-      .catch(err => {});
+      .catch(err => {})
   }
   deleteit1 = index => () => {
-    var data1 = [];
-    var ddd = this.state.data1.length;
+    var data1 = []
+    var ddd = this.state.data1.length
     for (let i = 0; i < ddd; i++) {
       if (i !== index) {
-        data1.push(this.state.data1[i]);
+        data1.push(this.state.data1[i])
       }
     }
-    this.setState({ data1: data1 });
-    console.log(data1);
-  };
+    this.setState({ data1: data1 })
+    console.log(data1)
+  }
   deleteit2 = index => () => {
-    var data2 = [];
-    var ddd = this.state.data2.length;
+    var data2 = []
+    var ddd = this.state.data2.length
     for (let i = 0; i < ddd; i++) {
       if (i !== index) {
-        data2.push(this.state.data2[i]);
+        data2.push(this.state.data2[i])
       }
     }
-    this.setState({ data2: data2 });
-    console.log(data2);
-  };
+    this.setState({ data2: data2 })
+    console.log(data2)
+  }
   deleteit3 = index => () => {
-    var data3 = [];
-    var ddd = this.state.data3.length;
+    var data3 = []
+    var ddd = this.state.data3.length
     for (let i = 0; i < ddd; i++) {
       if (i !== index) {
-        data3.push(this.state.data3[i]);
+        data3.push(this.state.data3[i])
       }
     }
-    this.setState({ data3: data3 });
-    console.log(data3);
-  };
+    this.setState({ data3: data3 })
+    console.log(data3)
+  }
   goto = sid => () => {
     // console.log(sid)
-    localStorage.setItem('item.sid', sid);
-    window.location.href = 'http://localhost:3000/ProductDetail/sid:' + sid;
-  };
+    localStorage.setItem('item.sid', sid)
+    window.location.href = 'http://localhost:3000/ProductDetail/sid:' + sid
+  }
   check1 = () => {
     if (this.state.input1 == 0) {
-      this.setState({ input1: 1 });
-      this.setState({ choose: this.state.data1 });
+      this.setState({ input1: 1 })
+      this.setState({ choose: this.state.data1 })
       ///////////////////////////////////////////////total
-      var total = 0;
+      var total = 0
       for (let i = 0; i < this.state.data1.length; i++) {
-        total += this.state.data1[i].total;
+        total += this.state.data1[i].total
       }
-      this.setState({ total: total });
+      this.setState({ total: total })
       //////////////////////////////////////////////////
-      console.log(this.state.data1);
+      console.log(this.state.data1)
     } else {
-      this.setState({ input1: 0 });
+      this.setState({ input1: 0 })
     }
-  };
+  }
   check2 = () => {
     if (this.state.input2 == 0) {
-      this.setState({ input2: 1 });
-      this.setState({ choose: this.state.data2 });
+      this.setState({ input2: 1 })
+      this.setState({ choose: this.state.data2 })
       ///////////////////////////////////////////////total
-      var total = 0;
+      var total = 0
       for (let i = 0; i < this.state.data2.length; i++) {
-        total += this.state.data2[i].total;
+        total += this.state.data2[i].total
       }
-      this.setState({ total: total });
+      this.setState({ total: total })
       ///////////////////////////////////////////////total
-      console.log(this.state.data2);
+      console.log(this.state.data2)
     } else {
-      this.setState({ input2: 0 });
+      this.setState({ input2: 0 })
     }
-  };
+  }
   check3 = () => {
     if (this.state.input3 == 0) {
-      this.setState({ input3: 1 });
-      this.setState({ choose: this.state.data3 });
+      this.setState({ input3: 1 })
+      this.setState({ choose: this.state.data3 })
       ///////////////////////////////////////////////total
-      var total = 0;
+      var total = 0
       for (let i = 0; i < this.state.data3.length; i++) {
-        total += this.state.data3[i].total;
+        total += this.state.data3[i].total
       }
-      this.setState({ total: total });
+      this.setState({ total: total })
       ///////////////////////////////////////////////total
-      console.log(this.state.data3);
+      console.log(this.state.data3)
     } else {
-      this.setState({ input3: 0 });
+      this.setState({ input3: 0 })
     }
-  };
+  }
   paymethod = event => {
-    var method = event.target.value;
-    console.log(event.target.value);
+    var method = event.target.value
+    console.log(event.target.value)
     if (method === 'tohome') {
-      var sss = 130;
-      this.setState({ method_money: 130 });
+      var sss = 130
+      this.setState({ method_money: 130 })
     } else if (method === 'toshop') {
-      sss = 60;
-      this.setState({ method_money: 60 });
+      sss = 60
+      this.setState({ method_money: 60 })
     }
 
     this.setState({
       method_funshop: method,
-    });
-  };
+    })
+  }
   gotocheck = () => {
     if (this.props.userInfo.login) {
       if (this.state.choose.length) {
-        console.log(this.state.choose);
-        localStorage.setItem('method_funshop', this.state.method_funshop);
+        console.log(this.state.choose)
+        localStorage.setItem('method_funshop', this.state.method_funshop)
         localStorage.setItem(
           'funapptotal',
           this.state.total + this.state.method_money
-        );
-        var aaa = JSON.stringify(this.state.choose);
-        localStorage.setItem('choose_order', aaa);
-        console.log(this.props.userInfo.login);
-        window.location.href = 'http://localhost:3000/Shopping1';
+        )
+        var aaa = JSON.stringify(this.state.choose)
+        localStorage.setItem('choose_order', aaa)
+        console.log(this.props.userInfo.login)
+        window.location.href = 'http://localhost:3000/Shopping1'
       } else {
-        alert('please choose');
+        alert('please choose')
       }
     } else {
-      alert('please login');
-      console.log(this.props.userInfo.login);
+      alert('please login')
+      console.log(this.props.userInfo.login)
     }
-  };
+  }
   clear = () => {
-    localStorage.removeItem('allcart');
-    window.location.href = 'http://localhost:3000/Mycart';
-  };
+    localStorage.removeItem('allcart')
+    window.location.href = 'http://localhost:3000/Mycart'
+  }
   render() {
     if (
       this.state.data1.length == 0 &&
@@ -265,7 +265,7 @@ class Mycart extends React.Component {
             </div>
           </div>
         </>
-      );
+      )
     } else {
       return (
         <>
@@ -516,14 +516,14 @@ class Mycart extends React.Component {
             </div>
           </div>
         </>
-      );
+      )
     }
   }
 }
 function mapStateToProp(store) {
   return {
     userInfo: store.userInfo,
-  };
+  }
 }
 
 export default withRouter(
@@ -533,4 +533,4 @@ export default withRouter(
       userInfoAction: actions.userInfo,
     }
   )(Mycart)
-);
+)
