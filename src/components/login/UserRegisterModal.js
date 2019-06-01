@@ -84,7 +84,7 @@ class UserRegisterModal extends React.Component {
       }
     }
   }
-
+  // 註冊
   UserRegisterRequest = evt => {
     if (this.refs.submitForm.reportValidity()) {
       evt.preventDefault()
@@ -173,7 +173,7 @@ class UserRegisterModal extends React.Component {
                 <Form.Text className="red">{this.state.remindText}</Form.Text>
               </Form.Group>
 
-              <label htmlFor="uniform">Name</label>
+              <label htmlFor="uniform">姓名</label>
               <input
                 className="pl-3"
                 name="uniform"
@@ -182,7 +182,7 @@ class UserRegisterModal extends React.Component {
                 ref={el => (this.inputname = el)}
               />
 
-              <label htmlFor="uniform">email</label>
+              <label htmlFor="uniform">信箱</label>
               <input
                 className="pl-3"
                 name="uniform"

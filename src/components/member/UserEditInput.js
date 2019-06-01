@@ -8,16 +8,16 @@ import { withRouter } from 'react-router'
 class userEditInput extends React.Component {
   constructor(props) {
     super(props)
-    const data = this.props.firmData
+    const data = this.props.UserData
+    console.log(this.props.img) //pho
     this.state = {
       insert: true,
-      sid: data.sid,
-      firm_id: data.firm_id,
+      member_id: data.member_id,
       store: data.store,
       county: data.county,
       dist: data.dist,
       address: data.address,
-      phone: data.phone,
+      mobile: data.mobile,
       business_hours: data.business_hours,
       public_holiday: data.public_holiday,
       charges: data.charges,
@@ -28,13 +28,13 @@ class userEditInput extends React.Component {
   }
   updateAccount = () => {
     const data = {
-      sid: this.state.sid,
+      member_id: this.state.member_id,
       firm_id: this.state.firm_id,
       store: this.state.store,
       county: this.state.county,
       dist: this.state.dist,
       address: this.state.address,
-      phone: this.state.phone,
+      mobile: this.state.mobile,
       business_hours: this.state.business_hours,
       public_holiday: this.state.public_holiday,
       charges: this.state.charges,
@@ -43,7 +43,7 @@ class userEditInput extends React.Component {
       status: this.state.status,
     }
     if (this.state.insert) {
-      fetch('//localhost:3002/firm/insertAccount', {
+      fetch('//localhost:3002/member/insertAccount', {
         method: 'POST',
         body: JSON.stringify(data),
         credentials: 'include',
@@ -55,14 +55,14 @@ class userEditInput extends React.Component {
         .then(obj => {
           if (obj.success) {
             this.setState({
-              firmData: obj.body,
+              UserData: obj.body,
             })
           } else {
             console.log(obj.message)
           }
         })
     } else {
-      fetch('//localhost:3002/firm/updateAccount', {
+      fetch('//localhost:3002/member/updateAccount', {
         method: 'POST',
         body: JSON.stringify(data),
         credentials: 'include',
@@ -74,7 +74,7 @@ class userEditInput extends React.Component {
         .then(obj => {
           if (obj.success) {
             this.setState({
-              firmData: obj.body,
+              UserData: obj.body,
             })
           } else {
             console.log(obj.message)
@@ -142,13 +142,12 @@ class userEditInput extends React.Component {
             <Col sm={10}>
               <Form.Control
                 type="text"
-                placeholder="Password"
-                value={this.state.phone}
-                onChange={e => this.setState({ phone: e.target.value })}
+                value={this.state.mobile}
+                onChange={e => this.setState({ mobile: e.target.value })}
               />
             </Col>
           </Form.Group>
-          <Form.Group as={Row} controlId="formHorizontalPassword">
+          {/* <Form.Group as={Row} controlId="formHorizontalPassword">
             <Form.Label column sm={2}>
               營業時間
             </Form.Label>
@@ -236,7 +235,7 @@ class userEditInput extends React.Component {
                 </label>
               </div>
             </Col>
-          </Form.Group>
+          </Form.Group> */}
 
           <div className="d-flex justify-content-center">
             <button className="button mt-3 mr-3" onClick={this.updateAccount}>

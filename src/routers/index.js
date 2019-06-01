@@ -21,6 +21,7 @@ import Shopping2 from '../components/shopprocess/Shopping2'
 import Shopping3 from '../components/shopprocess/Shopping3'
 import Instagram from '../components/instagram/Instagram'
 import actions from '../redux/action/userInfo.js'
+import OpenMemberPage from '../pages/OpenMemberPage'
 
 class RootRouter extends React.Component {
   constructor() {
@@ -70,6 +71,7 @@ class RootRouter extends React.Component {
               path={'/chatroom/message/' + 'ID' + this.props.userInfo.account}
               component={ChatRoom}
             />
+            <Route path="/chatroom/openMemberPage" component={OpenMemberPage} />
             <Route path="/ProductDetail" component={ProductDetail} />
             <Route path="/Myfav" component={Myfav} />
             <Route

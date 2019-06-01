@@ -4,6 +4,7 @@ import actions from '../../redux/action/userInfo.js'
 import UserAccount from './UserAccount'
 import UserEvent from './UserEvent'
 import UserShopping from './UserShopping'
+import site_reservation from './site_reservation'
 // import UserMail from './UserMail'
 import { connect } from 'react-redux'
 import { withRouter } from 'react-router'
@@ -81,7 +82,7 @@ class MemberMenu extends React.Component {
               {/*            UserInfo         */}
               <div className="info">
                 <h5>{data.nickname}</h5>
-                <div className="email mb-3">{data.account}</div>
+                <div className="email">{data.account}</div>
                 <button className="button" onClick={this.handleShow}>
                   編輯個人資料
                 </button>
@@ -102,7 +103,7 @@ class MemberMenu extends React.Component {
                   <NavLink to="/member/UserShopping">訂單查詢</NavLink>
                 </li>
                 <li>
-                  <NavLink to="/member/userSite">場地預定查詢</NavLink>
+                  <NavLink to="/member/site_reservation">場地預定查詢</NavLink>
                 </li>
               </ul>
             </div>
@@ -112,14 +113,17 @@ class MemberMenu extends React.Component {
               <Route path="/member/account" component={UserAccount} />
               <Route path="/member/userevent" component={UserEvent} />
               <Route path="/member/usershopping" component={UserShopping} />
-              {/* <Route path="/member/userSite" component={Site_manage} /> */}
+              <Route
+                path="/member/site_reservation"
+                component={site_reservation}
+              />
               {/* <Route path="/usermail" component={UserMail} /> */}
             </Switch>
           </div>
-          {/* <FirmEdit
+          <MemberEdit
             editPopup={this.state.editPopup}
             handleHide={this.handleHide}
-          /> */}
+          />
         </>
       </Router>
     )

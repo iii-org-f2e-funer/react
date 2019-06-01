@@ -35,18 +35,26 @@ class ProductSlider extends React.Component {
           this.setState({ datas: arr }, () => {
             this.data_length = obj.data.length // 原始資料長度
             this.carousel.style.left = this.position + 'px' // 設定初始位置
+            // 開始自動輪播
+            this.handleAutoSlide()
           })
         }
       })
-
-    // 開起輪播
-    this.timer = setInterval(() => {
-      this.handleNextClick()
-    }, 5000)
   }
   componentWillUnmount() {
     clearInterval(this.timer)
   }
+  //自動播放
+  handleAutoSlide = () => {
+    this.timer = setInterval(() => {
+      this.handleNextClick()
+    }, 4000)
+  }
+  //停止播放
+  handleStopSlide = () => {
+    clearInterval(this.timer)
+  }
+
   // 按上一個
   handlePrevClick = () => {
     this.pointer -= 1
@@ -89,13 +97,17 @@ class ProductSlider extends React.Component {
   render() {
     return (
       <>
-        <div className="product_slider">
+        <div
+          className="product_slider"
+          onMouseEnter={this.handleStopSlide}
+          onMouseLeave={this.handleAutoSlide}
+        >
           <div className="slider_inner">
             {/* list */}
             <ul className="productList" ref={el => (this.carousel = el)}>
               {this.state.datas.map((item, idx) => (
-                <li key={item.sid} className="productItem">
-                  <Link>
+                <li key={idx} className="productItem">
+                  <Link to="#">
                     {/* <img src={item.image_path} alt="" /> */}
                     <img
                       src={process.env.PUBLIC_URL + '/images/home/09.jpg'}

@@ -214,13 +214,65 @@ label.col-2
 // --------------------------------------
 // register
 // --------------------------------------
+$h: 80px
+$w: 80px
+
 .codeCheck 
-    margin: auto
-    min-height: 55vh
-    max-width: 800px
+    background-color: #dcf1f6
+    // background-color: #fff
+    min-height: 100vh
     width: 100%
-    .code_form
-        padding: 0 50px
+    margin: auto
+    .container
+        position: relative
+        max-width: 500px
+        width: 100%
+        h1
+            font-weight: 900
+        .code_form
+            font-size: 20px
+            padding: 50px
+            background-color: #fff
+            border-radius: 6px
+            box-shadow: 0 1px 4px rgba(0,0,0,0.1)
+        .funner_pic
+            animation: jumping 0.8s infinite alternate
+            position: relative
+            width: $w
+            height: $h
+            background-color: #f9c149
+            border-radius: $w*3/20
+            margin: 0
+            box-shadow: 0px 10px 20px rgba(black,0.2)
+            .eye
+                position: absolute
+                top: $w/5
+                background-color: #fff
+                width: $w/4
+                height: $w/4
+                border-radius: 100%
+                &.left
+                    left: $w*3/20      
+                &.right
+                    right: $w*3/20
+                .eyeball
+                    position: absolute
+                    top: 50%
+                    left: 50%
+                    transform: translate(-50%,-50%)
+                    background-color: #000
+                    width: $w*3/20
+                    height: $w*3/20
+                    border-radius: 100%
+            @keyframes jumping
+                50%
+                    top: 0
+                    box-shadow: 0px 8px 15px rgba(black,0.2)
+                100%
+                    top: -40px
+                    box-shadow: 0px 80px 30px rgba(black,0.2)
+
+
 
 
 
