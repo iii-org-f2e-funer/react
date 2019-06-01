@@ -1,10 +1,10 @@
-import React from 'react';
-import '../styles/product/product.scss';
-import { InputGroup, FormControl, Button, Card } from 'react-bootstrap';
-
+import React from 'react'
+import '../styles/product/product.scss'
+import { InputGroup, FormControl, Button, Card } from 'react-bootstrap'
+import { Link } from 'react-router-dom'
 export default class product extends React.Component {
   constructor() {
-    super();
+    super()
     this.state = {
       data: [],
       data1: [],
@@ -13,7 +13,7 @@ export default class product extends React.Component {
       game_type: [],
       type: 0,
       sort: 'hightolow',
-    };
+    }
   }
   componentDidMount() {
     ///////////////////////////////////////////////////////////////////////////////
@@ -23,16 +23,16 @@ export default class product extends React.Component {
         // 這裡會得到一個 ReadableStream 的物件
         // console.log(response)
         // 可以透過 blob(), json(), text() 轉成可用的資訊
-        return response.json();
+        return response.json()
       })
       .then(jsonData => {
-        this.setState({ data: jsonData });
+        this.setState({ data: jsonData })
         // typeof()
         // console.log(this.state.data)
       })
       .catch(err => {
         // console.log('錯誤:', err)
-      });
+      })
     ////////////////////////////////////////////////////////////////////////////////
     fetch('//localhost:3002/product/productlist2', {})
       //fetch product_sid=sid的所有圖片path
@@ -40,126 +40,126 @@ export default class product extends React.Component {
         // 這裡會得到一個 ReadableStream 的物件
         // console.log(response)
         // 可以透過 blob(), json(), text() 轉成可用的資訊
-        return response.json();
+        return response.json()
       })
       .then(jsonData => {
-        this.setState({ data1: jsonData });
-        const dt1 = this.state.data;
-        const dt2 = jsonData;
-        var d1_leng = Object.keys(this.state.data).length;
-        var d2_leng = Object.keys(jsonData).length;
+        this.setState({ data1: jsonData })
+        const dt1 = this.state.data
+        const dt2 = jsonData
+        var d1_leng = Object.keys(this.state.data).length
+        var d2_leng = Object.keys(jsonData).length
 
         //迴圈判斷只抓其中一張圖
         for (let data1_index = d1_leng - 1; data1_index >= 0; data1_index--) {
           for (let data2_index = d2_leng - 1; data2_index >= 0; data2_index--) {
             if (dt2[data2_index].sid === dt1[data1_index].sid) {
               //將抓到的image_path存回去 this.state.data
-              dt1[data1_index].image_path = dt2[data2_index].image_path;
+              dt1[data1_index].image_path = dt2[data2_index].image_path
             }
           }
         }
-        console.log(dt1);
-        this.setState({ data: dt1 });
-        this.setState({ oridata: dt1 });
+        console.log(dt1)
+        this.setState({ data: dt1 })
+        this.setState({ oridata: dt1 })
       })
       .catch(err => {
-        console.log('錯誤:', err);
-      });
+        console.log('錯誤:', err)
+      })
     ///////////////////////////////////////////////////////////////////////////////
     fetch('//localhost:3002/product/game_type', {})
       //fetch game_type
       .then(response => {
-        return response.json();
+        return response.json()
       })
       .then(jsonData => {
-        this.setState({ game_type: jsonData });
+        this.setState({ game_type: jsonData })
         // typeof()
-        console.log(this.state.game_type);
+        console.log(this.state.game_type)
       })
       .catch(err => {
         // console.log('錯誤:', err)
-      });
+      })
   }
   gotodetail = sid => () => {
     // console.log(sid)
-    window.location.href = 'http://localhost:3000/ProductDetail/sid:' + sid;
-    localStorage.setItem('item.sid', sid);
-  };
+    // window.location.href = 'http://localhost:3000/ProductDetail/sid:' + sid
+    localStorage.setItem('item.sid', sid)
+  }
   search = () => () => {
     ///////////////// getstart ///////////////////
-    this.setState({ data: this.state.oridata });
+    this.setState({ data: this.state.oridata })
     // this.state.data = this.state.oridata
     ///////////////////// searchtext ///////////////////////////////
-    let data = this.state.oridata;
+    let data = this.state.oridata
     if (this.state.searchText && this.state.searchText.trim() !== '') {
       data = this.state.data.filter(item =>
         item.productName.includes(this.state.searchText)
-      );
+      )
     }
-    this.setState({ data: data });
+    this.setState({ data: data })
     //////////////////////// money /////////////////////////////////
-    var aaa = [];
-    var money = document.getElementById('searchmoney').value;
-    var d1_leng = Object.keys(data).length;
+    var aaa = []
+    var money = document.getElementById('searchmoney').value
+    var d1_leng = Object.keys(data).length
     for (let i = 0; i < d1_leng; i++) {
       if (data[i].price <= money) {
-        aaa.push(data[i]);
+        aaa.push(data[i])
       }
     }
-    data = aaa;
-    this.setState({ data: data });
+    data = aaa
+    this.setState({ data: data })
     // console.log(data)
     /////////////////////// type ///////////////////////////////////
-    var bbb = [];
-    var type_id = this.state.type;
+    var bbb = []
+    var type_id = this.state.type
     // console.log(type_id)
-    var d2_leng = Object.keys(data).length;
+    var d2_leng = Object.keys(data).length
     if (type_id == 0) {
     } else {
       for (let i = 0; i < d2_leng; i++) {
         if (data[i].gametype_id == type_id) {
-          bbb.push(data[i]);
+          bbb.push(data[i])
         }
       }
-      data = bbb;
-      this.setState({ data: data });
+      data = bbb
+      this.setState({ data: data })
     }
     /////////////////////// sort ///////////////////////////////
-    var sort_style = this.state.sort;
+    var sort_style = this.state.sort
     if (sort_style === 'hightolow') {
       //物件排序方法
       data.sort(function(a, b) {
-        return b.price - a.price;
-      });
+        return b.price - a.price
+      })
     } else {
       data.sort(function(a, b) {
-        return a.price - b.price;
-      });
+        return a.price - b.price
+      })
     }
-    this.setState({ data: data });
+    this.setState({ data: data })
     ////////////////////////////////////////////////////////////////
-  };
+  }
   range = () => () => {
-    var money = document.getElementById('searchmoney').value;
-    this.setState({ searchmoney: money });
+    var money = document.getElementById('searchmoney').value
+    this.setState({ searchmoney: money })
     // console.log(uuu)
-  };
+  }
   gettype = event => {
     // console.log(event.target.value)
     // console.log(event.target.value)
-    this.setState({ type: event.target.value });
-  };
+    this.setState({ type: event.target.value })
+  }
 
   handleSearchTextChange = event => {
     // console.log(event.target.value)
-    this.setState({ searchText: event.target.value });
-  };
+    this.setState({ searchText: event.target.value })
+  }
 
   getsort = event => {
     // console.log(event.target.value)
     // console.log(event.target.value)
-    this.setState({ sort: event.target.value });
-  };
+    this.setState({ sort: event.target.value })
+  }
   render() {
     return (
       <>
@@ -241,35 +241,37 @@ export default class product extends React.Component {
               </div>
               <div className="cards">
                 {this.state.data.map(item => (
-                  <div
-                    className="gamecard"
-                    key={item.id}
-                    onClick={this.gotodetail(item.sid)}
-                  >
-                    <Card
-                      style={{ width: '170px', height: '300px' }}
-                      className="allcard"
+                  <Link to={'ProductDetail/sid:' + item.sid}>
+                    <div
+                      className="gamecard"
+                      key={item.id}
+                      onClick={this.gotodetail(item.sid)}
                     >
-                      <Card.Img
-                        variant="top"
-                        src={
-                          // process.env.PUBLIC_URL + '/images/product/game1.jpg'
-                          'http://192.168.27.25/happy6/product_manage/' +
-                          item.image_path
-                        }
-                      />
-                      <div>
-                        <Card.Title className="cardtitle">
-                          {item.productName}
-                        </Card.Title>
-                        <div className="card-priceall ">
-                          <div className="p-1 card-price">
-                            <h4>${item.price}</h4>
+                      <Card
+                        style={{ width: '170px', height: '300px' }}
+                        className="allcard"
+                      >
+                        <Card.Img
+                          variant="top"
+                          src={
+                            // process.env.PUBLIC_URL + '/images/product/game1.jpg'
+                            'http://192.168.27.25/happy6/product_manage/' +
+                            item.image_path
+                          }
+                        />
+                        <div>
+                          <Card.Title className="cardtitle">
+                            {item.productName}
+                          </Card.Title>
+                          <div className="card-priceall ">
+                            <div className="p-1 card-price">
+                              <h4>${item.price}</h4>
+                            </div>
                           </div>
                         </div>
-                      </div>
-                    </Card>
-                  </div>
+                      </Card>
+                    </div>
+                  </Link>
                 ))}
               </div>
             </div>
@@ -277,6 +279,6 @@ export default class product extends React.Component {
           <div className="scrolltop" />
         </div>
       </>
-    );
+    )
   }
 }
