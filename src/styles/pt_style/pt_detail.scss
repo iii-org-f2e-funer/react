@@ -8,6 +8,7 @@
   font-family: 'Noto Sans CJK TC';
   border-radius: 10px;
   box-shadow: -3px 3px rgba(41, 38, 0, 0.1);
+
 }
 .ptdetail_host {
   display: flex;
@@ -143,6 +144,12 @@
   color: #fff;
   background: #6ec4d2;
 }
+#disable{
+  background: #a5a5a5
+}
+#disable:hover{
+  cursor: default;
+}
 .ptinfo_bottom {
   height: 600px;
   // background-color: #333;
@@ -186,7 +193,5 @@
     color: #fff;
     font-size: 14px;
     margin: 0 8px;
-}
-
-  
+  }
 }

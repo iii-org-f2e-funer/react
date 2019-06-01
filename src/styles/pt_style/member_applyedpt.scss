@@ -12,6 +12,11 @@
     background-color: #777;
     margin: 30px;
   }
+  img{
+    width: 100%;
+    height: 100%;
+    object-fit: cover
+  }
   .ptinfo,
   .applyeder,
   .btnlist {
@@ -56,6 +61,20 @@
     line-height: 32px;
     margin: 4px auto;
     background-color: #fff;
+  }
+  #reject{
+    background: #EC6A6A;
+    border: none;
+  }
+  #approve, #editbtn{
+    background: #6ec4d2;
+    border: none;
+    color: #fff;
+  }
+  #commit{
+    background: #F9C149;
+    border: none;
+    color: #FFF;
   }
 }
 .ptuse .modal-content {

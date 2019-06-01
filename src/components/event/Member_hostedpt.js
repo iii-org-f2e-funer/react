@@ -1,11 +1,11 @@
 import React from 'react'
 import '../../styles/pt_style/member_applyedpt.scss'
 import Member_applyermodal from './Member_applyermodal'
-import Member_cancelapply from './Member_cancelapply'
+
 import { Link } from 'react-router-dom'
 import moment from 'moment'
 
-class Member_applyedpt extends React.Component {
+class Member_hostedpt extends React.Component {
   constructor() {
     super()
 
@@ -58,31 +58,29 @@ class Member_applyedpt extends React.Component {
 
           <div className="btnlist">
             {(() => {
-              switch (this.props.data.pt_applystatus) {
-                case 'pending':
-                  return <div className="applystatus">團主審核中</div>
+              switch (this.props.data.pt_state) {
+                case 0:
+                  return <div className="applystatus">已取消</div>
                   break
-                case 'reject':
+                case 1:
                   return (
-                    <div className="applystatus" id="reject">
-                      申請失敗
-                    </div>
-                  )
-                  break
-                case 'approve':
-                  return (
-                    <div className="applystatus" id="approve">
-                      開啟聊天室
-                    </div>
+                    <>
+                      <Link to={'/event/edit/' + this.props.data.pt_sid}>
+                        <button className="applyclick" id="editbtn">
+                          編輯揪團
+                        </button>
+                      </Link>
+                      <Member_applyermodal pt_sid={this.props.data.pt_sid}/>
+                      <div className="applystatus" id="approve">開啟聊天室</div>
+                    </>
                   )
                   break
               }
             })()}
-            <Member_cancelapply applysid={this.props.data.pt_applysid} />
           </div>
         </div>
       </>
     )
   }
 }
-export default Member_applyedpt
+export default Member_hostedpt

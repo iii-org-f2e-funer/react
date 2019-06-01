@@ -60,9 +60,9 @@ class Pt_list extends React.Component {
   //以上
 
 
-  logincheck = e => {
+logincheck = e => {
     if (this.props.userInfo.login) {
-      document.location.pathname = '/event/new/'
+      this.props.history.push('/event/new/')
     } else {
       this.handleShow()
     }

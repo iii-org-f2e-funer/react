@@ -34,8 +34,9 @@ class Pt_applymodal extends React.Component {
     let apply = JSON.stringify({
       pt_sid: this.props.ptapply.pt_sid,
       pt_host: this.props.ptapply.pt_host,
-      ptapplymem: this.props.account.account,
+      ptapplymem: this.props.account,
     })
+    console.log(apply)
     fetch('//localhost:3002/event/apply', {
       method: 'POST',
       body: apply,

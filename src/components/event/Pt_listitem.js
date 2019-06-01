@@ -33,13 +33,23 @@ const Pt_listitem = props => {
               )}
             </div>
             <div className="pt_host d-flex">
-              <div className="host_pic">
-                <img
-                  src={process.env.PUBLIC_URL + '/images/pt_img/dr_strange.jpg'}
-                  alt=""
-                />
-              </div>
-              <div className="host_name">{props.data.pt_host}</div>
+              <Link
+                to={'/chatroom/openMemberPage/' + 'ID' + props.data.member_id}
+              >
+                <div className="host_pic">
+                  <img
+                    src={
+                      process.env.PUBLIC_URL + '/images/pt_img/dr_strange.jpg'
+                    }
+                    alt=""
+                  />
+                </div>
+              </Link>
+              <Link
+                to={'/chatroom/openMemberPage/' + 'ID' + props.data.member_id}
+              >
+                <div className="host_name">{props.data.pt_host}</div>
+              </Link>
             </div>
             <Card.Body className="card_bd">
               <div className="pt_title d-flex justify-content-between">
@@ -77,4 +87,3 @@ export default withRouter(
     }
   )(Pt_listitem)
 )
-

@@ -5,7 +5,7 @@
   // background-color: bisque;
   border: 1px solid #ccc;
   font-family: 'Noto Sans CJK TC';
-}
+
 
 .ptform {
   margin: 10px;
@@ -38,6 +38,9 @@
   font-size: 12px;
   justify-content: center;
   margin-bottom: 120px;
+}
+.form-row.btncol{
+  justify-content: center;
 }
 .imgfield {
   width: 920px;
@@ -112,10 +115,11 @@ textarea {
   border: none;
   border-radius: 5px;
   display: flex;
-  margin: 0 auto;
+  margin: 0 8px;
   background-color: #6ec4d2;
   color: #fff;
 }
+
 .pt_level {
   margin-top: 8px;
 }
@@ -348,4 +352,5 @@ td.rdtYear:hover {
 
 .rdtTime td {
   cursor: default;
+}
 }

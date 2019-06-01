@@ -6,7 +6,27 @@ class Member_applyermodal extends React.Component {
   constructor(props) {
     super(props)
 
-    this.state = { modalshow: false }
+    this.state = { modalshow: false, applyer: [] }
+  }
+  componentDidMount() {
+    console.log(this.props.pt_sid)
+    // this.setState({ pt_sid: this.props.pt_sid })
+
+    // if (this.state.pt_sid !== '') {
+    // console.log(this.state.pt_sid)
+    fetch('//localhost:3002/event/ptapplyer', {
+      method: 'POST',
+      body: JSON.stringify({ ptsid: this.props.pt_sid }),
+      headers: {
+        'Content-type': 'application/json',
+      },
+    })
+      .then(res => res.json())
+      .then(obj => {
+        console.log(obj)
+        this.setState({ applyer: obj })
+      })
+    // }
   }
 
   showmodal = e => {
@@ -17,10 +37,47 @@ class Member_applyermodal extends React.Component {
     this.setState({ modalshow: false })
   }
 
+  handleapprove = id => e => {
+    fetch('//localhost:3002/event/commit', {
+      method: 'POST',
+      body: JSON.stringify({
+        pt_applysid: id,
+        result: 'approve',
+      }),
+      headers: {
+        'Content-type': 'application/json',
+      },
+    })
+      .then(res => res.json())
+      .then(obj => {
+        console.log(obj)
+        alert('你已審核成功')
+      })
+  }
+
+  handlereject = id => e => {
+    fetch('//localhost:3002/event/commit', {
+      method: 'POST',
+      body: JSON.stringify({
+        pt_applysid: id,
+        result: 'reject',
+      }),
+      headers: {
+        'Content-type': 'application/json',
+      },
+    })
+      .then(res => res.json())
+      .then(obj => {
+        console.log(obj)
+        alert('你已審核成功')
+      })
+  }
+
   render() {
+    // if (this.state.pt_sid !== '') {
     return (
       <>
-        <button className="applyclick" onClick={this.showmodal}>
+        <button className="applyclick" id='commit' onClick={this.showmodal}>
           審核申請
         </button>
         <Modal
@@ -35,12 +92,22 @@ class Member_applyermodal extends React.Component {
               <div className="title">
                 <div>待審核的報名者</div>
               </div>
-              <Member_applyeritem />
+              {this.state.applyer.map(item => (
+                <Member_applyeritem
+                  key={item.pt_applysid}
+                  data={item}
+                  handleapprove={this.handleapprove(item.pt_applysid)}
+                  handlereject={this.handlereject(item.pt_applysid)}
+                />
+              ))}
             </div>
           </>
         </Modal>
       </>
     )
+    //   } else {
+    //     return <></>
+    //   }
   }
 }
 

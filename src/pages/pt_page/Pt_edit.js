@@ -5,6 +5,8 @@ import moment from 'moment'
 import TWzipcode from 'react-twzipcode'
 // import Pt_imgupload from '../../components/event/Pt_imgupload'
 import Pt_editmodal from '../../components/event/Pt_editmodal'
+import Pt_cancelhost from '../../components/event/Pt_cancelhost'
+
 
 class Pt_edit extends React.Component {
   constructor() {
@@ -22,7 +24,7 @@ class Pt_edit extends React.Component {
       pt_level: '',
       pt_title: '',
       pt_info: '',
-      modalshow: false,
+      editmodalshow: false,
       locatefirm: [],
       editsuccess: [],
     }
@@ -161,12 +163,12 @@ class Pt_edit extends React.Component {
       .then(res => res.json())
       .then(obj => {
         console.log(obj)
-        this.setState({ editsuccess: obj, modalshow: true })
+        this.setState({ editsuccess: obj, editmodalshow: true })
       })
   }
 
   handleClose = e => {
-    this.setState({ modalshow: false })
+    this.setState({ editmodalshow: false })
   }
 
   render() {
@@ -205,7 +207,10 @@ class Pt_edit extends React.Component {
               <div className="imgfield">
                 {this.state.pt_img ? (
                   <div className="imgpreview" onClick={this.handleuploadimg}>
-                    <img src={this.state.pt_img} alt="" />
+                    <img
+                      src={'//localhost:3002/images/event/' + this.state.pt_img}
+                      alt=""
+                    />
                   </div>
                 ) : (
                   <div className="pt_imgupload" onClick={this.handleuploadimg}>
@@ -341,12 +346,13 @@ class Pt_edit extends React.Component {
                 onBlur={event => this.handleinfoChange(event)}
               />
             </div>
-            <div className="form-row">
+            <div className="form-row btncol">
+            <Pt_cancelhost pt_sid={this.state.pt_sid} />
               <button type="submit" className="pt_submitbtn">
                 確認修改
               </button>
               <Pt_editmodal
-                show={this.state.modalshow}
+                show={this.state.editmodalshow}
                 handleHide={this.handleClose}
                 edited={this.state.editsuccess}
               />

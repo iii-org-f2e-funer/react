@@ -28,6 +28,7 @@ class Pt_new extends React.Component {
       pt_info: '',
       modalshow: false,
       locatefirm: [],
+      loaded: false,
     }
   }
 
@@ -43,6 +44,7 @@ class Pt_new extends React.Component {
           pt_host: obj.body.account,
           pt_city: obj.body.city,
           pt_dist: obj.body.site,
+          loaded: true,
         })
       })
   }
@@ -158,192 +160,201 @@ class Pt_new extends React.Component {
   }
 
   render() {
-    return (
-      <>
-        <div className="pt_container">
-          <form
-            name="newptform"
-            className="ptform"
-            method="post"
-            onSubmit={this.handleformsubmit}
-            ref={el => (this.form = el)}
-          >
-            <input type="hidden" name="check" value="happy6" />
-            <div className="form-row title">
-              <h3>主揪一場新桌遊</h3>
-            </div>
-            <input type="hidden" name="pt_host" value={this.state.pt_host} />
-            <div className="form-row">
-              <label htmlFor="pt_imgfile">桌遊封面</label>
-              <input
-                type="hidden"
-                id="pt_img"
-                name="pt_img"
-                value={this.state.pt_img}
-              />
-              <input
-                type="file"
-                id="pt_imgfile"
-                ref="fileUploader"
-                accept="image/jpeg,.png"
-                onChange={this.handleimgChange}
-                style={{ display: 'none' }}
-              />
-              <div className="imgfield">
-                {this.state.pt_img ? (
-                  <div className="imgpreview" onClick={this.handleuploadimg}>
-                    <img
-                      src={'//localhost:3002/images/event/' + this.state.pt_img}
-                      alt=""
-                    />
-                  </div>
-                ) : (
-                  <div className="pt_imgupload" onClick={this.handleuploadimg}>
-                    <i className="fas fa-camera" />
-                  </div>
-                )}
+    if (!this.state.loaded) {
+      return <></>
+    } else {
+      return (
+        <>
+          <div className="pt_container">
+            <form
+              name="newptform"
+              className="ptform"
+              method="post"
+              onSubmit={this.handleformsubmit}
+              ref={el => (this.form = el)}
+            >
+              <input type="hidden" name="check" value="happy6" />
+              <div className="form-row title">
+                <h3>主揪一場新桌遊</h3>
               </div>
-            </div>
+              <input type="hidden" name="pt_host" value={this.state.pt_host} />
+              <div className="form-row">
+                <label htmlFor="pt_imgfile">桌遊封面</label>
+                <input
+                  type="hidden"
+                  id="pt_img"
+                  name="pt_img"
+                  value={this.state.pt_img}
+                />
+                <input
+                  type="file"
+                  id="pt_imgfile"
+                  ref="fileUploader"
+                  accept="image/jpeg,.png"
+                  onChange={this.handleimgChange}
+                  style={{ display: 'none' }}
+                />
+                <div className="imgfield">
+                  {this.state.pt_img ? (
+                    <div className="imgpreview" onClick={this.handleuploadimg}>
+                      <img
+                        src={
+                          '//localhost:3002/images/event/' + this.state.pt_img
+                        }
+                        alt=""
+                      />
+                    </div>
+                  ) : (
+                    <div
+                      className="pt_imgupload"
+                      onClick={this.handleuploadimg}
+                    >
+                      <i className="fas fa-camera" />
+                    </div>
+                  )}
+                </div>
+              </div>
 
-            <div className="form-row">
-              <label htmlFor="pt_locate">地點</label>
-              <TWzipcode
-                countyFieldName="pt_city"
-                districtFieldName="pt_dist"
-                countyValue={this.state.pt_city}
-                districtValue={this.state.pt_dist}
-                css={[
-                  'form-control county-sel',
-                  'form-control district-sel',
-                  'form-control zipcode',
-                ]}
-                handleChangeCounty={this.handlecityChange}
-                handleChangeDistrict={this.handledistChange}
-              />
-              <input
-                id="pt_add"
-                name="pt_add"
-                list="addlist"
-                placeholder="地址/店家名稱"
-                value={this.state.add}
-                // onClick={e => this.handleloadadd(e)}
-                onChange={event => this.handleaddChange(event)}
-              />
-              <datalist id="addlist">
-                {this.state.locatefirm.map(item => (
-                  <option key={item.sid} value={item.firmname} />
-                ))}
-              </datalist>
-            </div>
-            <div className="form-row">
-              <label htmlFor="pt_time">桌遊時間</label>
-              <Datetime
-                className="flex"
-                dateFormat="YYYY/MM/DD"
-                timeFormat="HH:mm"
-                value={this.state.pt_time}
-                inputProps={{ name: 'pt_time' }}
-                onChange={moment => this.handletimeChange(moment)}
-              />
-            </div>
+              <div className="form-row">
+                <label htmlFor="pt_locate">地點</label>
+                <TWzipcode
+                  countyFieldName="pt_city"
+                  districtFieldName="pt_dist"
+                  countyValue={this.state.pt_city}
+                  districtValue={this.state.pt_dist}
+                  css={[
+                    'form-control county-sel',
+                    'form-control district-sel',
+                    'form-control zipcode',
+                  ]}
+                  handleChangeCounty={this.handlecityChange}
+                  handleChangeDistrict={this.handledistChange}
+                />
+                <input
+                  id="pt_add"
+                  name="pt_add"
+                  list="addlist"
+                  placeholder="地址/店家名稱"
+                  value={this.state.add}
+                  // onClick={e => this.handleloadadd(e)}
+                  onChange={event => this.handleaddChange(event)}
+                />
+                <datalist id="addlist">
+                  {this.state.locatefirm.map(item => (
+                    <option key={item.sid} value={item.firmname} />
+                  ))}
+                </datalist>
+              </div>
+              <div className="form-row">
+                <label htmlFor="pt_time">桌遊時間</label>
+                <Datetime
+                  className="flex"
+                  dateFormat="YYYY/MM/DD"
+                  timeFormat="HH:mm"
+                  value={this.state.pt_time}
+                  inputProps={{ name: 'pt_time' }}
+                  onChange={moment => this.handletimeChange(moment)}
+                />
+              </div>
 
-            <div className="form-row">
-              <label htmlFor="pt_endtime">審核截止時間</label>
-              <Datetime
-                className="flex"
-                dateFormat="YYYY/MM/DD"
-                timeFormat="HH:mm"
-                value={this.state.pt_endtime}
-                inputProps={{ name: 'pt_endtime' }}
-                onChange={moment => this.handleendtimeChange(moment)}
-              />
-            </div>
-            <div className="form-row">
-              <label htmlFor="pt_member">成團人數</label>
-              <input
-                type="number"
-                min="1"
-                id="pt_member"
-                name="pt_member"
-                value={this.state.pt_member}
-                onChange={event => this.handlememberChange(event)}
-              />
-            </div>
-            <div className="form-row">
-              <label htmlFor="pt_maxm">上限人數</label>
-              <input
-                type="number"
-                min="1"
-                id="pt_maxm"
-                name="pt_maxm"
-                value={this.state.pt_maxm}
-                onChange={event => this.handlemaxmChange(event)}
-              />
-            </div>
-            <div className="form-row" id="pt_level">
-              <label htmlFor="pt_level">遊戲難度</label>
-              <input
-                className="pt_level"
-                type="radio"
-                name="pt_level"
-                value="easy"
-                onChange={event => this.handlelevelChange(event)}
-              />
-              <span> 適合新手 </span>
-              <input
-                className="pt_level"
-                type="radio"
-                name="pt_level"
-                value="normal"
-                onChange={event => this.handlelevelChange(event)}
-              />
-              <span>適合已有基礎的玩家</span>
-              <input
-                className="pt_level"
-                type="radio"
-                name="pt_level"
-                value="hard"
-                onChange={event => this.handlelevelChange(event)}
-              />
-              <span>高難度重度策略</span>
-            </div>
-            <div className="form-row">
-              <label htmlFor="pt_title">開團標題</label>
-              <input
-                type="text"
-                id="pt_title"
-                name="pt_title"
-                placeholder="請輸入你的揪團標題"
-                value={this.state.pt_title}
-                onChange={event => this.handletitleChange(event)}
-              />
-            </div>
-            <div className="form-row">
-              <label htmlFor="pt_info">詳細描述</label>
-              <textarea
-                id="pt_info"
-                name="pt_info"
-                rows="20"
-                placeholder="增加一些描述讓你的團吸引其他人加入吧"
-                onBlur={event => this.handleinfoChange(event)}
-              />
-            </div>
-            <div className="form-row">
-              <button type="submit" className="pt_submitbtn">
-                確認開團
-              </button>
-              <Pt_newmodal
-                show={this.state.modalshow}
-                handleHide={this.handleClose}
-              />
-            </div>
-            <div className="form-row remind">
-              *您的揪團將會刊登在列表上，並於時間截止後下架，請記得在最晚審核時間勾選申請人哦!
-            </div>
-          </form>
-        </div>
-      </>
-    )
+              <div className="form-row">
+                <label htmlFor="pt_endtime">審核截止時間</label>
+                <Datetime
+                  className="flex"
+                  dateFormat="YYYY/MM/DD"
+                  timeFormat="HH:mm"
+                  value={this.state.pt_endtime}
+                  inputProps={{ name: 'pt_endtime' }}
+                  onChange={moment => this.handleendtimeChange(moment)}
+                />
+              </div>
+              <div className="form-row">
+                <label htmlFor="pt_member">成團人數</label>
+                <input
+                  type="number"
+                  min="1"
+                  id="pt_member"
+                  name="pt_member"
+                  value={this.state.pt_member}
+                  onChange={event => this.handlememberChange(event)}
+                />
+              </div>
+              <div className="form-row">
+                <label htmlFor="pt_maxm">上限人數</label>
+                <input
+                  type="number"
+                  min="1"
+                  id="pt_maxm"
+                  name="pt_maxm"
+                  value={this.state.pt_maxm}
+                  onChange={event => this.handlemaxmChange(event)}
+                />
+              </div>
+              <div className="form-row" id="pt_level">
+                <label htmlFor="pt_level">遊戲難度</label>
+                <input
+                  className="pt_level"
+                  type="radio"
+                  name="pt_level"
+                  value="easy"
+                  onChange={event => this.handlelevelChange(event)}
+                />
+                <span> 適合新手 </span>
+                <input
+                  className="pt_level"
+                  type="radio"
+                  name="pt_level"
+                  value="normal"
+                  onChange={event => this.handlelevelChange(event)}
+                />
+                <span>適合已有基礎的玩家</span>
+                <input
+                  className="pt_level"
+                  type="radio"
+                  name="pt_level"
+                  value="hard"
+                  onChange={event => this.handlelevelChange(event)}
+                />
+                <span>高難度重度策略</span>
+              </div>
+              <div className="form-row">
+                <label htmlFor="pt_title">開團標題</label>
+                <input
+                  type="text"
+                  id="pt_title"
+                  name="pt_title"
+                  placeholder="請輸入你的揪團標題"
+                  value={this.state.pt_title}
+                  onChange={event => this.handletitleChange(event)}
+                />
+              </div>
+              <div className="form-row">
+                <label htmlFor="pt_info">詳細描述</label>
+                <textarea
+                  id="pt_info"
+                  name="pt_info"
+                  rows="20"
+                  placeholder="增加一些描述讓你的團吸引其他人加入吧"
+                  onBlur={event => this.handleinfoChange(event)}
+                />
+              </div>
+              <div className="form-row">
+                <button type="submit" className="pt_submitbtn">
+                  確認開團
+                </button>
+                <Pt_newmodal
+                  show={this.state.modalshow}
+                  handleHide={this.handleClose}
+                />
+              </div>
+              <div className="form-row remind">
+                *您的揪團將會刊登在列表上，並於時間截止後下架，請記得在最晚審核時間勾選申請人哦!
+              </div>
+            </form>
+          </div>
+        </>
+      )
+    }
   }
 }
 function mapStateToProp(store) {
