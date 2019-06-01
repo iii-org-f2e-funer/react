@@ -14,7 +14,7 @@ class Member_applyermodal extends React.Component {
 
     // if (this.state.pt_sid !== '') {
     // console.log(this.state.pt_sid)
-    fetch('//localhost:3002/event/ptapplyer', {
+    fetch('//localhost:3002/event/commitptapplyer', {
       method: 'POST',
       body: JSON.stringify({ ptsid: this.props.pt_sid }),
       headers: {
@@ -102,14 +102,24 @@ class Member_applyermodal extends React.Component {
               <div className="title">
                 <div>待審核的報名者</div>
               </div>
-              {this.state.applyer.map(item => (
-                <Member_applyeritem
-                  key={item.pt_applysid}
-                  data={item}
-                  handleapprove={this.handleapprove(item.pt_applysid)}
-                  handlereject={this.handlereject(item.pt_applysid)}
-                />
-              ))}
+              {this.state.applyer == '' ? (
+                <>
+                  <div className="applyeder none">
+                    <div>目前沒有申請者喔</div>
+                  </div>
+                </>
+              ) : (
+                <>
+                  {this.state.applyer.map(item => (
+                    <Member_applyeritem
+                      key={item.pt_applysid}
+                      data={item}
+                      handleapprove={this.handleapprove(item.pt_applysid)}
+                      handlereject={this.handlereject(item.pt_applysid)}
+                    />
+                  ))}
+                </>
+              )}
             </div>
           </>
         </Modal>
