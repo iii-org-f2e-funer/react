@@ -34,13 +34,21 @@ class NavIcons extends React.Component {
             <li>
               <div
                 className={
-                  this.state.noticeOpen ? 'notice_btn active' : 'notice_btn'
+                  this.state.newNotice
+                    ? 'notice_btn newNotice'
+                    : this.state.noticeOpen
+                    ? 'notice_btn active'
+                    : 'notice_btn'
                 }
                 onMouseEnter={this.handleNoticeOpen}
                 onMouseLeave={this.handleNoticeOpen}
               >
                 <FaBell />
-                <Notice isOpen={this.state.noticeOpen} />
+                <Notice
+                  isOpen={this.state.noticeOpen}
+                  handleNewNotice={this.handleNewNotice}
+                  userInfo={this.props.userInfo}
+                />
               </div>
             </li>
             <li>
