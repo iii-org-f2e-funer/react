@@ -18,9 +18,6 @@ class Mycart extends React.Component {
       method_money: 60,
       method_funshop: 'toshop',
       login: '',
-      data1: [],
-      data2: [],
-      data3: [],
       input1: 0,
       input2: 0,
       input3: 0,
@@ -233,16 +230,12 @@ class Mycart extends React.Component {
               <div className="cart-title">
                 <h2>我的購物車</h2>
               </div>
-              {/* {this.state.data1[].seller} */}
               {/* ////////////////////////////////////////////////////////////data1//////////////////////////////////////////////// */}
-              {this.state.data1 == [] ||
-              this.state.data1 == undefined ||
-              this.state.data1 == '' ? (
-                ''
-              ) : (
+
+              {this.state.zzz.map(item => (
                 <div className="myfav-table mb-5">
                   <label class="container1">
-                    {this.state.name1}
+                    {item.seller}
                     <input type="radio" name="rr" onClick={this.check1} />
                     <span class="checkmark" />
                   </label>
@@ -258,30 +251,25 @@ class Mycart extends React.Component {
                       </tr>
                     </thead>
                     <tbody>
-                      {this.state.data1.map((item, index, array) => (
+                      {item.products.map((item, index, array) => (
                         <tr key={item.product_sid}>
                           <td>{index + 1}</td>
-                          <td>{this.state.data1[index].productName}</td>
-
-                          <td>{this.state.data1[index].product_price}</td>
-                          <td>{this.state.data1[index].number}</td>
-                          <td>{this.state.data1[index].total}</td>
+                          <td>{item.productName}</td>
+                          <td>{item.product_price}</td>
+                          <td>{item.number}</td>
+                          <td>{item.total}</td>
                           <td>
                             <button
                               className="m-1 button button"
                               block
-                              onClick={this.deleteit(
-                                this.state.data1[index].product_sid
-                              )}
+                              onClick={this.deleteit(item.product_sid)}
                             >
                               刪除
                             </button>
                             <button
                               className="m-1 button button"
                               block
-                              onClick={this.goto(
-                                this.state.data1[index].product_sid
-                              )}
+                              onClick={this.goto(item.product_sid)}
                             >
                               詳細資料
                             </button>
@@ -291,12 +279,9 @@ class Mycart extends React.Component {
                     </tbody>
                   </Table>
                 </div>
-              )}
-              {/* ////////////////////////////////////////////////////////////data2//////////////////////////////////////////////// */}
-
-              {/* ////////////////////////////////////////////////////////////data3//////////////////////////////////////////////// */}
-
-              {/* /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////// */}
+              ))}
+              {/* //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////// */}
+              {/* footer */}
               <div className="check mt-5">
                 <div className="remind">
                   <label>提醒您</label>
@@ -332,7 +317,7 @@ class Mycart extends React.Component {
                     <h3 className="total">
                       {this.state.total + this.state.method_money}
                     </h3>
-                  </div>{' '}
+                  </div>
                   <div className="checkbutton">
                     <div className="">
                       <Link to="/product">
