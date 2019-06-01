@@ -9,25 +9,31 @@ class AccountEdit extends React.Component {
   constructor(props) {
     super(props)
     this.state = {
+      insert: true,
+      member_id: '',
       memberData: {
-        member_sid: '',
+        member_id: '',
         account: '',
-        store: '',
-        county: '',
-        dist: '',
-        address: '',
+        password: '',
+        email: '',
+        name: '',
+        nickname: '',
+        birthday: '',
         mobile: '',
-        business_hours: '',
-        public_holiday: '',
-        charges: '',
-        about: '',
-        rule: '',
-        status: '',
+        intro: '',
+        city: '',
+        site: '',
+        street: '',
+        absence: '',
+        participation: '',
+        account_status: '',
+        create_date: '',
+        photo: '',
       },
     }
   }
   componentDidMount() {
-    fetch('//localhost:3002/member/member', {
+    fetch('//localhost:3002/member/userInfo', {
       credentials: 'include',
     })
       .then(res => res.json())
@@ -35,29 +41,47 @@ class AccountEdit extends React.Component {
         if (obj.success) {
           this.setState({
             memberData: Object.assign(this.state.memberData, obj.body),
+            member_id: obj.member_id,
+            insert: false,
+            img: obj.img,
           })
-          console.log(this.state.memberData)
         } else {
-          console.log(obj.message)
+          this.setState({ member_id: obj.member_id })
         }
       })
   }
+
+  cancelEdit = () => {
+    fetch('//localhost:3002/member/userInfo', {
+      credentials: 'include',
+    })
+      .then(res => res.json())
+      .then(obj => {
+        if (obj.success) {
+          console.log(obj)
+          this.setState({
+            memberData: Object.assign(this.state.memberData, obj.body),
+            member_id: obj.member_id,
+            insert: false,
+          })
+        } else {
+          console.log(obj)
+          this.setState({ member_id: obj.member_id })
+        }
+      })
+    this.props.handleHide()
+  }
+
   render() {
     return (
       <>
         <Modal
-          className="firmEdit"
+          className="memberEdit"
           show={this.props.editPopup}
           onHide={this.props.handleHide}
           dialogClassName="modal-90w"
           aria-labelledby="example-custom-modal-styling-title"
-        >
-          {/* <h4 className="text-center">店家基本資訊</h4>
-          <FirmEditInput
-            firmData={this.state.firmData}
-            cancelEdit={this.props.handleHide}
-          /> */}
-        </Modal>
+        />
       </>
     )
   }

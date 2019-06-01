@@ -6,6 +6,7 @@ class UserAccountEdit extends React.Component {
   constructor(props) {
     super(props)
     this.state = {
+      member_id: this.props.data.member_id,
       account: this.props.data.account,
       name: this.props.data.name,
       mobile: this.props.data.mobile,
@@ -46,7 +47,7 @@ class UserAccountEdit extends React.Component {
   }
   UserUpdateAccount = () => {
     const data = {
-      member_sid: this.state.member_sid,
+      member_id: this.state.member_id,
       account: this.state.account,
       name: this.state.name,
       mobile: this.state.mobile,
@@ -78,7 +79,7 @@ class UserAccountEdit extends React.Component {
   }
   updatePassword = () => {
     const data = {
-      sid: this.props.data.sid,
+      member_id: this.state.member_id,
       password: this.state.password,
     }
     fetch('//localhost:3002/member/passwordEdit', {
