@@ -44,8 +44,8 @@ class LoginInput extends React.Component {
         .then(res => res.json())
         .then(obj => {
           if (obj.data.success) {
-            const account = this.state.account
-            const payload = { account: account }
+            const sid = obj.data.body
+            const payload = { account: sid }
             this.props.firmInfoAction(payload)
             this.props.firmLogin(obj.data.user)
           } else {

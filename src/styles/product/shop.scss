@@ -16,6 +16,7 @@ $shadow: 0px 1px 4px rgba(black, 0.2);
   .container1 {
     margin: 0 auto;
     width: 760px;
+    height: auto;
     background: $color_background;
   }
   .text-mute {
@@ -132,7 +133,7 @@ $shadow: 0px 1px 4px rgba(black, 0.2);
   }
   .step1-form {
     width: 100%;
-    height: 1200px;
+    height: auto;
     background: #ffffff;
     .title-people {
       width: 120px;

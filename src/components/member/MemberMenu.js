@@ -84,7 +84,7 @@ class MemberMenu extends React.Component {
                 <h5>{data.nickname}</h5>
                 <div className="email">{data.account}</div>
                 <button className="button" onClick={this.handleShow}>
-                  編輯個人資料
+                  公開會員資訊
                 </button>
               </div>
             </div>
@@ -123,6 +123,7 @@ class MemberMenu extends React.Component {
           <MemberEdit
             editPopup={this.state.editPopup}
             handleHide={this.handleHide}
+            data={data}
           />
         </>
       </Router>

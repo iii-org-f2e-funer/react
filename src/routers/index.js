@@ -64,7 +64,14 @@ class RootRouter extends React.Component {
             <Route path="/firm/site_order" component={() => <Firm />} />
             <Route exact path="/checkCode" component={CheckCode} />
 
-            <Route path="/member" component={Member} />
+            <Route path="/member/account" component={() => <Member />} />
+            <Route path="/member/userevent" component={() => <Member />} />
+            <Route path="/member/UserShopping" component={() => <Member />} />
+            <Route
+              path="/member/site_reservation"
+              component={() => <Member />}
+            />
+
             <Route path="/event" component={Event} />
             <Route path="/product" component={Product} />
             <Route

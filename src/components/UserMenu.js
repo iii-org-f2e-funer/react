@@ -26,7 +26,7 @@ class UserMenu extends React.Component {
               <Link to="/member/UserShopping">訂單查詢</Link>
             </li>
             <li>
-              <Link to="/member/userSite">場地預定</Link>
+              <Link to="/member/site_reservation">場地預定</Link>
             </li>
             <hr />
             <li>

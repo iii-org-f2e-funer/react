@@ -13,7 +13,6 @@ class UserAccountEdit extends React.Component {
       city: this.props.data.city,
       site: this.props.data.site,
       street: this.props.data.street,
-      nickname: this.props.data.nickname,
       gender: this.props.data.gender,
       email: this.props.data.email,
       password: '',
@@ -51,7 +50,6 @@ class UserAccountEdit extends React.Component {
       member_id: this.state.member_id,
       account: this.state.account,
       name: this.state.name,
-      nickname: this.state.nickname,
       gender: this.state.gender,
       mobile: this.state.mobile,
       city: this.state.city,
@@ -117,15 +115,6 @@ class UserAccountEdit extends React.Component {
             className="col-7"
             value={this.state.name}
             onChange={e => this.setState({ name: e.target.value })}
-          />
-        </div>
-        <div className="flex mb-3">
-          <label className="col-2">暱稱</label>
-          <input
-            type="text"
-            className="col-7"
-            value={this.state.nickname}
-            onChange={e => this.setState({ nickname: e.target.value })}
           />
         </div>
         {/* gender */}

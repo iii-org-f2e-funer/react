@@ -78,6 +78,14 @@ p {
 	margin-bottom: 16px;
 	line-height: 32px;
 }
+p.remindText {
+	font-size: 14px;
+	font-weight: 400;
+	letter-spacing: 0;
+	margin-bottom: 16px;
+	line-height: 32px;
+	color:#949494;
+}
 // mixin
 $blue: #6ec4d2 !important;
 $red: #ec6a6a !important;
