@@ -114,7 +114,10 @@ class Navbar extends React.Component {
           </ul>
           <ul className="user_nav">
             {this.props.userInfo.login ? (
-              <NavIcons logOut={this.logOut} />
+              <NavIcons
+                logOut={this.logOut}
+                avatarRefresh={this.props.avatarRefresh}
+              />
             ) : (
               <>
                 <li>

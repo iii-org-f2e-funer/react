@@ -21,6 +21,21 @@ class UserMenu extends React.Component {
         }
       })
   }
+  componentWillReceiveProps(nextProps) {
+    if (this.props.avatarRefresh !== nextProps.avatarRefresh) {
+      fetch('//localhost:3002/firm/userInfo', {
+        credentials: 'include',
+      })
+        .then(res => res.json())
+        .then(obj => {
+          if (obj.success) {
+            this.setState({ avatar: obj.body.photo })
+          } else {
+            console.log('無logo')
+          }
+        })
+    }
+  }
   render() {
     return (
       <>

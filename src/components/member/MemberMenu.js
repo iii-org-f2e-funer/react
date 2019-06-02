@@ -72,6 +72,7 @@ class MemberMenu extends React.Component {
       .then(res => res.json())
       .then(obj => {
         this.redirect()
+        this.props.avatarRefresh()
       })
   }
   render() {
