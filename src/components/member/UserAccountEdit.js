@@ -71,6 +71,7 @@ class UserAccountEdit extends React.Component {
       .then(obj => {
         if (obj.success) {
           this.props.cancelEdit()
+          this.props.redirect()
         } else {
           alert(obj.massage)
           this.props.cancelEdit()

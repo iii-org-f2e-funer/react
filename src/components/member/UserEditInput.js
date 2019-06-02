@@ -16,7 +16,9 @@ class userEditInput extends React.Component {
       intro: '',
     }
   }
-  updateAccount = () => {}
+  updateAccount = () => {
+    const data = {}
+  }
 
   render() {
     return (
@@ -39,7 +41,7 @@ class userEditInput extends React.Component {
               性別
             </Form.Label>
             <Col sm={10}>
-              <p>南</p>
+              <p>{this.props.data.gender}</p>
             </Col>
           </Form.Group>
           <Form.Group as={Row} controlId="formHorizontalEmail">
@@ -47,7 +49,7 @@ class userEditInput extends React.Component {
               地區
             </Form.Label>
             <Col sm={10}>
-              <p>南</p>
+              <p>{this.props.data.city}</p>
             </Col>
           </Form.Group>
           <Form.Group as={Row} controlId="formHorizontalEmail">
@@ -79,12 +81,12 @@ class userEditInput extends React.Component {
             <button className="button mt-3 mr-3" onClick={this.updateAccount}>
               確認更改
             </button>
-            <button
+            <div
               className="button button-white mt-3"
-              onClick={this.props.cancelEdit}
+              onClick={this.props.handleHide}
             >
               取消變更
-            </button>
+            </div>
           </div>
         </Form>
       </>

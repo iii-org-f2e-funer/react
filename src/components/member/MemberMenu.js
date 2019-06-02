@@ -26,6 +26,20 @@ class MemberMenu extends React.Component {
       data: [],
     }
   }
+  redirect = () => {
+    fetch('//localhost:3002/firm/userInfo', {
+      credentials: 'include',
+    })
+      .then(res => res.json())
+      .then(obj => {
+        // console.log(obj.body)
+        if (obj.success) {
+          this.setState({ data: obj.body })
+        } else {
+          this.props.history.push('/')
+        }
+      })
+  }
   componentDidMount() {
     fetch('//localhost:3002/firm/userInfo', {
       credentials: 'include',
@@ -69,13 +83,23 @@ class MemberMenu extends React.Component {
                     </label>
                   </div>
                   <div className="circle">
-                    <img
-                      alt="無法顯示"
-                      src={
-                        process.env.PUBLIC_URL +
-                        '/images/personalFolder/logo.png'
-                      }
-                    />
+                    {data.photo ? (
+                      <img
+                        alt="無法顯示"
+                        src={
+                          process.env.PUBLIC_URL +
+                          '/images/personalFolder/logo.png'
+                        }
+                      />
+                    ) : (
+                      <img
+                        alt="無法顯示"
+                        src={
+                          process.env.PUBLIC_URL +
+                          '/images/member/preset_avatar.png'
+                        }
+                      />
+                    )}
                   </div>
                 </div>
               </form>
@@ -110,7 +134,10 @@ class MemberMenu extends React.Component {
           </div>
           <div className="firmManage_info">
             <Switch>
-              <Route path="/member/account" component={UserAccount} />
+              <Route
+                path="/member/account"
+                component={() => <UserAccount redirect={this.redirect} />}
+              />
               <Route path="/member/userevent" component={UserEvent} />
               <Route path="/member/usershopping" component={UserShopping} />
               <Route

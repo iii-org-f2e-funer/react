@@ -56,6 +56,7 @@ class UserAccount extends React.Component {
           <UserAccountEdit
             data={this.state.data}
             cancelEdit={this.cancelEdit}
+            redirect={this.props.redirect}
           />
         ) : (
           <div className="accountInfo">

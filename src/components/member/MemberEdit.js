@@ -64,7 +64,7 @@ class AccountEdit extends React.Component {
           <h4 className="text-center">個人基本資訊</h4>
           <UserEditInput
             UserData={this.state.UserData}
-            cancelEdit={this.cancelEdit}
+            handleHide={this.props.handleHide}
             data={this.props.data}
           />
         </Modal>
