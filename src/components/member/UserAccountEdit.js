@@ -15,6 +15,7 @@ class UserAccountEdit extends React.Component {
       street: this.props.data.street,
       gender: this.props.data.gender,
       email: this.props.data.email,
+      birthday: this.props.data.birthday,
       password: '',
       password2: '',
     }
@@ -204,16 +205,6 @@ class UserAccountEdit extends React.Component {
           />
         </div>
 
-        {/* <div className="flex mb-3">
-          <label className="col-2">負責人</label>
-          <input
-            type="text"
-            className="col-7"
-            value={this.state.contacter}
-            onChange={e => this.setState({ contacter: e.target.value })}
-          />
-        </div> */}
-
         {/* password */}
         <button className="button mt-3 mr-3" onClick={this.UserUpdateAccount}>
           確認更改
@@ -223,32 +214,6 @@ class UserAccountEdit extends React.Component {
           onClick={this.props.cancelEdit}
         >
           取消變更
-        </button>
-        <h5>修改密碼</h5>
-        <hr />
-        <div className="flex mb-3 login-form">
-          <label className="col-2">新密碼</label>
-          <input
-            type="password"
-            className="col-3 pl-3"
-            onBlur={this.checkPassword}
-            ref={el => (this.inputPassword = el)}
-            onChange={e => this.setState({ password: e.target.value })}
-          />
-        </div>
-        <div className="flex mb-3 login-form">
-          <label className="col-2">確認密碼</label>
-          <input
-            type="password"
-            className="col-3 pl-3"
-            value={this.state.password2}
-            onBlur={this.checkPasswordAgain}
-            ref={el => (this.inputPassword2 = el)}
-            onChange={e => this.setState({ password2: e.target.value })}
-          />
-        </div>
-        <button className="button mt-3 mr-3" onClick={this.updatePassword}>
-          確認更改密碼
         </button>
       </>
     )
