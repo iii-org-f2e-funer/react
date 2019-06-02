@@ -23,9 +23,11 @@ class LoginInput extends React.Component {
     this.setState({ account: evt.target.value })
   }
   checkPassword = evt => {
-    this.setState({ password: evt.target.value })
+    this.setState({ password: evt.target.value, remindText: '' })
   }
-
+  noRemind = () => {
+    this.setState({ remindText: '' })
+  }
   FirmRequest = evt => {
     if (this.refs.submitForm.reportValidity()) {
       evt.preventDefault()
@@ -50,7 +52,7 @@ class LoginInput extends React.Component {
             this.props.firmLogin(obj.data.user)
           } else {
             this.inputTitle.value = ''
-            alert(obj.data.message)
+            // alert(obj.data.message)
             this.setState({ remindText: obj.data.message })
           }
         })
@@ -84,6 +86,7 @@ class LoginInput extends React.Component {
                 placeholder="廠商密碼"
                 className="password form-control"
                 onBlur={this.checkPassword}
+                onFocus={this.noRemind}
                 required
                 ref={el => (this.inputTitle = el)}
               />

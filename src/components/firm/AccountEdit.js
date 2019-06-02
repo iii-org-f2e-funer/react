@@ -13,6 +13,7 @@ class AccountEdit extends React.Component {
       address: this.props.data.address,
       contacter: this.props.data.contacter,
       email: this.props.data.email,
+      ori_password: '',
       password: '',
       password2: '',
     }
@@ -25,7 +26,13 @@ class AccountEdit extends React.Component {
     this.setState({
       dist: evt.district,
     })
-
+  ori_password = evt => {
+    if (evt.target.value.length > 0 && evt.target.value.length < 8) {
+      alert('密碼需8碼以上')
+      this.ori_password.value = ''
+    }
+    this.setState({ ori_password: evt.target.value })
+  }
   checkPassword = evt => {
     if (evt.target.value.length > 0 && evt.target.value.length < 8) {
       alert('密碼需8碼以上')
@@ -76,6 +83,7 @@ class AccountEdit extends React.Component {
   updatePassword = () => {
     const data = {
       sid: this.props.data.sid,
+      ori_password: this.state.ori_password,
       password: this.state.password,
     }
     fetch('//localhost:3002/firm/passwordEdit', {
@@ -91,8 +99,10 @@ class AccountEdit extends React.Component {
         if (obj.success) {
           this.props.cancelEdit()
         } else {
-          alert(obj.massage)
-          this.props.cancelEdit()
+          alert(obj.message)
+          this.ori_password.value = ''
+          this.inputPassword.value = ''
+          this.inputPassword2.value = ''
         }
       })
   }
@@ -176,6 +186,16 @@ class AccountEdit extends React.Component {
         </button>
         <h5>修改密碼</h5>
         <hr />
+        <div className="flex mb-3 login-form">
+          <label className="col-2">原密碼</label>
+          <input
+            type="password"
+            className="col-3 pl-3"
+            onBlur={this.ori_Password}
+            ref={el => (this.ori_password = el)}
+            onChange={e => this.setState({ ori_password: e.target.value })}
+          />
+        </div>
         <div className="flex mb-3 login-form">
           <label className="col-2">新密碼</label>
           <input

@@ -11,6 +11,8 @@ class FirmRegisterModal extends React.Component {
       email: '',
       uniform: '',
       remindText: '',
+      accountRemindText: '',
+      emailRemindText: '',
     }
   }
   checkStore = evt => {
@@ -37,10 +39,17 @@ class FirmRegisterModal extends React.Component {
             return
           } else {
             this.inputunicode.value = ''
-            alert(obj.data.message)
+            this.setState({ accountRemindText: obj.data.message })
           }
         })
     }
+  }
+  noRemind = () => {
+    this.setState({
+      remindText: '',
+      accountRemindText: '',
+      emailRemindText: '',
+    })
   }
   checkEmail = evt => {
     if (evt.target.value !== '') {
@@ -63,7 +72,7 @@ class FirmRegisterModal extends React.Component {
             return
           } else {
             this.inputemail.value = ''
-            alert(obj.data.message)
+            this.setState({ emailRemindText: obj.data.message })
           }
         })
     }
@@ -96,14 +105,16 @@ class FirmRegisterModal extends React.Component {
   }
   checkPassword = evt => {
     if (evt.target.value.length > 0 && evt.target.value.length < 8) {
-      alert('密碼需8碼以上')
+      this.setState({ remindText: '密碼需8碼以上!' })
       this.inputPassword.value = ''
+    } else {
+      this.setState({ remindText: '' })
     }
     this.setState({ password: evt.target.value })
   }
   checkPasswordAgain = evt => {
     if (evt.target.value !== '') {
-      this.state.passwordCheck = evt.target.value
+      this.setState({ passwordCheck: evt.target.value })
       if (this.state.passwordCheck !== this.state.password) {
         this.setState({ remindText: '密碼不一致!' })
         this.inputPassword.value = ''
@@ -166,9 +177,13 @@ class FirmRegisterModal extends React.Component {
                   placeholder="輸入帳號"
                   className="account form-control"
                   onBlur={this.checkAccount}
+                  onFocus={this.noRemind}
                   required
                   ref={el => (this.inputaccount = el)}
                 />
+                <Form.Text className="red">
+                  {this.state.accountRemindText}
+                </Form.Text>
               </Form.Group>
               <Form.Group
                 controlId="formBasicPassword"
@@ -180,6 +195,7 @@ class FirmRegisterModal extends React.Component {
                   placeholder="密碼(8-20碼)"
                   className="password form-control"
                   onBlur={this.checkPassword}
+                  onFocus={this.noRemind}
                   required
                   ref={el => (this.inputPassword = el)}
                 />
@@ -194,10 +210,11 @@ class FirmRegisterModal extends React.Component {
                   placeholder="再次輸入密碼"
                   className="password form-control"
                   onBlur={this.checkPasswordAgain}
+                  onFocus={this.noRemind}
                   required
                   ref={el => (this.inputPassword2 = el)}
                 />
-                {/* <Form.Text className="red">{this.state.remindText}</Form.Text> */}
+                <Form.Text className="red">{this.state.remindText}</Form.Text>
               </Form.Group>
               <label htmlFor="uniform">信箱</label>
               <input
@@ -205,9 +222,13 @@ class FirmRegisterModal extends React.Component {
                 name="uniform"
                 type="email"
                 required
+                onFocus={this.noRemind}
                 onBlur={this.checkEmail}
                 ref={el => (this.inputemail = el)}
               />
+              <Form.Text className="red mb-2">
+                {this.state.emailRemindText}
+              </Form.Text>
               <label htmlFor="uniform">統編</label>
               <input
                 className="pl-3"
