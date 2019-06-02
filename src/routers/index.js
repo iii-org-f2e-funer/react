@@ -28,7 +28,7 @@ class RootRouter extends React.Component {
   constructor() {
     super()
     this.state = {
-      preload: true,
+      preload: false,
       avatarRefresh: 1,
     }
   }

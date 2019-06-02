@@ -63,6 +63,7 @@ class Preload_page extends React.Component {
               />
             </svg>
           </div>
+          <div className="white" />
         </div>
       </>
     )
