@@ -8,7 +8,7 @@ class UserAccount extends React.Component {
     super(props)
     this.state = {
       isEdit: false,
-      data: [],
+      data: {},
     }
   }
   componentDidMount() {
@@ -18,6 +18,7 @@ class UserAccount extends React.Component {
       .then(res => res.json())
       .then(obj => {
         if (obj.success) {
+          console.log(obj)
           this.setState({
             data: obj.body,
           })
@@ -38,6 +39,7 @@ class UserAccount extends React.Component {
       .then(res => res.json())
       .then(obj => {
         if (obj.success) {
+
           this.setState({
             data: obj.body,
           })

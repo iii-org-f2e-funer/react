@@ -22,6 +22,9 @@ class Navbar extends React.Component {
   registerSuccess = () => {
     this.setState({ registerPopup: false })
   }
+  userRegisterPopup = () => {
+    this.setState({ userRegisterPopup: false })
+  }
   firmLogin = () => {
     this.setState({ loginPopup: false })
   }
@@ -145,7 +148,7 @@ class Navbar extends React.Component {
           show={this.state.userRegisterPopup}
           handleHide={this.registerHide}
           switch={this.handleShow}
-          registerSuccess={this.registerSuccess}
+          registerSuccess={this.userRegisterPopup}
         />
         <FirmRegisterModal
           show={this.state.registerPopup}

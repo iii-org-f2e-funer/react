@@ -61,7 +61,19 @@ class MemberMenu extends React.Component {
   handleHide = () => {
     this.setState({ editPopup: false })
   }
-
+  updatePhoto = event => {
+    var fd = new FormData()
+    fd.append('photo', event.target.files[0])
+    fetch('//localhost:3002/member/updatePhoto', {
+      method: 'POST',
+      credentials: 'include',
+      body: fd,
+    })
+      .then(res => res.json())
+      .then(obj => {
+        this.redirect()
+      })
+  }
   render() {
     const data = this.state.data
     return (
@@ -77,13 +89,14 @@ class MemberMenu extends React.Component {
                       id="file-upload"
                       type="file"
                       accept=".png, .jpg, .jpeg"
+                      onChange={this.updatePhoto}
                     />
                     <label htmlFor="file-upload" className="pen">
                       <FaPen />
                     </label>
                   </div>
                   <div className="circle">
-                    {data.photo ? (
+                    {data.photo === '' ? (
                       <img
                         alt="無法顯示"
                         src={
@@ -93,10 +106,9 @@ class MemberMenu extends React.Component {
                       />
                     ) : (
                       <img
-                        alt="無法顯示"
+                        alt=""
                         src={
-                          process.env.PUBLIC_URL +
-                          '/images/member/preset_avatar.png'
+                          'http://localhost:3002/images/member/' + data.photo
                         }
                       />
                     )}
