@@ -26,7 +26,9 @@ class MemberInput extends React.Component {
   checkPassword = evt => {
     this.setState({ password: evt.target.value })
   }
-
+  noRemind = () => {
+    this.setState({ remindText: '' })
+  }
   MemberRequest = evt => {
     if (this.refs.submitForm.reportValidity()) {
       evt.preventDefault()
@@ -45,7 +47,6 @@ class MemberInput extends React.Component {
         .then(res => res.json())
         .then(obj => {
           if (obj.data.success) {
-            alert(obj.data.message)
             this.setState({ loginSuccess: true })
             const payload = { account: obj.data.member_id }
             this.props.userInfoAction(payload)
@@ -53,7 +54,6 @@ class MemberInput extends React.Component {
           } else {
             this.inputAccount.value = ''
             this.inputPassword.value = ''
-            alert(obj.data.message)
             this.setState({ remindText: obj.data.message })
           }
         })
@@ -71,6 +71,7 @@ class MemberInput extends React.Component {
                 placeholder="會員帳號"
                 className="account form-control"
                 onBlur={this.checkAccount}
+                onFocus={this.noRemind}
                 ref={el => (this.inputAccount = el)}
                 required
               />
@@ -88,6 +89,7 @@ class MemberInput extends React.Component {
                 placeholder="會員密碼"
                 className="password form-control"
                 onBlur={this.checkPassword}
+                onFocus={this.noRemind}
                 required
                 ref={el => (this.inputPassword = el)}
               />
