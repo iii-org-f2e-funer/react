@@ -45,6 +45,7 @@ class Pt_applymodal extends React.Component {
 
   handleApply() {
     let apply = JSON.stringify({
+      hostid: this.props.ptapply.member_id,
       pt_sid: this.props.ptapply.pt_sid,
       pt_host: this.props.ptapply.pt_host,
       ptapplymem: this.state.account,

@@ -338,7 +338,7 @@ class Pt_new extends React.Component {
                   onBlur={event => this.handleinfoChange(event)}
                 />
               </div>
-              <div className="form-row">
+              <div className="form-row btncol">
                 <button type="submit" className="pt_submitbtn">
                   確認開團
                 </button>

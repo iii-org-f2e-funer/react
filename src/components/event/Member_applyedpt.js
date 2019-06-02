@@ -11,12 +11,18 @@ class Member_applyedpt extends React.Component {
 
     this.state = {}
   }
+  url = str => () => {
+    document.location.href = str
+  }
 
   render() {
     return (
       <>
         <div className="applyed">
-          <Link to={'/event/info/' + this.props.data.pt_sid}>
+          <Link
+            to="#"
+            onClick={this.url('/event/info/' + this.props.data.pt_sid)}
+          >
             <div className="ptimg">
               {this.props.data.pt_img !== '' ? (
                 <img
@@ -34,7 +40,10 @@ class Member_applyedpt extends React.Component {
             </div>
           </Link>
           <div className="ptinfo">
-            <Link to={'/event/info/' + this.props.data.pt_sid}>
+          <Link
+            to="#"
+            onClick={this.url('/event/info/' + this.props.data.pt_sid)}
+          >
               <div className="ptinfo_title">{this.props.data.pt_title}</div>{' '}
             </Link>
             <div className="ptinfo_time">

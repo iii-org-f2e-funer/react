@@ -16,7 +16,9 @@ class Member_applyermodal extends React.Component {
     // console.log(this.state.pt_sid)
     fetch('//localhost:3002/event/commitptapplyer', {
       method: 'POST',
-      body: JSON.stringify({ ptsid: this.props.pt_sid }),
+      body: JSON.stringify({
+        ptsid: this.props.pt_sid,
+      }),
       headers: {
         'Content-type': 'application/json',
       },
@@ -37,12 +39,13 @@ class Member_applyermodal extends React.Component {
     this.setState({ modalshow: false })
   }
 
-  handleapprove = id => e => {
+  handleapprove = (id, member) => e => {
     fetch('//localhost:3002/event/commit', {
       method: 'POST',
       body: JSON.stringify({
         pt_applysid: id,
         result: 'approve',
+        applyerid: member,
       }),
       headers: {
         'Content-type': 'application/json',
@@ -56,12 +59,13 @@ class Member_applyermodal extends React.Component {
       .then(this.refreshapplyer(id))
   }
 
-  handlereject = id => e => {
+  handlereject = (id, member) => e => {
     fetch('//localhost:3002/event/commit', {
       method: 'POST',
       body: JSON.stringify({
         pt_applysid: id,
         result: 'reject',
+        applyerid: member,
       }),
       headers: {
         'Content-type': 'application/json',
@@ -114,8 +118,14 @@ class Member_applyermodal extends React.Component {
                     <Member_applyeritem
                       key={item.pt_applysid}
                       data={item}
-                      handleapprove={this.handleapprove(item.pt_applysid)}
-                      handlereject={this.handlereject(item.pt_applysid)}
+                      handleapprove={this.handleapprove(
+                        item.pt_applysid,
+                        item.member_id
+                      )}
+                      handlereject={this.handlereject(
+                        item.pt_applysid,
+                        item.member_id
+                      )}
                     />
                   ))}
                 </>

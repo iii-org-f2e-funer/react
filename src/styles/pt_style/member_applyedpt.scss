@@ -27,6 +27,9 @@
     flex-grow: 2;
     justify-content: center;
   }
+  .ptinfo a:hover{
+    text-decoration: none;
+  }
   .ptinfo_title,
   .ptinfo_time,
   .ptinfo_locate,
@@ -67,10 +70,15 @@
     background: #EC6A6A;
     border: none;
   }
-  #approve, #editbtn{
+  #approve{
     background: #6ec4d2;
     border: none;
     color: #fff;
+  }
+  #editbtn{
+    background:#FFF;
+    border: 2px solid #6ec4d2;
+    color:#6ec4d2;
   }
   #commit{
     background: #F9C149;

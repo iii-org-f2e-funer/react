@@ -13,12 +13,17 @@ class Member_hostedpt extends React.Component {
       data: [],
     }
   }
-
+  url = str => () => {
+    document.location.href = str
+  }
   render() {
     return (
       <>
         <div className="applyed">
-          <Link to={'/event/info/' + this.props.data.pt_sid}>
+          <Link
+            to="#"
+            onClick={this.url('/event/info/' + this.props.data.pt_sid)}
+          >
             <div className="ptimg">
               {this.props.data.pt_img !== '' ? (
                 <img
@@ -36,7 +41,10 @@ class Member_hostedpt extends React.Component {
             </div>
           </Link>
           <div className="ptinfo">
-            <Link to={'/event/info/' + this.props.data.pt_sid}>
+            <Link
+              to="#"
+              onClick={this.url('/event/info/' + this.props.data.pt_sid)}
+            >
               <div className="ptinfo_title">{this.props.data.pt_title}</div>
             </Link>
             <div className="ptinfo_time">
@@ -71,7 +79,12 @@ class Member_hostedpt extends React.Component {
                 case 1:
                   return (
                     <>
-                      <Link to={'/event/edit/' + this.props.data.pt_sid}>
+                      <Link
+                        to="#"
+                        onClick={this.url(
+                          '/event/edit/' + this.props.data.pt_sid
+                        )}
+                      >
                         <button className="applyclick" id="editbtn">
                           編輯揪團
                         </button>

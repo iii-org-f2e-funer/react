@@ -26,6 +26,7 @@ class Pt_detail extends React.Component {
       applyer: [],
       account: [],
       loaded: false,
+      intro: '',
     }
   }
   componentDidMount() {
@@ -58,7 +59,7 @@ class Pt_detail extends React.Component {
   loadptinfo() {
     let data = JSON.stringify({ ptsid: window.location.pathname.split('/')[3] })
     // console.log(data)
-    fetch('//localhost:3002/event/ptinfo', {
+    fetch('//localhost:3002/event/ptinfopage', {
       method: 'POST',
       body: data,
       headers: {
