@@ -133,7 +133,7 @@ class AccountEdit extends React.Component {
               css={[
                 'form-control county-sel',
                 'form-control district-sel',
-                'form-control zipcode',
+                'form-control zipcode d-none',
               ]}
               handleChangeCounty={this.handlecityChange}
               handleChangeDistrict={this.handledistChange}

@@ -1,6 +1,5 @@
 import React from 'react'
 import { Modal, Form, Col, Row } from 'react-bootstrap'
-import TWzipcode from 'react-twzipcode'
 import actions from '../../redux/action/userInfo.js'
 import { connect } from 'react-redux'
 import { withRouter } from 'react-router'
@@ -8,80 +7,16 @@ import { withRouter } from 'react-router'
 class userEditInput extends React.Component {
   constructor(props) {
     super(props)
-    const data = this.props.UserData
-    console.log(this.props.img) //pho
     this.state = {
-      insert: true,
-      member_id: data.member_id,
-      store: data.store,
-      county: data.county,
-      dist: data.dist,
-      address: data.address,
-      mobile: data.mobile,
-      business_hours: data.business_hours,
-      public_holiday: data.public_holiday,
-      charges: data.charges,
-      about: data.about,
-      rule: data.rule,
-      status: data.status,
+      member_id: '',
+      nickname: '',
+      gender: '',
+      city: '',
+      member_favorite: '',
+      intro: '',
     }
   }
-  updateAccount = () => {
-    const data = {
-      member_id: this.state.member_id,
-      firm_id: this.state.firm_id,
-      store: this.state.store,
-      county: this.state.county,
-      dist: this.state.dist,
-      address: this.state.address,
-      mobile: this.state.mobile,
-      business_hours: this.state.business_hours,
-      public_holiday: this.state.public_holiday,
-      charges: this.state.charges,
-      about: this.state.about,
-      rule: this.state.rule,
-      status: this.state.status,
-    }
-    if (this.state.insert) {
-      fetch('//localhost:3002/member/insertAccount', {
-        method: 'POST',
-        body: JSON.stringify(data),
-        credentials: 'include',
-        headers: {
-          'Content-type': 'application/json',
-        },
-      })
-        .then(res => res.json())
-        .then(obj => {
-          if (obj.success) {
-            this.setState({
-              UserData: obj.body,
-            })
-          } else {
-            console.log(obj.message)
-          }
-        })
-    } else {
-      fetch('//localhost:3002/member/updateAccount', {
-        method: 'POST',
-        body: JSON.stringify(data),
-        credentials: 'include',
-        headers: {
-          'Content-type': 'application/json',
-        },
-      })
-        .then(res => res.json())
-        .then(obj => {
-          if (obj.success) {
-            this.setState({
-              UserData: obj.body,
-            })
-          } else {
-            console.log(obj.message)
-          }
-        })
-    }
-  }
+  updateAccount = () => {}
 
   render() {
     return (
@@ -89,7 +24,7 @@ class userEditInput extends React.Component {
         <Form>
           <Form.Group as={Row} controlId="formHorizontalEmail">
             <Form.Label column sm={2}>
-              名稱
+              暱稱
             </Form.Label>
             <Col sm={10}>
               <Form.Control
@@ -101,141 +36,44 @@ class userEditInput extends React.Component {
           </Form.Group>
           <Form.Group as={Row} controlId="formHorizontalEmail">
             <Form.Label column sm={2}>
-              照片
+              性別
             </Form.Label>
             <Col sm={10}>
-              <Form.Control type="file" placeholder="" />
+              <p>南</p>
+            </Col>
+          </Form.Group>
+          <Form.Group as={Row} controlId="formHorizontalEmail">
+            <Form.Label column sm={2}>
+              地區
+            </Form.Label>
+            <Col sm={10}>
+              <p>南</p>
+            </Col>
+          </Form.Group>
+          <Form.Group as={Row} controlId="formHorizontalEmail">
+            <Form.Label column sm={2}>
+              擅長遊戲
+            </Form.Label>
+            <Col sm={10}>
+              <p>南</p>
             </Col>
           </Form.Group>
           <Form.Group as={Row} controlId="formHorizontalPassword">
             <Form.Label column sm={2}>
-              地址
-            </Form.Label>
-            <Col sm={10}>
-              <div>
-                <TWzipcode
-                  countyFieldName="pt_city"
-                  districtFieldName="pt_dist"
-                  countyValue={this.state.county}
-                  districtValue={this.state.dist}
-                  css={[
-                    'form-control county-sel',
-                    'form-control district-sel',
-                    'form-control zipcode',
-                  ]}
-                  handleChangeCounty={this.handlecityChange}
-                  handleChangeDistrict={this.handledistChange}
-                />
-                <input
-                  className="addressinput mt-2"
-                  type="text"
-                  value={this.state.address}
-                  onChange={e => this.setState({ address: e.target.value })}
-                />
-              </div>
-            </Col>
-          </Form.Group>
-          <Form.Group as={Row} controlId="formHorizontalPassword">
-            <Form.Label column sm={2}>
-              電話
-            </Form.Label>
-            <Col sm={10}>
-              <Form.Control
-                type="text"
-                value={this.state.mobile}
-                onChange={e => this.setState({ mobile: e.target.value })}
-              />
-            </Col>
-          </Form.Group>
-          {/* <Form.Group as={Row} controlId="formHorizontalPassword">
-            <Form.Label column sm={2}>
-              營業時間
+              關於我
             </Form.Label>
             <Col sm={10}>
               <Form.Control
                 as="textarea"
-                rows="3"
-                value={this.state.business_hours}
-                onChange={e =>
-                  this.setState({ business_hours: e.target.value })
-                }
-              />
-            </Col>
-          </Form.Group>
-          <Form.Group as={Row} controlId="formHorizontalPassword">
-            <Form.Label column sm={2}>
-              收費資訊
-            </Form.Label>
-            <Col sm={10}>
-              <Form.Control
-                as="textarea"
-                rows="5"
-                value={this.state.charges}
-                onChange={e => this.setState({ charges: e.target.value })}
-              />
-            </Col>
-          </Form.Group>
-          <Form.Group as={Row} controlId="formHorizontalPassword">
-            <Form.Label column sm={2}>
-              關於我們
-            </Form.Label>
-            <Col sm={10}>
-              <Form.Control
-                as="textarea"
-                rows="5"
+                rows="8"
                 value={this.state.about}
                 onChange={e => this.setState({ about: e.target.value })}
               />
+              <p className="color-grey remindText">
+                * 提醒您，豐富的自我介紹可以提高參團及揪團成功的機率哦!
+              </p>
             </Col>
           </Form.Group>
-          <Form.Group as={Row} controlId="formHorizontalPassword">
-            <Form.Label column sm={2}>
-              場地規範
-            </Form.Label>
-            <Col sm={10}>
-              <Form.Control
-                as="textarea"
-                rows="5"
-                value={this.state.rule}
-                onChange={e => this.setState({ rule: e.target.value })}
-              />
-            </Col>
-          </Form.Group>
-          <Form.Group as={Row} controlId="formHorizontalPassword">
-            <Form.Label column sm={2}>
-              是否開放
-            </Form.Label>
-            <Col sm={10} className="d-flex align-items-center">
-              <div className="form-check">
-                <input
-                  className="form-check-input"
-                  type="radio"
-                  name="exampleRadios"
-                  id="exampleRadios1"
-                  value="1"
-                  checked={this.state.status === 1}
-                  onChange={e => this.setState({ status: +e.target.value })}
-                />
-                <label className="form-check-label" htmlFor="exampleRadios1">
-                  場地開放預約
-                </label>
-              </div>
-              <div className="form-check">
-                <input
-                  className="form-check-input"
-                  type="radio"
-                  name="exampleRadios"
-                  id="exampleRadios2"
-                  value="0"
-                  checked={this.state.status === 0}
-                  onChange={e => this.setState({ status: +e.target.value })}
-                />
-                <label className="form-check-label" htmlFor="exampleRadios2">
-                  暫不開放
-                </label>
-              </div>
-            </Col>
-          </Form.Group> */}
 
           <div className="d-flex justify-content-center">
             <button className="button mt-3 mr-3" onClick={this.updateAccount}>
