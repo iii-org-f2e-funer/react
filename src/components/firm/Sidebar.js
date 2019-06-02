@@ -25,6 +25,20 @@ class Sidebar extends React.Component {
       data: {},
     }
   }
+  reFresh = () => {
+    fetch('//localhost:3002/firm/userInfo', {
+      credentials: 'include',
+    })
+      .then(res => res.json())
+      .then(obj => {
+        if (obj.success) {
+          this.setState({ data: obj.body })
+          console.log(this.state.data)
+        } else {
+          this.props.history.push('/')
+        }
+      })
+  }
   componentDidMount() {
     fetch('//localhost:3002/firm/userInfo', {
       credentials: 'include',
@@ -65,6 +79,7 @@ class Sidebar extends React.Component {
           .then(obj => {
             if (obj.success) {
               this.setState({ data: obj.body })
+              this.props.avatarRefresh()
             } else {
               this.props.history.push('/')
             }
@@ -143,7 +158,10 @@ class Sidebar extends React.Component {
           </div>
           <div className="firmManage_info">
             <Switch>
-              <Route path="/firm/account" component={Account} />
+              <Route
+                path="/firm/account"
+                component={() => <Account reFresh={this.reFresh} />}
+              />
               <Route path="/firm/product_manage" component={Product_manage} />
               <Route path="/firm/product_order" component={Product_order} />
               <Route path="/firm/site_manage" component={Site_manage} />

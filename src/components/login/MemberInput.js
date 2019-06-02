@@ -11,6 +11,7 @@ class MemberInput extends React.Component {
       password: '',
       remindText: '',
       passwordShow: false,
+      loginSuccess: false,
     }
   }
   register = () => {
@@ -25,7 +26,9 @@ class MemberInput extends React.Component {
   checkPassword = evt => {
     this.setState({ password: evt.target.value })
   }
-
+  noRemind = () => {
+    this.setState({ remindText: '' })
+  }
   MemberRequest = evt => {
     if (this.refs.submitForm.reportValidity()) {
       evt.preventDefault()
@@ -44,13 +47,13 @@ class MemberInput extends React.Component {
         .then(res => res.json())
         .then(obj => {
           if (obj.data.success) {
-            alert(obj.data.message)
+            this.setState({ loginSuccess: true })
             const payload = { account: obj.data.member_id }
             this.props.userInfoAction(payload)
             this.props.userLogin(obj.data.user)
           } else {
-            this.inputTitle.value = ''
-            alert(obj.data.message)
+            this.inputAccount.value = ''
+            this.inputPassword.value = ''
             this.setState({ remindText: obj.data.message })
           }
         })
@@ -68,6 +71,8 @@ class MemberInput extends React.Component {
                 placeholder="會員帳號"
                 className="account form-control"
                 onBlur={this.checkAccount}
+                onFocus={this.noRemind}
+                ref={el => (this.inputAccount = el)}
                 required
               />
             </Form.Group>
@@ -84,8 +89,9 @@ class MemberInput extends React.Component {
                 placeholder="會員密碼"
                 className="password form-control"
                 onBlur={this.checkPassword}
+                onFocus={this.noRemind}
                 required
-                ref={el => (this.inputTitle = el)}
+                ref={el => (this.inputPassword = el)}
               />
               <Form.Text className="red">{this.state.remindText}</Form.Text>
             </Form.Group>
@@ -97,6 +103,15 @@ class MemberInput extends React.Component {
             >
               登入
             </button>
+            <div className="funner_pic m-auto">
+              <div className="eye left">
+                <div className="eyeball " />
+              </div>
+              <div className="eye right">
+                <div className="eyeball " />
+              </div>
+              <div className="mouth" />
+            </div>
           </form>
           <ul>
             <li className="register blue">

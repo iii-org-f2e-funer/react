@@ -26,9 +26,16 @@ import OpenMemberPage from '../pages/OpenMemberPage'
 class RootRouter extends React.Component {
   constructor() {
     super()
-    this.state = {}
+    this.state = {
+      preload: true,
+      avatarRefresh: 1,
+    }
   }
   componentDidMount() {
+    const _this = this
+    setTimeout(function() {
+      _this.setState({ preload: false })
+    }, 5000)
     fetch('//localhost:3002/firm/userInfo', {
       credentials: 'include',
     })
@@ -49,22 +56,35 @@ class RootRouter extends React.Component {
         }
       })
   }
+  avatarRefresh = () => {
+    this.state.avatarRefresh++
+    this.setState({ avatarRefresh: this.state.avatarRefresh })
+  }
   render() {
+    // if (this.state.preload) {
+    //   return null
+    // } else {
     return (
       <Router>
         <>
-          <Navbar />
+          <Navbar avatarRefresh={this.state.avatarRefresh} />
           <Switch>
             <Route exact path="/" component={Home} />
 
-            <Route path="/firm/account" component={() => <Firm />} />
+            <Route
+              path="/firm/account"
+              component={() => <Firm avatarRefresh={this.avatarRefresh} />}
+            />
             <Route path="/firm/product_manage" component={() => <Firm />} />
             <Route path="/firm/product_order" component={() => <Firm />} />
             <Route path="/firm/site_manage" component={() => <Firm />} />
             <Route path="/firm/site_order" component={() => <Firm />} />
             <Route exact path="/checkCode" component={CheckCode} />
 
-            <Route path="/member/account" component={() => <Member />} />
+            <Route
+              path="/member/account"
+              component={() => <Member avatarRefresh={this.avatarRefresh} />}
+            />
             <Route path="/member/userevent" component={() => <Member />} />
             <Route path="/member/UserShopping" component={() => <Member />} />
             <Route
@@ -95,6 +115,7 @@ class RootRouter extends React.Component {
         </>
       </Router>
     )
+    // }
   }
 }
 

@@ -22,6 +22,9 @@ class Navbar extends React.Component {
   registerSuccess = () => {
     this.setState({ registerPopup: false })
   }
+  userRegisterPopup = () => {
+    this.setState({ userRegisterPopup: false })
+  }
   firmLogin = () => {
     this.setState({ loginPopup: false })
   }
@@ -111,7 +114,10 @@ class Navbar extends React.Component {
           </ul>
           <ul className="user_nav">
             {this.props.userInfo.login ? (
-              <NavIcons logOut={this.logOut} />
+              <NavIcons
+                logOut={this.logOut}
+                avatarRefresh={this.props.avatarRefresh}
+              />
             ) : (
               <>
                 <li>
@@ -145,7 +151,7 @@ class Navbar extends React.Component {
           show={this.state.userRegisterPopup}
           handleHide={this.registerHide}
           switch={this.handleShow}
-          registerSuccess={this.registerSuccess}
+          registerSuccess={this.userRegisterPopup}
         />
         <FirmRegisterModal
           show={this.state.registerPopup}

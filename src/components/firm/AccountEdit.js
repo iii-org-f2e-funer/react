@@ -37,8 +37,9 @@ class AccountEdit extends React.Component {
     if (evt.target.value.length > 0 && evt.target.value.length < 8) {
       alert('密碼需8碼以上')
       this.inputPassword.value = ''
+    } else {
+      this.setState({ password: evt.target.value })
     }
-    this.setState({ password: evt.target.value })
   }
   checkPasswordAgain = evt => {
     if (evt.target.value !== '') {
@@ -103,6 +104,7 @@ class AccountEdit extends React.Component {
           this.ori_password.value = ''
           this.inputPassword.value = ''
           this.inputPassword2.value = ''
+          this.setState({ ori_password: '', password: '', password2: '' })
         }
       })
   }
@@ -134,15 +136,15 @@ class AccountEdit extends React.Component {
         </div>
         <div className="flex mb-3">
           <label className="col-2">店家地址</label>
-          <div>
+          <div className="address_outter">
             <TWzipcode
               countyFieldName="pt_city"
               districtFieldName="pt_dist"
               countyValue={this.state.city}
               districtValue={this.state.dist}
               css={[
-                'form-control county-sel',
-                'form-control district-sel',
+                'form-control county-sel code',
+                'form-control district-sel code ml-2',
                 'form-control zipcode d-none',
               ]}
               handleChangeCounty={this.handlecityChange}
@@ -201,6 +203,7 @@ class AccountEdit extends React.Component {
           <input
             type="password"
             className="col-3 pl-3"
+            value={this.state.password}
             onBlur={this.checkPassword}
             ref={el => (this.inputPassword = el)}
             onChange={e => this.setState({ password: e.target.value })}

@@ -61,6 +61,7 @@ class NavIcons extends React.Component {
               >
                 <FaUserAlt />
                 <FirmMenu
+                  avatarRefresh={this.props.avatarRefresh}
                   isOpen={this.state.userMenuOpen}
                   logOut={this.props.logOut}
                 />
@@ -112,6 +113,7 @@ class NavIcons extends React.Component {
               >
                 <FaUserAlt />
                 <UserMenu
+                  avatarRefresh={this.props.avatarRefresh}
                   isOpen={this.state.userMenuOpen}
                   logOut={this.props.logOut}
                 />

@@ -9,19 +9,21 @@ class FirmRegisterModal extends React.Component {
       password: '',
       passwordCheck: '',
       email: '',
-      uniform: '',
+      unicode: '',
       remindText: '',
+      remindText2: '',
       accountRemindText: '',
       emailRemindText: '',
+      unicodeRemindText: '',
     }
   }
   checkStore = evt => {
     this.setState({ store: evt.target.value })
   }
-  checkuniform = evt => {
+  checkunicode = evt => {
     if (evt.target.value !== '') {
-      let uniform = evt.target.value
-      let data = { uniform: evt.target.value }
+      let unicode = evt.target.value
+      let data = { unicode: evt.target.value }
       fetch('//localhost:3002/firm/unicodeCheck', {
         method: 'POST',
         body: JSON.stringify(data),
@@ -35,20 +37,38 @@ class FirmRegisterModal extends React.Component {
           console.log(obj)
           this.setState({ unicode: '' })
           if (obj.data.success) {
-            this.setState({ uniform: uniform })
+            this.setState({ unicode: unicode })
             return
           } else {
             this.inputunicode.value = ''
-            this.setState({ accountRemindText: obj.data.message })
+            this.setState({ unicodeRemindText: obj.data.message })
           }
         })
     }
   }
-  noRemind = () => {
+  noremindText = () => {
     this.setState({
       remindText: '',
+    })
+  }
+  noremindText2 = () => {
+    this.setState({
+      remindText2: '',
+    })
+  }
+  noaccountRemindText = () => {
+    this.setState({
       accountRemindText: '',
+    })
+  }
+  noemailRemindText = () => {
+    this.setState({
       emailRemindText: '',
+    })
+  }
+  nounicodeRemindText = () =>{
+    this.setState({
+      unicodeRemindText: '',
     })
   }
   checkEmail = evt => {
@@ -98,7 +118,7 @@ class FirmRegisterModal extends React.Component {
             return
           } else {
             this.inputaccount.value = ''
-            alert(obj.data.message)
+            this.setState({ accountRemindText: obj.data.message })
           }
         })
     }
@@ -108,15 +128,14 @@ class FirmRegisterModal extends React.Component {
       this.setState({ remindText: '密碼需8碼以上!' })
       this.inputPassword.value = ''
     } else {
-      this.setState({ remindText: '' })
+      this.setState({ password: evt.target.value })
     }
-    this.setState({ password: evt.target.value })
   }
   checkPasswordAgain = evt => {
     if (evt.target.value !== '') {
       this.setState({ passwordCheck: evt.target.value })
       if (this.state.passwordCheck !== this.state.password) {
-        this.setState({ remindText: '密碼不一致!' })
+        this.setState({ remindText2: '密碼不一致!' })
         this.inputPassword.value = ''
         this.inputPassword2.value = ''
       }
@@ -177,7 +196,7 @@ class FirmRegisterModal extends React.Component {
                   placeholder="輸入帳號"
                   className="account form-control"
                   onBlur={this.checkAccount}
-                  onFocus={this.noRemind}
+                  onFocus={this.noaccountRemindText}
                   required
                   ref={el => (this.inputaccount = el)}
                 />
@@ -195,10 +214,11 @@ class FirmRegisterModal extends React.Component {
                   placeholder="密碼(8-20碼)"
                   className="password form-control"
                   onBlur={this.checkPassword}
-                  onFocus={this.noRemind}
+                  onFocus={this.noremindText}
                   required
                   ref={el => (this.inputPassword = el)}
                 />
+                <Form.Text className="red">{this.state.remindText}</Form.Text>
               </Form.Group>
               <Form.Group
                 controlId="formBasicPassword"
@@ -210,11 +230,11 @@ class FirmRegisterModal extends React.Component {
                   placeholder="再次輸入密碼"
                   className="password form-control"
                   onBlur={this.checkPasswordAgain}
-                  onFocus={this.noRemind}
+                  onFocus={this.noremindText2}
                   required
                   ref={el => (this.inputPassword2 = el)}
                 />
-                <Form.Text className="red">{this.state.remindText}</Form.Text>
+                <Form.Text className="red">{this.state.remindText2}</Form.Text>
               </Form.Group>
               <label htmlFor="uniform">信箱</label>
               <input
@@ -222,7 +242,7 @@ class FirmRegisterModal extends React.Component {
                 name="uniform"
                 type="email"
                 required
-                onFocus={this.noRemind}
+                onFocus={this.noemailRemindText}
                 onBlur={this.checkEmail}
                 ref={el => (this.inputemail = el)}
               />
@@ -235,9 +255,13 @@ class FirmRegisterModal extends React.Component {
                 name="uniform"
                 type="text"
                 required
-                onBlur={this.checkuniform}
-                ref={el => (this.inputuniform = el)}
+                onFocus={this.nounicodeRemindText}
+                onBlur={this.checkunicode}
+                ref={el => (this.inputunicode = el)}
               />
+              <Form.Text className="red mb-2">
+                {this.state.unicodeRemindText}
+              </Form.Text>
               <button
                 type="submit"
                 className="button button--lg"

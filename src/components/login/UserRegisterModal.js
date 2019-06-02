@@ -1,5 +1,5 @@
 import React from 'react'
-import { Modal, Form, Button, Col, Row } from 'react-bootstrap'
+import { Modal, Form, Button } from 'react-bootstrap'
 
 class UserRegisterModal extends React.Component {
   constructor(props) {
@@ -76,11 +76,11 @@ class UserRegisterModal extends React.Component {
   }
   checkPasswordAgain = evt => {
     if (evt.target.value !== '') {
-      this.state.passwordCheck = evt.target.value
-      if (this.state.passwordCheck !== this.state.password) {
-        this.setState({ remindText: '密碼不一致!' })
-        this.inputPassword.value = ''
+      if (this.state.password !== evt.target.value) {
         this.inputPassword2.value = ''
+        this.setState({ remindText: '密碼不一致!' })
+      } else {
+        this.setState({ remindText: '' })
       }
     }
   }
@@ -92,11 +92,11 @@ class UserRegisterModal extends React.Component {
         account: this.state.account,
         password: this.state.password,
         email: this.state.email,
+        name: this.inputname.value,
       }
       fetch('//localhost:3002/member/userRegister', {
         method: 'POST',
         body: JSON.stringify(data),
-        credentials: 'include',
         headers: {
           'Content-type': 'application/json',
         },
@@ -106,9 +106,8 @@ class UserRegisterModal extends React.Component {
           console.log(obj)
           if (obj.data.success) {
             alert(obj.data.message)
-            console.log(obj.data)
+            // console.log(obj.data)
             this.props.registerSuccess()
-            localStorage.setItem('account', obj.data.body.account)
           } else {
             alert(obj.data.message)
           }
@@ -196,7 +195,7 @@ class UserRegisterModal extends React.Component {
                 variant="primary"
                 type="submit"
                 className="button button--lg"
-                onClick={this.userRegister}
+                onClick={this.UserRegisterRequest}
               >
                 註冊
               </Button>

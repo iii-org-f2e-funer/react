@@ -6,6 +6,7 @@ class FirmMenu extends React.Component {
     super(props)
     this.state = { data: [] }
   }
+
   componentDidMount() {
     fetch('//localhost:3002/firm/userInfo', {
       credentials: 'include',
@@ -18,6 +19,21 @@ class FirmMenu extends React.Component {
           console.log('無logo')
         }
       })
+  }
+  componentWillReceiveProps(nextProps) {
+    if (this.props.avatarRefresh !== nextProps.avatarRefresh) {
+      fetch('//localhost:3002/firm/userInfo', {
+        credentials: 'include',
+      })
+        .then(res => res.json())
+        .then(obj => {
+          if (obj.success) {
+            this.setState({ data: obj.body })
+          } else {
+            console.log('無logo')
+          }
+        })
+    }
   }
   render() {
     return (

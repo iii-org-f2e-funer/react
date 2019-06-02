@@ -66,14 +66,11 @@ class Notice extends React.Component {
                 <li
                   key={item.notice_id}
                   className={item.isRead ? '' : 'unread'}
-                  onClick={
-                    item.isRead ? '' : this.handleReadChange(item.notice_id)
-                  }
+                  onClick={this.handleReadChange(item.notice_id)}
                 >
-                  {item.link !== '' ? (
-                    <NavLink to={item.link} onClick={this.chageLink}>
+                  {item.link !== '' && item.link !== null ? (
+                    <NavLink to={item.link}>
                       <div className="item">
-                        <img src={item.img} alt="" />
                         <div className="content">
                           <div
                             className="text"
@@ -87,7 +84,6 @@ class Notice extends React.Component {
                     </NavLink>
                   ) : (
                     <div className="item">
-                      <img src="" alt="" />
                       <div className="content">
                         <div
                           className="text"
