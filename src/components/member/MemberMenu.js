@@ -1,8 +1,8 @@
 // 左方Sidebar + Link
 import React from 'react'
 import actions from '../../redux/action/userInfo.js'
-import UserAccount from './UserAccount'
 import UserEvent from './UserEvent'
+import UserAccount from './UserAccount'
 import UserShopping from './UserShopping'
 import site_reservation from './site_reservation'
 // import UserMail from './UserMail'
@@ -71,7 +71,7 @@ class MemberMenu extends React.Component {
     })
       .then(res => res.json())
       .then(obj => {
-        this.redirect()
+        // this.redirect()
         this.props.avatarRefresh()
       })
   }
@@ -147,10 +147,7 @@ class MemberMenu extends React.Component {
           </div>
           <div className="firmManage_info">
             <Switch>
-              <Route
-                path="/member/account"
-                component={() => <UserAccount redirect={this.redirect} />}
-              />
+              <Route path="/member/account" component={UserAccount} />
               <Route path="/member/userevent" component={UserEvent} />
               <Route path="/member/usershopping" component={UserShopping} />
               <Route

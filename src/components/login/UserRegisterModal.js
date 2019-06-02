@@ -42,7 +42,7 @@ class UserRegisterModal extends React.Component {
     }
   }
   checkAccount = evt => {
-    if (evt.target.value !== '') {
+    if (evt.target.value.length > 0 && evt.target.value !== '') {
       let account = evt.target.value
       let data = { account: evt.target.value }
       fetch('//localhost:3002/member/accountCheck', {

@@ -16,6 +16,7 @@ class UserAccountEdit extends React.Component {
       gender: this.props.data.gender,
       email: this.props.data.email,
       birthday: this.props.data.birthday,
+      ori_password: '',
       password: '',
       password2: '',
     }
@@ -26,7 +27,7 @@ class UserAccountEdit extends React.Component {
     })
   handledistChange = evt =>
     this.setState({
-      dist: evt.district,
+      site: evt.district,
     })
 
   checkPassword = evt => {
@@ -72,10 +73,10 @@ class UserAccountEdit extends React.Component {
       .then(obj => {
         if (obj.success) {
           this.props.cancelEdit()
-          this.props.redirect()
+          // this.props.redirect()
         } else {
           alert(obj.massage)
-          this.props.cancelEdit()
+          // this.props.cancelEdit()
         }
       })
   }
@@ -83,6 +84,7 @@ class UserAccountEdit extends React.Component {
     const data = {
       member_id: this.state.member_id,
       password: this.state.password,
+      ori_password: this.state.ori_password,
     }
     fetch('//localhost:3002/member/passwordEdit', {
       method: 'POST',
@@ -95,10 +97,11 @@ class UserAccountEdit extends React.Component {
       .then(res => res.json())
       .then(obj => {
         if (obj.success) {
+          alert(obj.message)
           this.props.cancelEdit()
         } else {
-          alert(obj.massage)
-          this.props.cancelEdit()
+          alert(obj.message)
+          // this.props.cancelEdit()
         }
       })
   }
@@ -205,7 +208,6 @@ class UserAccountEdit extends React.Component {
           />
         </div>
 
-        {/* password */}
         <button className="button mt-3 mr-3" onClick={this.UserUpdateAccount}>
           確認更改
         </button>
@@ -214,6 +216,43 @@ class UserAccountEdit extends React.Component {
           onClick={this.props.cancelEdit}
         >
           取消變更
+        </button>
+        {/* password */}
+        <h5>修改密碼</h5>
+        <hr />
+        <div className="flex mb-3 login-form">
+          <label className="col-2">原密碼</label>
+          <input
+            type="password"
+            className="col-3 pl-3"
+            ref={el => (this.ori_password = el)}
+            onChange={e => this.setState({ ori_password: e.target.value })}
+          />
+        </div>
+        <div className="flex mb-3 login-form">
+          <label className="col-2">新密碼</label>
+          <input
+            type="password"
+            className="col-3 pl-3"
+            // value={this.state.password}
+            onBlur={this.checkPassword}
+            ref={el => (this.inputPassword = el)}
+            onChange={e => this.setState({ password: e.target.value })}
+          />
+        </div>
+        <div className="flex mb-3 login-form">
+          <label className="col-2">確認密碼</label>
+          <input
+            type="password"
+            className="col-3 pl-3"
+            // value={this.state.password2}
+            onBlur={this.checkPasswordAgain}
+            ref={el => (this.inputPassword2 = el)}
+            onChange={e => this.setState({ password2: e.target.value })}
+          />
+        </div>
+        <button className="button mt-3 mr-3" onClick={this.updatePassword}>
+          確認更改密碼
         </button>
       </>
     )
