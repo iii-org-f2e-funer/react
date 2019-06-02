@@ -4,7 +4,22 @@ import { Link } from 'react-router-dom'
 class UserMenu extends React.Component {
   constructor(props) {
     super(props)
-    this.state = {}
+    this.state = {
+      avatar: '',
+    }
+  }
+  componentDidMount() {
+    fetch('//localhost:3002/firm/userInfo', {
+      credentials: 'include',
+    })
+      .then(res => res.json())
+      .then(obj => {
+        if (obj.success) {
+          this.setState({ avatar: obj.body.photo })
+        } else {
+          console.log('無logo')
+        }
+      })
   }
   render() {
     return (
@@ -13,7 +28,21 @@ class UserMenu extends React.Component {
           <ul>
             <li>
               <div className="avatar">
-                <img src="" alt="" />
+                {this.state.avatar === '' ? (
+                  <img
+                    alt="無法顯示"
+                    src={
+                      process.env.PUBLIC_URL + '/images/personalFolder/logo.png'
+                    }
+                  />
+                ) : (
+                  <img
+                    alt=""
+                    src={
+                      'http://localhost:3002/images/member/' + this.state.avatar
+                    }
+                  />
+                )}
               </div>
             </li>
             <li>
