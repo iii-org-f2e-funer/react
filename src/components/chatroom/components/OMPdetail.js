@@ -65,6 +65,59 @@ class OMPdetail extends React.Component {
         })
       })
   }
+  componentWillReceiveProps() {
+    let theUrl = this.props.location.pathname
+    console.log(theUrl.split('/'))
+    var toID = theUrl.split('/')[theUrl.split('/').length - 1].replace('ID', '')
+    fetch('http://localhost:3002/chatroom/openMemberPage/' + toID, {
+      method: 'GET',
+      headers: { 'Content-type': 'application/json' },
+    })
+      .then(res => {
+        return res.json()
+      })
+      .then(obj => {
+        var gameName = [
+          '紙牌遊戲',
+          '骰子遊戲',
+          '合作遊戲',
+          '派對遊戲',
+          '陣營遊戲',
+          '猜心遊戲',
+          '輕策略遊戲',
+          '中策略遊戲',
+          '重策略遊戲',
+          '大腦遊戲',
+          '言語遊戲',
+          '巧手遊戲',
+          '競速遊戲',
+          '兒童遊戲',
+          '闔家遊戲',
+        ]
+        var specialtyGame = []
+        var theGame = []
+        for (let k in obj[0]) {
+          theGame = [...theGame, obj[0][k]]
+        }
+        theGame.splice(0, 1)
+        console.log(theGame)
+        theGame.filter((ele, ind) => {
+          if (ele == 1) {
+            specialtyGame = [...specialtyGame, gameName[ind]]
+          }
+        })
+        console.log(specialtyGame)
+        console.log(obj)
+        this.setState({
+          nickName: obj[1].nickname,
+          age: obj[1].birthday,
+          gender: obj[1].gender,
+          location: obj[1].location,
+          about: obj[1].about,
+          game: specialtyGame,
+        })
+      })
+  }
   render() {
     return (
       <div className="OMPdetail">
@@ -111,6 +164,7 @@ class OMPdetail extends React.Component {
             </p>
           </div>
         </div>
+        <div className="d-none">{this.props.url}</div>
       </div>
     )
   }

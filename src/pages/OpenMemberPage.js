@@ -11,18 +11,32 @@ import '../styles/chatroom/openMemberPage.scss'
 class OpenMemberPage extends React.Component {
   constructor(props) {
     super(props)
-    this.state = {}
+    this.state = { url: '', urlKey: '' }
+  }
+  componentDidMount() {
+    let theUrl_key = this.props.location.key
+    this.setState({ urlKey: theUrl_key })
   }
   render() {
     if (!this.props.userInfo.account) {
       return null
     }
+    let theUrl = this.props.location.pathname
+    // let theUrl_key = this.props.location.key
+    // console.log(this.props)
+    // if (this.state.urlKey !== theUrl_key) {
+    //   this.forceUpdate()
+    // }
+
     console.log(this.props.userInfo.account)
     return (
       <div className="OpenMemberPage">
         <div className="container d-flex">
-          <OMPsidePage logInId={this.props.userInfo.account} />
-          <OMPdetail />
+          <OMPsidePage
+            url={this.props.location.pathname}
+            logInId={this.props.userInfo.account}
+          />
+          <OMPdetail url={this.props.location.pathname} />
         </div>
       </div>
     )

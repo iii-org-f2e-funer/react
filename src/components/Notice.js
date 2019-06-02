@@ -1,10 +1,11 @@
 import React from 'react'
-import { Link } from 'react-router-dom'
+import { Link, NavLink } from 'react-router-dom'
+import { withRouter } from 'react-router'
 
 class Notice extends React.Component {
   constructor(props) {
     super(props)
-    this.state = { notices: [] }
+    this.state = { notices: [], count: 0 }
   }
   componentDidMount() {
     this.getNoticeData()
@@ -50,7 +51,10 @@ class Notice extends React.Component {
         }
       })
   }
-
+  chageLink = () => {
+    console.log(this.props)
+    this.setState({ count: this.state.count + 1 })
+  }
   render() {
     return (
       <>
@@ -67,7 +71,7 @@ class Notice extends React.Component {
                   }
                 >
                   {item.link !== '' ? (
-                    <Link to={item.link}>
+                    <NavLink to={item.link} onClick={this.chageLink}>
                       <div className="item">
                         <img src={item.img} alt="" />
                         <div className="content">
@@ -80,7 +84,7 @@ class Notice extends React.Component {
                           <div className="time"> {item.time}</div>
                         </div>
                       </div>
-                    </Link>
+                    </NavLink>
                   ) : (
                     <div className="item">
                       <img src="" alt="" />
@@ -115,4 +119,4 @@ class Notice extends React.Component {
     )
   }
 }
-export default Notice
+export default withRouter(Notice)
