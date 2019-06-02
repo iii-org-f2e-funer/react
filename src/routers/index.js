@@ -26,9 +26,15 @@ import OpenMemberPage from '../pages/OpenMemberPage'
 class RootRouter extends React.Component {
   constructor() {
     super()
-    this.state = {}
+    this.state = {
+      preload: true,
+    }
   }
   componentDidMount() {
+    const _this = this
+    setTimeout(function() {
+      _this.setState({ preload: false })
+    }, 5000)
     fetch('//localhost:3002/firm/userInfo', {
       credentials: 'include',
     })
@@ -50,51 +56,58 @@ class RootRouter extends React.Component {
       })
   }
   render() {
-    return (
-      <Router>
-        <>
-          <Navbar />
-          <Switch>
-            <Route exact path="/" component={Home} />
+    if (this.state.preload) {
+      return null
+    } else {
+      return (
+        <Router>
+          <>
+            <Navbar />
+            <Switch>
+              <Route exact path="/" component={Home} />
 
-            <Route path="/firm/account" component={() => <Firm />} />
-            <Route path="/firm/product_manage" component={() => <Firm />} />
-            <Route path="/firm/product_order" component={() => <Firm />} />
-            <Route path="/firm/site_manage" component={() => <Firm />} />
-            <Route path="/firm/site_order" component={() => <Firm />} />
-            <Route exact path="/checkCode" component={CheckCode} />
+              <Route path="/firm/account" component={() => <Firm />} />
+              <Route path="/firm/product_manage" component={() => <Firm />} />
+              <Route path="/firm/product_order" component={() => <Firm />} />
+              <Route path="/firm/site_manage" component={() => <Firm />} />
+              <Route path="/firm/site_order" component={() => <Firm />} />
+              <Route exact path="/checkCode" component={CheckCode} />
 
-            <Route path="/member/account" component={() => <Member />} />
-            <Route path="/member/userevent" component={() => <Member />} />
-            <Route path="/member/UserShopping" component={() => <Member />} />
-            <Route
-              path="/member/site_reservation"
-              component={() => <Member />}
-            />
-            <Route path="/product" component={Product} />
-            <Route
-              path={'/chatroom/message/' + 'ID' + this.props.userInfo.account}
-              component={ChatRoom}
-            />
-            <Route path="/chatroom/openMemberPage" component={OpenMemberPage} />
-            <Route path="/ProductDetail" component={ProductDetail} />
-            <Route path="/Myfav" component={Myfav} />
-            <Route
-              path="/Mycart"
-              component={() => <Mycart show={this.state.show} />}
-            />
-            <Route path="/Shopping1" component={Shopping1} />
-            <Route path="/Shopping2" component={Shopping2} />
-            <Route path="/Shopping3" component={Shopping3} />
-            <Route path="/instagram" component={Instagram} />
-            <Route path="/event" component={Event} />
-            <Route path="/gameMap" component={GameMap} />
-            <Route path="/gameMapDetail/:id" component={GameMapDetail} />
-          </Switch>
-          <Footer />
-        </>
-      </Router>
-    )
+              <Route path="/member/account" component={() => <Member />} />
+              <Route path="/member/userevent" component={() => <Member />} />
+              <Route path="/member/UserShopping" component={() => <Member />} />
+              <Route
+                path="/member/site_reservation"
+                component={() => <Member />}
+              />
+              <Route path="/product" component={Product} />
+              <Route
+                path={'/chatroom/message/' + 'ID' + this.props.userInfo.account}
+                component={ChatRoom}
+              />
+              <Route
+                path="/chatroom/openMemberPage"
+                component={OpenMemberPage}
+              />
+              <Route path="/ProductDetail" component={ProductDetail} />
+              <Route path="/Myfav" component={Myfav} />
+              <Route
+                path="/Mycart"
+                component={() => <Mycart show={this.state.show} />}
+              />
+              <Route path="/Shopping1" component={Shopping1} />
+              <Route path="/Shopping2" component={Shopping2} />
+              <Route path="/Shopping3" component={Shopping3} />
+              <Route path="/instagram" component={Instagram} />
+              <Route path="/event" component={Event} />
+              <Route path="/gameMap" component={GameMap} />
+              <Route path="/gameMapDetail/:id" component={GameMapDetail} />
+            </Switch>
+            <Footer />
+          </>
+        </Router>
+      )
+    }
   }
 }
 
