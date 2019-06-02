@@ -7,10 +7,38 @@ const Pt_applyer = props => {
       <div className="pt_applyer">
         {props.applyer.map(item => (
           <Link
-            to={'/chatroom/openMemberPage/' + 'ID' + item.member_id} title={item.name}
+            to={'/chatroom/openMemberPage/' + 'ID' + item.member_id}
+            title={item.name}
           >
             <div key={item.pt_applysid} className="applyer">
-              <img src="http://localhost:3002/images/member/pic1.jpg" alt="" />
+              {(() => {
+                switch (item.photo) {
+                  case '':
+                    return (
+                      <img
+                        src="//localhost:3002/images/member/preset_avatar.png"
+                        alt=""
+                      />
+                    )
+                    break
+                  case null:
+                    return (
+                      <img
+                        src="//localhost:3002/images/member/preset_avatar.png"
+                        alt=""
+                      />
+                    )
+                    break
+                  default:
+                    return (
+                      <img
+                        src={'//localhost:3002/images/member/' + item.photo}
+                        alt=""
+                      />
+                    )
+                    break
+                }
+              })()}
             </div>
           </Link>
         ))}

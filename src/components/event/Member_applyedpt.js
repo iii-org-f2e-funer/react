@@ -11,26 +11,41 @@ class Member_applyedpt extends React.Component {
 
     this.state = {}
   }
+  url = str => () => {
+    document.location.href = str
+  }
 
   render() {
     return (
       <>
         <div className="applyed">
-          <div className="ptimg">
-            {this.props.data.pt_img !== '' ? (
-              <img
-                src={'//localhost:3002/images/event/' + this.props.data.pt_img}
-                alt=""
-              />
-            ) : (
-              <img
-                src="//localhost:3002/images/event/defaulteventimg.jpg"
-                alt=""
-              />
-            )}
-          </div>
+          <Link
+            to="#"
+            onClick={this.url('/event/info/' + this.props.data.pt_sid)}
+          >
+            <div className="ptimg">
+              {this.props.data.pt_img !== '' ? (
+                <img
+                  src={
+                    '//localhost:3002/images/event/' + this.props.data.pt_img
+                  }
+                  alt=""
+                />
+              ) : (
+                <img
+                  src="//localhost:3002/images/event/defaulteventimg.jpg"
+                  alt=""
+                />
+              )}
+            </div>
+          </Link>
           <div className="ptinfo">
-            <div className="ptinfo_title">{this.props.data.pt_title}</div>
+          <Link
+            to="#"
+            onClick={this.url('/event/info/' + this.props.data.pt_sid)}
+          >
+              <div className="ptinfo_title">{this.props.data.pt_title}</div>{' '}
+            </Link>
             <div className="ptinfo_time">
               <div className="infoicon">
                 <i className="fas fa-clock" />
@@ -49,13 +64,13 @@ class Member_applyedpt extends React.Component {
                 {this.props.data.pt_add}
               </div>
             </div>
-            <div className="ptinfo_member">
-              {/* <div>6人已報名，3人已參加</div> */}
-            </div>
+            {/* <div className="ptinfo_member">
+              <div>6人已報名，3人已參加</div>
+            </div> */}
           </div>
 
           <div className="btnlist">
-            {(() => {
+            {/* {(() => {
               switch (this.props.data.pt_applystatus) {
                 case 'pending':
                   return <div className="applystatus">團主審核中</div>
@@ -75,11 +90,38 @@ class Member_applyedpt extends React.Component {
                   )
                   break
               }
-            })()}
-            <Member_cancelapply
-              applysid={this.props.data.pt_applysid}
-              cancel={this.props.cancel}
-            />
+            })()} */}
+            {this.props.data.pt_applystatus === 'pending' ? (
+              <>
+                <div className="applystatus">團主審核中</div>
+                <Member_cancelapply
+                  applysid={this.props.data.pt_applysid}
+                  cancel={this.props.cancel}
+                />
+              </>
+            ) : (
+              ''
+            )}
+            {this.props.data.pt_applystatus === 'reject' ? (
+              <div className="applystatus" id="reject">
+                申請失敗
+              </div>
+            ) : (
+              ''
+            )}
+            {this.props.data.pt_applystatus === 'approve' ? (
+              <>
+                <div className="applystatus" id="approve">
+                  開啟聊天室
+                </div>
+                <Member_cancelapply
+                  applysid={this.props.data.pt_applysid}
+                  cancel={this.props.cancel}
+                />
+              </>
+            ) : (
+              ''
+            )}
           </div>
         </div>
       </>

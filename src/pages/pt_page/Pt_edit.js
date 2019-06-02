@@ -7,7 +7,6 @@ import TWzipcode from 'react-twzipcode'
 import Pt_editmodal from '../../components/event/Pt_editmodal'
 import Pt_cancelhost from '../../components/event/Pt_cancelhost'
 
-
 class Pt_edit extends React.Component {
   constructor() {
     super()
@@ -343,11 +342,12 @@ class Pt_edit extends React.Component {
                 name="pt_info"
                 rows="20"
                 placeholder="增加一些描述讓你的團吸引其他人加入吧"
+                value={this.state.pt_info}
                 onBlur={event => this.handleinfoChange(event)}
               />
             </div>
             <div className="form-row btncol">
-            <Pt_cancelhost pt_sid={this.state.pt_sid} />
+              <Pt_cancelhost pt_sid={this.state.pt_sid} />
               <button type="submit" className="pt_submitbtn">
                 確認修改
               </button>

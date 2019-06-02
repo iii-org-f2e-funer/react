@@ -7,7 +7,34 @@ const Member_applyeritem = props => {
       <div className="applyeder">
         <Link to={'/chatroom/openMemberPage/' + 'ID' + props.data.member_id}>
           <div className="applyerimg">
-            <img src={'' + props.data.photo} alt="" />
+            {(() => {
+              switch (props.data.photo) {
+                case '':
+                  return (
+                    <img
+                      src="//localhost:3002/images/member/preset_avatar.png"
+                      alt=""
+                    />
+                  )
+                  break
+                case null:
+                  return (
+                    <img
+                      src="//localhost:3002/images/member/preset_avatar.png"
+                      alt=""
+                    />
+                  )
+                  break
+                default:
+                  return (
+                    <img
+                      src={'//localhost:3002/images/member/' + props.data.photo}
+                      alt=""
+                    />
+                  )
+                  break
+              }
+            })()}
           </div>
         </Link>
         <div className="applyername">

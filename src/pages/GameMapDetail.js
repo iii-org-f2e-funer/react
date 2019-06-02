@@ -77,21 +77,21 @@ class MyVerticallyCenteredModal extends React.Component {
   handleSubmit(event) {
     console.log(this.props)
     event.preventDefault()
-    fetch('http://127.0.0.1:3002/gameMap/reservation', {
+    fetch('http://localhost:3002/gameMap/reservation', {
       method: 'POST',
+      credentials: 'include',
       headers: {
         Accept: 'application/json',
         'Content-Type': 'application/json',
-        credentials: 'include',
       },
       body: JSON.stringify({
-        name: this.state.startName,
-        phone: this.state.startPhone,
-        people: this.state.startPeo,
-        date: this.state.startDate,
-        firm_id: this.props.datastore.firm_id,
-        store: this.props.datastore.store,
-        userId: this.props.userInfo.account,
+        name: this.state.startName, //聯絡人
+        phone: this.state.startPhone, //預約手機
+        people: this.state.startPeo, //預約人數
+        date: this.state.startDate, //預約日期時間
+        firm_id: this.props.datastore.firm_id, //預約店家代碼
+        store: this.props.datastore.store, //預約廠商名
+        userId: this.props.userInfo.account, //預約使用者帳號
       }),
     })
       .then(() => {

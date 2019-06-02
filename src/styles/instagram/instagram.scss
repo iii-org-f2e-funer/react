@@ -6,7 +6,15 @@
   min-height: 100vh;
   color: #474747;
 
-  
+  .wipe-in {
+    opacity: 1 !important;
+    // transition: opacity 3s !important;
+  }
+
+  .wipe-out {
+    opacity: 0 !important;
+    // transition: opacity 2700ms !important;
+  }
   //左邊會員功能
   .user {
     width: 265px;
@@ -542,6 +550,9 @@
     }
     //揪團LIST
     ul {
+      // 特效
+      opacity: 0;
+      transition: opacity 0.8s;
       li {
         margin-bottom: 25px;
         a {
@@ -554,6 +565,8 @@
             color: #013b46;
             margin: 0 0 2px 0;
             padding-left: 16px;
+            height: 21px;
+            overflow: hidden;
           }
           //詳細資訊
           p {
@@ -563,6 +576,8 @@
             line-height: 24px;
             padding-left: 25px;
             vertical-align: middle;
+            height: 24px;
+            overflow: hidden;
             svg {
               display: inline-block;
               margin-top: -2px;

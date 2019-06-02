@@ -71,8 +71,6 @@ class RootRouter extends React.Component {
               path="/member/site_reservation"
               component={() => <Member />}
             />
-
-            <Route path="/event" component={Event} />
             <Route path="/product" component={Product} />
             <Route
               path={'/chatroom/message/' + 'ID' + this.props.userInfo.account}

@@ -8,6 +8,7 @@ class OMPsidePage extends React.Component {
     super(props)
     this.state = {
       FriendData: [],
+      FriendAllData: [],
       FriendStatus: 'unFriend',
       friendNum: 0,
       toID: 0,
@@ -15,6 +16,48 @@ class OMPsidePage extends React.Component {
   }
   //get data from database
   async componentDidMount() {
+    let theUrl = this.props.location.pathname
+    var toID = theUrl.split('/')[theUrl.split('/').length - 1].replace('ID', '')
+    this.setState({ toID: toID })
+    console.log(this.props.logInId)
+    const response = await fetch(
+      `http://localhost:3002/chatroom/friendList/${this.props.logInId}`,
+      {
+        method: 'GET',
+        headers: { 'Content-type': 'application/json' },
+      }
+    )
+    const data = await response.json()
+
+    //過濾掉delete的好友
+    let noDeleteData = data[0].filter(ele => {
+      return ele.status !== 'delete'
+    })
+
+    console.log('FriendData:', data)
+    console.log('noDeleteFriendData:', noDeleteData)
+    await this.setState({ FriendAllData: data[0] })
+    await this.setState({ FriendData: noDeleteData })
+
+    let FriendNum = noDeleteData.filter(ele => {
+      return ele.status == 'approve'
+    })
+    this.setState({ friendNum: FriendNum.length })
+    let checkFriend = noDeleteData.filter((ele, ind) => {
+      return ele.friendID == toID && (ele.status == 'approve' || 'review')
+    })
+    console.log(checkFriend)
+    if (checkFriend[0]) {
+      if (checkFriend[0].status == 'approve') {
+        await this.setState({ FriendStatus: 'approve' })
+      } else if (checkFriend[0].status == 'review') {
+        await this.setState({ FriendStatus: 'review' })
+      }
+    }
+    console.log(this.state.FriendStatus)
+  }
+
+  async componentWillReceiveProps() {
     let theUrl = this.props.location.pathname
     var toID = theUrl.split('/')[theUrl.split('/').length - 1].replace('ID', '')
     this.setState({ toID: toID })
@@ -174,6 +217,7 @@ class OMPsidePage extends React.Component {
             <span> 開始聊聊</span>
           </NavLink>
         </div>
+        <div className="d-none">{this.props.url}</div>
       </div>
     )
   }
