@@ -1,5 +1,6 @@
 import React from 'react'
 import { Button, Table } from 'react-bootstrap'
+import * as moment from 'moment'
 
 class Site_order extends React.Component {
   constructor(props) {
@@ -7,8 +8,65 @@ class Site_order extends React.Component {
     this.state = {
       isEdit: false,
       data: [],
+      viewChange: 1,
+    }
+
+    this.statusCode = this.statusCode.bind(this)
+    this.checkOK = this.checkOK.bind(this)
+  }
+  statusCode(code) {
+    switch (code) {
+      case 0:
+        return '待審核'
+      case 1:
+        return '已審核'
+      case 2:
+        return '已完成'
+      case 9:
+        return '已取消'
     }
   }
+  checkOK(sid) {
+    fetch('//localhost:3002/reservationInfo', {
+      method: 'PUT',
+      credentials: 'include',
+      headers: {
+        Accept: 'application/json',
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({
+        sid: sid,
+        status: 1,
+      }),
+    }).then(() => {
+      this.readData()
+    })
+  }
+
+  readData() {
+    fetch('//localhost:3002/reservationInfo', {
+      credentials: 'include',
+      headers: {
+        Accept: 'application/json',
+        'Content-Type': 'application/json',
+      },
+    })
+      .then(res => res.json())
+      .then(obj => {
+        if (obj.success) {
+          this.setState({
+            data: obj.body,
+          })
+        } else {
+          // this.props.history.push('/')
+        }
+      })
+  }
+
+  componentDidMount() {
+    this.readData()
+  }
+
   render() {
     return (
       <>
@@ -20,38 +78,43 @@ class Site_order extends React.Component {
               <thead className="table_head">
                 <tr>
                   <th>預約單編號</th>
-                  <th>商品名稱</th>
-                  <th>店家</th>
-                  <th>單價</th>
-                  <th>數量</th>
-                  <th>小計</th>
+                  <th>預約日期</th>
+                  <th>預約時間</th>
+                  <th>預約帳號</th>
+                  <th>預約人數</th>
+                  <th>訂單狀態</th>
                   <th>操作</th>
                 </tr>
               </thead>
               <tbody>
                 {this.state.data.map((item, index, array) => (
-                  <tr>
-                    <td key={index}>{index + 1}</td>
-                    <td>{this.state.data[index].productName}</td>
-                    <td>{this.state.data[index].seller_sid}</td>
-                    <td>{this.state.data[index].price}</td>
-                    <td>{this.state.data[index].number}</td>
-                    <td>{this.state.data[index].totall}</td>
+                  <tr key={item.sid}>
+                    <td>{item.sid}</td>
+                    <td>{moment(item.date).format('YYYY-MM-DD')}</td>
+                    <td>{moment(item.date).format('HH:mm')}</td>
+                    <td>{item.user_id}</td>
+                    <td>{item.peoples}</td>
+                    <td>{this.statusCode(item.status)}</td>
                     <td>
                       <button
                         className="m-1 button button"
                         block
-                        onClick={this.deleteit(index)}
-                      >
-                        刪除
-                      </button>
-                      <button
-                        className="m-1 button button"
-                        block
-                        onClick={this.goto(this.state.data[index].sid)}
+                        onClick={'this.goto(this.state.data[index].sid)'}
                       >
                         詳細資料
                       </button>
+
+                      {item.status === 0 ? (
+                        <button
+                          className="m-1 button button"
+                          block
+                          onClick={() => this.checkOK(item.sid)}
+                        >
+                          確認
+                        </button>
+                      ) : (
+                        ''
+                      )}
                     </td>
                   </tr>
                 ))}

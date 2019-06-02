@@ -2,6 +2,7 @@
 import React from 'react'
 import { withRouter } from 'react-router'
 import { Button, Table, InputGroup } from 'react-bootstrap'
+import * as moment from 'moment'
 import '../../styles/cart/cart.scss'
 import '../../styles/cart/cart.scss'
 
@@ -11,6 +12,20 @@ class site_reservation extends React.Component {
     this.state = {
       isEdit: false,
       data: [],
+    }
+    this.state.statusCode = this.statusCode.bind(this)
+  }
+
+  statusCode(code) {
+    switch (code) {
+      case 0:
+        return '待確認'
+      case 1:
+        return '已確認'
+      case 2:
+        return '已完成'
+      case 9:
+        return '已取消'
     }
   }
   componentDidMount() {
@@ -52,19 +67,14 @@ class site_reservation extends React.Component {
               <tbody>
                 {this.state.data.map((item, index) => (
                   <tr key={item.sid}>
-                    <td>
-                      {new Date(item.date).getFullYear()}-
-                      {new Date(item.date).getMonth() + 1}-
-                      {new Date(item.date).getDay() + 1}
-                    </td>
+                    <td>{moment(item.date).format('YYYY-MM-DD')}</td>
                     <td className="name">
-                      {new Date(item.date).getHours()}:
-                      {new Date(item.date).getMinutes()}
+                      {moment(item.date).format('HH:mm')}
                     </td>
                     <td>{item.site_name}</td>
-                    <td className="">{item.status}</td>
-                    <td>取消預定</td>
-                    <td className="todo">評價</td>
+                    <td className="">{this.statusCode(item.status)}</td>
+                    <td>--</td>
+                    <td className="todo">--</td>
                   </tr>
                 ))}
               </tbody>
