@@ -24,6 +24,7 @@ class Mycart extends React.Component {
       input3: 0,
       choose: [],
       zzz: [],
+      chooseIndex: 0,
     }
   }
 
@@ -90,9 +91,21 @@ class Mycart extends React.Component {
               zzz.push(obj)
             }
           }
-          // console.log(xxx)
-          // console.log(zzz)
-          this.setState({ zzz: zzz })
+          // 預設
+          var d_index = null
+          if (zzz.length === 0) {
+            d_index = null
+          } else {
+            if (zzz.length === 1) {
+              d_index = 0
+            } else {
+              d_index = null
+            }
+          }
+
+          this.setState({ chooseIndex: d_index, zzz: zzz }, () => {
+            this.checkDollar()
+          })
         }
       })
       .catch(err => console.log(err))
@@ -116,16 +129,44 @@ class Mycart extends React.Component {
     window.location.href = 'http://localhost:3000/ProductDetail/sid:' + sid
   }
 
-  check1 = ind => () => {
-    var chooseseller = this.state.zzz[ind].products
-    console.log(chooseseller)
-    var choosetotal = 0
-    for (let i = 0; i < chooseseller.length; i++) {
-      choosetotal += chooseseller[i].total
+  // check1 = ind => () => {
+  //   var chooseIndex = ind
+  //   var chooseseller = this.state.zzz[chooseIndex].products
+  //   console.log(chooseseller)
+  //   var choosetotal = 0
+  //   for (let i = 0; i < chooseseller.length; i++) {
+  //     choosetotal += chooseseller[i].total
+  //   }
+  //   console.log(choosetotal)
+  //   this.setState({
+  //     choosetotal: choosetotal,
+  //     choose: this.state.zzz[ind].products,
+  //     chooseIndex: chooseIndex,
+  //   })
+  // }
+
+  //check店家
+  check1 = index => () => {
+    this.setState({ chooseIndex: index }, () => {
+      this.checkDollar()
+    })
+  }
+  //算錢
+  checkDollar = () => {
+    var total = 0 // 小計
+    var products = []
+
+    if (this.state.chooseIndex !== null) {
+      products = this.state.zzz[this.state.chooseIndex].products
+      for (let i = 0; i < products.length; i++) {
+        total += products[i].total
+      }
     }
-    console.log(choosetotal)
-    this.setState({ choosetotal: choosetotal })
-    this.setState({ choose: this.state.zzz[ind].products })
+
+    this.setState({
+      choosetotal: total,
+      choose: products,
+    })
   }
 
   paymethod = event => {
@@ -215,6 +256,7 @@ class Mycart extends React.Component {
                       type="radio"
                       name="rr"
                       onClick={this.check1(index)}
+                      checked={this.state.chooseIndex === index}
                     />
                     <span class="checkmark" />
                   </label>
