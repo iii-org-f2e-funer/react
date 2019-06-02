@@ -37,12 +37,53 @@ const Pt_listitem = props => {
                 to={'/chatroom/openMemberPage/' + 'ID' + props.data.member_id}
               >
                 <div className="host_pic">
-                  <img
-                    src={
-                      process.env.PUBLIC_URL + '/images/pt_img/dr_strange.jpg'
+                  {(() => {
+                    switch (props.data.photo) {
+                      case '':
+                        return (
+                          <img
+                            src="//localhost:3002/images/member/preset_avatar.png"
+                            alt=""
+                          />
+                        )
+                        break
+                      case null:
+                        return (
+                          <img
+                            src="//localhost:3002/images/member/preset_avatar.png"
+                            alt=""
+                          />
+                        )
+                        break
+                      default:
+                        return (
+                          <img
+                            src={
+                              '//localhost:3002/images/member/' +
+                              props.data.photo
+                            }
+                            alt=""
+                          />
+                        )
+                        break
                     }
-                    alt=""
-                  />
+                  })()}
+                  {/* {props.data.photo === '' ? (
+                    <img
+                      src="//localhost:3002/images/member/preset_avatar.png"
+                      alt=""
+                    />
+                  ) : (
+                    ''
+                  )}
+                  {props.data.photo === null ? (
+                    <img
+                      src="//localhost:3002/images/member/preset_avatar.png"
+                      alt=""
+                    />
+                  ) : (
+                    ''
+                  )} */}
                 </div>
               </Link>
               <Link

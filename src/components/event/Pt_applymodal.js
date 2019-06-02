@@ -15,9 +15,22 @@ class Pt_applymodal extends React.Component {
       show2: false,
       applysuccess: false,
       errormsg: '',
+      account: '',
     }
   }
-
+  componentDidMount() {
+    // console.log('AAAAAAAAAAAAAAAAA', this.props.accountID)
+    fetch('//localhost:3002/firm/userInfo', {
+      credentials: 'include',
+    })
+      .then(res => res.json())
+      .then(obj => {
+        console.log(obj.body)
+        this.setState({
+          account: obj.body.account,
+        })
+      })
+  }
   handleClose() {
     this.setState({ show: false })
   }
@@ -34,7 +47,7 @@ class Pt_applymodal extends React.Component {
     let apply = JSON.stringify({
       pt_sid: this.props.ptapply.pt_sid,
       pt_host: this.props.ptapply.pt_host,
-      ptapplymem: this.props.account,
+      ptapplymem: this.state.account,
     })
     console.log(apply)
     fetch('//localhost:3002/event/apply', {

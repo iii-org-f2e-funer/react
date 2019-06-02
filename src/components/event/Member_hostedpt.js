@@ -18,21 +18,27 @@ class Member_hostedpt extends React.Component {
     return (
       <>
         <div className="applyed">
-          <div className="ptimg">
-            {this.props.data.pt_img !== '' ? (
-              <img
-                src={'//localhost:3002/images/event/' + this.props.data.pt_img}
-                alt=""
-              />
-            ) : (
-              <img
-                src="//localhost:3002/images/event/defaulteventimg.jpg"
-                alt=""
-              />
-            )}
-          </div>
+          <Link to={'/event/info/' + this.props.data.pt_sid}>
+            <div className="ptimg">
+              {this.props.data.pt_img !== '' ? (
+                <img
+                  src={
+                    '//localhost:3002/images/event/' + this.props.data.pt_img
+                  }
+                  alt=""
+                />
+              ) : (
+                <img
+                  src="//localhost:3002/images/event/defaulteventimg.jpg"
+                  alt=""
+                />
+              )}
+            </div>
+          </Link>
           <div className="ptinfo">
-            <div className="ptinfo_title">{this.props.data.pt_title}</div>
+            <Link to={'/event/info/' + this.props.data.pt_sid}>
+              <div className="ptinfo_title">{this.props.data.pt_title}</div>
+            </Link>
             <div className="ptinfo_time">
               <div className="infoicon">
                 <i className="fas fa-clock" />
@@ -51,9 +57,9 @@ class Member_hostedpt extends React.Component {
                 {this.props.data.pt_add}
               </div>
             </div>
-            <div className="ptinfo_member">
-              {/* <div>6人已報名，3人已參加</div> */}
-            </div>
+            {/* <div className="ptinfo_member">
+              <div>6人已報名，3人已參加</div>
+            </div> */}
           </div>
 
           <div className="btnlist">
@@ -70,8 +76,10 @@ class Member_hostedpt extends React.Component {
                           編輯揪團
                         </button>
                       </Link>
-                      <Member_applyermodal pt_sid={this.props.data.pt_sid}/>
-                      <div className="applystatus" id="approve">開啟聊天室</div>
+                      <Member_applyermodal pt_sid={this.props.data.pt_sid} />
+                      <div className="applystatus" id="approve">
+                        開啟聊天室
+                      </div>
                     </>
                   )
                   break

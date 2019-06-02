@@ -28,7 +28,6 @@ class Pt_detail extends React.Component {
       loaded: false,
     }
   }
-
   componentDidMount() {
     //抓揪團資料
     this.loadptinfo()
@@ -55,6 +54,7 @@ class Pt_detail extends React.Component {
       })
     }
   }
+
   loadptinfo() {
     let data = JSON.stringify({ ptsid: window.location.pathname.split('/')[3] })
     // console.log(data)
@@ -102,7 +102,37 @@ class Pt_detail extends React.Component {
                 }
               >
                 <div className="ptdetail_hostimg">
-                  <img src="/images/pt_img/dr_strange.jpg" alt="" />
+                  {(() => {
+                    switch (this.state.data.photo) {
+                      case '':
+                        return (
+                          <img
+                            src="//localhost:3002/images/member/preset_avatar.png"
+                            alt=""
+                          />
+                        )
+                        break
+                      case null:
+                        return (
+                          <img
+                            src="//localhost:3002/images/member/preset_avatar.png"
+                            alt=""
+                          />
+                        )
+                        break
+                      default:
+                        return (
+                          <img
+                            src={
+                              '//localhost:3002/images/member/' +
+                              this.state.data.photo
+                            }
+                            alt=""
+                          />
+                        )
+                        break
+                    }
+                  })()}
                 </div>
               </Link>
               <Link
@@ -232,7 +262,7 @@ class Pt_detail extends React.Component {
                     <Pt_applymodal
                       ptapply={this.state.data}
                       handlerender={this.loadapplyer}
-                      account={this.state.account}
+                      accountID={this.props.userInfo.account}
                     />
                   )}
                   <div className="pt_share" />
