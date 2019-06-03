@@ -3,13 +3,81 @@
   min-height: 100vh;
   margin: 0 auto;
 
+  .listsearch {
+    display: flex;
+    margin: 24px auto 0;
+    line-height: 38px;
+  }
+
+  .listsearch .searchtitle{
+    width: 100px;
+    margin-left: 8px;
+  }
+
+  .listsearch .searchtime,
+  .searchterm,
+  .searchlocate,
+  .clearbtn,
+  .searchbtn {
+    margin-right: 8px;
+    display: flex;
+    flex-direction: column;
+  }
+  .listsearch .timecol{
+    display: flex
+  }
+  .listsearch input[type='text'] {
+    width: 180px;
+    margin: 0 8px;
+  }
+  .listsearch select{
+    border: none;
+    border-radius: 4px;
+    border-bottom: 2px solid #949494;
+    margin: 0 8px;
+  }
+  .listsearch select:focus{
+    border-color: #3db4e0;
+  }
+  .form-control.county-sel,
+  .form-control.district-sel {
+    display: inline-block;
+    width: 120px;
+
+    // border: none;
+    // border-bottom: 2px solid #949494;
+  }
+  .listsearch .zipcode {
+    display: none;
+  }
+
+.listsearch .btncol{
+  display: flex;
+  justify-content: flex-end;
+  margin: 8px 0;
+}
+.listsearch .searchbtn,.clearbtn{
+  width: 80px;
+  height: 40px;
+  text-align: center;
+  justify-content: center;
+  background: #3db4e0;
+  border-radius: 4px;
+  color: #FFF;
+}
+.listsearch .searchbtn,.clearbtn:hover{
+  cursor: pointer;
+}
   .commentList {
     display: flex;
     // justify-content: space-between;
     align-content: space-between;
     flex-wrap: wrap;
-  }
 
+  }
+.noresult{
+  margin: 8px auto
+}
   .card {
     width: 250px;
     height: 350px;
@@ -47,10 +115,10 @@
     height: 100%;
     object-fit: cover;
   }
-.pt_title{
-  max-height: 48px;
-  overflow: hidden;
-}
+  .pt_title {
+    max-height: 48px;
+    overflow: hidden;
+  }
   .pt_host {
     width: 100%;
     position: absolute;
