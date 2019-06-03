@@ -46,7 +46,7 @@ class OldComment extends React.Component {
       <>
         {/* 留言 */}
         <div key={this.props.data.comment_id} className="comment">
-          <Link to={"/chatroom/openMemberPage/ID" + this.props.data.member_id}>
+          <Link to={'/chatroom/openMemberPage/ID' + this.props.data.member_id}>
             <img
               src={
                 this.props.data.isFirm
@@ -60,7 +60,7 @@ class OldComment extends React.Component {
           </Link>
           <div className="comment_inner">
             <div className="text">
-            <Link to={"/chatroom/openMemberPage/ID" + this.props.data.member_id}>
+            <Link to={'/chatroom/openMemberPage/ID' + this.props.data.member_id}>
               <span className="sender">{this.props.data.nickname}</span></Link>
               <span className="content">{this.props.data.content} </span>
             </div>
