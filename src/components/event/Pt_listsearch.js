@@ -87,9 +87,15 @@ class Pt_listsearch extends React.Component {
             </div>
             <div className="btncol">
               <div className="searchbtn" onClick={this.props.search}>
+                <span style={{ fontSize: '14px' }}>
+                  <i class="fas fa-search mr-1" />
+                </span>
                 搜尋
               </div>
               <div className="clearbtn" onClick={this.props.clear}>
+                <span style={{ fontSize: '16px' }}>
+                  <i class="fas fa-times mr-1" />
+                </span>
                 清除
               </div>
             </div>
