@@ -106,6 +106,7 @@ class MyVerticallyCenteredModal extends React.Component {
       .then(() => {
         this.props.onHide()
         // window.location.href = '/gameMap'
+        alert('場地預約已送出')
         this.props.history.push('/gameMap')
         return 1
       })

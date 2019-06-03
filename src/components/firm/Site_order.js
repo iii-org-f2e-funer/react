@@ -1,6 +1,7 @@
 import React from 'react'
 import { Button, Table } from 'react-bootstrap'
-import * as moment from 'moment'
+import moment from 'moment'
+require('moment-timezone')
 
 class Site_order extends React.Component {
   constructor(props) {
@@ -90,8 +91,16 @@ class Site_order extends React.Component {
                 {this.state.data.map((item, index, array) => (
                   <tr key={item.sid}>
                     <td>{item.sid}</td>
-                    <td>{moment(item.date).format('YYYY-MM-DD')}</td>
-                    <td>{moment(item.date).format('HH:mm')}</td>
+                    <td>
+                      {moment(item.date)
+                        .utcOffset(960)
+                        .format('YYYY-MM-DD')}
+                    </td>
+                    <td>
+                      {moment(item.date)
+                        .utcOffset(960)
+                        .format('HH:mm')}
+                    </td>
                     <td>{item.user_id}</td>
                     <td>{item.peoples}</td>
                     <td>{this.statusCode(item.status)}</td>

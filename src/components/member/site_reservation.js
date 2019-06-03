@@ -2,9 +2,11 @@
 import React from 'react'
 import { withRouter } from 'react-router'
 import { Button, Table, InputGroup } from 'react-bootstrap'
-import * as moment from 'moment'
+import moment from 'moment'
 import '../../styles/cart/cart.scss'
 import '../../styles/cart/cart.scss'
+
+require('moment-timezone')
 
 class site_reservation extends React.Component {
   constructor(props) {
@@ -67,9 +69,15 @@ class site_reservation extends React.Component {
               <tbody>
                 {this.state.data.map((item, index) => (
                   <tr key={item.sid}>
-                    <td>{moment(item.date).format('YYYY-MM-DD')}</td>
+                    <td>
+                      {moment(item.date)
+                        .utcOffset(960)
+                        .format('YYYY-MM-DD')}
+                    </td>
                     <td className="name">
-                      {moment(item.date).format('HH:mm')}
+                      {moment(item.date)
+                        .utcOffset(960)
+                        .format('HH:mm')}
                     </td>
                     <td>{item.site_name}</td>
                     <td className="">{this.statusCode(item.status)}</td>
