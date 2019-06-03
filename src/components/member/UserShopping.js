@@ -52,7 +52,7 @@ class UserShopping extends React.Component {
               <thead className="table_head">
                 <tr>
                   {' '}
-                  <th scope="col">date</th>
+                  <th scope="col">日期</th>
                   <th scope="col">訂單編號</th>
                   <th scope="col">訂購人姓名</th>
                   <th scope="col">收貨方法</th>
