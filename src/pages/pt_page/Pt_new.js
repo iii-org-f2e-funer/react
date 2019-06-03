@@ -232,6 +232,7 @@ class Pt_new extends React.Component {
                 // onClick={e => this.handleloadadd(e)}
                 onChange={event => this.handleaddChange(event)}
                 autocomplete="off"
+                required="required"
               />
               <datalist id="addlist">
                 {this.state.locatefirm.map(item => (
@@ -271,6 +272,7 @@ class Pt_new extends React.Component {
                 name="pt_member"
                 value={this.state.pt_member}
                 onChange={event => this.handlememberChange(event)}
+                required="required"
               />
             </div>
             <div className="form-row">
@@ -282,6 +284,7 @@ class Pt_new extends React.Component {
                 name="pt_maxm"
                 value={this.state.pt_maxm}
                 onChange={event => this.handlemaxmChange(event)}
+                required="required"
               />
             </div>
             <div className="form-row" id="pt_level">
@@ -292,6 +295,7 @@ class Pt_new extends React.Component {
                 name="pt_level"
                 value="easy"
                 onChange={event => this.handlelevelChange(event)}
+                required="required"
               />
               <span> 適合新手 </span>
               <input
@@ -320,6 +324,7 @@ class Pt_new extends React.Component {
                 placeholder="請輸入你的揪團標題"
                 value={this.state.pt_title}
                 onChange={event => this.handletitleChange(event)}
+                required="required"
               />
             </div>
             <div className="form-row">
@@ -330,6 +335,7 @@ class Pt_new extends React.Component {
                 rows="20"
                 placeholder="增加一些描述讓你的團吸引其他人加入吧"
                 onBlur={event => this.handleinfoChange(event)}
+                required="required"
               />
             </div>
             <div className="form-row btncol">

@@ -70,6 +70,7 @@ class Pt_listsearch extends React.Component {
                 className="form-control"
                 value={this.props.level}
                 onChange={this.props.changelevel}
+                style={{ width: '200px' }}
               >
                 <option value="" selected>
                   請選擇
@@ -86,11 +87,15 @@ class Pt_listsearch extends React.Component {
               </select>
             </div>
             <div className="btncol">
-              <div className="searchbtn" onClick={this.props.search}>
+              <div
+                className="searchbtn"
+                onClick={this.props.search}
+                style={{ width: '120px' }}
+              >
                 <span style={{ fontSize: '14px' }}>
                   <i class="fas fa-search mr-1" />
                 </span>
-                搜尋
+                搜尋關鍵字
               </div>
               <div className="clearbtn" onClick={this.props.clear}>
                 <span style={{ fontSize: '16px' }}>
