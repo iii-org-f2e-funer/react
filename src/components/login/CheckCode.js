@@ -72,7 +72,9 @@ class CheckCode extends React.Component {
       contacter: this.state.contacter,
     }
     Object.keys(data).forEach(key => fd.append(key, data[key]))
-    fd.append('files', this.fileInput.files[0])
+    if (!this.fileInput.files.length) {
+      fd.append('files', this.fileInput.files[0])
+    }
     fetch('//13.112.90.13:3002/firm/codeInfo', {
       method: 'POST',
       body: fd,
