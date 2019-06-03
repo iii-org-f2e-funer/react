@@ -16,7 +16,7 @@ class NewProduct extends React.Component {
     }
   }
   componentDidMount() {
-    fetch('//localhost:3002/product/game_type', {
+    fetch('//13.112.90.13:3002/product/game_type', {
       credentials: 'include',
     })
       .then(res => res.json())
@@ -55,7 +55,7 @@ class NewProduct extends React.Component {
     for (let i = 0; i < this.fileInput.files.length; i++) {
       fd.append('files', this.fileInput.files[i])
     }
-    fetch('//localhost:3002/firm/insertProduct', {
+    fetch('//13.112.90.13:3002/firm/insertProduct', {
       method: 'POST',
       body: fd,
       credentials: 'include',

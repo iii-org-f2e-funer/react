@@ -17,7 +17,7 @@ class ProductDetail extends React.Component {
   componentDidMount() {
     var gotit = {}
 
-    fetch('//localhost:3002/product/productlist', {})
+    fetch('//13.112.90.13:3002/product/productlist', {})
       .then(response => {
         return response.json()
       })
@@ -89,7 +89,7 @@ class ProductDetail extends React.Component {
         gotit.description = gotit.description.replace(/\s/g, '<br>')
         this.setState({ gotit: gotit })
 
-        fetch('//localhost:3002/product/productlist2', {})
+        fetch('//13.112.90.13:3002/product/productlist2', {})
           .then(response => {
             return response.json()
           })
@@ -120,7 +120,7 @@ class ProductDetail extends React.Component {
             console.log('錯誤:', err)
           })
       })
-    fetch('//localhost:3002/product/firm', {})
+    fetch('//13.112.90.13:3002/product/firm', {})
       .then(response => {
         return response.json()
       })

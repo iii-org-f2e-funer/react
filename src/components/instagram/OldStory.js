@@ -37,7 +37,7 @@ class OldStory extends React.Component {
         content: this.textInput.innerText,
       }
 
-      fetch('http://localhost:3002/instagram/newComment', {
+      fetch('http://13.112.90.13:3002/instagram/newComment', {
         method: 'POST',
         body: JSON.stringify(data),
         headers: {
@@ -60,7 +60,7 @@ class OldStory extends React.Component {
       userID: this.props.userInfo.body.member_id,
       postID: this.props.data.post_id,
     }
-    fetch('http://localhost:3002/instagram/changeFavorite', {
+    fetch('http://13.112.90.13:3002/instagram/changeFavorite', {
       method: 'POST',
       body: JSON.stringify(data),
       headers: {
@@ -80,7 +80,7 @@ class OldStory extends React.Component {
       userID: this.props.userInfo.body.member_id,
       postID: this.props.data.post_id,
     }
-    fetch('http://localhost:3002/instagram/changeBookmark', {
+    fetch('http://13.112.90.13:3002/instagram/changeBookmark', {
       method: 'POST',
       body: JSON.stringify(data),
       headers: {
@@ -118,7 +118,7 @@ class OldStory extends React.Component {
       userID: this.props.userInfo.body.member_id,
       postID: this.props.data.post_id,
     }
-    fetch('http://localhost:3002/instagram/deleteStory', {
+    fetch('http://13.112.90.13:3002/instagram/deleteStory', {
       method: 'POST',
       body: JSON.stringify(data),
       headers: {
@@ -166,7 +166,7 @@ class OldStory extends React.Component {
       formData.append('photos', this.inputFiles.files[i])
     }
     // Fetch
-    fetch('http://localhost:3002/instagram/updateStory', {
+    fetch('http://13.112.90.13:3002/instagram/updateStory', {
       method: 'POST',
       body: formData,
     })
@@ -201,9 +201,9 @@ class OldStory extends React.Component {
                 <img
                   src={
                     this.props.data.isFirm
-                      ? 'http://localhost:3002/images/firm/' +
+                      ? 'http://13.112.90.13:3002/images/firm/' +
                       this.props.data.avatar
-                      : 'http://localhost:3002/images/member/' +
+                      : 'http://13.112.90.13:3002/images/member/' +
                       this.props.data.avatar
                   }
                   alt=""
@@ -259,7 +259,7 @@ class OldStory extends React.Component {
                           return (
                             <img
                               key={idx}
-                              src={'http://localhost:3002/images/' + item}
+                              src={'http://13.112.90.13:3002/images/' + item}
                               alt=""
                             />
                           )

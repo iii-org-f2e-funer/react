@@ -38,7 +38,7 @@ class Pt_detail extends React.Component {
 
     //抓登入資料
     if (this.props.userInfo.login) {
-      fetch('//localhost:3002/firm/userInfo', {
+      fetch('//13.112.90.13:3002/firm/userInfo', {
         credentials: 'include',
       })
         .then(res => res.json())
@@ -59,7 +59,7 @@ class Pt_detail extends React.Component {
   loadptinfo() {
     let data = JSON.stringify({ ptsid: window.location.pathname.split('/')[3] })
     // console.log(data)
-    fetch('//localhost:3002/event/ptinfopage', {
+    fetch('//13.112.90.13:3002/event/ptinfopage', {
       method: 'POST',
       body: data,
       headers: {
@@ -75,7 +75,7 @@ class Pt_detail extends React.Component {
   loadapplyer() {
     let data = JSON.stringify({ ptsid: window.location.pathname.split('/')[3] })
 
-    fetch('//localhost:3002/event/ptapplyer', {
+    fetch('//13.112.90.13:3002/event/ptapplyer', {
       method: 'POST',
       body: data,
       headers: {
@@ -106,7 +106,7 @@ class Pt_detail extends React.Component {
                     case '':
                       return (
                         <img
-                          src="//localhost:3002/images/member/preset_avatar.png"
+                          src="//13.112.90.13:3002/images/member/preset_avatar.png"
                           alt=""
                         />
                       )
@@ -114,7 +114,7 @@ class Pt_detail extends React.Component {
                     case null:
                       return (
                         <img
-                          src="//localhost:3002/images/member/preset_avatar.png"
+                          src="//13.112.90.13:3002/images/member/preset_avatar.png"
                           alt=""
                         />
                       )
@@ -123,7 +123,7 @@ class Pt_detail extends React.Component {
                       return (
                         <img
                           src={
-                            '//localhost:3002/images/member/' +
+                            '//13.112.90.13:3002/images/member/' +
                             this.state.data.photo
                           }
                           alt=""
@@ -148,13 +148,13 @@ class Pt_detail extends React.Component {
                 {this.state.data.pt_img !== '' ? (
                   <img
                     src={
-                      '//localhost:3002/images/event/' + this.state.data.pt_img
+                      '//13.112.90.13:3002/images/event/' + this.state.data.pt_img
                     }
                     alt=""
                   />
                 ) : (
                   <img
-                    src="//localhost:3002/images/event/defaulteventimg.jpg"
+                    src="//13.112.90.13:3002/images/event/defaulteventimg.jpg"
                     alt=""
                   />
                 )}

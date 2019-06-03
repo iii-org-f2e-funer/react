@@ -14,7 +14,7 @@ class Member_applyermodal extends React.Component {
 
     // if (this.state.pt_sid !== '') {
     // console.log(this.state.pt_sid)
-    fetch('//localhost:3002/event/commitptapplyer', {
+    fetch('//13.112.90.13:3002/event/commitptapplyer', {
       method: 'POST',
       body: JSON.stringify({
         ptsid: this.props.pt_sid,
@@ -40,7 +40,7 @@ class Member_applyermodal extends React.Component {
   }
 
   handleapprove = (id, member) => e => {
-    fetch('//localhost:3002/event/commit', {
+    fetch('//13.112.90.13:3002/event/commit', {
       method: 'POST',
       body: JSON.stringify({
         pt_applysid: id,
@@ -60,7 +60,7 @@ class Member_applyermodal extends React.Component {
   }
 
   handlereject = (id, member) => e => {
-    fetch('//localhost:3002/event/commit', {
+    fetch('//13.112.90.13:3002/event/commit', {
       method: 'POST',
       body: JSON.stringify({
         pt_applysid: id,

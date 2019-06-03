@@ -19,7 +19,7 @@ class Event extends React.Component {
   }
   refreshEvents = () => {
     clearInterval(this.timer2)
-    fetch('//localhost:3002/instagram/getEvents')
+    fetch('//13.112.90.13:3002/instagram/getEvents')
       .then(res => res.json())
       .then(obj => {
         this.ul.className = 'wipe-in'

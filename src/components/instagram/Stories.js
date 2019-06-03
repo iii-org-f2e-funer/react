@@ -15,7 +15,7 @@ class Stories extends React.Component {
   }
 
   componentDidMount() {
-    fetch('//localhost:3002/firm/userInfo', {
+    fetch('//13.112.90.13:3002/firm/userInfo', {
       credentials: 'include',
     })
       .then(res => res.json())
@@ -52,13 +52,13 @@ class Stories extends React.Component {
     var allStories = []
     var allState = [[], [], []]
     // fetch 所有貼文
-    fetch('http://localhost:3002/instagram/allData')
+    fetch('http://13.112.90.13:3002/instagram/allData')
       .then(res => res.json())
       .then(data => {
         // console.log(data)
         allStories = data
         // fetch 貼文狀態(favorite bookmark editable)
-        return fetch('http://localhost:3002/instagram/storyState', {
+        return fetch('http://13.112.90.13:3002/instagram/storyState', {
           method: 'POST',
           headers: {
             'content-type': 'application/json',

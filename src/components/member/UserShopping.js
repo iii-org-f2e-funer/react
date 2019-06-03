@@ -20,7 +20,7 @@ class UserShopping extends React.Component {
   }
 
   componentDidMount() {
-    fetch('//localhost:3002/member/productorder', {})
+    fetch('//13.112.90.13:3002/member/productorder', {})
       .then(response => {
         return response.json()
       })

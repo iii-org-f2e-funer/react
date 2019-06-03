@@ -16,19 +16,19 @@ const Pt_listitem = props => {
               {/* <Card.Img
                 className="card_img"
                 variant="top"
-                src={'//localhost:3002/images/event/' + props.data.pt_img}
+                src={'//13.112.90.13:3002/images/event/' + props.data.pt_img}
               /> */}
               {props.data.pt_img !== '' ? (
                 <Card.Img
                   className="card_img"
                   variant="top"
-                  src={'//localhost:3002/images/event/' + props.data.pt_img}
+                  src={'//13.112.90.13:3002/images/event/' + props.data.pt_img}
                 />
               ) : (
                 <Card.Img
                   className="card_img"
                   variant="top"
-                  src="//localhost:3002/images/event/defaulteventimg.jpg"
+                  src="//13.112.90.13:3002/images/event/defaulteventimg.jpg"
                 />
               )}
             </div>
@@ -42,7 +42,7 @@ const Pt_listitem = props => {
                       case '':
                         return (
                           <img
-                            src="//localhost:3002/images/member/preset_avatar.png"
+                            src="//13.112.90.13:3002/images/member/preset_avatar.png"
                             alt=""
                           />
                         )
@@ -50,7 +50,7 @@ const Pt_listitem = props => {
                       case null:
                         return (
                           <img
-                            src="//localhost:3002/images/member/preset_avatar.png"
+                            src="//13.112.90.13:3002/images/member/preset_avatar.png"
                             alt=""
                           />
                         )
@@ -59,7 +59,7 @@ const Pt_listitem = props => {
                         return (
                           <img
                             src={
-                              '//localhost:3002/images/member/' +
+                              '//13.112.90.13:3002/images/member/' +
                               props.data.photo
                             }
                             alt=""
@@ -70,7 +70,7 @@ const Pt_listitem = props => {
                   })()}
                   {/* {props.data.photo === '' ? (
                     <img
-                      src="//localhost:3002/images/member/preset_avatar.png"
+                      src="//13.112.90.13:3002/images/member/preset_avatar.png"
                       alt=""
                     />
                   ) : (
@@ -78,7 +78,7 @@ const Pt_listitem = props => {
                   )}
                   {props.data.photo === null ? (
                     <img
-                      src="//localhost:3002/images/member/preset_avatar.png"
+                      src="//13.112.90.13:3002/images/member/preset_avatar.png"
                       alt=""
                     />
                   ) : (

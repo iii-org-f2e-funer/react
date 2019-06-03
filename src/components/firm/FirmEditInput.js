@@ -79,7 +79,7 @@ class FirmEditInput extends React.Component {
     }
     console.log(fd)
     if (this.state.insert) {
-      fetch('//localhost:3002/firm/insertAccount', {
+      fetch('//13.112.90.13:3002/firm/insertAccount', {
         method: 'POST',
         body: fd,
         credentials: 'include',
@@ -95,7 +95,7 @@ class FirmEditInput extends React.Component {
           }
         })
     } else {
-      fetch('//localhost:3002/firm/updateAccount', {
+      fetch('//13.112.90.13:3002/firm/updateAccount', {
         method: 'POST',
         body: fd,
         credentials: 'include',
@@ -285,7 +285,7 @@ class FirmEditInput extends React.Component {
                       <img
                         key={index}
                         src={
-                          'http://localhost:3002/images/firm/' + item.image_path
+                          'http://13.112.90.13:3002/images/firm/' + item.image_path
                         }
                         alt=""
                       />

@@ -29,7 +29,7 @@ class FirmEdit extends React.Component {
     }
   }
   componentDidMount() {
-    fetch('//localhost:3002/firm/firmInfo', {
+    fetch('//13.112.90.13:3002/firm/firmInfo', {
       credentials: 'include',
     })
       .then(res => res.json())
@@ -48,7 +48,7 @@ class FirmEdit extends React.Component {
       })
   }
   cancelEdit = () => {
-    fetch('//localhost:3002/firm/firmInfo', {
+    fetch('//13.112.90.13:3002/firm/firmInfo', {
       credentials: 'include',
     })
       .then(res => res.json())

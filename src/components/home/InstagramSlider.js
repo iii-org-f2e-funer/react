@@ -16,7 +16,7 @@ class InstagramSlider extends React.Component {
   }
   componentDidMount() {
     // this.props.events
-    fetch('http://localhost:3002/home/homeInstagram')
+    fetch('http://13.112.90.13:3002/home/homeInstagram')
       .then(res => res.json())
       .then(obj => {
         if (obj.success === true) {
@@ -83,8 +83,8 @@ class InstagramSlider extends React.Component {
                       <img
                         src={
                           item.isFirm
-                            ? 'http://localhost:3002/images/firm/' + item.avatar
-                            : 'http://localhost:3002/images/member/' +
+                            ? 'http://13.112.90.13:3002/images/firm/' + item.avatar
+                            : 'http://13.112.90.13:3002/images/member/' +
                               item.avatar
                         }
                         alt=""

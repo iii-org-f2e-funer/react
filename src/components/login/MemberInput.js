@@ -36,7 +36,7 @@ class MemberInput extends React.Component {
         account: this.state.account,
         password: this.state.password,
       }
-      fetch('//localhost:3002/member/userLogin', {
+      fetch('//13.112.90.13:3002/member/userLogin', {
         method: 'POST',
         body: JSON.stringify(data),
         credentials: 'include',

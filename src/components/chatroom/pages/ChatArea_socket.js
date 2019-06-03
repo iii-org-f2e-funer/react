@@ -19,7 +19,7 @@ class ChatArea extends React.Component {
       member_name: '',
       member_chat_data: [],
       start_chat_time: '',
-      endpoint: 'http://localhost:8080',
+      endpoint: 'http://13.112.90.13:8080',
       newChatData: [],
       inputContent: '',
     }
@@ -40,7 +40,7 @@ class ChatArea extends React.Component {
 
       //fecth data from database
       const response = await fetch(
-        `http://localhost:3002/chatroom/message/${
+        `http://13.112.90.13:3002/chatroom/message/${
           this.props.logInId
         }/${theUrl}`,
         {
@@ -149,7 +149,7 @@ class ChatArea extends React.Component {
       console.log(this.newChatData)
       //Post data to database
       // const post_data = fetch(
-      //   `http://localhost:3002/chatroom/message/${this.props.logInId}/${
+      //   `http://13.112.90.13:3002/chatroom/message/${this.props.logInId}/${
       //     this.state.member_name
       //   }`,
       //   {

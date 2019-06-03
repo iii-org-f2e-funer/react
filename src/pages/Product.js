@@ -17,7 +17,7 @@ export default class product extends React.Component {
   }
   componentDidMount() {
     ///////////////////////////////////////////////////////////////////////////////
-    fetch('//localhost:3002/product/productlist', {})
+    fetch('//13.112.90.13:3002/product/productlist', {})
       //fetch prodct_manage
       .then(response => {
         // 這裡會得到一個 ReadableStream 的物件
@@ -34,7 +34,7 @@ export default class product extends React.Component {
         // console.log('錯誤:', err)
       })
     ////////////////////////////////////////////////////////////////////////////////
-    fetch('//localhost:3002/product/productlist2', {})
+    fetch('//13.112.90.13:3002/product/productlist2', {})
       //fetch product_sid=sid的所有圖片path
       .then(response => {
         // 這裡會得到一個 ReadableStream 的物件
@@ -66,7 +66,7 @@ export default class product extends React.Component {
         console.log('錯誤:', err)
       })
     ///////////////////////////////////////////////////////////////////////////////
-    fetch('//localhost:3002/product/game_type', {})
+    fetch('//13.112.90.13:3002/product/game_type', {})
       //fetch game_type
       .then(response => {
         return response.json()
@@ -82,7 +82,7 @@ export default class product extends React.Component {
   }
   gotodetail = sid => () => {
     // console.log(sid)
-    // window.location.href = 'http://localhost:3000/ProductDetail/sid:' + sid
+    // window.location.href = 'http://13.112.90.13:3000/ProductDetail/sid:' + sid
     localStorage.setItem('item.sid', sid)
   }
   search = () => () => {

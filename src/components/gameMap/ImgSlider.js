@@ -48,7 +48,7 @@ class Slider extends React.Component {
     // fetch(GetStore + '&lat=' + lat + '&lng=' + lng)
     console.log(data)
 
-    fetch('http://127.0.0.1:3002/gameMap/nearby/')
+    fetch('http://13.112.90.13:3002/gameMap/nearby/')
       .then(res => res.json())
       .then(data => {
         console.log('AAAAAAAAA', data)

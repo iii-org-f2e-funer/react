@@ -9,7 +9,7 @@ class UserMenu extends React.Component {
     }
   }
   componentDidMount() {
-    fetch('//localhost:3002/firm/userInfo', {
+    fetch('//13.112.90.13:3002/firm/userInfo', {
       credentials: 'include',
     })
       .then(res => res.json())
@@ -23,7 +23,7 @@ class UserMenu extends React.Component {
   }
   componentWillReceiveProps(nextProps) {
     if (this.props.avatarRefresh !== nextProps.avatarRefresh) {
-      fetch('//localhost:3002/firm/userInfo', {
+      fetch('//13.112.90.13:3002/firm/userInfo', {
         credentials: 'include',
       })
         .then(res => res.json())
@@ -54,7 +54,7 @@ class UserMenu extends React.Component {
                   <img
                     alt=""
                     src={
-                      'http://localhost:3002/images/member/' + this.state.avatar
+                      'http://13.112.90.13:3002/images/member/' + this.state.avatar
                     }
                   />
                 )}

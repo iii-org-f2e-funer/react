@@ -36,7 +36,7 @@ class site_reservation extends React.Component {
     let r = window.confirm('取消此場地預定訂單?')
 
     if (r === true) {
-      fetch('//localhost:3002/reservationInfo', {
+      fetch('//13.112.90.13:3002/reservationInfo', {
         method: 'PUT',
         credentials: 'include',
         headers: {
@@ -56,7 +56,7 @@ class site_reservation extends React.Component {
   }
 
   readData() {
-    fetch('//localhost:3002/reservationInfo', {
+    fetch('//13.112.90.13:3002/reservationInfo', {
       credentials: 'include',
       headers: {
         Accept: 'application/json',

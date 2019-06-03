@@ -12,7 +12,7 @@ class Instagram extends React.Component {
     this.state = { userInfo: {}, isGuest: true }
   }
   componentWillMount() {
-    fetch('//localhost:3002/firm/userInfo', {
+    fetch('//13.112.90.13:3002/firm/userInfo', {
       credentials: 'include',
     })
       .then(res => res.json())

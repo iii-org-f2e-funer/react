@@ -13,7 +13,7 @@ class Pt_cancelhost extends React.Component {
     this.setState({ cancelmodalshow: true })
 
     console.log(this.props.pt_sid)
-    fetch('//localhost:3002/event/cancelhost', {
+    fetch('//13.112.90.13:3002/event/cancelhost', {
       method: 'POST',
       body: JSON.stringify({ pt_sid: this.props.pt_sid }),
       headers: {

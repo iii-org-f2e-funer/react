@@ -27,7 +27,7 @@ class MemberMenu extends React.Component {
     }
   }
   redirect = () => {
-    fetch('//localhost:3002/firm/userInfo', {
+    fetch('//13.112.90.13:3002/firm/userInfo', {
       credentials: 'include',
     })
       .then(res => res.json())
@@ -41,7 +41,7 @@ class MemberMenu extends React.Component {
       })
   }
   componentDidMount() {
-    fetch('//localhost:3002/firm/userInfo', {
+    fetch('//13.112.90.13:3002/firm/userInfo', {
       credentials: 'include',
     })
       .then(res => res.json())
@@ -64,7 +64,7 @@ class MemberMenu extends React.Component {
   updatePhoto = event => {
     var fd = new FormData()
     fd.append('photo', event.target.files[0])
-    fetch('//localhost:3002/member/updatePhoto', {
+    fetch('//13.112.90.13:3002/member/updatePhoto', {
       method: 'POST',
       credentials: 'include',
       body: fd,
@@ -109,7 +109,7 @@ class MemberMenu extends React.Component {
                       <img
                         alt=""
                         src={
-                          'http://localhost:3002/images/member/' + data.photo
+                          'http://13.112.90.13:3002/images/member/' + data.photo
                         }
                       />
                     )}

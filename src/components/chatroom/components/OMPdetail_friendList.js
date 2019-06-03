@@ -21,7 +21,7 @@ class OMPdetail_friendList extends React.Component {
     console.log(theUrl.split('/'))
     var toID = theUrl.split('/')[theUrl.split('/').length - 1].replace('ID', '')
     this.setState({ toID: toID })
-    fetch('http://localhost:3002/chatroom/openMemberPage/' + toID, {
+    fetch('http://13.112.90.13:3002/chatroom/openMemberPage/' + toID, {
       method: 'GET',
       headers: { 'Content-type': 'application/json' },
     })
@@ -71,7 +71,7 @@ class OMPdetail_friendList extends React.Component {
       })
     //fetch status
 
-    fetch(`http://localhost:3002/chatroom/friendList/${this.props.logInId}`, {
+    fetch(`http://13.112.90.13:3002/chatroom/friendList/${this.props.logInId}`, {
       method: 'GET',
       headers: { 'Content-type': 'application/json' },
     })

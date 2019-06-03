@@ -32,7 +32,7 @@ class CheckCode extends React.Component {
     const code = values.code
     console.log(code)
     const data = { code: code }
-    fetch('//localhost:3002/firm/checkCode', {
+    fetch('//13.112.90.13:3002/firm/checkCode', {
       method: 'POST',
       body: JSON.stringify(data),
       credentials: 'include',
@@ -73,7 +73,7 @@ class CheckCode extends React.Component {
     }
     Object.keys(data).forEach(key => fd.append(key, data[key]))
     fd.append('files', this.fileInput.files[0])
-    fetch('//localhost:3002/firm/codeInfo', {
+    fetch('//13.112.90.13:3002/firm/codeInfo', {
       method: 'POST',
       body: fd,
       credentials: 'include',

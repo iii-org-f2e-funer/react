@@ -23,12 +23,12 @@ class UserEvent extends React.Component {
   componentWillMount() {
     //抓登入資料
     if (this.props.userInfo.login) {
-      fetch('//localhost:3002/firm/userInfo', {
+      fetch('//13.112.90.13:3002/firm/userInfo', {
         credentials: 'include',
       })
         .then(res => res.json())
         .then(obj => {
-          fetch('//localhost:3002/event/applyedpt', {
+          fetch('//13.112.90.13:3002/event/applyedpt', {
             method: 'POST',
             body: JSON.stringify({ account: obj.body.account }),
             headers: {
@@ -39,7 +39,7 @@ class UserEvent extends React.Component {
             .then(obj => {
               this.setState({ applyed: obj, applyeddone: true })
             })
-          fetch('//localhost:3002/event/hostedpt', {
+          fetch('//13.112.90.13:3002/event/hostedpt', {
             method: 'POST',
             body: JSON.stringify({ account: obj.body.account }),
             headers: {

@@ -13,7 +13,7 @@ class Product_manage extends React.Component {
     }
   }
   componentDidMount() {
-    fetch('//localhost:3002/firm/userInfo', {
+    fetch('//13.112.90.13:3002/firm/userInfo', {
       credentials: 'include',
     })
       .then(res => res.json())
@@ -26,7 +26,7 @@ class Product_manage extends React.Component {
           this.props.history.push('/')
         }
       })
-    fetch('//localhost:3002/product/product_manage', { credentials: 'include' })
+    fetch('//13.112.90.13:3002/product/product_manage', { credentials: 'include' })
       //fetch order
       .then(response => {
         return response.json()
@@ -48,7 +48,7 @@ class Product_manage extends React.Component {
   handleHide = () => {
     this.setState({ editPopup: false })
 
-    fetch('//localhost:3002/product/product_manage', { credentials: 'include' })
+    fetch('//13.112.90.13:3002/product/product_manage', { credentials: 'include' })
       //fetch order
       .then(response => {
         return response.json()
@@ -68,7 +68,7 @@ class Product_manage extends React.Component {
     const data = {
       sid: insid,
     }
-    fetch(`//localhost:3002/product/product_del`, {
+    fetch(`//13.112.90.13:3002/product/product_del`, {
       method: 'post',
       body: JSON.stringify(data),
       credentials: 'include',

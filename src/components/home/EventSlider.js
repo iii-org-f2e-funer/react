@@ -21,7 +21,7 @@ class EventSlider extends React.Component {
   }
   componentDidMount() {
     // this.props.events
-    fetch('http://localhost:3002/home/homeEvent')
+    fetch('http://13.112.90.13:3002/home/homeEvent')
       .then(res => res.json())
       .then(obj => {
         if (obj.success === true) {

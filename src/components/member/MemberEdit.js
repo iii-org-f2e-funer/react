@@ -20,7 +20,7 @@ class AccountEdit extends React.Component {
     }
   }
   // componentDidMount() {
-  //   fetch('//localhost:3002/firm/userInfo', {
+  //   fetch('//13.112.90.13:3002/firm/userInfo', {
   //     credentials: 'include',
   //   })
   //     .then(res => res.json())
@@ -36,7 +36,7 @@ class AccountEdit extends React.Component {
   //     })
   // }
   cancelEdit = () => {
-    fetch('//localhost:3002/firm/userInfo', {
+    fetch('//13.112.90.13:3002/firm/userInfo', {
       credentials: 'include',
     })
       .then(res => res.json())
