@@ -15,12 +15,10 @@ class ProductDetail extends React.Component {
     }
   }
   componentDidMount() {
+    var gotit = {}
+
     fetch('//localhost:3002/product/productlist', {})
-      //fetch prodct_manage
       .then(response => {
-        // 這裡會得到一個 ReadableStream 的物件
-        // console.log(response)
-        // 可以透過 blob(), json(), text() 轉成可用的資訊
         return response.json()
       })
       .then(jsonData => {
@@ -29,11 +27,10 @@ class ProductDetail extends React.Component {
         var data_leng = Object.keys(jsonData).length
         for (let i = 0; i < data_leng; i++) {
           if (this.state.data[i].sid == sid) {
-            var gotit = this.state.data[i]
+            gotit = this.state.data[i]
             break
           }
         }
-        //換行處理
         switch (gotit.gametype_id) {
           case 0:
             this.state.type = '全部'
@@ -91,49 +88,60 @@ class ProductDetail extends React.Component {
         gotit.createDate = gotit.createDate.slice(0, 10)
         gotit.description = gotit.description.replace(/\s/g, '<br>')
         this.setState({ gotit: gotit })
+
+        fetch('//localhost:3002/product/productlist2', {})
+          .then(response => {
+            return response.json()
+          })
+          .then(jsonData => {
+            var local = window.location.href
+            var long = local.length
+            var sid_index = local.lastIndexOf('sid:')
+            var sid = local.slice(sid_index + 4, long)
+            // alert(sid_index + 'spice:' + sid + 'length:' + long)
+            const gotdata2 = jsonData
+            var data_leng = Object.keys(jsonData).length
+            for (let i = 0; i < data_leng; i++) {
+              if (gotdata2[i].sid == sid) {
+                var a1 =
+                  'http://192.168.27.25/happy6/product_manage/' +
+                  gotdata2[i].image_path
+                var image = {
+                  original: a1,
+                  thumbnail: a1,
+                }
+                this.state.images.push(image)
+              }
+            }
+            this.setState({ images: this.state.images })
+            // console.log(this.state.images)
+          })
+          .catch(err => {
+            console.log('錯誤:', err)
+          })
+      })
+    fetch('//localhost:3002/product/firm', {})
+      .then(response => {
+        return response.json()
+      })
+      .then(jsonData => {
+        var firmname
+        console.log(jsonData)
         console.log(gotit)
+        for (let i = 0; i < jsonData.length; i++) {
+          if (jsonData[i].sid === gotit.seller_sid) {
+            firmname = jsonData[i].firmname
+            break
+          }
+        }
+        console.log(firmname)
+        this.setState({ firmname: firmname })
       })
       .catch(err => {
         console.log('錯誤:', err)
       })
 
-    fetch('//localhost:3002/product/productlist2', {})
-      //fetch prodct_images
-      .then(response => {
-        // 這裡會得到一個 ReadableStream 的物件
-        // console.log(response)
-        // 可以透過 blob(), json(), text() 轉成可用的資訊
-        return response.json()
-      })
-      .then(jsonData => {
-        // this.setState({ data: jsonData })
-        //抓localStorage.sid
-        // var sid = localStorage.getItem('item.sid')
-        var local = window.location.href
-        var long = local.length
-        var sid_index = local.lastIndexOf('sid:')
-        var sid = local.slice(sid_index + 4, long)
-        // alert(sid_index + 'spice:' + sid + 'length:' + long)
-        const gotdata2 = jsonData
-        var data_leng = Object.keys(jsonData).length
-        for (let i = 0; i < data_leng; i++) {
-          if (gotdata2[i].sid == sid) {
-            var a1 =
-              'http://192.168.27.25/happy6/product_manage/' +
-              gotdata2[i].image_path
-            var image = {
-              original: a1,
-              thumbnail: a1,
-            }
-            this.state.images.push(image)
-          }
-        }
-        this.setState({ images: this.state.images })
-        // console.log(this.state.images)
-      })
-      .catch(err => {
-        console.log('錯誤:', err)
-      })
+    console.log(gotit)
   }
   add = () => () => {
     this.state.number++
@@ -197,7 +205,7 @@ class ProductDetail extends React.Component {
                 </div>
                 <div className="detailCard">
                   <h3>{this.state.gotit.productName}</h3>
-                  <p>出售商:{this.state.gotit.seller_sid}</p>
+                  <p>出售商:{this.state.firmname}</p>
                   <p>上架日期:{this.state.gotit.createDate}</p>
                   <p>分類:{this.state.type}</p>
                   <h4>

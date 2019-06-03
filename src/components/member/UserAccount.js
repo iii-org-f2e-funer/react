@@ -18,7 +18,7 @@ class UserAccount extends React.Component {
       .then(res => res.json())
       .then(obj => {
         if (obj.success) {
-          console.log(obj)
+          // console.log(obj)
           this.setState({
             data: obj.body,
           })
@@ -39,7 +39,6 @@ class UserAccount extends React.Component {
       .then(res => res.json())
       .then(obj => {
         if (obj.success) {
-
           this.setState({
             data: obj.body,
           })
@@ -86,9 +85,9 @@ class UserAccount extends React.Component {
             <div className="flex mb-3">
               <label className="col-2">地址</label>
               <div className="col-7">
-                {this.state.data.city +
-                  this.state.data.site +
-                  this.state.data.street}
+                {this.state.data.city}
+                {this.state.data.site}
+                {this.state.data.street}
               </div>
             </div>
 

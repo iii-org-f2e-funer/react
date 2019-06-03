@@ -3,8 +3,9 @@ import React from 'react'
 import { withRouter } from 'react-router'
 import actions from '../../redux/action/userInfo.js'
 import { connect } from 'react-redux'
-import Account from '../../components/firm/Account'
-
+import '../../styles/cart/cart.scss'
+import { Button, Table, InputGroup } from 'react-bootstrap'
+// import '../../styles/cart/cart.scss'
 class UserShopping extends React.Component {
   constructor(props) {
     super(props)
@@ -16,31 +17,28 @@ class UserShopping extends React.Component {
 
   componentDidMount() {
     fetch('//localhost:3002/member/productorder', {})
-      //fetch prodct_manage
       .then(response => {
-        // 這裡會得到一個 ReadableStream 的物件
-        // console.log(response)
-        // 可以透過 blob(), json(), text() 轉成可用的資訊
         return response.json()
       })
       .then(jsonData => {
-        this.setState({ data: jsonData })
-        var d2_leng = Object.keys(jsonData).length
         var aa = []
-        for (let i = 0; i < d2_leng; i++) {
-          if (this.props.userInfo.account == jsonData[i].login_user_sid) {
+        console.log(jsonData)
+        console.log(this.props.userInfo.account)
+        for (let i = 0; i < jsonData.length; i++) {
+          if (jsonData[i].login_user_sid == this.props.userInfo.account) {
+            if (jsonData[i].getmethod == 'tohome') {
+              jsonData[i].getmethod = '宅配'
+            } else {
+              jsonData[i].getmethod = '超商取貨'
+            }
+            jsonData[i].cre_date = jsonData[i].cre_date.slice(0, 16)
             aa.push(jsonData[i])
           }
         }
-        console.log(this.props.userInfo.account)
-        console.log(jsonData)
         console.log(aa)
         this.setState({
           data1: aa,
         })
-      })
-      .catch(err => {
-        // console.log('錯誤:', err)
       })
   }
   render() {
@@ -50,36 +48,42 @@ class UserShopping extends React.Component {
         <hr />
         <div className="cart">
           <div className="myfav-table mb-5">
-            <table striped bordered hover>
-              <thead className="table_head text-nowrap">
+            <Table striped bordered hover>
+              <thead className="table_head">
                 <tr>
-                  <th scope="col">#</th>
+                  {' '}
+                  <th scope="col">date</th>
                   <th scope="col">訂單編號</th>
                   <th scope="col">訂購人姓名</th>
                   <th scope="col">收貨方法</th>
                   <th scope="col">付款方式</th>
                   <th scope="col">我要退貨</th>
-                  <th scope="col">date</th>
                 </tr>
               </thead>
               <tbody>
                 {this.state.data1.map((item, index, array) => (
                   <tr>
-                    <td key={index}>{index + 1}</td>
-                    <td>{this.state.data[index].order_sid}</td>
-                    <td>{this.state.data[index].order_name}</td>
-                    <td>{this.state.data[index].getmethod}</td>
-                    <td>{this.state.data[index].paymethod}</td>
-                    <td>{this.state.data[index].cre_date}</td>
-                    <td>
-                      <a className="btn btn-primary text-nowrap" href="#">退貨</a>
+                    {' '}
+                    <td className="name">{this.state.data1[index].cre_date}</td>
+                    <td className="name">
+                      {this.state.data1[index].order_sid}
                     </td>
-                    {/* <td>{this.state.data[index].number}</td> */}
-                    {/* <td>{this.state.data[index].totall}</td> */}
+                    <td className="name">
+                      {this.state.data1[index].order_name}
+                    </td>
+                    <td className="name">
+                      {this.state.data1[index].getmethod}
+                    </td>
+                    <td className="name">
+                      {this.state.data1[index].paymethod}
+                    </td>{' '}
+                    <td>
+                      <button className="button-white button">退貨</button>
+                    </td>
                   </tr>
                 ))}
               </tbody>
-            </table>
+            </Table>
           </div>
         </div>
       </>

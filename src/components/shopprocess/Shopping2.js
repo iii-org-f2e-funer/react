@@ -1,15 +1,15 @@
-import React from 'react';
-import { Button, Form } from 'react-bootstrap';
-import '../../styles/product/shop.scss';
-import Account from '../../components/firm/Account';
-import actions from '../../redux/action/userInfo.js';
-import { connect } from 'react-redux';
-import { withRouter } from 'react-router';
-import { Link } from 'react-router-dom';
+import React from 'react'
+import { Button, Form } from 'react-bootstrap'
+import '../../styles/product/shop.scss'
+import Account from '../../components/firm/Account'
+import actions from '../../redux/action/userInfo.js'
+import { connect } from 'react-redux'
+import { withRouter } from 'react-router'
+import { Link } from 'react-router-dom'
 
 class Shopping2 extends React.Component {
   constructor() {
-    super();
+    super()
     this.state = {
       years: 0,
       months: 0,
@@ -18,16 +18,16 @@ class Shopping2 extends React.Component {
       paymethod: localStorage.paymethod,
       getmethod: localStorage.method_funshop,
       order: {},
-    };
+    }
   }
   componentDidMount() {
-    this.setState({ login: this.props.userInfo.account });
+    this.setState({ login: this.props.userInfo.account })
   }
   finish2 = () => {
-    var temp_order = JSON.parse(localStorage.temp_order);
-    var order_str = localStorage.choose_order;
-    var ccc = JSON.parse(order_str);
-    console.log(ccc);
+    var temp_order = JSON.parse(localStorage.temp_order)
+    var order_str = localStorage.choose_order
+    var ccc = JSON.parse(order_str)
+    console.log(ccc)
     //////////////////////////////////////////////////// orderlist ////////////////////////////
     var order = {
       //////user_sid
@@ -58,17 +58,17 @@ class Shopping2 extends React.Component {
       cre_date: '',
       ///////////seller
       seller: ccc[0].seller,
-    };
+    }
 
     //////////////////////////////////////////////////////////////////////////////////
-    alert('訂單完成');
+    alert('訂單完成')
     if (localStorage.method_funshop === 'tohome') {
-      order.Freight = 130;
+      order.Freight = 130
     } else {
-      order.Freight = 60;
+      order.Freight = 60
     }
-    this.setState({ order: order });
-    console.log(order);
+    this.setState({ order: order })
+    console.log(order)
 
     ////////////////////////////////////// 新增訂單 //////////////////////////////////////////////
 
@@ -83,24 +83,24 @@ class Shopping2 extends React.Component {
       .then(res => res.json())
       .then(obj => {
         if (obj.success) {
-          console.log('order success');
+          console.log('order success')
         } else {
-          console.log(obj.message);
+          console.log(obj.message)
         }
-      });
-  };
+      })
+  }
   years = event => {
-    this.setState({ year_card: event.target.value });
-  };
+    this.setState({ year_card: event.target.value })
+  }
   months = event => {
-    this.setState({ month_card: event.target.value });
-  };
+    this.setState({ month_card: event.target.value })
+  }
   card = event => {
-    this.setState({ card_number: event.target.value });
-  };
+    this.setState({ card_number: event.target.value })
+  }
   csv = event => {
-    this.setState({ csv: event.target.value });
-  };
+    this.setState({ csv: event.target.value })
+  }
   render() {
     if (localStorage.paymethod === 'MASTERCARD') {
       return (
@@ -268,7 +268,7 @@ class Shopping2 extends React.Component {
             </div>
           </div>
         </>
-      );
+      )
     } else if (localStorage.paymethod === 'ATM') {
       return (
         <>
@@ -312,7 +312,7 @@ class Shopping2 extends React.Component {
             </div>
           </div>
         </>
-      );
+      )
     } else if (localStorage.paymethod === 'TOHOMEPAY') {
       return (
         <>
@@ -361,7 +361,7 @@ class Shopping2 extends React.Component {
             </div>
           </div>
         </>
-      );
+      )
     }
   }
 }
@@ -369,7 +369,7 @@ class Shopping2 extends React.Component {
 function mapStateToProp(store) {
   return {
     userInfo: store.userInfo,
-  };
+  }
 }
 
 export default withRouter(
@@ -379,4 +379,4 @@ export default withRouter(
       userInfoAction: actions.userInfo,
     }
   )(Shopping2)
-);
+)

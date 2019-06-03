@@ -11,11 +11,14 @@ import '../styles/chatroom/openMemberPage.scss'
 class OpenMemberPage extends React.Component {
   constructor(props) {
     super(props)
-    this.state = { url: '', urlKey: '' }
+    this.state = { url: '', urlKey: '', friend: 'review' }
   }
   componentDidMount() {
     let theUrl_key = this.props.location.key
     this.setState({ urlKey: theUrl_key })
+  }
+  handleaddFriend = () => {
+    this.setState({ friend: 'approve' })
   }
   render() {
     if (!this.props.userInfo.account) {
@@ -33,7 +36,9 @@ class OpenMemberPage extends React.Component {
       <div className="OpenMemberPage">
         <div className="container d-flex">
           <OMPsidePage
+            handleaddFriend={this.handleaddFriend}
             url={this.props.location.pathname}
+            friendCheck={this.state.friend}
             logInId={this.props.userInfo.account}
           />
           <OMPdetail url={this.props.location.pathname} />

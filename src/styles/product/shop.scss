@@ -22,6 +22,19 @@ $shadow: 0px 1px 4px rgba(black, 0.2);
   .text-mute {
     color: red;
   }
+  select{
+    width: 45%;
+    margin:  20px 10px;
+    display: inline;
+  }
+  .form-group{
+    margin-bottom: 40px;
+    .form-label{
+      font-size:25px;
+      color:rgb(158, 149, 149);
+      font-weight: 500;
+    }
+  }
   .orderdetail {
     width: 100%;
     background: #fff;
@@ -152,21 +165,27 @@ $shadow: 0px 1px 4px rgba(black, 0.2);
       }
     }
   }
-  .buttons {
-    margin-left: 60%;
-    display: flex;
-    .buttonall {
-      margin: 10px;
-    }
+  .button1{
+    width: 100%;
+    height: 45px;
+    margin-bottom: 35px;
+  }
+  .button2{
+    width: 100%;
+    height: 45px;
+    margin-bottom: 15px;
   }
   .form-check {
     margin: 30px;
     font-size: 16px;
   }
   .pay-control {
-    width: 300px;
+    margin: 0;
+    width: 100%;
+    height: 45px;
     color: #949494;
-    padding: 2px;
+    background: #fff;
+    margin-bottom: 30px; 
   }
 }
 
@@ -258,10 +277,16 @@ $shadow: 0px 1px 4px rgba(black, 0.2);
     width: 200px;
   }
   .buttons {
-    margin-left: 60%;
-    display: flex;
-    .buttonall {
-      margin: 10px;
+    .button1{
+      width: 600px;
+     
+      height: 45px;
+      
+    }
+    .button2{
+      width: 600px;
+      height: 45px;
+      margin-bottom: 20px;
     }
   }
   .form-check {
@@ -273,8 +298,17 @@ $shadow: 0px 1px 4px rgba(black, 0.2);
 //--------------------------------------------------------------------------------------------3
 
 .Shopping3 {
+  .title-firmname{
+    font-size: 26px;
+    color: #e2a2a2;
+    font-weight: 700px;
+    text-align: center;
+    margin-bottom: 20px;
+  }
   .button3{
     margin: 20px;
+    width: 250px;
+    height: 45px;
   }
   background: $color_background;
   .container1 {

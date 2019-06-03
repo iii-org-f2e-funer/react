@@ -248,7 +248,7 @@ export default class product extends React.Component {
                       onClick={this.gotodetail(item.sid)}
                     >
                       <Card
-                        style={{ width: '170px', height: '300px' }}
+                        style={{ width: '250px', height: '400px' }}
                         className="allcard"
                       >
                         <Card.Img
@@ -260,11 +260,11 @@ export default class product extends React.Component {
                           }
                         />
                         <div>
-                          <Card.Title className="cardtitle">
-                            {item.productName}
-                          </Card.Title>
                           <div className="card-priceall ">
                             <div className="p-1 card-price">
+                              <div className="mb-2 productname">
+                                {item.productName}
+                              </div>
                               <h4>${item.price}</h4>
                             </div>
                           </div>
