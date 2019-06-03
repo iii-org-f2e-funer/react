@@ -11,7 +11,7 @@ class User extends React.Component {
     return (
       <>
         <div className="user">
-          <Link className="userInfo" to="">
+          <Link className="userInfo" to="/member/account">
             <img
               src={
                 this.props.userInfo.isFirm

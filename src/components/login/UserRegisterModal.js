@@ -191,14 +191,13 @@ class UserRegisterModal extends React.Component {
                 ref={el => (this.inputemail = el)}
               />
 
-              <Button
-                variant="primary"
+              <button
                 type="submit"
                 className="button button--lg"
                 onClick={this.UserRegisterRequest}
               >
                 註冊
-              </Button>
+              </button>
             </form>
             <div className="register center">
               註冊即同意<span className="blue">隱私權政策</span>和
