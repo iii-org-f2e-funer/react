@@ -63,10 +63,8 @@ class NewProduct extends React.Component {
       .then(res => res.json())
       .then(obj => {
         if (obj.success) {
-          console.log(obj.message)
           this.props.handleHide()
         } else {
-          console.log(obj.message)
           this.props.handleHide()
         }
       })

@@ -19,9 +19,13 @@ class FirmRegisterModal extends React.Component {
   }
   checkStore = evt => {
     this.setState({ store: evt.target.value })
+    this.inputunicode.value = ''
   }
   checkunicode = evt => {
     if (evt.target.value !== '') {
+      if (evt.target.value.length !== 8) {
+        this.setState({ unicodeRemindText: '請輸入8碼統編' })
+      }
       let unicode = evt.target.value
       let data = { unicode: evt.target.value }
       fetch('//localhost:3002/firm/unicodeCheck', {
@@ -49,6 +53,7 @@ class FirmRegisterModal extends React.Component {
   noremindText = () => {
     this.setState({
       remindText: '',
+      remindText2: '',
     })
   }
   noremindText2 = () => {
@@ -66,7 +71,7 @@ class FirmRegisterModal extends React.Component {
       emailRemindText: '',
     })
   }
-  nounicodeRemindText = () =>{
+  nounicodeRemindText = () => {
     this.setState({
       unicodeRemindText: '',
     })
@@ -147,7 +152,7 @@ class FirmRegisterModal extends React.Component {
       var data = {
         account: this.state.account,
         password: this.state.password,
-        uniform: this.state.uniform,
+        unicode: this.state.unicode,
         email: this.state.email,
       }
       fetch('//localhost:3002/firm/firmRegister', {
@@ -253,7 +258,7 @@ class FirmRegisterModal extends React.Component {
               <input
                 className="pl-3"
                 name="uniform"
-                type="text"
+                type="number"
                 required
                 onFocus={this.nounicodeRemindText}
                 onBlur={this.checkunicode}

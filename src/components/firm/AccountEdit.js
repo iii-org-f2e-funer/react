@@ -1,6 +1,6 @@
 import React from 'react'
 import TWzipcode from 'react-twzipcode'
-
+import { Form } from 'react-bootstrap'
 class AccountEdit extends React.Component {
   constructor(props) {
     super(props)
@@ -16,7 +16,13 @@ class AccountEdit extends React.Component {
       ori_password: '',
       password: '',
       password2: '',
+      remindText: '',
     }
+  }
+  noremindText = () => {
+    this.setState({
+      remindText: '',
+    })
   }
   handlecityChange = evt =>
     this.setState({
@@ -28,14 +34,14 @@ class AccountEdit extends React.Component {
     })
   ori_password = evt => {
     if (evt.target.value.length > 0 && evt.target.value.length < 8) {
-      alert('密碼需8碼以上')
+      this.setState({ remindText: '原密碼需8碼以上' })
       this.ori_password.value = ''
     }
     this.setState({ ori_password: evt.target.value })
   }
   checkPassword = evt => {
     if (evt.target.value.length > 0 && evt.target.value.length < 8) {
-      alert('密碼需8碼以上')
+      this.setState({ remindText: '密碼需8碼以上' })
       this.inputPassword.value = ''
     } else {
       this.setState({ password: evt.target.value })
@@ -45,9 +51,10 @@ class AccountEdit extends React.Component {
     if (evt.target.value !== '') {
       this.state.passwordCheck = evt.target.value
       if (this.state.password2 !== this.state.password) {
-        alert('密碼不一致!')
+        this.setState({ remindText: '密碼不一致' })
         this.inputPassword.value = ''
         this.inputPassword2.value = ''
+        this.setState({ password: '', password2: '' })
       }
     }
   }
@@ -100,7 +107,7 @@ class AccountEdit extends React.Component {
         if (obj.success) {
           this.props.cancelEdit()
         } else {
-          alert(obj.message)
+          this.setState({ remindText: obj.message })
           this.ori_password.value = ''
           this.inputPassword.value = ''
           this.inputPassword2.value = ''
@@ -193,6 +200,7 @@ class AccountEdit extends React.Component {
           <input
             type="password"
             className="col-3 pl-3"
+            onFocus={this.noremindText}
             onBlur={this.ori_Password}
             ref={el => (this.ori_password = el)}
             onChange={e => this.setState({ ori_password: e.target.value })}
@@ -204,6 +212,7 @@ class AccountEdit extends React.Component {
             type="password"
             className="col-3 pl-3"
             value={this.state.password}
+            onFocus={this.noremindText}
             onBlur={this.checkPassword}
             ref={el => (this.inputPassword = el)}
             onChange={e => this.setState({ password: e.target.value })}
@@ -215,11 +224,13 @@ class AccountEdit extends React.Component {
             type="password"
             className="col-3 pl-3"
             value={this.state.password2}
+            onFocus={this.noremindText}
             onBlur={this.checkPasswordAgain}
             ref={el => (this.inputPassword2 = el)}
             onChange={e => this.setState({ password2: e.target.value })}
           />
         </div>
+        <Form.Text className="red">{this.state.remindText}</Form.Text>
         <button className="button mt-3 mr-3" onClick={this.updatePassword}>
           確認更改密碼
         </button>
