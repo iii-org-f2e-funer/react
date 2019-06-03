@@ -251,7 +251,7 @@ class BoradGameMap extends React.Component {
           /> */}
         {/* <meta property="og:image" content={} /> */}
         {/* </Helmet> */}
-        <div className="mapContainer">
+        <div className="mapContainer" style={{ minHeight: '750px' }}>
           <div className="mapBody">
             <MapBody
               getStoreByMarker={data => this.getStoreByMarker(data)}
