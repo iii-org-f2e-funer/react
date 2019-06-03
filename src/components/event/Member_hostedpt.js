@@ -90,9 +90,9 @@ class Member_hostedpt extends React.Component {
                         </button>
                       </Link>
                       <Member_applyermodal pt_sid={this.props.data.pt_sid} />
-                      <div className="applystatus" id="approve">
+                      {/* <div className="applystatus" id="approve">
                         開啟聊天室
-                      </div>
+                      </div> */}
                     </>
                   )
                   break
