@@ -37,7 +37,7 @@ class UserMenu extends React.Component {
     }
   }
   render() {
-    console.log(this.state.avatar)
+    // console.log(this.state.avatar)
     return (
       <>
         {this.props.isOpen ? (
