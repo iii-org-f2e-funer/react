@@ -104,7 +104,10 @@ class Sidebar extends React.Component {
                     ) : (
                       <img
                         alt=""
-                        src="/public/images/member/preset_avatar.png"
+                        src={
+                          process.env.PUBLIC_URL +
+                          'images/member/preset_avatar.png'
+                        }
                       />
                     )}
                   </div>

@@ -42,13 +42,24 @@ class FirmMenu extends React.Component {
           <ul>
             <li>
               <div className="avatar mb-2">
-                <img
-                  src={
-                    'http://13.112.90.13:3002/images/firm/' +
-                    this.state.data.my_file
-                  }
-                  alt="無法顯示"
-                />
+                {this.state.data.my_file === '' ||
+                this.state.data.my_file === undefined ? (
+                  <img
+                    alt="無法顯示"
+                    src={
+                      process.env.PUBLIC_URL +
+                      '/images/member/preset_avatar.png'
+                    }
+                  />
+                ) : (
+                  <img
+                    src={
+                      'http://13.112.90.13:3002/images/firm/' +
+                      this.state.data.my_file
+                    }
+                    alt="無法顯示"
+                  />
+                )}
               </div>
             </li>
             <li>

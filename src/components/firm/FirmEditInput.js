@@ -285,7 +285,8 @@ class FirmEditInput extends React.Component {
                       <img
                         key={index}
                         src={
-                          'http://13.112.90.13:3002/images/firm/' + item.image_path
+                          'http://13.112.90.13:3002/images/firm/' +
+                          item.image_path
                         }
                         alt=""
                       />

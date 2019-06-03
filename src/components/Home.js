@@ -4,6 +4,8 @@ import '../styles/home.scss'
 import EventSlider from './home/EventSlider'
 import ProductSlider from './home/ProductSlider'
 import InstagramSlider from './home/InstagramSlider'
+import Preload_page from '../pages/Preload_page.js'
+
 class Home extends React.Component {
   constructor(props) {
     super(props)
@@ -12,7 +14,11 @@ class Home extends React.Component {
       homeProducts: [],
     }
   }
-  componentDidMount() {}
+  componentDidMount() {
+    setTimeout(() => {
+      this.props.closeAnimate()
+    }, 5400)
+  }
   render() {
     return (
       <>
@@ -124,6 +130,7 @@ class Home extends React.Component {
             </div>
           </div>
         </div>
+        {this.props.preload ? <Preload_page /> : ''}
       </>
     )
   }

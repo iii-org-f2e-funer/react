@@ -37,7 +37,7 @@ class UserMenu extends React.Component {
     }
   }
   render() {
-    console.log(this.state.avatar);
+    console.log(this.state.avatar)
     return (
       <>
         {this.props.isOpen ? (
@@ -48,14 +48,16 @@ class UserMenu extends React.Component {
                   <img
                     alt="無法顯示"
                     src={
-                      process.env.PUBLIC_URL + '/images/member/preset_avatar.png'
+                      process.env.PUBLIC_URL +
+                      '/images/member/preset_avatar.png'
                     }
                   />
                 ) : (
                   <img
                     alt=""
                     src={
-                      'http://13.112.90.13:3002/images/member/' + this.state.avatar
+                      'http://13.112.90.13:3002/images/member/' +
+                      this.state.avatar
                     }
                   />
                 )}
