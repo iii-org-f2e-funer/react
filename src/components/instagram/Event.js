@@ -41,7 +41,7 @@ class Event extends React.Component {
           <ul ref={el => (this.ul = el)}>
             {this.state.datas.map(item => (
               <li>
-                <Link
+                <Link to={"/event/info/"+item.pt_sid}
                   className={
                     item.pt_level === 'hard'
                       ? 'c1'
