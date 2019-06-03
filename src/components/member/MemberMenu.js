@@ -102,7 +102,7 @@ class MemberMenu extends React.Component {
                         alt="無法顯示"
                         src={
                           process.env.PUBLIC_URL +
-                          '/images/personalFolder/logo.png'
+                          '/images/member/preset_avatar.png'
                         }
                       />
                     ) : (

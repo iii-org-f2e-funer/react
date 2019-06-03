@@ -37,17 +37,18 @@ class UserMenu extends React.Component {
     }
   }
   render() {
+    console.log(this.state.avatar);
     return (
       <>
         {this.props.isOpen ? (
           <ul>
             <li>
               <div className="avatar">
-                {this.state.avatar === '' ? (
+                {this.state.avatar === '' || this.state.avatar === undefined ? (
                   <img
                     alt="無法顯示"
                     src={
-                      process.env.PUBLIC_URL + '/images/personalFolder/logo.png'
+                      process.env.PUBLIC_URL + '/images/member/preset_avatar.png'
                     }
                   />
                 ) : (
