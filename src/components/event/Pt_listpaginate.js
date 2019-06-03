@@ -42,7 +42,7 @@ export class Pt_listpaginate extends Component {
   }
 
   loadCommentsFromServer = () => {
-    console.log('here')
+    // console.log('here')
     let a = JSON.stringify({
       offset: this.state.offset,
       limit: this.state.perPage,

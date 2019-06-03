@@ -75,11 +75,14 @@ class Pt_listsearch extends React.Component {
                   請選擇
                 </option>
                 <option className="easy" value="easy">
-                  
                   適合新手
                 </option>
-                <option className="normal" value="normal">適合已有基礎的玩家</option>
-                <option className="hard" value="hard">高難度重度策略</option>
+                <option className="normal" value="normal">
+                  適合已有基礎的玩家
+                </option>
+                <option className="hard" value="hard">
+                  高難度重度策略
+                </option>
               </select>
             </div>
             <div className="btncol">
