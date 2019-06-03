@@ -173,16 +173,20 @@
         padding: 10px 20px;
         .poster {
           font-size: 14px;
-          img {
-            display: inline-block;
-            height: 30px;
-            width: 30px;
-            border-radius: 50%;
-            border: 1px solid #949494;
-          }
-          span {
-            line-height: 30px;
-            margin-left: 7px;
+          a {
+            text-decoration: none;
+            color: #474747;
+            img {
+              display: inline-block;
+              height: 30px;
+              width: 30px;
+              border-radius: 50%;
+              border: 1px solid #949494;
+            }
+            span {
+              line-height: 30px;
+              margin-left: 7px;
+            }
           }
         }
       }
@@ -441,8 +445,11 @@
               padding: 4px 8px;
               border-radius: 4px;
               // 留言人
-              .sender {
-                color: #38bdd8;
+              a {
+                text-decoration: none !important;
+                .sender {
+                  color: #38bdd8;
+                }
               }
               // 留言內容
               .content {

@@ -7,7 +7,7 @@ import FriendList from '../components/FriendList'
 function AsidePage(props) {
   return (
     <>
-      <nav className="nav aside-page-box my-2 px-3 d-flex justify-content-center">
+      <div className="nav aside-page-box my-2 px-3 d-flex justify-content-center">
         <NavLink
           className="chat-link  px-2 mr-4"
           activeClassName="active"
@@ -22,7 +22,7 @@ function AsidePage(props) {
         >
           好友列表
         </NavLink>
-      </nav>
+      </div>
       <InputGroup className="my-3 px-2">
         <FormControl
           className=" "

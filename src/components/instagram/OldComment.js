@@ -1,4 +1,5 @@
 import React from 'react'
+import { Link } from 'react-router-dom'
 class OldComment extends React.Component {
   constructor(props) {
     super(props)
@@ -45,19 +46,22 @@ class OldComment extends React.Component {
       <>
         {/* 留言 */}
         <div key={this.props.data.comment_id} className="comment">
-          <img
-            src={
-              this.props.data.isFirm
-                ? 'http://localhost:3002/images/firm/' + this.props.data.avatar
-                : 'http://localhost:3002/images/member/' +
+          <Link to={"/chatroom/openMemberPage/ID" + this.props.data.member_id}>
+            <img
+              src={
+                this.props.data.isFirm
+                  ? 'http://localhost:3002/images/firm/' + this.props.data.avatar
+                  : 'http://localhost:3002/images/member/' +
                   this.props.data.avatar
-            }
-            alt=""
-            className="avatar"
-          />
+              }
+              alt=""
+              className="avatar"
+            />
+          </Link>
           <div className="comment_inner">
             <div className="text">
-              <span className="sender">{this.props.data.nickname}</span>
+            <Link to={"/chatroom/openMemberPage/ID" + this.props.data.member_id}>
+              <span className="sender">{this.props.data.nickname}</span></Link>
               <span className="content">{this.props.data.content} </span>
             </div>
             <div className="time">
@@ -74,6 +78,7 @@ class OldComment extends React.Component {
         {/* 留言的留言 */}
         {this.props.data.subcomments.map(item => (
           <div key={item.subcomment_id} className="sub comment">
+          <Link to={"/chatroom/openMemberPage/ID" + this.props.data.member_id}>
             <img
               src={
                 item.isFirm
@@ -83,9 +88,12 @@ class OldComment extends React.Component {
               alt=""
               className="avatar"
             />
+            </Link>
             <div className="comment_inner">
               <div className="text">
+              <Link to={"/chatroom/openMemberPage/ID" + this.props.data.member_id}>
                 <span className="sender">{item.nickname}</span>
+                </Link>
                 <span className="content">{item.content} </span>
               </div>
               <div className="time">
@@ -114,8 +122,8 @@ class OldComment extends React.Component {
             </div>
           </div>
         ) : (
-          ''
-        )}
+            ''
+          )}
       </>
     )
   }
