@@ -69,14 +69,14 @@ class ChatRoom extends React.Component {
           <div className="chatroom">
             <div className="container ">
               <div className="row">
-                <div className="col-lg-3 aside">
+                <div className="col-md-3 aside">
                   <AsidePage
                     logInId={this.props.userInfo.account}
                     refreshID={this.state.refresh}
                     refresh={this.handleRefreh}
                   />
                 </div>
-                <div className="col-lg chatArea">
+                <div className="col-md chatArea">
                   {/* 傳props 給子元件: */}
                   {/* <Route path="/abc" render={(props) => <TestWidget {...props} someProp={100} />} /> */}
                   {/* <Route

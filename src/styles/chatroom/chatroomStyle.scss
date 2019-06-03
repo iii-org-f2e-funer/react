@@ -191,6 +191,7 @@ $dark-yellow: #f9a629;
         overflow: hidden;
         margin-right: 16px;
         img {
+          object-position: 50% 50%;
           object-fit: cover;
           width: 100%;
           height: 100%;
@@ -287,7 +288,7 @@ $dark-yellow: #f9a629;
           height: 90%;
           overflow: auto;
           li {
-            width: 50%;
+            width: 40%;
             margin-bottom: 8px;
             .text-box {
               display: flex;
@@ -297,6 +298,7 @@ $dark-yellow: #f9a629;
                 border-radius: $boder_radius;
                 padding: 14px 28px;
                 line-height: 18px;
+                overflow: hidden;
               }
 
               .avatar {
@@ -306,6 +308,7 @@ $dark-yellow: #f9a629;
                 overflow: hidden;
                 margin-right: 16px;
                 img {
+                  object-position: 50% 50%;
                   object-fit: cover;
                   width: 100%;
                   height: 100%;
