@@ -27,21 +27,28 @@ class Site_order extends React.Component {
         return '已取消'
     }
   }
+
   checkOK(sid) {
-    fetch('//localhost:3002/reservationInfo', {
-      method: 'PUT',
-      credentials: 'include',
-      headers: {
-        Accept: 'application/json',
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify({
-        sid: sid,
-        status: 1,
-      }),
-    }).then(() => {
-      this.readData()
-    })
+    let r = window.confirm('確認此場訂預定訂單?')
+
+    if (r === true) {
+      fetch('//localhost:3002/reservationInfo', {
+        method: 'PUT',
+        credentials: 'include',
+        headers: {
+          Accept: 'application/json',
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          sid: sid,
+          status: 1,
+        }),
+      }).then(() => {
+        this.readData()
+      })
+    } else {
+      return
+    }
   }
 
   readData() {
