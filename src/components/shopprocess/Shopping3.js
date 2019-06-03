@@ -1,28 +1,47 @@
-import React from 'react';
-import { Button, Form } from 'react-bootstrap';
-import '../../styles/product/shop.scss';
-import TWzipcode from 'react-twzipcode';
+import React from 'react'
+import { Button, Form } from 'react-bootstrap'
+import '../../styles/product/shop.scss'
+import TWzipcode from 'react-twzipcode'
 // import { BrowserRouter as Router, Route, Link, Switch } from 'react-router-dom'
-import { Link } from 'react-router-dom';
+import { Link } from 'react-router-dom'
 export default class Shopping3 extends React.Component {
   constructor() {
-    super();
+    super()
     this.state = {
       all: [],
-    };
+    }
   }
   componentDidMount() {
-    var funapptotal = localStorage.funapptotal;
-    var all = JSON.parse(localStorage.choose_order);
-    var temp = JSON.parse(localStorage.temp_order);
+    var funapptotal = localStorage.funapptotal
+    var all = JSON.parse(localStorage.choose_order)
+    var temp = JSON.parse(localStorage.temp_order)
     this.setState({
       all: all,
       totall: funapptotal,
       fee: temp.fee,
       total: temp.totall,
       seller: all[0].seller,
-    });
-    // localStorage.setItem('allcart', '');
+    })
+    fetch('//localhost:3002/product/firm', {})
+      .then(response => {
+        return response.json()
+      })
+      .then(jsonData => {
+        var firmname
+        console.log(jsonData)
+        console.log(all[0].seller)
+        for (let i = 0; i < jsonData.length; i++) {
+          if (jsonData[i].sid === all[0].seller) {
+            firmname = jsonData[i].firmname
+            break
+          }
+        }
+        console.log(firmname)
+        this.setState({ firmname: firmname })
+      })
+      .catch(err => {
+        console.log('錯誤:', err)
+      })
   }
 
   render() {
@@ -60,7 +79,7 @@ export default class Shopping3 extends React.Component {
                 <div className="orderdetail-title">
                   <h3>購買清單</h3>
                 </div>
-                <div>SELLER:{this.state.seller}</div>
+                <div className="title-firmname">{this.state.firmname}</div>
                 {this.state.all.map((item, index, array) => (
                   <div className="title-blocks">
                     <div className="title-block">
@@ -93,13 +112,17 @@ export default class Shopping3 extends React.Component {
                     <div className="end-money2">{this.state.total}</div>
                   </div>
                 </div>
-                <button className="button button3">回首頁</button>
-                <button className="button button3">回桌遊列表</button>
+                <Link to="/">
+                  <button className="button button3">回首頁</button>
+                </Link>
+                <Link to="/product">
+                  <button className="button button3">回桌遊列表</button>
+                </Link>
               </div>
             </div>
           </div>
         </div>
       </>
-    );
+    )
   }
 }

@@ -198,10 +198,10 @@ class Mycart extends React.Component {
         console.log(this.props.userInfo.login)
         window.location.href = 'http://localhost:3000/Shopping1'
       } else {
-        alert('please choose')
+        alert('請先選擇要結帳的店家')
       }
     } else {
-      alert('please login')
+      alert('請先登入')
     }
   }
   clear = () => {
@@ -239,10 +239,10 @@ class Mycart extends React.Component {
                 </div>
                 <div className="ml-4 title clear1">
                   <button
-                    className="button button-white clear"
+                    className="button button-white clear pb-1"
                     onClick={this.clear}
                   >
-                    clear Mycart
+                    清空購物車
                   </button>
                 </div>
               </div>

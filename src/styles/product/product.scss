@@ -7,7 +7,7 @@
     background-size: cover;
   }
   .product_container {
-    width: 1300px;
+    width:90%;
     margin: 0 auto;
   }
   .drop-control {
@@ -117,12 +117,17 @@
     outline: 0;
   }
   .cards {
-    width: 910px;
+    width: 1300px;
     margin-top: 30px;
     text-align: center;
     display: flex;
     flex-wrap: wrap;
     transition: .5s;
+    .productname{
+       font-size:20px;
+       line-height: 25px;
+       color:rgb(126, 119, 119)
+    }
   }
   .allcard {
     position: relative;
