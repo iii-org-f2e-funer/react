@@ -25,20 +25,6 @@ class Sidebar extends React.Component {
       data: {},
     }
   }
-  reFresh = () => {
-    fetch('//13.112.90.13:3002/firm/userInfo', {
-      credentials: 'include',
-    })
-      .then(res => res.json())
-      .then(obj => {
-        if (obj.success) {
-          this.setState({ data: obj.body })
-          console.log(this.state.data)
-        } else {
-          this.props.history.push('/')
-        }
-      })
-  }
   componentDidMount() {
     fetch('//13.112.90.13:3002/firm/userInfo', {
       credentials: 'include',

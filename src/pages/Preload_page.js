@@ -226,27 +226,27 @@ class Preload_page extends React.Component {
                 >
                   <defs>
                     <linearGradient id="b1" x1="0" y1="0" x2="1" y2="0">
-                      <stop offset="0%" stop-color="#fff" stop-opacity="0.7">
+                      <stop offset="0%" stopColor="#fff" stopOpacity="0.7">
                         <animate
-                          attributeName="stop-opacity"
+                          attributeName="stopOpacity"
                           from="0.7"
                           to="1"
                           dur="100ms"
                           fill="freeze"
                         />
                       </stop>
-                      <stop offset="30%" stop-color="#fff" stop-opacity="0.3">
+                      <stop offset="30%" stopColor="#fff" stopOpacity="0.3">
                         <animate
-                          attributeName="stop-opacity"
+                          attributeName="stopOpacity"
                           from="0.3"
                           to="1"
                           dur="200ms"
                           fill="freeze"
                         />
                       </stop>
-                      <stop offset="100%" stop-color="#fff" stop-opacity="0">
+                      <stop offset="100%" stopColor="#fff" stopOpacity="0">
                         <animate
-                          attributeName="stop-opacity"
+                          attributeName="stopOpacity"
                           from="0"
                           to="1"
                           dur="550ms"

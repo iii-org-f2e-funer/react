@@ -26,7 +26,9 @@ class Product_manage extends React.Component {
           this.props.history.push('/')
         }
       })
-    fetch('//13.112.90.13:3002/product/product_manage', { credentials: 'include' })
+    fetch('//13.112.90.13:3002/product/product_manage', {
+      credentials: 'include',
+    })
       //fetch order
       .then(response => {
         return response.json()
@@ -48,7 +50,9 @@ class Product_manage extends React.Component {
   handleHide = () => {
     this.setState({ editPopup: false })
 
-    fetch('//13.112.90.13:3002/product/product_manage', { credentials: 'include' })
+    fetch('//13.112.90.13:3002/product/product_manage', {
+      credentials: 'include',
+    })
       //fetch order
       .then(response => {
         return response.json()

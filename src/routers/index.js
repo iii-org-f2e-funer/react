@@ -28,7 +28,7 @@ class RootRouter extends React.Component {
   constructor(props) {
     super(props)
     this.state = {
-      preload: false,
+      preload: true,
       avatarRefresh: 1,
     }
   }
@@ -57,8 +57,9 @@ class RootRouter extends React.Component {
       })
   }
   avatarRefresh = () => {
-    this.state.avatarRefresh++
-    this.setState({ avatarRefresh: this.state.avatarRefresh })
+    let newState = this.state.avatarRefresh
+    newState = newState + 1
+    this.setState({ avatarRefresh: newState })
   }
   render() {
     return (
