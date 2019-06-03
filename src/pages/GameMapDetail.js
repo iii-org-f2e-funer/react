@@ -292,6 +292,7 @@ class GameMapDetail extends React.Component {
       modalShow: false,
       images: [],
       reloadState: 0,
+      paramId: 0,
 
       //跳出登入畫面的state 請copy以下
       loginPopup: false,
@@ -363,6 +364,45 @@ class GameMapDetail extends React.Component {
       .catch(err => {
         throw new Error(err)
       })
+    this.setState({ paramId: +this.props.match.params.id })
+  }
+
+  componentDidUpdate(prevProps, prevState) {
+    if (1) {
+      console.log(prevProps)
+    }
+
+    //console.log('this.props.match.params.id',this.props.match.params.id)
+   // console.log('this.state.paramId',this.state.paramId)
+
+    if (this.state.paramId === +this.props.match.params.id) return
+
+    fetch('http://127.0.0.1:3002/gameMap/sid/' + this.props.match.params.id)
+      .then(res => res.json())
+      .then(data => {
+        this.setState({ dataStore: data[0] })
+        return this.state
+      })
+      .then(state => {
+        let newImageArray = []
+        for (let index in this.state.dataStore.imageArray) {
+          let imgString =
+            'http://192.168.27.25/happy6/site' +
+            this.state.dataStore.imageArray[index]
+          let imgObj = {
+            original: imgString,
+            thumbnail: imgString,
+          }
+          newImageArray.push(imgObj)
+        }
+        this.setState({ images: newImageArray })
+      })
+      // .catch(err => console.log(err))
+      .catch(err => {
+        throw new Error(err)
+      })
+
+      this.setState({ paramId: +this.props.match.params.id })
   }
 
   logincheck = () => {

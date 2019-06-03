@@ -161,7 +161,7 @@ const Slide = ({ image, src }) => {
   return (
     <Link
       to={{ pathname: `/gamemapDetail/${src}` }}
-      onClick={() => this.props.changePage()}
+      // onClick={() => this.props.changePage()}
     >
       <div className="slide" style={styles} src={src} />
     </Link>
