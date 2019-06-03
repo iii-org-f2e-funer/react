@@ -99,7 +99,12 @@ export default class product extends React.Component {
     this.setState({ data: data })
     //////////////////////// money /////////////////////////////////
     var aaa = []
-    var money = document.getElementById('searchmoney').value
+
+    if (document.getElementById('searchmoney').value) {
+      var money = document.getElementById('searchmoney').value
+    } else {
+      money = 180
+    }
     var d1_leng = Object.keys(data).length
     for (let i = 0; i < d1_leng; i++) {
       if (data[i].price <= money) {
@@ -254,8 +259,7 @@ export default class product extends React.Component {
                         <Card.Img
                           variant="top"
                           src={
-                            // process.env.PUBLIC_URL + '/images/product/game1.jpg'
-                            'http://192.168.27.25/happy6/product_manage/' +
+                            '//13.112.90.13:3002/images/product/' +
                             item.image_path
                           }
                         />

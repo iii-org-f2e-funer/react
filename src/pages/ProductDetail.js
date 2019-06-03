@@ -104,8 +104,7 @@ class ProductDetail extends React.Component {
             for (let i = 0; i < data_leng; i++) {
               if (gotdata2[i].sid == sid) {
                 var a1 =
-                  'http://192.168.27.25/happy6/product_manage/' +
-                  gotdata2[i].image_path
+                  '//13.112.90.13:3002/images/product/' + gotdata2[i].image_path
                 var image = {
                   original: a1,
                   thumbnail: a1,
