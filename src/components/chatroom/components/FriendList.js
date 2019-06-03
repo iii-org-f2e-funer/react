@@ -22,7 +22,7 @@ class FriendList extends React.Component {
     const data = await response.json()
 
     //過濾掉delete的好友
-    let noDeleteData = data.filter(ele => {
+    let noDeleteData = data[1].filter(ele => {
       return ele.status !== 'delete'
     })
 
@@ -30,6 +30,9 @@ class FriendList extends React.Component {
     console.log('noDeleteFriendData:', noDeleteData)
 
     await this.setState({ FriendData: noDeleteData })
+  }
+  handleClick = () => {
+    this.props.refresh()
   }
   render() {
     return (
@@ -41,13 +44,14 @@ class FriendList extends React.Component {
                 <NavLink
                   key={data.friendID}
                   to={
-                    '/chatroom/friendList/' +
+                    '/chatroom/FriendList/' +
                     'ID' +
                     this.props.logInId +
                     '/' +
                     'ID' +
                     data.friendID
                   }
+                  onClick={this.handleClick}
                   className={'list-group-item text-center'}
                   activeClassName="active"
                 >
