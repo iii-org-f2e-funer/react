@@ -81,7 +81,7 @@ export default class Shopping1 extends React.Component {
     // console.log(this.state)
     var aaa = event.target.value
     if (aaa === '') {
-      document.getElementById('addr1-mute').innerText = 'addr error'
+      document.getElementById('addr1-mute').innerText = '請填入地址'
     } else {
       document.getElementById('addr1-mute').innerText = ''
     }
@@ -91,7 +91,7 @@ export default class Shopping1 extends React.Component {
     var aaa = event.target.value
     var aaaa = /^(09)[0-9]{8}$/.test(aaa)
     if (aaaa === false) {
-      document.getElementById('phone1-mute').innerText = 'phone error'
+      document.getElementById('phone1-mute').innerText = '請填入正確手機號碼'
     } else {
       document.getElementById('phone1-mute').innerText = ''
     }
@@ -105,7 +105,7 @@ export default class Shopping1 extends React.Component {
     )
     console.log(aaaa)
     if (aaaa === false) {
-      document.getElementById('email1-mute').innerText = 'email error'
+      document.getElementById('email1-mute').innerText = 'email格式錯誤'
     } else {
       document.getElementById('email1-mute').innerText = ''
     }

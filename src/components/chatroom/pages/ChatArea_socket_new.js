@@ -223,8 +223,6 @@ class ChatArea_socket_new extends React.Component {
   render() {
     return (
       <>
-        {this.props.location.pathname}
-
         <div className="chat_box">
           <div className="message_list">
             {/* 資料庫撈資料進來的地方 */}
@@ -234,7 +232,7 @@ class ChatArea_socket_new extends React.Component {
               ref={(this.goBottom = ele => (this.chatUl = ele))}
             >
               <h5 className="text-center">
-                {'您可以開始與' + this.state.to_member_name + '聊天'}
+                {'您可以開始與' + this.props.toName + '聊天'}
               </h5>
               <h5 className="text-center">{this.state.start_chat_time}</h5>
               {this.state.member_chat_data.map(element => {

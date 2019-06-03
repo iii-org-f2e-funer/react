@@ -115,3 +115,55 @@ $dark-yellow: #f9a629 !important;
     }
   }
 }
+
+.chatArea {
+  .OMPdetail {
+    display: inline-block;
+    vertical-align: top;
+    min-height: 70vh;
+    margin: 12px 0px;
+    background-color: #fff;
+    border-radius: 4px;
+    border: 1px solid rgba(black, 0.1);
+    font-size: 18px;
+    padding: 32px 28px;
+    width: 100%;
+    .memberDetail {
+      a {
+        width: 35%;
+      }
+      // span {
+      //   display: inline-block;
+      //   vertical-align: top;
+      //   position: relative;
+      //   margin: 0;
+      //   padding: 0 16px;
+      //   height: 36px;
+      //   line-height: 36px;
+      //   min-width: 64px;
+      //   box-sizing: border-box;
+      //   font-size: 16px;
+      //   font-weight: 500;
+      //   text-align: center;
+      //   text-decoration: none;
+      //   letter-spacing: 0;
+      //   background-color: $blue;
+      //   border-color: transparent;
+      //   border: none;
+      //   border-radius: 36px;
+      //   outline: 0;
+      //   overflow: hidden;
+      //   transition: all 0.3s;
+      //   color: $white;
+      //   font-weight: 400;
+      // }
+    }
+    .aboutMe {
+      .me {
+        display: inline-block;
+        border-radius: 4px;
+        border-bottom: 1px solid rgba(black, 0.1);
+      }
+    }
+  }
+}
