@@ -13,6 +13,19 @@ class Product_manage extends React.Component {
     }
   }
   componentDidMount() {
+    fetch('//localhost:3002/firm/userInfo', {
+      credentials: 'include',
+    })
+      .then(res => res.json())
+      .then(obj => {
+        if (obj.success) {
+          this.setState({
+            data: obj.body,
+          })
+        } else {
+          this.props.history.push('/')
+        }
+      })
     fetch('//localhost:3002/product/product_manage', { credentials: 'include' })
       //fetch order
       .then(response => {
@@ -33,6 +46,8 @@ class Product_manage extends React.Component {
   }
 
   handleHide = () => {
+    this.setState({ editPopup: false })
+
     fetch('//localhost:3002/product/product_manage', { credentials: 'include' })
       //fetch order
       .then(response => {
@@ -48,6 +63,7 @@ class Product_manage extends React.Component {
       })
       .catch(err => {})
   }
+
   deleteit = insid => () => {
     const data = {
       sid: insid,
@@ -114,7 +130,7 @@ class Product_manage extends React.Component {
                         block
                         onClick={this.deleteit(item.sid)}
                       >
-                        缺貨
+                        刪除
                       </button>
                     </td>
                   </tr>
