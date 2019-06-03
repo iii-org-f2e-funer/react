@@ -28,12 +28,9 @@ class RootRouter extends React.Component {
     super(props)
     this.state = {
       avatarRefresh: 1,
-      preload: true,
     }
   }
-  closeAnimate = () => {
-    this.setState({ preload: false })
-  }
+
   componentDidMount() {
     fetch('//13.112.90.13:3002/firm/userInfo', {
       credentials: 'include',
@@ -66,16 +63,7 @@ class RootRouter extends React.Component {
         <>
           <Navbar avatarRefresh={this.state.avatarRefresh} />
           <Switch>
-            <Route
-              exact
-              path="/"
-              component={() => (
-                <Home
-                  closeAnimate={this.closeAnimate}
-                  preload={this.state.preload}
-                />
-              )}
-            />
+            <Route exact path="/" component={Home} />
 
             <Route
               path="/firm/account"

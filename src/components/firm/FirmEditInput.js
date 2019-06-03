@@ -77,7 +77,6 @@ class FirmEditInput extends React.Component {
     for (let i = 0; i < this.fileInput.files.length; i++) {
       fd.append('files', this.fileInput.files[i])
     }
-    console.log(fd)
     if (this.state.insert) {
       fetch('//13.112.90.13:3002/firm/insertAccount', {
         method: 'POST',

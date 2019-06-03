@@ -12,12 +12,16 @@ class Home extends React.Component {
     this.state = {
       homeEvents: [],
       homeProducts: [],
+      preload: true,
     }
   }
   componentDidMount() {
     setTimeout(() => {
-      this.props.closeAnimate()
+      this.closeAnimate()
     }, 5400)
+  }
+  closeAnimate = () => {
+    this.setState({ preload: false })
   }
   render() {
     return (
@@ -130,7 +134,7 @@ class Home extends React.Component {
             </div>
           </div>
         </div>
-        {this.props.preload ? <Preload_page /> : ''}
+        {this.state.preload ? <Preload_page /> : ''}
       </>
     )
   }
