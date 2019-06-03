@@ -120,10 +120,10 @@ class site_reservation extends React.Component {
                           取消
                         </button>
                       ) : (
-                        ''
+                        '----'
                       )}
                     </td>
-                    <td className="todo">--</td>
+                    <td className="todo">----</td>
                   </tr>
                 ))}
               </tbody>
