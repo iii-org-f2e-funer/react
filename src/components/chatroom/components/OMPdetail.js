@@ -16,7 +16,7 @@ class OMPdetail extends React.Component {
     let theUrl = this.props.location.pathname
     console.log(theUrl.split('/'))
     var toID = theUrl.split('/')[theUrl.split('/').length - 1].replace('ID', '')
-    fetch('http://localhost:3002/chatroom/openMemberPage/' + toID, {
+    fetch('http://13.112.90.13:3002/chatroom/openMemberPage/' + toID, {
       method: 'GET',
       headers: { 'Content-type': 'application/json' },
     })
@@ -69,7 +69,7 @@ class OMPdetail extends React.Component {
     let theUrl = this.props.location.pathname
     console.log(theUrl.split('/'))
     var toID = theUrl.split('/')[theUrl.split('/').length - 1].replace('ID', '')
-    fetch('http://localhost:3002/chatroom/openMemberPage/' + toID, {
+    fetch('http://13.112.90.13:3002/chatroom/openMemberPage/' + toID, {
       method: 'GET',
       headers: { 'Content-type': 'application/json' },
     })

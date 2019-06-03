@@ -62,7 +62,7 @@ class NewStory extends React.Component {
         formData.append('photos', this.inputFiles.files[i])
       }
       // Fetch
-      fetch('http://localhost:3002/instagram/newStory', {
+      fetch('http://13.112.90.13:3002/instagram/newStory', {
         method: 'POST',
         body: formData,
         credentials: 'include',
@@ -93,9 +93,9 @@ class NewStory extends React.Component {
               <img
                 src={
                   this.props.userInfo.isFirm
-                    ? 'http://localhost:3002/images/firm/' +
+                    ? 'http://13.112.90.13:3002/images/firm/' +
                       this.props.userInfo.body.photo
-                    : 'http://localhost:3002/images/member/' +
+                    : 'http://13.112.90.13:3002/images/member/' +
                       this.props.userInfo.body.photo
                 }
                 alt=""

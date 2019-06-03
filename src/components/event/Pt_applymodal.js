@@ -20,7 +20,7 @@ class Pt_applymodal extends React.Component {
   }
   componentDidMount() {
     // console.log('AAAAAAAAAAAAAAAAA', this.props.accountID)
-    fetch('//localhost:3002/firm/userInfo', {
+    fetch('//13.112.90.13:3002/firm/userInfo', {
       credentials: 'include',
     })
       .then(res => res.json())
@@ -51,7 +51,7 @@ class Pt_applymodal extends React.Component {
       ptapplymem: this.state.account,
     })
     console.log(apply)
-    fetch('//localhost:3002/event/apply', {
+    fetch('//13.112.90.13:3002/event/apply', {
       method: 'POST',
       body: apply,
       headers: {

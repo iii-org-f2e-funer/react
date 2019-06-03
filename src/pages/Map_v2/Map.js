@@ -78,7 +78,7 @@ class BoradGameMap extends React.Component {
     //^^^^^^CitySelect==CALLBACK
 
     // fetch(GetStore + '&city=' + data.city_id)
-    fetch('http://127.0.0.1:3002/gameMap/city/' + data.city_id)
+    fetch('http://13.112.90.13:3002/gameMap/city/' + data.city_id)
       .then(res => res.json())
       // .then(res => console.log(res))
       .then(res => {
@@ -94,7 +94,7 @@ class BoradGameMap extends React.Component {
     // fetch(GetStore + '&lat=' + lat + '&lng=' + lng)
     console.log(data)
 
-    fetch('http://127.0.0.1:3002/gameMap/All/' + data)
+    fetch('http://13.112.90.13:3002/gameMap/All/' + data)
       .then(res => res.json())
       // .then(res => console.log(res))
 
@@ -141,7 +141,7 @@ class BoradGameMap extends React.Component {
   //       storeTel: data.storeTel,
   //       storeOpHr: data.storeOpHr
   //   });
-  //   fetch('http://localhost:3000/map/store/'+this.state.storeId)
+  //   fetch('http://13.112.90.13:3000/map/store/'+this.state.storeId)
   //   .then(res => res.json())
   //   .then(({ data }) => {
   //     this.setState({
@@ -191,7 +191,7 @@ class BoradGameMap extends React.Component {
   // 依所在位置取得鄰近場館
   getStoresByPosition(lat, lng) {
     // fetch(GetStore + '&lat=' + lat + '&lng=' + lng)
-    fetch('http://127.0.0.1:3002/gameMap/All')
+    fetch('http://13.112.90.13:3002/gameMap/All')
       .then(res => res.json())
       // .then(res => console.log(res))
       .then(res => {

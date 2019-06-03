@@ -23,7 +23,7 @@ class Pt_imgupload extends React.Component {
     imgdata.append('pt_img', imgfile)
     console.log(imgdata)
 
-    fetch('//localhost:3002/event/imgupload', {
+    fetch('//13.112.90.13:3002/event/imgupload', {
       method: 'POST',
       body: imgdata,
     })

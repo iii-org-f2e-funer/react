@@ -32,7 +32,7 @@ class Mycart extends React.Component {
     this.refreshCart()
   }
   refreshCart = () => {
-    fetch('//localhost:3002/product/firm')
+    fetch('//13.112.90.13:3002/product/firm')
       .then(response => {
         return response.json()
       })
@@ -126,7 +126,7 @@ class Mycart extends React.Component {
 
   goto = sid => () => {
     localStorage.setItem('item.sid', sid)
-    window.location.href = 'http://localhost:3000/ProductDetail/sid:' + sid
+    window.location.href = 'http://13.112.90.13:3000/ProductDetail/sid:' + sid
   }
 
   // check1 = ind => () => {
@@ -196,7 +196,7 @@ class Mycart extends React.Component {
         var aaa = JSON.stringify(this.state.choose)
         localStorage.setItem('choose_order', aaa)
         console.log(this.props.userInfo.login)
-        window.location.href = 'http://localhost:3000/Shopping1'
+        window.location.href = 'http://13.112.90.13:3000/Shopping1'
       } else {
         alert('請先選擇要結帳的店家')
       }
@@ -206,7 +206,7 @@ class Mycart extends React.Component {
   }
   clear = () => {
     localStorage.removeItem('allcart')
-    window.location.href = 'http://localhost:3000/Mycart'
+    window.location.href = 'http://13.112.90.13:3000/Mycart'
   }
   add = () => {}
   render() {

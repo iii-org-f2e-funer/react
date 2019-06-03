@@ -21,7 +21,7 @@ class ChatArea_socket_new extends React.Component {
       from_u_id: '',
       member_chat_data: [],
       start_chat_time: '',
-      endpoint: 'http://localhost:8080',
+      endpoint: 'http://13.112.90.13:8080',
       newChatData: [],
       inputContent: '',
       messages: [],
@@ -66,7 +66,7 @@ class ChatArea_socket_new extends React.Component {
 
       //fecth data from database(chat history)
       const response = await fetch(
-        `http://localhost:3002/chatroom/message/${this.props.logInId}/${to_id}`,
+        `http://13.112.90.13:3002/chatroom/message/${this.props.logInId}/${to_id}`,
         {
           method: 'GET',
           headers: { 'Content-type': 'application/json' },
@@ -197,7 +197,7 @@ class ChatArea_socket_new extends React.Component {
       }
       ////////////POST to DATA BASE/////////
       fetch(
-        `http://localhost:3002/chatroom/message/${this.props.logInId}/${
+        `http://13.112.90.13:3002/chatroom/message/${this.props.logInId}/${
           this.state.to_member_name
         }`,
         {

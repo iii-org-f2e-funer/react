@@ -18,7 +18,7 @@ class Notice extends React.Component {
   }
   // 撈 DB notice
   getNoticeData = () => {
-    fetch('http://localhost:3002/notice/userNotice', {
+    fetch('http://13.112.90.13:3002/notice/userNotice', {
       credentials: 'include',
     })
       .then(res => res.json())
@@ -38,7 +38,7 @@ class Notice extends React.Component {
   }
   // 切換已讀
   handleReadChange = notice_id => () => {
-    fetch('http://localhost:3002/notice/ReadChange', {
+    fetch('http://13.112.90.13:3002/notice/ReadChange', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       credentials: 'include',

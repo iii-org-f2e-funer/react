@@ -70,7 +70,7 @@ class AccountEdit extends React.Component {
       contacter: this.state.contacter,
       email: this.state.email,
     }
-    fetch('//localhost:3002/firm/firmEdit', {
+    fetch('//13.112.90.13:3002/firm/firmEdit', {
       method: 'POST',
       body: JSON.stringify(data),
       credentials: 'include',
@@ -94,7 +94,7 @@ class AccountEdit extends React.Component {
       ori_password: this.state.ori_password,
       password: this.state.password,
     }
-    fetch('//localhost:3002/firm/passwordEdit', {
+    fetch('//13.112.90.13:3002/firm/passwordEdit', {
       method: 'POST',
       body: JSON.stringify(data),
       credentials: 'include',

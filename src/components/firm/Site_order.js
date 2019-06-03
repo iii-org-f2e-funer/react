@@ -32,7 +32,7 @@ class Site_order extends React.Component {
     let r = window.confirm('確認此場訂預定訂單?')
 
     if (r === true) {
-      fetch('//localhost:3002/reservationInfo', {
+      fetch('//13.112.90.13:3002/reservationInfo', {
         method: 'PUT',
         credentials: 'include',
         headers: {
@@ -52,7 +52,7 @@ class Site_order extends React.Component {
   }
 
   readData() {
-    fetch('//localhost:3002/reservationInfo', {
+    fetch('//13.112.90.13:3002/reservationInfo', {
       credentials: 'include',
       headers: {
         Accept: 'application/json',

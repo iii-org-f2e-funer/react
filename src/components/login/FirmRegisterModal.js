@@ -28,7 +28,7 @@ class FirmRegisterModal extends React.Component {
       }
       let unicode = evt.target.value
       let data = { unicode: evt.target.value }
-      fetch('//localhost:3002/firm/unicodeCheck', {
+      fetch('//13.112.90.13:3002/firm/unicodeCheck', {
         method: 'POST',
         body: JSON.stringify(data),
         credentials: 'include',
@@ -80,7 +80,7 @@ class FirmRegisterModal extends React.Component {
     if (evt.target.value !== '') {
       let email = evt.target.value
       let data = { email: evt.target.value }
-      fetch('//localhost:3002/firm/emailCheck', {
+      fetch('//13.112.90.13:3002/firm/emailCheck', {
         method: 'POST',
         body: JSON.stringify(data),
         credentials: 'include',
@@ -106,7 +106,7 @@ class FirmRegisterModal extends React.Component {
     if (evt.target.value !== '') {
       let account = evt.target.value
       let data = { account: evt.target.value }
-      fetch('//localhost:3002/firm/accountCheck', {
+      fetch('//13.112.90.13:3002/firm/accountCheck', {
         method: 'POST',
         body: JSON.stringify(data),
         credentials: 'include',
@@ -155,7 +155,7 @@ class FirmRegisterModal extends React.Component {
         unicode: this.state.unicode,
         email: this.state.email,
       }
-      fetch('//localhost:3002/firm/firmRegister', {
+      fetch('//13.112.90.13:3002/firm/firmRegister', {
         method: 'POST',
         body: JSON.stringify(data),
         credentials: 'include',

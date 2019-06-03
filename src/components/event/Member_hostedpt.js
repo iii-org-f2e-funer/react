@@ -28,13 +28,13 @@ class Member_hostedpt extends React.Component {
               {this.props.data.pt_img !== '' ? (
                 <img
                   src={
-                    '//localhost:3002/images/event/' + this.props.data.pt_img
+                    '//13.112.90.13:3002/images/event/' + this.props.data.pt_img
                   }
                   alt=""
                 />
               ) : (
                 <img
-                  src="//localhost:3002/images/event/defaulteventimg.jpg"
+                  src="//13.112.90.13:3002/images/event/defaulteventimg.jpg"
                   alt=""
                 />
               )}

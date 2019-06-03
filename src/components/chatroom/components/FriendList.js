@@ -13,7 +13,7 @@ class FriendList extends React.Component {
   //get data from database
   async componentDidMount() {
     const response = await fetch(
-      `http://localhost:3002/chatroom/friendList/${this.props.logInId}`,
+      `http://13.112.90.13:3002/chatroom/friendList/${this.props.logInId}`,
       {
         method: 'GET',
         headers: { 'Content-type': 'application/json' },

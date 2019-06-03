@@ -26,7 +26,7 @@ class Sidebar extends React.Component {
     }
   }
   reFresh = () => {
-    fetch('//localhost:3002/firm/userInfo', {
+    fetch('//13.112.90.13:3002/firm/userInfo', {
       credentials: 'include',
     })
       .then(res => res.json())
@@ -40,7 +40,7 @@ class Sidebar extends React.Component {
       })
   }
   componentDidMount() {
-    fetch('//localhost:3002/firm/userInfo', {
+    fetch('//13.112.90.13:3002/firm/userInfo', {
       credentials: 'include',
     })
       .then(res => res.json())
@@ -65,14 +65,14 @@ class Sidebar extends React.Component {
     const fd = new FormData()
     fd.append('firm_id', this.state.data.sid)
     fd.append('file', file)
-    fetch('//localhost:3002/firm/avatarUpdate', {
+    fetch('//13.112.90.13:3002/firm/avatarUpdate', {
       method: 'POST',
       body: fd,
       credentials: 'include',
     })
       .then(res => res.json())
       .then(obj => {
-        fetch('//localhost:3002/firm/userInfo', {
+        fetch('//13.112.90.13:3002/firm/userInfo', {
           credentials: 'include',
         })
           .then(res => res.json())
@@ -111,7 +111,7 @@ class Sidebar extends React.Component {
                       <img
                         alt="無法顯示"
                         src={
-                          'http://localhost:3002/images/firm/' +
+                          'http://13.112.90.13:3002/images/firm/' +
                           this.state.data.my_file
                         }
                       />

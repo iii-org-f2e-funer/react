@@ -19,7 +19,7 @@ class Maylike extends React.Component {
   }
 
   componentDidMount() {
-    fetch('//localhost:3002/product/productlist', {})
+    fetch('//13.112.90.13:3002/product/productlist', {})
       //fetch prodct_manage
       .then(response => {
         // 這裡會得到一個 ReadableStream 的物件
@@ -36,7 +36,7 @@ class Maylike extends React.Component {
         console.log('錯誤:', err)
       })
 
-    fetch('//localhost:3002/product/productlist2', {})
+    fetch('//13.112.90.13:3002/product/productlist2', {})
       //fetch product_sid=sid的所有圖片path
       .then(response => {
         // 這裡會得到一個 ReadableStream 的物件
@@ -108,7 +108,7 @@ class Maylike extends React.Component {
   }
   clickaaa1 = index => () => {
     console.log(index)
-    window.location.href = 'http://localhost:3000/ProductDetail'
+    window.location.href = 'http://13.112.90.13:3000/ProductDetail'
     localStorage.setItem('item.sid', index)
   }
 

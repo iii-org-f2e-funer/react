@@ -70,7 +70,7 @@ class QueryBar extends Component {
       text: text,
       keywordOpen: '',
     })
-    // fetch('http://127.0.0.1:3002/gameMap/All/' + encodeURI(text))
+    // fetch('http://13.112.90.13:3002/gameMap/All/' + encodeURI(text))
     //   .then(res => res.json())
     //   .then(({ data }) =>
     //     this.setState({

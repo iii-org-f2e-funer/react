@@ -30,7 +30,7 @@ class ChatRoom extends React.Component {
 
   async componentDidMount() {
     const response = await fetch(
-      `http://localhost:3002/chatroom/message/${this.props.userInfo.account}`,
+      `http://13.112.90.13:3002/chatroom/message/${this.props.userInfo.account}`,
       {
         method: 'GET',
         headers: { 'Content-type': 'application/json' },
@@ -48,7 +48,7 @@ class ChatRoom extends React.Component {
   //   //login ok
   //   console.log(logInId)
   //   const response = await fetch(
-  //     `http://localhost:3002/chatroom/message/${this.props.userInfo.member_id}`,
+  //     `http://13.112.90.13:3002/chatroom/message/${this.props.userInfo.member_id}`,
   //     {
   //       method: 'GET',
   //       headers: { 'Content-type': 'application/json' },

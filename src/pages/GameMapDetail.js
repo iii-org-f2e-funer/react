@@ -77,7 +77,7 @@ class MyVerticallyCenteredModal extends React.Component {
   handleSubmit(event) {
     console.log(this.props)
     event.preventDefault()
-    fetch('http://localhost:3002/gameMap/reservation', {
+    fetch('http://13.112.90.13:3002/gameMap/reservation', {
       method: 'POST',
       credentials: 'include',
       headers: {
@@ -340,7 +340,7 @@ class GameMapDetail extends React.Component {
       console.log(prevProps)
     }
 
-    fetch('http://127.0.0.1:3002/gameMap/sid/' + this.props.match.params.id)
+    fetch('http://13.112.90.13:3002/gameMap/sid/' + this.props.match.params.id)
       .then(res => res.json())
       .then(data => {
         this.setState({ dataStore: data[0] })
@@ -377,7 +377,7 @@ class GameMapDetail extends React.Component {
 
     if (this.state.paramId === +this.props.match.params.id) return
 
-    fetch('http://127.0.0.1:3002/gameMap/sid/' + this.props.match.params.id)
+    fetch('http://13.112.90.13:3002/gameMap/sid/' + this.props.match.params.id)
       .then(res => res.json())
       .then(data => {
         this.setState({ dataStore: data[0] })

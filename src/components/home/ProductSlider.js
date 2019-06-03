@@ -15,7 +15,7 @@ class ProductSlider extends React.Component {
     this.position = -1 * this.slideWidth * this.numbers // -1 * 顯示個數 * 每個寬度
   }
   componentDidMount() {
-    fetch('http://localhost:3002/home/homeProduct')
+    fetch('http://13.112.90.13:3002/home/homeProduct')
       .then(res => res.json())
       .then(obj => {
         if (obj.success === true) {

@@ -61,7 +61,7 @@ class UserAccountEdit extends React.Component {
       birthday: this.state.birthday,
     }
     //  -------------------
-    fetch('//localhost:3002/member/memberEdit', {
+    fetch('//13.112.90.13:3002/member/memberEdit', {
       method: 'POST',
       body: JSON.stringify(data),
       credentials: 'include',
@@ -86,7 +86,7 @@ class UserAccountEdit extends React.Component {
       password: this.state.password,
       ori_password: this.state.ori_password,
     }
-    fetch('//localhost:3002/member/passwordEdit', {
+    fetch('//13.112.90.13:3002/member/passwordEdit', {
       method: 'POST',
       body: JSON.stringify(data),
       credentials: 'include',
