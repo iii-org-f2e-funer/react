@@ -8,6 +8,7 @@ import {
 } from 'react-router-dom'
 import AsidePage from '../components/chatroom/pages/AsidePage'
 import ChatArea_socket_new from '../components/chatroom/pages/ChatArea_socket_new'
+import OMPDetailFriendList from '../components/chatroom/components/OMPdetail_friendList'
 import '../styles/chatroom/chatroomStyle.scss'
 import ChatAreaOriginal from '../components/chatroom/pages/ChatAreaOriginal'
 import Account from '../components/firm/Account'
@@ -72,6 +73,7 @@ class ChatRoom extends React.Component {
                   <AsidePage
                     logInId={this.props.userInfo.account}
                     refreshID={this.state.refresh}
+                    refresh={this.handleRefreh}
                   />
                 </div>
                 <div className="col-lg chatArea">
@@ -131,6 +133,16 @@ class ChatRoom extends React.Component {
                         this.props.userInfo.account
                       }
                       component={ChatAreaOriginal}
+                    />
+                    <Route
+                      path={'/chatroom/FriendList/:LogInId/:toID'}
+                      component={() => (
+                        <OMPDetailFriendList
+                          logInId={this.props.userInfo.account}
+                          refresh={this.handleRefreh}
+                          refreshID={this.state.refresh}
+                        />
+                      )}
                     />
                   </Switch>
                 </div>

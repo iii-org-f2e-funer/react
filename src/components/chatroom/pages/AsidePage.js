@@ -39,7 +39,9 @@ function AsidePage(props) {
         />
         <Route
           path={'/chatroom/FriendList/' + 'ID' + props.logInId}
-          render={() => <FriendList logInId={props.logInId} />}
+          render={() => (
+            <FriendList refresh={props.refresh} logInId={props.logInId} />
+          )}
         />
       </Switch>
     </>
