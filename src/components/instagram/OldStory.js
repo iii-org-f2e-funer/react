@@ -1,6 +1,7 @@
 import React from 'react'
 import Carousel from './Carousel'
 import OldComment from './OldComment'
+import { Link } from 'react-router-dom'
 import {
   FaHeart,
   FaRegHeart,
@@ -144,7 +145,7 @@ class OldStory extends React.Component {
       var reader = new FileReader()
       reader.readAsDataURL(files[i]) //read file data as a base64 encoded string.
       // reader loaded
-      reader.addEventListener('load', function(e) {
+      reader.addEventListener('load', function (e) {
         // console.log(e.target.result)
         //
         preViewImges.push(e.target.result)
@@ -196,37 +197,39 @@ class OldStory extends React.Component {
           {/* header 使用者頭像、取消編輯按鈕 */}
           <div className="post-header">
             <div className="poster">
-              <img
-                src={
-                  this.props.data.isFirm
-                    ? 'http://localhost:3002/images/firm/' +
+              <Link to={"/chatroom/openMemberPage/ID" + this.props.data.member_id}>
+                <img
+                  src={
+                    this.props.data.isFirm
+                      ? 'http://localhost:3002/images/firm/' +
                       this.props.data.avatar
-                    : 'http://localhost:3002/images/member/' +
+                      : 'http://localhost:3002/images/member/' +
                       this.props.data.avatar
-                }
-                alt=""
-              />
+                  }
+                  alt=""
+                />
               <span>{this.props.data.nickname}</span>
+              </Link>
             </div>
             {this.props.editable ? (
               <div className="editable">
                 {this.state.isEdit ? (
                   <FaTimes onClick={this.handleOnBlur} />
                 ) : (
-                  <FaEllipsisH onClick={this.handleEditMenu} />
-                )}
+                    <FaEllipsisH onClick={this.handleEditMenu} />
+                  )}
                 {this.state.editMenu ? (
                   <div className="edit">
                     <span onClick={this.handleEdit}>編輯</span>
                     <span onClick={this.handleDelete}>刪除</span>
                   </div>
                 ) : (
-                  ''
-                )}
+                    ''
+                  )}
               </div>
             ) : (
-              ''
-            )}
+                ''
+              )}
           </div>
           <hr />
           {/* body 內文 光箱 */}
@@ -250,26 +253,26 @@ class OldStory extends React.Component {
                     })}
                   </>
                 ) : (
-                  <>
-                    {this.props.data.photos.map((item, idx) => {
-                      if (item !== '') {
-                        return (
-                          <img
-                            key={idx}
-                            src={'http://localhost:3002/images/' + item}
-                            alt=""
-                          />
-                        )
-                      }
-                    })}
-                  </>
-                )}
+                    <>
+                      {this.props.data.photos.map((item, idx) => {
+                        if (item !== '') {
+                          return (
+                            <img
+                              key={idx}
+                              src={'http://localhost:3002/images/' + item}
+                              alt=""
+                            />
+                          )
+                        }
+                      })}
+                    </>
+                  )}
               </div>
             ) : (
-              <div className="post-photos">
-                <Carousel photos={this.props.data.photos} />
-              </div>
-            )}
+                <div className="post-photos">
+                  <Carousel photos={this.props.data.photos} />
+                </div>
+              )}
           </div>
           {this.state.isEdit ? (
             <div className="post-footer">
@@ -290,69 +293,69 @@ class OldStory extends React.Component {
               </span>
             </div>
           ) : (
-            <>
-              <div className="post-footer">
-                {/* 愛心 */}
-                <div>
-                  {this.props.isFav ? (
-                    <FaHeart
-                      className="heart hearted"
-                      onClick={this.handleFavorite}
+              <>
+                <div className="post-footer">
+                  {/* 愛心 */}
+                  <div>
+                    {this.props.isFav ? (
+                      <FaHeart
+                        className="heart hearted"
+                        onClick={this.handleFavorite}
+                      />
+                    ) : (
+                        <FaRegHeart
+                          className="heart"
+                          onClick={this.handleFavorite}
+                        />
+                      )}
+                    <span className="favorites">
+                      {this.props.data.favorites > 0
+                        ? this.props.data.favorites + '個喜歡'
+                        : ''}
+                    </span>
+                  </div>
+
+                  {/* 收藏 */}
+
+                  {this.props.isBook ? (
+                    <FaBookmark
+                      className="bookmark bookmarked"
+                      onClick={this.handleBookmark}
                     />
                   ) : (
-                    <FaRegHeart
-                      className="heart"
-                      onClick={this.handleFavorite}
+                      <FaRegBookmark
+                        className="bookmark"
+                        onClick={this.handleBookmark}
+                      />
+                    )}
+                </div>
+                {/* 留言 */}
+                {/* 舊的留言 */}
+                <div className="comments">
+                  {this.props.data.comments.map(item => (
+                    <OldComment
+                      userInfo={this.props.userInfo}
+                      key={item.comment_id}
+                      data={item}
+                      handleReFresh={this.props.handleReFresh}
                     />
-                  )}
-                  <span className="favorites">
-                    {this.props.data.favorites > 0
-                      ? this.props.data.favorites + '個喜歡'
-                      : ''}
-                  </span>
+                  ))}
                 </div>
-
-                {/* 收藏 */}
-
-                {this.props.isBook ? (
-                  <FaBookmark
-                    className="bookmark bookmarked"
-                    onClick={this.handleBookmark}
-                  />
-                ) : (
-                  <FaRegBookmark
-                    className="bookmark"
-                    onClick={this.handleBookmark}
-                  />
-                )}
-              </div>
-              {/* 留言 */}
-              {/* 舊的留言 */}
-              <div className="comments">
-                {this.props.data.comments.map(item => (
-                  <OldComment
-                    userInfo={this.props.userInfo}
-                    key={item.comment_id}
-                    data={item}
-                    handleReFresh={this.props.handleReFresh}
-                  />
-                ))}
-              </div>
-              {/* 發送留言 */}
-              <div className="publish">
-                <div className="publish_inner">
-                  <div
-                    className="content"
-                    contentEditable={true}
-                    ref={el => (this.textInput = el)}
-                  />
-                  <span className="submit" onClick={this.handleSubmit}>
-                    發佈
+                {/* 發送留言 */}
+                <div className="publish">
+                  <div className="publish_inner">
+                    <div
+                      className="content"
+                      contentEditable={true}
+                      ref={el => (this.textInput = el)}
+                    />
+                    <span className="submit" onClick={this.handleSubmit}>
+                      發佈
                   </span>
+                  </div>
                 </div>
-              </div>
-            </>
-          )}
+              </>
+            )}
         </div>
         {this.state.isEdit ? (
           <div
@@ -361,8 +364,8 @@ class OldStory extends React.Component {
             style={{ width: '100%', height: document.body.scrollHeight }}
           />
         ) : (
-          ''
-        )}
+            ''
+          )}
       </>
     )
   }
