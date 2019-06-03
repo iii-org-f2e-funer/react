@@ -15,7 +15,7 @@ import {
 } from 'react-bootstrap'
 
 import { BrowserRouter, Route, Link, NavLink } from 'react-router-dom'
-
+import '../../styles/gameMap/imgSlider.scss'
 class Slider extends React.Component {
   constructor(props) {
     super(props)
@@ -132,6 +132,7 @@ class Slider extends React.Component {
                 key={i}
                 image={item.imageArray[0]}
                 src={item.sid}
+                store={item.store}
                 changePage={() => {
                   this.changePage()
                 }}
@@ -148,7 +149,7 @@ class Slider extends React.Component {
   }
 }
 
-const Slide = ({ image, src }) => {
+const Slide = ({ image, src, store }) => {
   const styles = {
     backgroundImage: `url(http://192.168.27.25/happy6/site/${image})`,
     backgroundSize: 'cover',
@@ -163,7 +164,10 @@ const Slide = ({ image, src }) => {
       to={{ pathname: `/gamemapDetail/${src}` }}
       // onClick={() => this.props.changePage()}
     >
-      <div className="slide" style={styles} src={src} />
+      <div className="slide" style={styles} src={src}>
+        {' '}
+        <span class="overlay">{store}</span>
+      </div>
     </Link>
   )
 }
