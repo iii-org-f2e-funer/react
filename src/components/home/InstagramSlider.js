@@ -20,12 +20,15 @@ class InstagramSlider extends React.Component {
       .then(res => res.json())
       .then(obj => {
         if (obj.success === true) {
-          // console.log(obj.data)
-          var arr = [obj.data[obj.data.length - 1], ...obj.data, obj.data[0]]
-          this.setState({ datas: arr }, () => {
-            this.data_length = obj.data.length // 原始資料長度
-            this.carousel.style.top = this.position + 'px' // 設定初始位置
-          })
+          console.log(obj.data)
+          if (obj.data.length === 0 || obj.data.length === undefined) {
+          } else {
+            var arr = [obj.data[obj.data.length - 1], ...obj.data, obj.data[0]]
+            this.setState({ datas: arr }, () => {
+              this.data_length = obj.data.length // 原始資料長度
+              this.carousel.style.top = this.position + 'px' // 設定初始位置
+            })
+          }
         }
       })
     // 開始自動輪播
@@ -66,6 +69,7 @@ class InstagramSlider extends React.Component {
   }
 
   render() {
+    if (this.state.datas[0] === undefined) return null
     return (
       <>
         <div className="instagram_slider">

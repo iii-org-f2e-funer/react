@@ -15,7 +15,8 @@ class site_reservation extends React.Component {
       isEdit: false,
       data: [],
     }
-    this.state.statusCode = this.statusCode.bind(this)
+    this.statusCode = this.statusCode.bind(this)
+    this.checkCancel = this.checkCancel.bind(this)
   }
 
   statusCode(code) {
@@ -30,7 +31,31 @@ class site_reservation extends React.Component {
         return '已取消'
     }
   }
-  componentDidMount() {
+
+  checkCancel(sid) {
+    let r = window.confirm('取消此場地預定訂單?')
+
+    if (r === true) {
+      fetch('//localhost:3002/reservationInfo', {
+        method: 'PUT',
+        credentials: 'include',
+        headers: {
+          Accept: 'application/json',
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          sid: sid,
+          status: 9,
+        }),
+      }).then(() => {
+        this.readData()
+      })
+    } else {
+      return
+    }
+  }
+
+  readData() {
     fetch('//localhost:3002/reservationInfo', {
       credentials: 'include',
       headers: {
@@ -48,6 +73,10 @@ class site_reservation extends React.Component {
           // this.props.history.push('/')
         }
       })
+  }
+
+  componentDidMount() {
+    this.readData()
   }
   render() {
     console.log(this.state)
@@ -81,8 +110,20 @@ class site_reservation extends React.Component {
                     </td>
                     <td>{item.site_name}</td>
                     <td className="">{this.statusCode(item.status)}</td>
-                    <td>--</td>
-                    <td className="todo">--</td>
+                    <td>
+                      {item.status === 0 ? (
+                        <button
+                          className="m-1 button button"
+                          block
+                          onClick={() => this.checkCancel(item.sid)}
+                        >
+                          取消
+                        </button>
+                      ) : (
+                        '----'
+                      )}
+                    </td>
+                    <td className="todo">----</td>
                   </tr>
                 ))}
               </tbody>
