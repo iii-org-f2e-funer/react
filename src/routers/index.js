@@ -28,15 +28,14 @@ class RootRouter extends React.Component {
   constructor() {
     super()
     this.state = {
-      preload: false,
+      preload: true,
       avatarRefresh: 1,
     }
   }
   componentDidMount() {
-    const _this = this
-    setTimeout(function() {
-      _this.setState({ preload: false })
-    }, 30000)
+    setTimeout(() => {
+      this.setState({ preload: false })
+    }, 5500)
     fetch('//localhost:3002/firm/userInfo', {
       credentials: 'include',
     })
@@ -62,64 +61,58 @@ class RootRouter extends React.Component {
     this.setState({ avatarRefresh: this.state.avatarRefresh })
   }
   render() {
-    if (this.state.preload) {
-      return <Preload_page />
-    } else {
-      return (
-        <Router>
-          <>
-            <Navbar avatarRefresh={this.state.avatarRefresh} />
-            <Switch>
-              <Route exact path="/" component={Home} />
+    return (
+      <Router>
+        <>
+          <Navbar avatarRefresh={this.state.avatarRefresh} />
+          <Switch>
+            <Route exact path="/" component={Home} />
 
-              <Route
-                path="/firm/account"
-                component={() => <Firm avatarRefresh={this.avatarRefresh} />}
-              />
-              <Route path="/firm/product_manage" component={() => <Firm />} />
-              <Route path="/firm/product_order" component={() => <Firm />} />
-              <Route path="/firm/site_manage" component={() => <Firm />} />
-              <Route path="/firm/site_order" component={() => <Firm />} />
-              <Route exact path="/checkCode" component={CheckCode} />
+            <Route
+              path="/firm/account"
+              component={() => <Firm avatarRefresh={this.avatarRefresh} />}
+            />
+            <Route path="/firm/product_manage" component={() => <Firm />} />
+            <Route path="/firm/product_order" component={() => <Firm />} />
+            <Route path="/firm/site_manage" component={() => <Firm />} />
+            <Route path="/firm/site_order" component={() => <Firm />} />
+            <Route exact path="/checkCode" component={CheckCode} />
 
-              <Route
-                path="/member/account"
-                component={() => <Member avatarRefresh={this.avatarRefresh} />}
-              />
-              <Route path="/member/userevent" component={() => <Member />} />
-              <Route path="/member/UserShopping" component={() => <Member />} />
-              <Route
-                path="/member/site_reservation"
-                component={() => <Member />}
-              />
-              <Route path="/product" component={Product} />
-              <Route
-                path={'/chatroom/message/' + 'ID' + this.props.userInfo.account}
-                component={ChatRoom}
-              />
-              <Route
-                path="/chatroom/openMemberPage"
-                component={OpenMemberPage}
-              />
-              <Route path="/ProductDetail" component={ProductDetail} />
-              <Route path="/Myfav" component={Myfav} />
-              <Route
-                path="/Mycart"
-                component={() => <Mycart show={this.state.show} />}
-              />
-              <Route path="/Shopping1" component={Shopping1} />
-              <Route path="/Shopping2" component={Shopping2} />
-              <Route path="/Shopping3" component={Shopping3} />
-              <Route path="/instagram" component={Instagram} />
-              <Route path="/event" component={Event} />
-              <Route path="/gameMap" component={GameMap} />
-              <Route path="/gameMapDetail/:id" component={GameMapDetail} />
-            </Switch>
-            <Footer />
-          </>
-        </Router>
-      )
-    }
+            <Route
+              path="/member/account"
+              component={() => <Member avatarRefresh={this.avatarRefresh} />}
+            />
+            <Route path="/member/userevent" component={() => <Member />} />
+            <Route path="/member/UserShopping" component={() => <Member />} />
+            <Route
+              path="/member/site_reservation"
+              component={() => <Member />}
+            />
+            <Route path="/product" component={Product} />
+            <Route
+              path={'/chatroom/message/' + 'ID' + this.props.userInfo.account}
+              component={ChatRoom}
+            />
+            <Route path="/chatroom/openMemberPage" component={OpenMemberPage} />
+            <Route path="/ProductDetail" component={ProductDetail} />
+            <Route path="/Myfav" component={Myfav} />
+            <Route
+              path="/Mycart"
+              component={() => <Mycart show={this.state.show} />}
+            />
+            <Route path="/Shopping1" component={Shopping1} />
+            <Route path="/Shopping2" component={Shopping2} />
+            <Route path="/Shopping3" component={Shopping3} />
+            <Route path="/instagram" component={Instagram} />
+            <Route path="/event" component={Event} />
+            <Route path="/gameMap" component={GameMap} />
+            <Route path="/gameMapDetail/:id" component={GameMapDetail} />
+          </Switch>
+          <Footer />
+          {this.state.preload ? <Preload_page /> : ''}
+        </>
+      </Router>
+    )
   }
 }
 
