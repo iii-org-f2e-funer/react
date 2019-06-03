@@ -105,6 +105,7 @@ class AccountEdit extends React.Component {
       .then(res => res.json())
       .then(obj => {
         if (obj.success) {
+          alert('密碼修改成功!')
           this.props.cancelEdit()
         } else {
           this.setState({ remindText: obj.message })

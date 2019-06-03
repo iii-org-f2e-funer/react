@@ -25,10 +25,10 @@ import OpenMemberPage from '../pages/OpenMemberPage'
 import Preload_page from '../pages/Preload_page.js'
 
 class RootRouter extends React.Component {
-  constructor() {
-    super()
+  constructor(props) {
+    super(props)
     this.state = {
-      preload: true,
+      preload: false,
       avatarRefresh: 1,
     }
   }
