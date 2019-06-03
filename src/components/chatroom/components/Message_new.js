@@ -1,6 +1,8 @@
 import React from 'react'
 import { Route, Link, Switch, NavLink } from 'react-router-dom'
 import avatar from '../avatar/ironman.jpg'
+import moment from 'moment'
+import 'moment/locale/zh-tw'
 
 class Message_new extends React.Component {
   constructor(props) {
@@ -38,8 +40,18 @@ class Message_new extends React.Component {
     const data = await response.json()
 
     console.log(data)
-
+    data.filter(ele => {
+      return (ele.time = moment(ele.time)
+        .locale('zh-tw')
+        .fromNow())
+    })
     await this.setState({ chatDataAll: data })
+  }
+  handleDelete = () => {
+    let wantDelete = window.confirm('是否刪除對話紀錄')
+    if (wantDelete) {
+      console.log('DELETE')
+    }
   }
 
   render() {
@@ -62,9 +74,13 @@ class Message_new extends React.Component {
                   className="list-group-item "
                   activeClassName="active"
                 >
+                  <i
+                    className="fas fa-times text-right"
+                    onClick={this.handleDelete}
+                  />
                   <div className="d-flex w-100 justify-content-between align-items-center">
                     <div className="d-flex justify-content-center align-items-center">
-                      <div className="avatar">
+                      <div className="avatar mt-2">
                         <img src={avatar} alt="會員1頭像" />
                       </div>
                       <h5 className="mb-1 text-nowrap  ">{data.y_toname}</h5>
@@ -76,7 +92,10 @@ class Message_new extends React.Component {
                       {data.m_time}
                     </span> */}
                   </div>
-                  <small className="text-truncate">{data.subject}</small>
+
+                  <span>
+                    <small className="text-truncate mt-2">{data.subject}</small>
+                  </span>
                 </NavLink>
               ) : (
                 <NavLink
@@ -92,9 +111,10 @@ class Message_new extends React.Component {
                   className="list-group-item "
                   activeClassName="active"
                 >
+                  <i class="fas fa-times" onClick={this.handleDelete} />
                   <div className="d-flex w-100 justify-content-between align-items-center">
                     <div className="d-flex justify-content-center align-items-center">
-                      <div className="avatar">
+                      <div className="avatar mt-2">
                         <img src={avatar} alt="會員1頭像" />
                       </div>
                       <h5 className="mb-1 text-nowrap  ">{data.x_fromname}</h5>
@@ -106,7 +126,9 @@ class Message_new extends React.Component {
                       {data.m_time}
                     </span> */}
                   </div>
-                  <small className="text-truncate">{data.subject}</small>
+                  <span>
+                    <small className="text-truncate mt-2">{data.subject}</small>
+                  </span>
                 </NavLink>
               )
             })}

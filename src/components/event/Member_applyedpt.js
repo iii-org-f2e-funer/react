@@ -27,23 +27,23 @@ class Member_applyedpt extends React.Component {
               {this.props.data.pt_img !== '' ? (
                 <img
                   src={
-                    '//localhost:3002/images/event/' + this.props.data.pt_img
+                    '//13.112.90.13:3002/images/event/' + this.props.data.pt_img
                   }
                   alt=""
                 />
               ) : (
                 <img
-                  src="//localhost:3002/images/event/defaulteventimg.jpg"
+                  src="//13.112.90.13:3002/images/event/defaulteventimg.jpg"
                   alt=""
                 />
               )}
             </div>
           </Link>
           <div className="ptinfo">
-          <Link
-            to="#"
-            onClick={this.url('/event/info/' + this.props.data.pt_sid)}
-          >
+            <Link
+              to="#"
+              onClick={this.url('/event/info/' + this.props.data.pt_sid)}
+            >
               <div className="ptinfo_title">{this.props.data.pt_title}</div>{' '}
             </Link>
             <div className="ptinfo_time">
@@ -112,7 +112,7 @@ class Member_applyedpt extends React.Component {
             {this.props.data.pt_applystatus === 'approve' ? (
               <>
                 <div className="applystatus" id="approve">
-                  開啟聊天室
+                  參加成功
                 </div>
                 <Member_cancelapply
                   applysid={this.props.data.pt_applysid}

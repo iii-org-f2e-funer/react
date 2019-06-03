@@ -1,5 +1,7 @@
 import React from 'react'
 import { withRouter } from 'react-router'
+import { NavLink } from 'react-router-dom'
+import '../../../styles/chatroom/openMemberPage.scss'
 class OMPdetail_friendList extends React.Component {
   constructor() {
     super()
@@ -10,12 +12,15 @@ class OMPdetail_friendList extends React.Component {
       location: '',
       game: [],
       about: '',
+      FriendData: '',
+      toID: '',
     }
   }
   componentDidMount() {
     let theUrl = this.props.location.pathname
     console.log(theUrl.split('/'))
     var toID = theUrl.split('/')[theUrl.split('/').length - 1].replace('ID', '')
+    this.setState({ toID: toID })
     fetch('http://localhost:3002/chatroom/openMemberPage/' + toID, {
       method: 'GET',
       headers: { 'Content-type': 'application/json' },
@@ -64,9 +69,37 @@ class OMPdetail_friendList extends React.Component {
           game: specialtyGame,
         })
       })
+    //fetch status
+
+    fetch(`http://localhost:3002/chatroom/friendList/${this.props.logInId}`, {
+      method: 'GET',
+      headers: { 'Content-type': 'application/json' },
+    })
+      .then(response => {
+        return response.json()
+      })
+      .then(data => {
+        //過濾掉delete的好友
+        let noDeleteData = data[0].filter(ele => {
+          return ele.status !== 'delete'
+        })
+
+        console.log('FriendData:', data)
+        console.log('noDeleteFriendData:', noDeleteData)
+
+        let checkFriend = noDeleteData.filter((ele, ind, arr) => {
+          return ele.user_id == toID || ele.friend_id == toID
+          // return ele.friendID == toID && (ele.status == 'approve' || 'review')
+        })
+        this.setState({ FriendData: checkFriend })
+        console.log(checkFriend)
+      })
   }
 
   render() {
+    if (!this.state.FriendData) {
+      return null
+    }
     return (
       <div className="OMPdetail">
         <h5>會員資料</h5>
@@ -111,9 +144,33 @@ class OMPdetail_friendList extends React.Component {
               {this.state.about == '' ? '未公開' : this.state.about}
             </p>
           </div>
-        </div>
-        <div className="d-none">
-          {this.props.url}+{this.props.refreshID}
+
+          <div className="d-none">
+            {this.props.url}+{this.props.refreshID}
+          </div>
+
+          <div
+            className={
+              this.state.FriendData[0].status == 'approve'
+                ? 'friendAction mx-auto text-center mt-3'
+                : 'd-none'
+            }
+          >
+            <NavLink
+              className={'startChat col-md text-center mx-auto button'}
+              to={
+                '/chatroom/message/' +
+                'ID' +
+                this.props.logInId +
+                '/' +
+                'ID' +
+                this.state.toID
+              }
+            >
+              <i className="far fa-comment-dots" />
+              <span> 開始聊聊</span>
+            </NavLink>
+          </div>
         </div>
       </div>
     )

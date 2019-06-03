@@ -154,23 +154,35 @@ class BoradGameMap extends React.Component {
   // 瀏覽器取得經緯度
   getGeoLocation = () => {
     if (navigator.geolocation) {
-      navigator.geolocation.getCurrentPosition(position => {
-        this.setState({
-          center: {
-            lat: position.coords.latitude,
-            lng: position.coords.longitude,
-          },
-          zoom: 14,
-          fetchNearbyStores: true,
-        })
-        console.log(
-          'Current position at: ' +
-            position.coords.latitude +
-            ', ' +
-            position.coords.longitude
-        )
-        console.log(this.state.fetchNearbyStores)
-      })
+      navigator.geolocation.getCurrentPosition(
+        position => {
+          this.setState({
+            center: {
+              lat: position.coords.latitude,
+              lng: position.coords.longitude,
+            },
+            zoom: 14,
+            fetchNearbyStores: true,
+          })
+          console.log(
+            'Current position at: ' +
+              position.coords.latitude +
+              ', ' +
+              position.coords.longitude
+          )
+          console.log(this.state.fetchNearbyStores)
+        },
+        err => {
+          this.setState({
+            center: {
+              lat: 25.0757482,
+              lng: 121.5059786,
+            },
+            zoom: 11.5,
+            fetchNearbyStores: true,
+          })
+        }
+      )
     }
   }
 
@@ -239,7 +251,7 @@ class BoradGameMap extends React.Component {
           /> */}
         {/* <meta property="og:image" content={} /> */}
         {/* </Helmet> */}
-        <div className="mapContainer">
+        <div className="mapContainer" style={{ minHeight: '750px' }}>
           <div className="mapBody">
             <MapBody
               getStoreByMarker={data => this.getStoreByMarker(data)}

@@ -248,7 +248,7 @@ export default class product extends React.Component {
                       onClick={this.gotodetail(item.sid)}
                     >
                       <Card
-                        style={{ width: '250px', height: '400px' }}
+                        style={{ width: '200px', height: '320px' }}
                         className="allcard"
                       >
                         <Card.Img

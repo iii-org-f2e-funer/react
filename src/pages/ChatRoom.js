@@ -102,6 +102,7 @@ class ChatRoom extends React.Component {
                               logInId={this.props.userInfo.account}
                               userData={this.state.chatData}
                               refresh={this.handleRefreh}
+                              toName={data.y_toname}
                             />
                           )}
                         />
@@ -121,6 +122,7 @@ class ChatRoom extends React.Component {
                               logInId={this.props.userInfo.account}
                               userData={this.state.chatData}
                               refresh={this.handleRefreh}
+                              toName={data.y_toname}
                             />
                           )}
                         />
