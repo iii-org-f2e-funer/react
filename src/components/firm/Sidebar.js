@@ -74,6 +74,7 @@ class Sidebar extends React.Component {
   }
   render() {
     const data = this.state.data
+    console.log(data.my_file)
     return (
       <Router>
         <>
@@ -93,20 +94,19 @@ class Sidebar extends React.Component {
                     </label>
                   </div>
                   <div className="circle">
-                    {this.state.data.my_file ? (
-                      <img
-                        alt="無法顯示"
-                        src={
-                          'http://13.112.90.13:3002/images/firm/' +
-                          this.state.data.my_file
-                        }
-                      />
-                    ) : (
+                    {data.my_file === null || data.my_file === '' ? (
                       <img
                         alt=""
                         src={
                           process.env.PUBLIC_URL +
                           'images/member/preset_avatar.png'
+                        }
+                      />
+                    ) : (
+                      <img
+                        alt="無法顯示"
+                        src={
+                          'http://13.112.90.13:3002/images/firm/' + data.my_file
                         }
                       />
                     )}
