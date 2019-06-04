@@ -14,8 +14,16 @@ class EventSlider extends React.Component {
       position: 0,
       datas: [],
     }
+
+    window.addEventListener('resize', () => {
+      console.log(this)
+      if (document.body.clientWidth < 1300) {
+        this.numbers = 3
+      }
+    })
+
     this.pointer = 0 // 初始化pointer
-    this.numbers = 4 // 顯示個數
+    this.numbers = 3 // 顯示個數
     this.slideWidth = 290 //寬度
     this.position = -1 * this.slideWidth * this.numbers // -1 * 顯示個數 * 每個寬度
   }
@@ -27,7 +35,7 @@ class EventSlider extends React.Component {
         if (obj.success === true) {
           // console.log(obj.data)
           var arr = [
-            obj.data[obj.data.length - 4],
+            // obj.data[obj.data.length - 4],
             obj.data[obj.data.length - 3],
             obj.data[obj.data.length - 2],
             obj.data[obj.data.length - 1],
@@ -35,7 +43,7 @@ class EventSlider extends React.Component {
             obj.data[0],
             obj.data[1],
             obj.data[2],
-            obj.data[3],
+            // obj.data[3],
           ]
           this.setState({ datas: arr }, () => {
             this.data_length = obj.data.length // 原始資料長度
@@ -54,7 +62,7 @@ class EventSlider extends React.Component {
   handleAutoSlide = () => {
     this.timer = setInterval(() => {
       this.handleNextClick()
-    }, 4500)
+    }, 3000)
   }
   //停止播放
   handleStopSlide = () => {

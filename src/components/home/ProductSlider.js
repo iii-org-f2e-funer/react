@@ -48,7 +48,7 @@ class ProductSlider extends React.Component {
   handleAutoSlide = () => {
     this.timer = setInterval(() => {
       this.handleNextClick()
-    }, 4000)
+    }, 3000)
   }
   //停止播放
   handleStopSlide = () => {
