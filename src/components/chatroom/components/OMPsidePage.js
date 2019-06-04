@@ -37,6 +37,7 @@ class OMPsidePage extends React.Component {
         console.log(obj)
         this.setState({
           photoURL: obj[1].photoURL,
+          friendNum: obj[1].friendTotal,
         })
         console.log(this.state.photoURL)
       })
@@ -58,10 +59,10 @@ class OMPsidePage extends React.Component {
     console.log('FriendData:', data)
     console.log('noDeleteFriendData:', noDeleteData)
 
-    let FriendNum = noDeleteData.filter(ele => {
-      return ele.status == 'approve'
-    })
-    this.setState({ friendNum: FriendNum.length })
+    // let FriendNum = noDeleteData.filter(ele => {
+    //   return ele.status == 'approve'
+    // })
+    // this.setState({ friendNum: FriendNum.length })
     let checkFriend = noDeleteData.filter((ele, ind, arr) => {
       return ele.friend_id == toID || ele.user_id == toID
       // return ele.friendID == toID && (ele.status == 'approve' || 'review')
