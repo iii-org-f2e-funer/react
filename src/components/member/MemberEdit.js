@@ -66,6 +66,7 @@ class AccountEdit extends React.Component {
             UserData={this.state.UserData}
             handleHide={this.props.handleHide}
             data={this.props.data}
+            refresh={this.props.refresh}
           />
         </Modal>
       </>

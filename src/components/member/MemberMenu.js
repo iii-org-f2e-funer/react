@@ -54,6 +54,7 @@ class MemberMenu extends React.Component {
         }
       })
   }
+
   handleShow = () => {
     this.setState({ editPopup: true })
   }
@@ -161,6 +162,7 @@ class MemberMenu extends React.Component {
             editPopup={this.state.editPopup}
             handleHide={this.handleHide}
             data={data}
+            refresh={this.redirect}
           />
         </>
       </Router>

@@ -107,10 +107,7 @@ class FriendList extends React.Component {
                   <div className="d-flex w-100 justify-content-center align-items-center">
                     <div className="avatar">
                       <img
-                        src={
-                          'http://13.112.90.13:3002/public/images/member/' +
-                          data.imgURL
-                        }
+                        src={'//13.112.90.13:3002/images/member/' + data.imgURL}
                         alt="會員1頭像"
                       />
                     </div>
