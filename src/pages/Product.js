@@ -15,70 +15,133 @@ export default class product extends React.Component {
       sort: 'hightolow',
     }
   }
+
+  // this.setState({ data: allData })
+  // this.setState({ data: dt1 })
+  // this.setState({ oridata: dt1 })
   componentDidMount() {
     ///////////////////////////////////////////////////////////////////////////////
-    fetch('//13.112.90.13:3002/product/productlist', {})
+    fetch('//13.112.90.13:3002/product/productlist')
       //fetch prodct_manage
       .then(response => {
         // 這裡會得到一個 ReadableStream 的物件
         // console.log(response)
         // 可以透過 blob(), json(), text() 轉成可用的資訊
+        console.log('CCC')
         return response.json()
       })
-      .then(jsonData => {
-        this.setState({ data: jsonData })
-        // typeof()
-        // console.log(this.state.data)
+      .then(allData => {
+        console.log('DDD')
+        fetch('//13.112.90.13:3002/product/productlist2')
+          //fetch product_sid=sid的所有圖片path
+          .then(response => {
+            // 這裡會得到一個 ReadableStream 的物件
+            // console.log(response)
+            // 可以透過 blob(), json(), text() 轉成可用的資訊
+            return response.json()
+          })
+          .then(imgData => {
+            console.log('EEE')
+            // this.setState({ data1: imgData })
+            const dt1 = allData
+            const dt2 = imgData
+            var d1_leng = Object.keys(allData).length
+
+            var d2_leng = Object.keys(imgData).length
+            console.log('FFF')
+            console.log(d1_leng)
+            //80
+            console.log(d2_leng)
+            //117
+            console.log('BBBB')
+            //迴圈判斷只抓其中一張圖
+            for (
+              let data1_index = d1_leng - 1;
+              data1_index >= 0;
+              data1_index--
+            ) {
+              for (
+                let data2_index = d2_leng - 1;
+                data2_index >= 0;
+                data2_index--
+              ) {
+                if (dt2[data2_index].sid === dt1[data1_index].sid) {
+                  //將抓到的image_path存回去 this.state.data
+                  dt1[data1_index].image_path = dt2[data2_index].image_path
+                }
+              }
+            }
+            // console.log(dt1)
+            // this.setState({ data: dt1 })
+            // this.setState({ oridata: dt1 })
+            fetch('//13.112.90.13:3002/product/game_type')
+              //fetch game_type
+              .then(response => {
+                return response.json()
+              })
+              .then(typeData => {
+                console.log('AAA')
+                this.setState({ data: dt1, oridata: dt1, game_type: typeData })
+                // typeof()
+                // console.log(this.state.game_type)
+              })
+              .catch(err => {
+                // console.log('錯誤:', err)
+              })
+          })
+          .catch(err => {
+            console.log('錯誤:', err)
+          })
       })
       .catch(err => {
         // console.log('錯誤:', err)
       })
     ////////////////////////////////////////////////////////////////////////////////
-    fetch('//13.112.90.13:3002/product/productlist2', {})
-      //fetch product_sid=sid的所有圖片path
-      .then(response => {
-        // 這裡會得到一個 ReadableStream 的物件
-        // console.log(response)
-        // 可以透過 blob(), json(), text() 轉成可用的資訊
-        return response.json()
-      })
-      .then(jsonData => {
-        this.setState({ data1: jsonData })
-        const dt1 = this.state.data
-        const dt2 = jsonData
-        var d1_leng = Object.keys(this.state.data).length
-        var d2_leng = Object.keys(jsonData).length
+    // fetch('//13.112.90.13:3002/product/productlist2')
+    //   //fetch product_sid=sid的所有圖片path
+    //   .then(response => {
+    //     // 這裡會得到一個 ReadableStream 的物件
+    //     // console.log(response)
+    //     // 可以透過 blob(), json(), text() 轉成可用的資訊
+    //     return response.json()
+    //   })
+    //   .then(jsonData => {
+    //     this.setState({ data1: jsonData })
+    //     const dt1 = this.state.data
+    //     const dt2 = jsonData
+    //     var d1_leng = Object.keys(this.state.data).length
+    //     var d2_leng = Object.keys(jsonData).length
 
-        //迴圈判斷只抓其中一張圖
-        for (let data1_index = d1_leng - 1; data1_index >= 0; data1_index--) {
-          for (let data2_index = d2_leng - 1; data2_index >= 0; data2_index--) {
-            if (dt2[data2_index].sid === dt1[data1_index].sid) {
-              //將抓到的image_path存回去 this.state.data
-              dt1[data1_index].image_path = dt2[data2_index].image_path
-            }
-          }
-        }
-        console.log(dt1)
-        this.setState({ data: dt1 })
-        this.setState({ oridata: dt1 })
-      })
-      .catch(err => {
-        console.log('錯誤:', err)
-      })
+    //     //迴圈判斷只抓其中一張圖
+    //     for (let data1_index = d1_leng - 1; data1_index >= 0; data1_index--) {
+    //       for (let data2_index = d2_leng - 1; data2_index >= 0; data2_index--) {
+    //         if (dt2[data2_index].sid === dt1[data1_index].sid) {
+    //           //將抓到的image_path存回去 this.state.data
+    //           dt1[data1_index].image_path = dt2[data2_index].image_path
+    //         }
+    //       }
+    //     }
+    //     console.log(dt1)
+    //     this.setState({ data: dt1 })
+    //     this.setState({ oridata: dt1 })
+    //   })
+    //   .catch(err => {
+    //     console.log('錯誤:', err)
+    //   })
     ///////////////////////////////////////////////////////////////////////////////
-    fetch('//13.112.90.13:3002/product/game_type', {})
-      //fetch game_type
-      .then(response => {
-        return response.json()
-      })
-      .then(jsonData => {
-        this.setState({ game_type: jsonData })
-        // typeof()
-        console.log(this.state.game_type)
-      })
-      .catch(err => {
-        // console.log('錯誤:', err)
-      })
+    // fetch('//13.112.90.13:3002/product/game_type')
+    //   //fetch game_type
+    //   .then(response => {
+    //     return response.json()
+    //   })
+    //   .then(jsonData => {
+    //     this.setState({ game_type: jsonData })
+    //     // typeof()
+    //     console.log(this.state.game_type)
+    //   })
+    //   .catch(err => {
+    //     // console.log('錯誤:', err)
+    //   })
   }
   gotodetail = sid => () => {
     // console.log(sid)

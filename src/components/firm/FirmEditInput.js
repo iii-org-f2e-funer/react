@@ -10,7 +10,6 @@ class FirmEditInput extends React.Component {
   constructor(props) {
     super(props)
     const data = this.props.firmData
-    console.log(this.props.img)
     this.state = {
       preViewImgs: [], // 預覽 base64 Data Array
       img: this.props.img,
@@ -77,7 +76,7 @@ class FirmEditInput extends React.Component {
     for (let i = 0; i < this.fileInput.files.length; i++) {
       fd.append('files', this.fileInput.files[i])
     }
-    if (this.state.insert) {
+    if (this.props.insert) {
       fetch('//13.112.90.13:3002/firm/insertAccount', {
         method: 'POST',
         body: fd,
