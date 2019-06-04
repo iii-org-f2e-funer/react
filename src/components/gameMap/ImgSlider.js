@@ -151,7 +151,7 @@ class Slider extends React.Component {
 
 const Slide = ({ image, src, store }) => {
   const styles = {
-    backgroundImage: `url(http://192.168.27.25/happy6/site/${image})`,
+    backgroundImage: `url(http://13.112.90.13:3002/images/firm/${image})`,
     backgroundSize: 'cover',
     backgroundRepeat: 'no-repeat',
     backgroundPosition: '50% 60%',

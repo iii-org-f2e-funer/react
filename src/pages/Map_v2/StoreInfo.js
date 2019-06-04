@@ -28,7 +28,9 @@ class StoreInfo extends Component {
         <Card style={{ width: '100%' }}>
           <Card.Img
             variant="top"
-            src={'http://192.168.27.25/happy6/site' + this.props.imageArray[0]}
+            src={
+              'http://13.112.90.13:3002/images/firm/' + this.props.imageArray[0]
+            }
             style={{ minHeight: '230px' }}
           />
           <Card.Body>
@@ -101,7 +103,7 @@ class StoreInfo extends Component {
                   width={64}
                   height={64}
                   className="m-3"
-                  src={`http://192.168.27.25/happy6/site${
+                  src={`http://13.112.90.13:3002/images/firm/${
                     this.props.dataStore[idx].imageArray[0]
                   }`}
                   alt=""

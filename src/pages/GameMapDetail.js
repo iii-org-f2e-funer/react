@@ -350,7 +350,7 @@ class GameMapDetail extends React.Component {
         let newImageArray = []
         for (let index in this.state.dataStore.imageArray) {
           let imgString =
-            'http://192.168.27.25/happy6/site' +
+            'http://13.112.90.13:3002/images/firm/' +
             this.state.dataStore.imageArray[index]
           let imgObj = {
             original: imgString,
@@ -387,7 +387,7 @@ class GameMapDetail extends React.Component {
         let newImageArray = []
         for (let index in this.state.dataStore.imageArray) {
           let imgString =
-            'http://192.168.27.25/happy6/site' +
+            'http://13.112.90.13:3002/images/firm/' +
             this.state.dataStore.imageArray[index]
           let imgObj = {
             original: imgString,
