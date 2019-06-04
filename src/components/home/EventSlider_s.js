@@ -15,7 +15,7 @@ class EventSlider extends React.Component {
       datas: [],
     }
     this.pointer = 0 // 初始化pointer
-    this.numbers = 4 // 顯示個數
+    this.numbers = 1 // 顯示個數
     this.slideWidth = 290 //寬度
     this.position = -1 * this.slideWidth * this.numbers // -1 * 顯示個數 * 每個寬度
   }
@@ -26,17 +26,7 @@ class EventSlider extends React.Component {
       .then(obj => {
         if (obj.success === true) {
           // console.log(obj.data)
-          var arr = [
-            obj.data[obj.data.length - 4],
-            obj.data[obj.data.length - 3],
-            obj.data[obj.data.length - 2],
-            obj.data[obj.data.length - 1],
-            ...obj.data,
-            obj.data[0],
-            obj.data[1],
-            obj.data[2],
-            obj.data[3],
-          ]
+          var arr = [obj.data[obj.data.length - 1], ...obj.data, obj.data[0]]
           this.setState({ datas: arr }, () => {
             this.data_length = obj.data.length // 原始資料長度
             this.carousel.style.left = this.position + 'px' // 設定初始位置
@@ -104,7 +94,7 @@ class EventSlider extends React.Component {
     return (
       <>
         <div
-          className="event_slider"
+          className="event_slider_s"
           onMouseEnter={this.handleStopSlide}
           onMouseLeave={this.handleAutoSlide}
         >

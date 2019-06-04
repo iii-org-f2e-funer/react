@@ -4,6 +4,11 @@ import '../styles/home.scss'
 import EventSlider from './home/EventSlider'
 import ProductSlider from './home/ProductSlider'
 import InstagramSlider from './home/InstagramSlider'
+
+import EventSlider_s from './home/EventSlider_s'
+import ProductSlider_s from './home/ProductSlider_s'
+import InstagramSlider_s from './home/InstagramSlider_s'
+
 import Preload_page from '../pages/Preload_page.js'
 import Cookies from 'js-cookie'
 
@@ -87,6 +92,7 @@ class Home extends React.Component {
           <div className="home_event">
             <h2>最新揪團</h2>
             <EventSlider />
+            <EventSlider_s />
             <div className="event_b">
               <Link to="/event">
                 <button className="button button--yellow">more</button>
@@ -123,6 +129,7 @@ class Home extends React.Component {
           <div className="home_product">
             <h2>熱銷商品</h2>
             <ProductSlider />
+            <ProductSlider_s />
             <div className="product_b">
               <Link to="/product">
                 <button className="button button--yellow">more</button>
@@ -136,6 +143,7 @@ class Home extends React.Component {
               <div className="r">
                 <h2>桌遊動態</h2>
                 <InstagramSlider />
+                <InstagramSlider_s />
               </div>
             </div>
           </div>
