@@ -20,7 +20,7 @@ class InstagramSlider extends React.Component {
       .then(res => res.json())
       .then(obj => {
         if (obj.success === true) {
-          console.log(obj.data)
+          // console.log(obj.data)
           if (obj.data.length === 0 || obj.data.length === undefined) {
           } else {
             var arr = [obj.data[obj.data.length - 1], ...obj.data, obj.data[0]]

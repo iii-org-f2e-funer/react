@@ -19,7 +19,7 @@ class ProductSlider extends React.Component {
       .then(res => res.json())
       .then(obj => {
         if (obj.success === true) {
-          console.log(obj)
+          // console.log(obj)
           var arr = [obj.data[obj.data.length - 1], ...obj.data, obj.data[0]]
           this.setState({ datas: arr }, () => {
             this.data_length = obj.data.length // 原始資料長度

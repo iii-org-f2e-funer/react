@@ -37,15 +37,15 @@ class ProductDetail extends React.Component {
           })
           .then(firm => {
             var firmname
-            console.log(jsonData)
-            console.log(gotit)
+            // console.log(jsonData)
+            // console.log(gotit)
             for (let i = 0; i < firm.length; i++) {
               if (firm[i].sid === gotit.seller_sid) {
                 firmname = firm[i].firmname
                 break
               }
             }
-            console.log(firmname)
+            // console.log(firmname)
             this.setState({ firmname: firmname })
           })
           .catch(err => {

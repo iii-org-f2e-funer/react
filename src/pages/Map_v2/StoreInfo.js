@@ -89,7 +89,7 @@ class StoreInfo extends Component {
   }
 
   CardInfo = () => {
-    console.log(this.props.dataStore)
+    // console.log(this.props.dataStore)
 
     if (!this.props.dataStore.length) {
       return ''
@@ -160,7 +160,7 @@ class StoreInfo extends Component {
     } else {
       return (
         <React.Fragment>
-          {console.log(this.props.dataStore)}
+          {/* {console.log(this.props.dataStore)} */}
           {this.props.storeStore ? this.DisplayInfo() : this.CardInfo()}
           {/* <NavLink to={{ pathname: `/games/game/${game.ID}` }}> */}
           {this.props.storeStore ? this.ClearButton() : ''}

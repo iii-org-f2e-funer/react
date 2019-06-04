@@ -39,12 +39,12 @@ class RootRouter extends React.Component {
       .then(obj => {
         if (obj.success) {
           if (obj.isFirm) {
-            console.log(obj)
+            // console.log(obj)
             this.props.firmInfoAction({
               account: obj.body.account,
             })
           } else {
-            console.log(obj)
+            // console.log(obj)
             this.props.userInfoAction({
               account: obj.body.member_id,
             })

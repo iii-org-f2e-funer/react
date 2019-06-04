@@ -54,22 +54,21 @@ class Maylike extends React.Component {
         for (let data1_index = d1_leng - 1; data1_index >= 0; data1_index--) {
           for (let data2_index = d2_leng - 1; data2_index >= 0; data2_index--) {
             if (dt2[data2_index].sid === dt1[data1_index].sid) {
-              
               dt1[data1_index].image_path = dt2[data2_index].image_path
             }
           }
         }
-       console.log('aaa',dt1)
+        console.log('aaa', dt1)
         this.setState({ data: dt1 })
-        console.log('bbb',this.state.data)
+        console.log('bbb', this.state.data)
         // ddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddd
-        for (let i = d1_leng-1; i >=0 ; i--) {
+        for (let i = d1_leng - 1; i >= 0; i--) {
           var tep =
             '//13.112.90.13:3002/images/product/' +
             this.state.data[i].image_path
           this.state.images.push(tep)
         }
-        this.setState({images:this.state.images})
+        this.setState({ images: this.state.images })
       })
       .catch(err => {
         console.log('錯誤:', err)
@@ -145,8 +144,7 @@ class Maylike extends React.Component {
                     src={`${item}`}
                   />
                   <Card.Body>
-                    <div className="maymoney">
-                    </div>
+                    <div className="maymoney" />
                     <Card.Text />
                   </Card.Body>
                 </Card>

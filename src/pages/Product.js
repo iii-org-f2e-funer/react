@@ -27,11 +27,9 @@ export default class product extends React.Component {
         // 這裡會得到一個 ReadableStream 的物件
         // console.log(response)
         // 可以透過 blob(), json(), text() 轉成可用的資訊
-        console.log('CCC')
         return response.json()
       })
       .then(allData => {
-        console.log('DDD')
         fetch('//13.112.90.13:3002/product/productlist2')
           //fetch product_sid=sid的所有圖片path
           .then(response => {
@@ -41,17 +39,15 @@ export default class product extends React.Component {
             return response.json()
           })
           .then(imgData => {
-            console.log('EEE')
             // this.setState({ data1: imgData })
             const dt1 = allData
             const dt2 = imgData
             var d1_leng = Object.keys(allData).length
 
-            var d2_leng = Object.keys(imgData).length
-            console.log('FFF')
-            console.log(d1_leng)
+            var d2_leng = Object.keys(imgData).length           
+            // console.log(d1_leng)
             //80
-            console.log(d2_leng)
+            // console.log(d2_leng)
             //117
             console.log('BBBB')
             //迴圈判斷只抓其中一張圖
@@ -80,7 +76,6 @@ export default class product extends React.Component {
                 return response.json()
               })
               .then(typeData => {
-                console.log('AAA')
                 this.setState({ data: dt1, oridata: dt1, game_type: typeData })
                 // typeof()
                 // console.log(this.state.game_type)
@@ -261,7 +256,11 @@ export default class product extends React.Component {
                     value={this.state.type}
                   >
                     {this.state.game_type.map((item, index, array) => (
-                      <option className="dropdown" value={item.type_id}>
+                      <option
+                        key={item.type_id}
+                        className="dropdown"
+                        value={item.type_id}
+                      >
                         {item.type_name}
                       </option>
                     ))}
@@ -309,7 +308,7 @@ export default class product extends React.Component {
               </div>
               <div className="cards">
                 {this.state.data.map(item => (
-                  <Link to={'ProductDetail/sid:' + item.sid}>
+                  <Link to={'ProductDetail/sid:' + item.sid} key={item.sid}>
                     <div
                       className="gamecard"
                       key={item.id}

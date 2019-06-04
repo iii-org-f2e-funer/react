@@ -16,7 +16,7 @@ class EventSlider extends React.Component {
     }
 
     window.addEventListener('resize', () => {
-      console.log(this)
+      // console.log(this)
       if (document.body.clientWidth < 1300) {
         this.numbers = 3
       }
@@ -125,7 +125,10 @@ class EventSlider extends React.Component {
                     {/* <img src="" alt="" /> */}
                     <img
                       src={
-                        'http://13.112.90.13:3002/images/event/' + item.pt_img
+                        item.pt_img !== ''
+                          ? 'http://13.112.90.13:3002/images/event/' +
+                            item.pt_img
+                          : 'http://13.112.90.13:3002/images/event/defaulteventimg.jpg'
                       }
                       alt=""
                     />
