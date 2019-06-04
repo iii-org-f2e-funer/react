@@ -35,13 +35,13 @@ class ProductDetail extends React.Component {
           .then(response => {
             return response.json()
           })
-          .then(jsonData => {
+          .then(firm => {
             var firmname
             console.log(jsonData)
             console.log(gotit)
-            for (let i = 0; i < jsonData.length; i++) {
-              if (jsonData[i].sid === gotit.seller_sid) {
-                firmname = jsonData[i].firmname
+            for (let i = 0; i < firm.length; i++) {
+              if (firm[i].sid === gotit.seller_sid) {
+                firmname = firm[i].firmname
                 break
               }
             }
