@@ -113,7 +113,7 @@ class Sidebar extends React.Component {
                         alt=""
                         src={
                           process.env.PUBLIC_URL +
-                          'images/member/preset_avatar.png'
+                          '/images/member/preset_avatar.png'
                         }
                       />
                     ) : (
