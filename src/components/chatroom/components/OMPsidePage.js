@@ -38,6 +38,7 @@ class OMPsidePage extends React.Component {
         this.setState({
           photoURL: obj[1].photoURL,
           friendNum: obj[1].friendTotal,
+          pt_num: obj[2].p_count,
         })
         console.log(this.state.photoURL)
       })
@@ -112,6 +113,8 @@ class OMPsidePage extends React.Component {
         console.log(obj)
         this.setState({
           photoURL: obj[1].photoURL,
+          friendNum: obj[1].friendTotal,
+          pt_num: obj[2].p_count,
         })
         console.log(this.state.photoURL)
       })
@@ -133,10 +136,10 @@ class OMPsidePage extends React.Component {
     console.log('FriendData:', data)
     console.log('noDeleteFriendData:', noDeleteData)
 
-    let FriendNum = noDeleteData.filter(ele => {
-      return ele.status == 'approve'
-    })
-    this.setState({ friendNum: FriendNum.length })
+    // let FriendNum = noDeleteData.filter(ele => {
+    //   return ele.status == 'approve'
+    // })
+    // this.setState({ friendNum: FriendNum.length })
     let checkFriend = noDeleteData.filter((ele, ind, arr) => {
       return ele.friend_id == toID || ele.user_id == toID
       // return ele.friendID == toID && (ele.status == 'approve' || 'review')
@@ -313,7 +316,7 @@ class OMPsidePage extends React.Component {
             <div>
               <i className="fas fa-dice-five" />
             </div>
-            <h5>10</h5>
+            <h5>{this.state.pt_num}</h5>
             <p>參團</p>
           </div>
           <div className="col-md text-center">
