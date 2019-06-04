@@ -26,6 +26,7 @@ class ChatArea_socket_new extends React.Component {
       inputContent: '',
       messages: [],
       roomID: '',
+      chatData: [],
     }
     this.ready()
   }
@@ -77,7 +78,8 @@ class ChatArea_socket_new extends React.Component {
       if (!response.ok) throw new Error(response.statusText)
       const data = await response.json()
       console.log(data)
-      if (data) {
+
+      if (!Number(data)) {
         memberChatData = data.filter(ele => {
           return ele.m_receiver_id == to_id || ele.m_sender_id == to_id
         })
@@ -85,13 +87,25 @@ class ChatArea_socket_new extends React.Component {
           return a.m_time > b.m_time ? 1 : -1
         })
       }
+      const response_head = await fetch(
+        `http://13.112.90.13:3002/chatroom/message/${this.props.logInId}`,
+        {
+          method: 'GET',
+          headers: { 'Content-type': 'application/json' },
+        }
+      )
+      const data_head = await response_head.json()
+
+      console.log(data_head)
+
+      await this.setState({ chatData: data_head })
 
       await this.setState({
         chatDataAll: data,
         member_chat_data: memberChatData,
         start_chat_time: memberChatData[0].h_stime,
       })
-
+      console.log(this.state.chatData)
       console.log(this.state.chatDataAll)
       console.log(this.state.member_chat_data)
     } catch (e) {
@@ -196,7 +210,7 @@ class ChatArea_socket_new extends React.Component {
         time: this.generateTime(),
         msec: new Date().getTime(),
         roomID: this.state.roomID,
-        h_id: this.state.member_chat_data[0].h_id,
+        h_id: this.state.chatData[0].id,
         is_readed: 0,
         urlSender: this.props.photoURL,
       }

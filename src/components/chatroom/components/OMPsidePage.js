@@ -231,7 +231,7 @@ class OMPsidePage extends React.Component {
       action: 'confirm',
       time: this.generateTime(),
       create_time: this.generateTime(),
-      m_sec: new Date().getTime(),
+      // m_sec: new Date().getTime(),
     }
     console.log(friendApplied)
 
@@ -239,7 +239,7 @@ class OMPsidePage extends React.Component {
     fetch(
       `http://13.112.90.13:3002/chatroom/chat_headerInsert/${
         this.props.logInId
-      }/${this.state.to_member_name}`,
+      }/${this.state.toID}`,
       {
         method: 'POST',
         headers: { 'Content-type': 'application/json' },
