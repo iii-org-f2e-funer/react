@@ -112,9 +112,7 @@ class Product_manage extends React.Component {
                   <th>商品名稱</th>
                   <th>售價</th>
                   <th>商品總類</th>
-                  <th style={{ width: '250px', textOverflow: 'ellipsis' }}>
-                    描述
-                  </th>
+
                   <th>上架日期</th>
                   <th>操作</th>
                 </tr>
@@ -126,7 +124,7 @@ class Product_manage extends React.Component {
                     <td>{item.productName}</td>
                     <td>{item.price}</td>
                     <td>{item.gametype_id}</td>
-                    <td>{item.description}</td>
+
                     <td>{item.createDate}</td>
                     <td>
                       <button
