@@ -30,12 +30,22 @@
     margin: 0 auto;
     color: #FFF;
     font-size: 24px;
+    transition: 0.5s;
+  }
+
+  .btn_newpt:hover{
+    transform: translateY(-3px)
   }
 #pt_monster{
   position: absolute;
   width: 160px;
-  top: 108px;
-  right:150px;
+  top: 100px;
+  right:330px;
+  transition: 0.5s;
+}
+
+#pt_monster:hover{
+  transform:translateY(5px)
 }
 
 #newpt_icon{
