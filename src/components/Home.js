@@ -7,7 +7,6 @@ import InstagramSlider from './home/InstagramSlider'
 
 import EventSlider_s from './home/EventSlider_s'
 import ProductSlider_s from './home/ProductSlider_s'
-import InstagramSlider_s from './home/InstagramSlider_s'
 
 import Preload_page from '../pages/Preload_page.js'
 import Cookies from 'js-cookie'
@@ -143,7 +142,6 @@ class Home extends React.Component {
               <div className="r">
                 <h2>桌遊動態</h2>
                 <InstagramSlider />
-                <InstagramSlider_s />
               </div>
             </div>
           </div>

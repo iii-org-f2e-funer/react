@@ -1,3 +1,38 @@
+@media (max-width: 767px) {
+  .home{
+    background: #fff !important;
+    min-height: 2000px !important;
+    .container{
+      margin-top: 0 !important;
+    }
+    div{
+      border: transparent !important;
+    }
+    .home_landing {
+      min-height: 1060px !important;
+    }
+    .home_event{
+      background-color: #F3F3F3 !important;
+      min-height: 650px !important;
+    }
+    .home_map{
+      margin-top: 50px !important;
+      padding: 0 50px;
+      min-height: 430px !important;
+      h2{
+        margin-bottom: 18px;
+      }
+    }
+    .home_product{
+      background-color:#E8F1F2;
+      min-height: 400px !important;
+      padding: 60px 0;
+      h2{
+        margin-top: 0 !important;
+      }
+    }
+  }
+}
 .home {
   //   background-color: white;
   background: white url('/images/home/home.png') top left no-repeat;
@@ -14,15 +49,25 @@
     position: relative;
     // have fun
     @media (max-width: 767px) {
+
       .landing_t {
+        background: #DCF1F6 url('/images/home/home_scenery.png') bottom no-repeat;
+        height: 450px !important;
+        
         .container {
+            margin-top: 0 !important;
           h1 {
+            position: relative !important;
+            top: 50px !important;
             color: #474747 !important;
-            font-size: 35px !important;
+            font-size: 42px !important;
             line-height: 50px !important;
             text-align: center !important;
           }
+          
           .btn_div {
+            position: relative !important;
+            top: 50px !important;          
             a {
               text-align: center !important;
               display: block;
@@ -64,6 +109,7 @@
       .landing_b {
         flex-direction: column !important;
         justify-content: flex-start !important;
+        padding: 50px 0;
         .landing_feature {
           width: 200px !important;
           height: 150px !important;
@@ -75,6 +121,7 @@
             object-fit: contain !important;
           }
         }
+
       }
     }
     // 那三張圖
