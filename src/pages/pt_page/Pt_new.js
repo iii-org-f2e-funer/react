@@ -334,7 +334,7 @@ class Pt_new extends React.Component {
                 name="pt_info"
                 rows="20"
                 placeholder="增加一些描述讓你的團吸引其他人加入吧"
-                onBlur={event => this.handleinfoChange(event)}
+                onChange={event => this.handleinfoChange(event)}
                 required="required"
               />
             </div>

@@ -1,5 +1,6 @@
 import React from 'react'
 import { Modal } from 'react-bootstrap'
+import { withRouter } from 'react-router-dom'
 
 class Pt_cancelhost extends React.Component {
   constructor(props) {
@@ -55,4 +56,4 @@ class Pt_cancelhost extends React.Component {
   }
 }
 
-export default Pt_cancelhost
+export default withRouter(Pt_cancelhost)

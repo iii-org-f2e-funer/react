@@ -343,7 +343,7 @@ class Pt_edit extends React.Component {
                 rows="20"
                 placeholder="增加一些描述讓你的團吸引其他人加入吧"
                 value={this.state.pt_info}
-                onBlur={event => this.handleinfoChange(event)}
+                onChange={event => this.handleinfoChange(event)}
               />
             </div>
             <div className="form-row btncol">
