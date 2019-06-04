@@ -175,7 +175,7 @@ class OMPsidePage extends React.Component {
   }
 
   //addFriend
-  addFriendClick = () => {
+  addFriendClick = async () => {
     var friendApplied = {
       applicant: parseInt(this.props.logInId),
       addFriendId: parseInt(this.state.toID),
@@ -193,9 +193,10 @@ class OMPsidePage extends React.Component {
       .then(data => {
         console.log(data)
       })
+
     const socket = socketIOClient(this.state.endpoint)
-    socket.emit('confirm', { action: 'add' })
-    this.setState({ FriendStatus: 'review' })
+    await socket.emit('confirm', { action: 'add' })
+    await this.setState({ FriendStatus: 'review' })
 
     console.log(this.state.FriendStatus)
   }
@@ -228,8 +229,32 @@ class OMPsidePage extends React.Component {
       applicant: parseInt(this.props.logInId),
       addFriendId: parseInt(this.state.toID),
       action: 'confirm',
+      time: this.generateTime(),
+      create_time: this.generateTime(),
+      m_sec: new Date().getTime(),
     }
     console.log(friendApplied)
+
+    //post chat_header
+    fetch(
+      `http://13.112.90.13:3002/chatroom/chat_headerInsert/${
+        this.props.logInId
+      }/${this.state.to_member_name}`,
+      {
+        method: 'POST',
+        headers: { 'Content-type': 'application/json' },
+        body: JSON.stringify(friendApplied),
+      }
+    )
+      .then(res => {
+        return res.json()
+      })
+      .then(data => {
+        console.log(data)
+        // this.props.refresh()
+      })
+
+    //post friendList
     fetch(`http://13.112.90.13:3002/chatroom/friendList/${this.state.toID}`, {
       method: 'POST',
       headers: { 'Content-type': 'application/json' },
@@ -241,6 +266,7 @@ class OMPsidePage extends React.Component {
       .then(data => {
         console.log(data)
       })
+
     socket.emit('confirm', { action: 'confirm' })
     this.setState({ FriendStatus: 'approve' })
     this.props.handleaddFriend()
@@ -291,6 +317,17 @@ class OMPsidePage extends React.Component {
       }
       console.log(this.state.FriendStatus)
     })
+  }
+
+  //generate time
+
+  generateTime = () => {
+    let tzoffset = new Date().getTimezoneOffset() * 60000 //offset in milliseconds
+    let localISOTime = new Date(Date.now() - tzoffset) //get local time
+      .toISOString()
+      .replace(/\.\d{3}\Z/, ' ')
+      .replace('T', ' ')
+    return localISOTime
   }
 
   render() {

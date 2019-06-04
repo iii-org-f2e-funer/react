@@ -98,6 +98,7 @@ class OMPdetail_friendList extends React.Component {
         console.log(checkFriend)
       })
   }
+  startChat = () => {}
 
   render() {
     if (!this.state.FriendData) {
@@ -169,6 +170,7 @@ class OMPdetail_friendList extends React.Component {
                 'ID' +
                 this.state.toID
               }
+              onClick={this.startChat}
             >
               <i className="far fa-comment-dots" />
               <span> 開始聊聊</span>
