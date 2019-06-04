@@ -15,6 +15,7 @@ class OMPsidePage extends React.Component {
       toID: 0,
       endpoint: 'http://13.112.90.13:8080',
       photoURL: '',
+      pt_num: 0,
     }
     this.ready()
   }
@@ -38,9 +39,10 @@ class OMPsidePage extends React.Component {
         this.setState({
           photoURL: obj[1].photoURL,
           friendNum: obj[1].friendTotal,
-          pt_num: obj[2].p_count,
+          pt_num: obj[2].pt_conut,
         })
         console.log(this.state.photoURL)
+        console.log(this.state.pt_num)
       })
 
     const response = await fetch(
@@ -114,7 +116,7 @@ class OMPsidePage extends React.Component {
         this.setState({
           photoURL: obj[1].photoURL,
           friendNum: obj[1].friendTotal,
-          pt_num: obj[2].p_count,
+          pt_num: obj[2].pt_conut,
         })
         console.log(this.state.photoURL)
       })
