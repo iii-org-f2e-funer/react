@@ -52,7 +52,7 @@ class Member_applyedpt extends React.Component {
               </div>
               <div>
                 {' '}
-                {moment(this.props.data.pt_time).format('YYYY/MM/DD HH:mm')}
+                {moment(this.props.data.pt_time).zone("-00:00").format('YYYY/MM/DD HH:mm')}
               </div>
             </div>
             <div className="ptinfo_locate">

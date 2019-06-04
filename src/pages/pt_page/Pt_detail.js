@@ -139,7 +139,9 @@ class Pt_detail extends React.Component {
                 '/chatroom/openMemberPage/' + 'ID' + this.state.data.member_id
               }
             >
-              <div className="ptdetail_hostname">{this.state.data.nickname}</div>
+              <div className="ptdetail_hostname">
+                {this.state.data.nickname}
+              </div>
             </Link>
           </div>
           <div className="ptdetail_info">
@@ -148,7 +150,8 @@ class Pt_detail extends React.Component {
                 {this.state.data.pt_img !== '' ? (
                   <img
                     src={
-                      '//13.112.90.13:3002/images/event/' + this.state.data.pt_img
+                      '//13.112.90.13:3002/images/event/' +
+                      this.state.data.pt_img
                     }
                     alt=""
                   />
@@ -168,14 +171,14 @@ class Pt_detail extends React.Component {
                     </div>
                     <div>
                       <div id="starttime">
-                        {moment(this.state.data.pt_time).format(
-                          'YYYY/MM/DD HH:mm'
-                        )}
+                        {moment(this.state.data.pt_time)
+                          .zone('-00:00')
+                          .format('YYYY/MM/DD HH:mm')}
                       </div>
                       <div id="deadlinetime">
-                        {moment(this.state.data.pt_endtime).format(
-                          'YYYY/MM/DD HH:mm'
-                        )}
+                        {moment(this.state.data.pt_endtime)
+                          .zone('-00:00')
+                          .format('YYYY/MM/DD HH:mm')}
                         截止揪團
                       </div>
                     </div>
