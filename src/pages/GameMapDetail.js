@@ -106,7 +106,11 @@ class MyVerticallyCenteredModal extends React.Component {
       .then(() => {
         this.props.onHide()
         // window.location.href = '/gameMap'
-        alert('場地預約已送出')
+        alert(
+          '場地預約已送出!!\n等候店家確認。( ' +
+            this.props.datastore.firm_id +
+            ')'
+        )
         this.props.history.push('/gameMap')
         return 1
       })
@@ -373,7 +377,7 @@ class GameMapDetail extends React.Component {
     }
 
     //console.log('this.props.match.params.id',this.props.match.params.id)
-   // console.log('this.state.paramId',this.state.paramId)
+    // console.log('this.state.paramId',this.state.paramId)
 
     if (this.state.paramId === +this.props.match.params.id) return
 
@@ -402,7 +406,7 @@ class GameMapDetail extends React.Component {
         throw new Error(err)
       })
 
-      this.setState({ paramId: +this.props.match.params.id })
+    this.setState({ paramId: +this.props.match.params.id })
   }
 
   logincheck = () => {
