@@ -92,7 +92,7 @@ class MapBody extends React.Component {
 
     // *Get games in store
     // fetch(GetStore + '/store_id=' + storeId)
-    fetch('http://127.0.0.1:3002/gameMap/All')
+    fetch('http://13.112.90.13:3002/gameMap/All')
       .then(res => res.json())
       // .then(res => {console.log(res)})
       .then(res => {

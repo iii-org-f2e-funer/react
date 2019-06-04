@@ -14,7 +14,7 @@ class product_order extends React.Component {
     }
   }
   componentDidMount() {
-    fetch('//localhost:3002/product/firm_order', { credentials: 'include' })
+    fetch('//13.112.90.13:3002/product/firm_order', { credentials: 'include' })
       //fetch order
       .then(response => {
         return response.json()

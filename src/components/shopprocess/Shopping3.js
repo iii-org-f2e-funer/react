@@ -22,7 +22,7 @@ export default class Shopping3 extends React.Component {
       total: temp.totall,
       seller: all[0].seller,
     })
-    fetch('//localhost:3002/product/firm', {})
+    fetch('//13.112.90.13:3002/product/firm', {})
       .then(response => {
         return response.json()
       })

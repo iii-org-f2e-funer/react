@@ -13,7 +13,7 @@ class OMPsidePage extends React.Component {
       FriendStatus: 'unFriend',
       friendNum: 0,
       toID: 0,
-      endpoint: 'http://localhost:8080',
+      endpoint: 'http://13.112.90.13:8080',
     }
     this.ready()
   }
@@ -24,7 +24,7 @@ class OMPsidePage extends React.Component {
     this.setState({ toID: toID })
     console.log(this.props.logInId)
     const response = await fetch(
-      `http://localhost:3002/chatroom/friendList/${this.props.logInId}`,
+      `http://13.112.90.13:3002/chatroom/friendList/${this.props.logInId}`,
       {
         method: 'GET',
         headers: { 'Content-type': 'application/json' },
@@ -74,7 +74,7 @@ class OMPsidePage extends React.Component {
     this.setState({ toID: toID })
     console.log(this.props.logInId)
     const response = await fetch(
-      `http://localhost:3002/chatroom/friendList/${this.props.logInId}`,
+      `http://13.112.90.13:3002/chatroom/friendList/${this.props.logInId}`,
       {
         method: 'GET',
         headers: { 'Content-type': 'application/json' },
@@ -126,7 +126,7 @@ class OMPsidePage extends React.Component {
       action: 'add',
     }
     console.log(friendApplied)
-    fetch(`http://localhost:3002/chatroom/friendList/${this.state.toID}`, {
+    fetch(`http://13.112.90.13:3002/chatroom/friendList/${this.state.toID}`, {
       method: 'POST',
       headers: { 'Content-type': 'application/json' },
       body: JSON.stringify(friendApplied),
@@ -150,7 +150,7 @@ class OMPsidePage extends React.Component {
       action: 'cancel',
     }
     console.log(friendApplied)
-    fetch(`http://localhost:3002/chatroom/friendList/${this.state.toID}`, {
+    fetch(`http://13.112.90.13:3002/chatroom/friendList/${this.state.toID}`, {
       method: 'POST',
       headers: { 'Content-type': 'application/json' },
       body: JSON.stringify(friendApplied),
@@ -174,7 +174,7 @@ class OMPsidePage extends React.Component {
       action: 'confirm',
     }
     console.log(friendApplied)
-    fetch(`http://localhost:3002/chatroom/friendList/${this.state.toID}`, {
+    fetch(`http://13.112.90.13:3002/chatroom/friendList/${this.state.toID}`, {
       method: 'POST',
       headers: { 'Content-type': 'application/json' },
       body: JSON.stringify(friendApplied),
@@ -196,7 +196,7 @@ class OMPsidePage extends React.Component {
     socket.on('confirm', async obj => {
       console.log(obj)
       const response = await fetch(
-        `http://localhost:3002/chatroom/friendList/${this.props.logInId}`,
+        `http://13.112.90.13:3002/chatroom/friendList/${this.props.logInId}`,
         {
           method: 'GET',
           headers: { 'Content-type': 'application/json' },

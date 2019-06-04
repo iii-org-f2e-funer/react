@@ -20,7 +20,7 @@ class UserShopping extends React.Component {
   }
 
   componentDidMount() {
-    fetch('//localhost:3002/member/productorder', {})
+    fetch('//13.112.90.13:3002/member/productorder', {})
       .then(response => {
         return response.json()
       })
@@ -53,7 +53,7 @@ class UserShopping extends React.Component {
   handleShow = index => () => {
     this.setState({ show: true, list: this.state.data1[index].allcart })
   }
- 
+
   render() {
     return (
       <>
@@ -64,10 +64,11 @@ class UserShopping extends React.Component {
             <Table striped bordered hover>
               <thead className="table_head">
                 <tr>
-                  {' '}
                   <th scope="col">日期</th>
                   <th scope="col">訂單編號</th>
-                  <th scope="col">訂購人姓名</th>
+                  <th scope="col" className="text-nowrap">
+                    訂購人姓名
+                  </th>
                   <th scope="col">收貨方法</th>
                   <th scope="col">付款方式</th>
                   <th scope="col">我要退貨</th>
@@ -96,7 +97,7 @@ class UserShopping extends React.Component {
                     </td>
                     <td>
                       <button
-                        className="button-white button"
+                        className="button-white button watchit"
                         onClick={this.handleShow(index)}
                       >
                         查看

@@ -15,7 +15,7 @@ class userEditInput extends React.Component {
   }
 
   componentDidMount() {
-    fetch('//localhost:3002/member/userPublicInfo', {
+    fetch('//13.112.90.13:3002/member/userPublicInfo', {
       credentials: 'include',
     })
       .then(res => res.json())
@@ -48,7 +48,7 @@ class userEditInput extends React.Component {
 
     event.preventDefault()
     event.stopPropagation()
-    fetch('//localhost:3002/member/editUserPublicInfo', {
+    fetch('//13.112.90.13:3002/member/editUserPublicInfo', {
       method: 'POST',
       credentials: 'include',
       headers: {

@@ -23,7 +23,7 @@ class OldComment extends React.Component {
         content: this.textInput.innerText,
       }
 
-      fetch('http://localhost:3002/instagram/newSubComment', {
+      fetch('http://13.112.90.13:3002/instagram/newSubComment', {
         method: 'POST',
         body: JSON.stringify(data),
         headers: {
@@ -46,12 +46,12 @@ class OldComment extends React.Component {
       <>
         {/* 留言 */}
         <div key={this.props.data.comment_id} className="comment">
-          <Link to={"/chatroom/openMemberPage/ID" + this.props.data.member_id}>
+          <Link to={'/chatroom/openMemberPage/ID' + this.props.data.member_id}>
             <img
               src={
                 this.props.data.isFirm
-                  ? 'http://localhost:3002/images/firm/' + this.props.data.avatar
-                  : 'http://localhost:3002/images/member/' +
+                  ? 'http://13.112.90.13:3002/images/firm/' + this.props.data.avatar
+                  : 'http://13.112.90.13:3002/images/member/' +
                   this.props.data.avatar
               }
               alt=""
@@ -60,7 +60,7 @@ class OldComment extends React.Component {
           </Link>
           <div className="comment_inner">
             <div className="text">
-            <Link to={"/chatroom/openMemberPage/ID" + this.props.data.member_id}>
+            <Link to={'/chatroom/openMemberPage/ID' + this.props.data.member_id}>
               <span className="sender">{this.props.data.nickname}</span></Link>
               <span className="content">{this.props.data.content} </span>
             </div>
@@ -82,8 +82,8 @@ class OldComment extends React.Component {
             <img
               src={
                 item.isFirm
-                  ? 'http://localhost:3002/images/firm/' + item.avatar
-                  : 'http://localhost:3002/images/member/' + item.avatar
+                  ? 'http://13.112.90.13:3002/images/firm/' + item.avatar
+                  : 'http://13.112.90.13:3002/images/member/' + item.avatar
               }
               alt=""
               className="avatar"

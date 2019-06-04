@@ -35,7 +35,7 @@ class LoginInput extends React.Component {
         account: this.state.account,
         password: this.state.password,
       }
-      fetch('//localhost:3002/firm/firmLogin', {
+      fetch('//13.112.90.13:3002/firm/firmLogin', {
         method: 'POST',
         body: JSON.stringify(data),
         credentials: 'include',

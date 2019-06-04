@@ -22,21 +22,17 @@ import Shopping3 from '../components/shopprocess/Shopping3'
 import Instagram from '../components/instagram/Instagram'
 import actions from '../redux/action/userInfo.js'
 import OpenMemberPage from '../pages/OpenMemberPage'
-import Preload_page from '../pages/Preload_page.js'
 
 class RootRouter extends React.Component {
-  constructor() {
-    super()
+  constructor(props) {
+    super(props)
     this.state = {
-      preload: true,
       avatarRefresh: 1,
     }
   }
+
   componentDidMount() {
-    setTimeout(() => {
-      this.setState({ preload: false })
-    }, 5500)
-    fetch('//localhost:3002/firm/userInfo', {
+    fetch('//13.112.90.13:3002/firm/userInfo', {
       credentials: 'include',
     })
       .then(res => res.json())
@@ -57,8 +53,9 @@ class RootRouter extends React.Component {
       })
   }
   avatarRefresh = () => {
-    this.state.avatarRefresh++
-    this.setState({ avatarRefresh: this.state.avatarRefresh })
+    let newState = this.state.avatarRefresh
+    newState = newState + 1
+    this.setState({ avatarRefresh: newState })
   }
   render() {
     return (
@@ -109,7 +106,6 @@ class RootRouter extends React.Component {
             <Route path="/gameMapDetail/:id" component={GameMapDetail} />
           </Switch>
           <Footer />
-          {this.state.preload ? <Preload_page /> : ''}
         </>
       </Router>
     )

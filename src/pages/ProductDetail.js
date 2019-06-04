@@ -17,7 +17,7 @@ class ProductDetail extends React.Component {
   componentDidMount() {
     var gotit = {}
 
-    fetch('//localhost:3002/product/productlist', {})
+    fetch('//13.112.90.13:3002/product/productlist', {})
       .then(response => {
         return response.json()
       })
@@ -89,7 +89,7 @@ class ProductDetail extends React.Component {
         gotit.description = gotit.description.replace(/\s/g, '<br>')
         this.setState({ gotit: gotit })
 
-        fetch('//localhost:3002/product/productlist2', {})
+        fetch('//13.112.90.13:3002/product/productlist2', {})
           .then(response => {
             return response.json()
           })
@@ -104,8 +104,7 @@ class ProductDetail extends React.Component {
             for (let i = 0; i < data_leng; i++) {
               if (gotdata2[i].sid == sid) {
                 var a1 =
-                  'http://192.168.27.25/happy6/product_manage/' +
-                  gotdata2[i].image_path
+                  '//13.112.90.13:3002/images/product/' + gotdata2[i].image_path
                 var image = {
                   original: a1,
                   thumbnail: a1,
@@ -120,7 +119,7 @@ class ProductDetail extends React.Component {
             console.log('錯誤:', err)
           })
       })
-    fetch('//localhost:3002/product/firm', {})
+    fetch('//13.112.90.13:3002/product/firm', {})
       .then(response => {
         return response.json()
       })

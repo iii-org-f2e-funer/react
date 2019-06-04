@@ -17,7 +17,7 @@ export default class product extends React.Component {
   }
   componentDidMount() {
     ///////////////////////////////////////////////////////////////////////////////
-    fetch('//localhost:3002/product/productlist', {})
+    fetch('//13.112.90.13:3002/product/productlist', {})
       //fetch prodct_manage
       .then(response => {
         // 這裡會得到一個 ReadableStream 的物件
@@ -34,7 +34,7 @@ export default class product extends React.Component {
         // console.log('錯誤:', err)
       })
     ////////////////////////////////////////////////////////////////////////////////
-    fetch('//localhost:3002/product/productlist2', {})
+    fetch('//13.112.90.13:3002/product/productlist2', {})
       //fetch product_sid=sid的所有圖片path
       .then(response => {
         // 這裡會得到一個 ReadableStream 的物件
@@ -66,7 +66,7 @@ export default class product extends React.Component {
         console.log('錯誤:', err)
       })
     ///////////////////////////////////////////////////////////////////////////////
-    fetch('//localhost:3002/product/game_type', {})
+    fetch('//13.112.90.13:3002/product/game_type', {})
       //fetch game_type
       .then(response => {
         return response.json()
@@ -82,7 +82,7 @@ export default class product extends React.Component {
   }
   gotodetail = sid => () => {
     // console.log(sid)
-    // window.location.href = 'http://localhost:3000/ProductDetail/sid:' + sid
+    // window.location.href = 'http://13.112.90.13:3000/ProductDetail/sid:' + sid
     localStorage.setItem('item.sid', sid)
   }
   search = () => () => {
@@ -99,7 +99,12 @@ export default class product extends React.Component {
     this.setState({ data: data })
     //////////////////////// money /////////////////////////////////
     var aaa = []
-    var money = document.getElementById('searchmoney').value
+
+    if (document.getElementById('searchmoney').value) {
+      var money = document.getElementById('searchmoney').value
+    } else {
+      money = 180
+    }
     var d1_leng = Object.keys(data).length
     for (let i = 0; i < d1_leng; i++) {
       if (data[i].price <= money) {
@@ -254,8 +259,7 @@ export default class product extends React.Component {
                         <Card.Img
                           variant="top"
                           src={
-                            // process.env.PUBLIC_URL + '/images/product/game1.jpg'
-                            'http://192.168.27.25/happy6/product_manage/' +
+                            '//13.112.90.13:3002/images/product/' +
                             item.image_path
                           }
                         />

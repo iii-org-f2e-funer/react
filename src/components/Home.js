@@ -4,15 +4,31 @@ import '../styles/home.scss'
 import EventSlider from './home/EventSlider'
 import ProductSlider from './home/ProductSlider'
 import InstagramSlider from './home/InstagramSlider'
+import Preload_page from '../pages/Preload_page.js'
+import Cookies from 'js-cookie'
+
 class Home extends React.Component {
   constructor(props) {
     super(props)
     this.state = {
       homeEvents: [],
       homeProducts: [],
+      preload: false,
     }
   }
-  componentDidMount() {}
+  componentDidMount() {
+    if (Cookies.get('visited') === undefined) {
+      //沒來過就開啟動畫
+      this.setState({ preload: true }, () => {
+        // 播完關閉 & set cookie
+        setTimeout(() => {
+          Cookies.set('visited', 1)
+          this.setState({ preload: false })
+        }, 5400)
+      })
+    }
+  }
+
   render() {
     return (
       <>
@@ -124,6 +140,7 @@ class Home extends React.Component {
             </div>
           </div>
         </div>
+        {this.state.preload ? <Preload_page /> : ''}
       </>
     )
   }

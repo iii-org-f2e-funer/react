@@ -19,7 +19,7 @@ class UserRegisterModal extends React.Component {
     if (evt.target.value !== '') {
       let email = evt.target.value
       let data = { email: evt.target.value }
-      fetch('//localhost:3002/member/emailCheck', {
+      fetch('//13.112.90.13:3002/member/emailCheck', {
         method: 'POST',
         body: JSON.stringify(data),
         credentials: 'include',
@@ -45,7 +45,7 @@ class UserRegisterModal extends React.Component {
     if (evt.target.value.length > 0 && evt.target.value !== '') {
       let account = evt.target.value
       let data = { account: evt.target.value }
-      fetch('//localhost:3002/member/accountCheck', {
+      fetch('//13.112.90.13:3002/member/accountCheck', {
         method: 'POST',
         body: JSON.stringify(data),
         credentials: 'include',
@@ -94,7 +94,7 @@ class UserRegisterModal extends React.Component {
         email: this.state.email,
         name: this.inputname.value,
       }
-      fetch('//localhost:3002/member/userRegister', {
+      fetch('//13.112.90.13:3002/member/userRegister', {
         method: 'POST',
         body: JSON.stringify(data),
         headers: {

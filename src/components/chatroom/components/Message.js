@@ -15,7 +15,7 @@ class Message extends React.Component {
   //get data from database
   async componentDidMount() {
     const response = await fetch(
-      `http://localhost:3002/chatroom/message/${this.props.logInId}`,
+      `http://13.112.90.13:3002/chatroom/message/${this.props.logInId}`,
       {
         method: 'GET',
         headers: { 'Content-type': 'application/json' },
@@ -30,7 +30,7 @@ class Message extends React.Component {
 
   // async componentWillReceiveProps() {
   //   const response = await fetch(
-  //     `http://localhost:3002/chatroom/message/${this.props.logInId}`,
+  //     `http://13.112.90.13:3002/chatroom/message/${this.props.logInId}`,
   //     {
   //       method: 'GET',
   //       headers: { 'Content-type': 'application/json' },

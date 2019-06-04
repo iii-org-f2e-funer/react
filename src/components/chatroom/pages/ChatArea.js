@@ -30,7 +30,7 @@ class ChatArea extends React.Component {
       theUrl = theUrl.split('/')[3]
       await this.setState({ member_name: theUrl })
       const response = await fetch(
-        'http://localhost:3002/chatroom/message/user_id1',
+        'http://13.112.90.13:3002/chatroom/message/user_id1',
         {
           method: 'GET',
           headers: { 'Content-type': 'application/json' },

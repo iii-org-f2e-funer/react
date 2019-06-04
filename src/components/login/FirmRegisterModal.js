@@ -19,12 +19,16 @@ class FirmRegisterModal extends React.Component {
   }
   checkStore = evt => {
     this.setState({ store: evt.target.value })
+    this.inputunicode.value = ''
   }
   checkunicode = evt => {
     if (evt.target.value !== '') {
+      if (evt.target.value.length !== 8) {
+        this.setState({ unicodeRemindText: '請輸入8碼統編' })
+      }
       let unicode = evt.target.value
       let data = { unicode: evt.target.value }
-      fetch('//localhost:3002/firm/unicodeCheck', {
+      fetch('//13.112.90.13:3002/firm/unicodeCheck', {
         method: 'POST',
         body: JSON.stringify(data),
         credentials: 'include',
@@ -49,6 +53,7 @@ class FirmRegisterModal extends React.Component {
   noremindText = () => {
     this.setState({
       remindText: '',
+      remindText2: '',
     })
   }
   noremindText2 = () => {
@@ -66,7 +71,7 @@ class FirmRegisterModal extends React.Component {
       emailRemindText: '',
     })
   }
-  nounicodeRemindText = () =>{
+  nounicodeRemindText = () => {
     this.setState({
       unicodeRemindText: '',
     })
@@ -75,7 +80,7 @@ class FirmRegisterModal extends React.Component {
     if (evt.target.value !== '') {
       let email = evt.target.value
       let data = { email: evt.target.value }
-      fetch('//localhost:3002/firm/emailCheck', {
+      fetch('//13.112.90.13:3002/firm/emailCheck', {
         method: 'POST',
         body: JSON.stringify(data),
         credentials: 'include',
@@ -101,7 +106,7 @@ class FirmRegisterModal extends React.Component {
     if (evt.target.value !== '') {
       let account = evt.target.value
       let data = { account: evt.target.value }
-      fetch('//localhost:3002/firm/accountCheck', {
+      fetch('//13.112.90.13:3002/firm/accountCheck', {
         method: 'POST',
         body: JSON.stringify(data),
         credentials: 'include',
@@ -147,10 +152,10 @@ class FirmRegisterModal extends React.Component {
       var data = {
         account: this.state.account,
         password: this.state.password,
-        uniform: this.state.uniform,
+        unicode: this.state.unicode,
         email: this.state.email,
       }
-      fetch('//localhost:3002/firm/firmRegister', {
+      fetch('//13.112.90.13:3002/firm/firmRegister', {
         method: 'POST',
         body: JSON.stringify(data),
         credentials: 'include',
@@ -253,7 +258,7 @@ class FirmRegisterModal extends React.Component {
               <input
                 className="pl-3"
                 name="uniform"
-                type="text"
+                type="number"
                 required
                 onFocus={this.nounicodeRemindText}
                 onBlur={this.checkunicode}

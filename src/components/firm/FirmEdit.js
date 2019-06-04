@@ -29,13 +29,12 @@ class FirmEdit extends React.Component {
     }
   }
   componentDidMount() {
-    fetch('//localhost:3002/firm/firmInfo', {
+    fetch('//13.112.90.13:3002/firm/firmInfo', {
       credentials: 'include',
     })
       .then(res => res.json())
       .then(obj => {
         if (obj.success) {
-          console.log(obj.img)
           this.setState({
             firmData: Object.assign(this.state.firmData, obj.body),
             firm_id: obj.firm_id,
@@ -48,17 +47,17 @@ class FirmEdit extends React.Component {
       })
   }
   cancelEdit = () => {
-    fetch('//localhost:3002/firm/firmInfo', {
+    fetch('//13.112.90.13:3002/firm/firmInfo', {
       credentials: 'include',
     })
       .then(res => res.json())
       .then(obj => {
         if (obj.success) {
-          console.log(obj)
           this.setState({
             firmData: Object.assign(this.state.firmData, obj.body),
             firm_id: obj.firm_id,
             insert: false,
+            img: obj.img,
           })
         } else {
           console.log(obj)

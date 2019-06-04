@@ -16,7 +16,7 @@ const Pt_applyer = props => {
                   case '':
                     return (
                       <img
-                        src="//localhost:3002/images/member/preset_avatar.png"
+                        src="//13.112.90.13:3002/images/member/preset_avatar.png"
                         alt=""
                       />
                     )
@@ -24,7 +24,7 @@ const Pt_applyer = props => {
                   case null:
                     return (
                       <img
-                        src="//localhost:3002/images/member/preset_avatar.png"
+                        src="//13.112.90.13:3002/images/member/preset_avatar.png"
                         alt=""
                       />
                     )
@@ -32,7 +32,7 @@ const Pt_applyer = props => {
                   default:
                     return (
                       <img
-                        src={'//localhost:3002/images/member/' + item.photo}
+                        src={'//13.112.90.13:3002/images/member/' + item.photo}
                         alt=""
                       />
                     )

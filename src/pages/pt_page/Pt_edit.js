@@ -31,7 +31,7 @@ class Pt_edit extends React.Component {
   componentDidMount() {
     let data = JSON.stringify({ ptsid: window.location.pathname.split('/')[3] })
 
-    fetch('//localhost:3002/event/ptinfo', {
+    fetch('//13.112.90.13:3002/event/ptinfo', {
       method: 'POST',
       body: data,
       headers: {
@@ -92,7 +92,7 @@ class Pt_edit extends React.Component {
       imgdata.append('pt_img', imgfile)
       console.log(imgdata)
 
-      fetch('//localhost:3002/event/imgupload', {
+      fetch('//13.112.90.13:3002/event/imgupload', {
         method: 'POST',
         body: imgdata,
       })
@@ -119,7 +119,7 @@ class Pt_edit extends React.Component {
         pt_city: this.state.pt_city,
         pt_dist: this.state.pt_dist,
       })
-      fetch('//localhost:3002/event/loadadd', {
+      fetch('//13.112.90.13:3002/event/loadadd', {
         method: 'POST',
         body: locate,
         headers: {
@@ -155,7 +155,7 @@ class Pt_edit extends React.Component {
 
     const fd = new FormData(this.form)
 
-    fetch('//localhost:3002/event/editpt', {
+    fetch('//13.112.90.13:3002/event/editpt', {
       method: 'POST',
       body: fd,
     })
@@ -207,7 +207,7 @@ class Pt_edit extends React.Component {
                 {this.state.pt_img ? (
                   <div className="imgpreview" onClick={this.handleuploadimg}>
                     <img
-                      src={'//localhost:3002/images/event/' + this.state.pt_img}
+                      src={'//13.112.90.13:3002/images/event/' + this.state.pt_img}
                       alt=""
                     />
                   </div>

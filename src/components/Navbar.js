@@ -32,7 +32,7 @@ class Navbar extends React.Component {
     this.setState({ loginPopup: false })
   }
   logOut = () => {
-    fetch('//localhost:3002/firm/logOut', {
+    fetch('//13.112.90.13:3002/firm/logOut', {
       method: 'POST',
       body: '',
       credentials: 'include',

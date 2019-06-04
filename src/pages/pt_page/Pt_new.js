@@ -34,7 +34,7 @@ class Pt_new extends React.Component {
 
   componentDidMount() {
     //抓登入資料
-    fetch('//localhost:3002/firm/userInfo', {
+    fetch('//13.112.90.13:3002/firm/userInfo', {
       credentials: 'include',
     })
       .then(res => res.json())
@@ -81,7 +81,7 @@ class Pt_new extends React.Component {
       imgdata.append('pt_img', imgfile)
       console.log(imgdata)
 
-      fetch('//localhost:3002/event/imgupload', {
+      fetch('//13.112.90.13:3002/event/imgupload', {
         method: 'POST',
         body: imgdata,
       })
@@ -109,7 +109,7 @@ class Pt_new extends React.Component {
         pt_dist: this.state.pt_dist,
       })
       // console.log('e')
-      fetch('//localhost:3002/event/loadadd', {
+      fetch('//13.112.90.13:3002/event/loadadd', {
         method: 'POST',
         body: locate,
         headers: {
@@ -144,7 +144,7 @@ class Pt_new extends React.Component {
 
     const fd = new FormData(this.form)
 
-    fetch('//localhost:3002/event/newptsubmit', {
+    fetch('//13.112.90.13:3002/event/newptsubmit', {
       method: 'POST',
       body: fd,
     })
@@ -196,7 +196,7 @@ class Pt_new extends React.Component {
                 {this.state.pt_img ? (
                   <div className="imgpreview" onClick={this.handleuploadimg}>
                     <img
-                      src={'//localhost:3002/images/event/' + this.state.pt_img}
+                      src={'//13.112.90.13:3002/images/event/' + this.state.pt_img}
                       alt=""
                     />
                   </div>

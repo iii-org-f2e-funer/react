@@ -12,7 +12,7 @@ class UserAccount extends React.Component {
     }
   }
   componentDidMount() {
-    fetch('//localhost:3002/firm/userInfo', {
+    fetch('//13.112.90.13:3002/firm/userInfo', {
       credentials: 'include',
     })
       .then(res => res.json())
@@ -33,7 +33,7 @@ class UserAccount extends React.Component {
 
   cancelEdit = () => {
     this.setState({ isEdit: false })
-    fetch('//localhost:3002/firm/userInfo', {
+    fetch('//13.112.90.13:3002/firm/userInfo', {
       credentials: 'include',
     })
       .then(res => res.json())

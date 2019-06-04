@@ -12,7 +12,7 @@ const Member_applyeritem = props => {
                 case '':
                   return (
                     <img
-                      src="//localhost:3002/images/member/preset_avatar.png"
+                      src="//13.112.90.13:3002/images/member/preset_avatar.png"
                       alt=""
                     />
                   )
@@ -20,7 +20,7 @@ const Member_applyeritem = props => {
                 case null:
                   return (
                     <img
-                      src="//localhost:3002/images/member/preset_avatar.png"
+                      src="//13.112.90.13:3002/images/member/preset_avatar.png"
                       alt=""
                     />
                   )
@@ -28,7 +28,7 @@ const Member_applyeritem = props => {
                 default:
                   return (
                     <img
-                      src={'//localhost:3002/images/member/' + props.data.photo}
+                      src={'//13.112.90.13:3002/images/member/' + props.data.photo}
                       alt=""
                     />
                   )

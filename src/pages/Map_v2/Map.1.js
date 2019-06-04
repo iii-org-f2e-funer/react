@@ -74,7 +74,7 @@ class EscapeRoomMap extends React.Component {
   //       storeTel: data.storeTel,
   //       storeOpHr: data.storeOpHr
   //   });
-  //   fetch('http://localhost:3000/map/store/'+this.state.storeId)
+  //   fetch('http://13.112.90.13:3000/map/store/'+this.state.storeId)
   //   .then(res => res.json())
   //   .then(({ data }) => {
   //     this.setState({

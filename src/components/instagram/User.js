@@ -15,9 +15,9 @@ class User extends React.Component {
             <img
               src={
                 this.props.userInfo.isFirm
-                  ? 'http://localhost:3002/images/firm/' +
+                  ? 'http://13.112.90.13:3002/images/firm/' +
                     this.props.userInfo.body.photo
-                  : 'http://localhost:3002/images/member/' +
+                  : 'http://13.112.90.13:3002/images/member/' +
                     this.props.userInfo.body.photo
               }
               alt=""

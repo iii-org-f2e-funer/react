@@ -72,7 +72,7 @@ class Shopping2 extends React.Component {
 
     ////////////////////////////////////// 新增訂單 //////////////////////////////////////////////
 
-    fetch('//localhost:3002/product/product_order', {
+    fetch('//13.112.90.13:3002/product/product_order', {
       method: 'POST',
       body: JSON.stringify(order),
       credentials: 'include',

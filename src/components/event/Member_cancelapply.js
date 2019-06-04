@@ -10,7 +10,7 @@ class Member_cancelapply extends React.Component {
 
   showmodal = e => {
     console.log(this.props.applysid)
-    fetch('//localhost:3002/event/cancelapply', {
+    fetch('//13.112.90.13:3002/event/cancelapply', {
       method: 'POST',
       body: JSON.stringify({ applysid: this.props.applysid }),
       headers: {

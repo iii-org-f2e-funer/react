@@ -25,22 +25,8 @@ class Sidebar extends React.Component {
       data: {},
     }
   }
-  reFresh = () => {
-    fetch('//localhost:3002/firm/userInfo', {
-      credentials: 'include',
-    })
-      .then(res => res.json())
-      .then(obj => {
-        if (obj.success) {
-          this.setState({ data: obj.body })
-          console.log(this.state.data)
-        } else {
-          this.props.history.push('/')
-        }
-      })
-  }
   componentDidMount() {
-    fetch('//localhost:3002/firm/userInfo', {
+    fetch('//13.112.90.13:3002/firm/userInfo', {
       credentials: 'include',
     })
       .then(res => res.json())
@@ -65,14 +51,14 @@ class Sidebar extends React.Component {
     const fd = new FormData()
     fd.append('firm_id', this.state.data.sid)
     fd.append('file', file)
-    fetch('//localhost:3002/firm/avatarUpdate', {
+    fetch('//13.112.90.13:3002/firm/avatarUpdate', {
       method: 'POST',
       body: fd,
       credentials: 'include',
     })
       .then(res => res.json())
       .then(obj => {
-        fetch('//localhost:3002/firm/userInfo', {
+        fetch('//13.112.90.13:3002/firm/userInfo', {
           credentials: 'include',
         })
           .then(res => res.json())
@@ -111,14 +97,17 @@ class Sidebar extends React.Component {
                       <img
                         alt="無法顯示"
                         src={
-                          'http://localhost:3002/images/firm/' +
+                          'http://13.112.90.13:3002/images/firm/' +
                           this.state.data.my_file
                         }
                       />
                     ) : (
                       <img
                         alt=""
-                        src="/public/images/member/preset_avatar.png"
+                        src={
+                          process.env.PUBLIC_URL +
+                          'images/member/preset_avatar.png'
+                        }
                       />
                     )}
                   </div>
