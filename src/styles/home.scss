@@ -118,6 +118,12 @@
       .event_slider {
         display: none !important;
       }
+      .event_slider_s {
+        display: block !important;
+      }
+    }
+    .event_slider_s {
+      display: none;
     }
     // event slider
     .event_slider {
@@ -322,6 +328,12 @@
       .product_slider {
         display: none !important;
       }
+      .product_slider_s {
+        display: block !important;
+      }
+    }
+    .product_slider_s {
+      display: none;
     }
     //product slider
     .product_slider {
