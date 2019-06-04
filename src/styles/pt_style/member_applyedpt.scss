@@ -116,6 +116,11 @@
     border-radius: 50%;
     overflow: hidden;
     margin: auto 8px auto 16px;
+    img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
   }
   .applyername {
     width: 360px;
