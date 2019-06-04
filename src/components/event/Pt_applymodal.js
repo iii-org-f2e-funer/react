@@ -1,5 +1,6 @@
 import React from 'react'
 import { Modal } from 'react-bootstrap'
+import moment from 'moment'
 
 class Pt_applymodal extends React.Component {
   constructor(props, context) {
@@ -19,7 +20,6 @@ class Pt_applymodal extends React.Component {
     }
   }
   componentDidMount() {
-    // console.log('AAAAAAAAAAAAAAAAA', this.props.accountID)
     fetch('//13.112.90.13:3002/firm/userInfo', {
       credentials: 'include',
     })
@@ -88,7 +88,15 @@ class Pt_applymodal extends React.Component {
         >
           <div className="ptmodal">
             <div className="msgcol">
-              <div>你是否要參加 {this.props.ptapply.pt_sid} 這團 </div>
+              <div>你是否要參加 {this.props.ptapply.nickname} </div>
+              <div>
+                在 {this.props.ptapply.pt_city},{this.props.ptapply.pt_dist}{' '}
+                {this.props.ptapply.pt_add}
+              </div>
+              <div>
+                {moment(this.props.ptapply.pt_time).format('YYYY/MM/DD HH:mm')}{' '}
+                開始的團嗎?
+              </div>
             </div>
             <div className="btncol">
               <button onClick={this.handleClose}>取消</button>
