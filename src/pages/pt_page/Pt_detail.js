@@ -139,7 +139,7 @@ class Pt_detail extends React.Component {
                 '/chatroom/openMemberPage/' + 'ID' + this.state.data.member_id
               }
             >
-              <div className="ptdetail_hostname">{this.state.data.name}</div>
+              <div className="ptdetail_hostname">{this.state.data.nickname}</div>
             </Link>
           </div>
           <div className="ptdetail_info">
