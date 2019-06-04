@@ -17,16 +17,24 @@ class Home extends React.Component {
     }
   }
   componentDidMount() {
-    if (Cookies.get('visited') === undefined) {
-      //沒來過就開啟動畫
-      this.setState({ preload: true }, () => {
-        // 播完關閉 & set cookie
-        setTimeout(() => {
-          Cookies.set('visited', 1)
-          this.setState({ preload: false })
-        }, 5400)
-      })
-    }
+    // if (Cookies.get('visited') === undefined) {
+    //   //沒來過就開啟動畫
+    //   this.setState({ preload: true }, () => {
+    //     // 播完關閉 & set cookie
+    //     setTimeout(() => {
+    //       Cookies.set('visited', 1)
+    //       this.setState({ preload: false })
+    //     }, 5400)
+    //   })
+    // }
+
+    //沒來過就開啟動畫
+    this.setState({ preload: true }, () => {
+      // 播完關閉 & set cookie
+      setTimeout(() => {
+        this.setState({ preload: false })
+      }, 5400)
+    })
   }
 
   render() {
