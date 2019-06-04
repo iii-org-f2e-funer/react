@@ -24,7 +24,9 @@ class Pt_editmodal extends React.Component {
                     <div>{this.props.edited.errormsg}</div>
                   </div>
                   <div className="btncol">
-                    <button onClick={this.props.handleHide}>確認</button>
+                    <Link to={'/event/'}>
+                      <button onClick={this.props.handleHide}>確認</button>
+                    </Link>
                   </div>
                 </>
               ) : (

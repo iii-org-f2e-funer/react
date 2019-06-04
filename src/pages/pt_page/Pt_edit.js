@@ -207,7 +207,9 @@ class Pt_edit extends React.Component {
                 {this.state.pt_img ? (
                   <div className="imgpreview" onClick={this.handleuploadimg}>
                     <img
-                      src={'//13.112.90.13:3002/images/event/' + this.state.pt_img}
+                      src={
+                        '//13.112.90.13:3002/images/event/' + this.state.pt_img
+                      }
                       alt=""
                     />
                   </div>
@@ -255,7 +257,7 @@ class Pt_edit extends React.Component {
                 className="flex"
                 dateFormat="YYYY/MM/DD"
                 timeFormat="HH:mm"
-                value={this.state.pt_time}
+                value={moment(this.state.pt_time).zone('-00:00')}
                 inputProps={{ name: 'pt_time' }}
                 onChange={moment => this.handletimeChange(moment)}
               />
@@ -267,7 +269,7 @@ class Pt_edit extends React.Component {
                 className="flex"
                 dateFormat="YYYY/MM/DD"
                 timeFormat="HH:mm"
-                value={this.state.pt_endtime}
+                value={moment(this.state.pt_endtime).zone('-00:00')}
                 inputProps={{ name: 'pt_endtime' }}
                 onChange={moment => this.handleendtimeChange(moment)}
               />
