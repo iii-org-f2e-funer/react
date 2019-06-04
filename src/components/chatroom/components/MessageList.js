@@ -13,6 +13,7 @@ class MessageList extends React.Component {
           action={ele.action}
           isMe={myId == ele.uid ? true : false}
           time={ele.time}
+          photoURL={ele.urlSender}
         />
       )
     })
@@ -23,11 +24,15 @@ class MessageList extends React.Component {
 class Message extends React.Component {
   render() {
     // 聊天消息，判断是否是自己
+    console.log(this.props.photoURL)
     return (
       <li className={this.props.isMe ? 'sender' : ''}>
         <div className="text-box sender align-items-center">
           <div className={this.props.isMe ? 'd-none' : 'avatar'}>
-            <img src={avatar} alt="會員1頭像" />
+            <img
+              src={'//13.112.90.13:3002/images/member/' + this.props.photoURL}
+              alt="會員1頭像"
+            />
           </div>
           <h5 className="my-auto rounded-pill">{this.props.action}</h5>
         </div>

@@ -45,15 +45,10 @@ class Message_new extends React.Component {
         .locale('zh-tw')
         .fromNow())
     })
-    let new_data = data.filter(ele => {
-      if (ele.from_id == this.props.logInId) {
-        return (ele.imgURL = ele.photoTO_URL)
-      } else if (ele.to_id == this.props.logInId) {
-        return (ele.imgURL = ele.photoFROM_URL)
-      }
-    })
-    console.log(new_data)
-    await this.setState({ chatDataAll: new_data })
+
+    console.log(data)
+
+    await this.setState({ chatDataAll: data })
   }
   handleDelete = () => {
     let wantDelete = window.confirm('是否刪除對話紀錄')
@@ -91,8 +86,8 @@ class Message_new extends React.Component {
                       <div className="avatar mt-2">
                         <img
                           src={
-                            'http://13.112.90.13:3002/public/images/member/' +
-                            data.imgURL
+                            '//13.112.90.13:3002/images/member/' +
+                            data.photoTO_URL
                           }
                           alt="會員1頭像"
                         />
@@ -131,8 +126,8 @@ class Message_new extends React.Component {
                       <div className="avatar mt-2">
                         <img
                           src={
-                            'http://13.112.90.13:3002/public/images/member/' +
-                            data.imgURL
+                            '//13.112.90.13:3002/images/member/' +
+                            data.photoFROM_URL
                           }
                           alt="會員1頭像"
                         />

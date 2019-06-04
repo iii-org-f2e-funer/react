@@ -30,14 +30,18 @@ class ChatRoom extends React.Component {
 
   async componentDidMount() {
     const response = await fetch(
-      `http://13.112.90.13:3002/chatroom/message/${this.props.userInfo.account}`,
+      `http://13.112.90.13:3002/chatroom/message/${
+        this.props.userInfo.account
+      }`,
       {
         method: 'GET',
         headers: { 'Content-type': 'application/json' },
       }
     )
     const data = await response.json()
+
     console.log(data)
+
     await this.setState({ chatData: data })
   }
 
@@ -103,6 +107,7 @@ class ChatRoom extends React.Component {
                               userData={this.state.chatData}
                               refresh={this.handleRefreh}
                               toName={data.y_toname}
+                              photoURL={data.photoTO_URL}
                             />
                           )}
                         />
@@ -123,6 +128,7 @@ class ChatRoom extends React.Component {
                               userData={this.state.chatData}
                               refresh={this.handleRefreh}
                               toName={data.y_toname}
+                              photoURL={data.photoFROM_URL}
                             />
                           )}
                         />
