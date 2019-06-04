@@ -101,7 +101,7 @@ const Pt_listitem = props => {
               </div>
               <div className="pt_time">
                 <i className="fas fa-clock" />
-                {moment(props.data.pt_time).format('YYYY/MM/DD HH:mm')}
+                {moment(props.data.pt_time).zone("-00:00").format('YYYY/MM/DD HH:mm')}
               </div>
               <div className="pt_locate">
                 <i className="fas fa-map-marker-alt" />
