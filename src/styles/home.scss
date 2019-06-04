@@ -33,6 +33,12 @@
     }
   }
 }
+@media (min-width: 768px) and (max-width: 1368px) {
+  .home {
+    background: white url('/images/home/1368px.png') top left no-repeat !important;
+    max-width: 1368px;
+  }
+}
 .home {
   //   background-color: white;
   background: white url('/images/home/home.png') top left no-repeat;
