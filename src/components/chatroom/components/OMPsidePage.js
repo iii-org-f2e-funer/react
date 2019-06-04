@@ -195,8 +195,8 @@ class OMPsidePage extends React.Component {
       })
 
     const socket = socketIOClient(this.state.endpoint)
-    await socket.emit('confirm', { action: 'add' })
-    await this.setState({ FriendStatus: 'review' })
+    socket.emit('confirm', { action: 'add' })
+    this.setState({ FriendStatus: 'review' })
 
     console.log(this.state.FriendStatus)
   }
@@ -222,7 +222,7 @@ class OMPsidePage extends React.Component {
     socket.emit('confirm', { action: 'cancel' })
     this.setState({ FriendStatus: 'unFriend' })
   }
-  confirmFriend = () => {
+  confirmFriend = async () => {
     const socket = socketIOClient(this.state.endpoint)
 
     var friendApplied = {
@@ -236,7 +236,7 @@ class OMPsidePage extends React.Component {
     console.log(friendApplied)
 
     //post chat_header
-    fetch(
+    let res = await fetch(
       `http://13.112.90.13:3002/chatroom/chat_headerInsert/${
         this.props.logInId
       }/${this.state.toID}`,
@@ -246,28 +246,33 @@ class OMPsidePage extends React.Component {
         body: JSON.stringify(friendApplied),
       }
     )
-      .then(res => {
-        return res.json()
-      })
-      .then(data => {
-        console.log(data)
-        // this.props.refresh()
-      })
+    let data = await res.json()
+    // .then(res => {
+    //   return res.json()
+    // })
+    // .then(data => {
+    console.log(data)
+    // this.props.refresh()
+    // })
 
     //post friendList
-    fetch(`http://13.112.90.13:3002/chatroom/friendList/${this.state.toID}`, {
-      method: 'POST',
-      headers: { 'Content-type': 'application/json' },
-      body: JSON.stringify(friendApplied),
-    })
-      .then(res => {
-        return res.json()
-      })
-      .then(data => {
-        console.log(data)
-      })
+    let res2 = await fetch(
+      `http://13.112.90.13:3002/chatroom/friendList/${this.state.toID}`,
+      {
+        method: 'POST',
+        headers: { 'Content-type': 'application/json' },
+        body: JSON.stringify(friendApplied),
+      }
+    )
+    let data2 = await res2.json()
+    // .then(res => {
+    //   return res.json()
+    // })
+    // .then(data => {
+    console.log(data2)
+    // })
 
-    socket.emit('confirm', { action: 'confirm' })
+    await socket.emit('confirm', { action: 'confirm' })
     this.setState({ FriendStatus: 'approve' })
     this.props.handleaddFriend()
   }
