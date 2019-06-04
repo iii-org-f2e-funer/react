@@ -8,7 +8,7 @@ const Pt_applyer = props => {
         {props.applyer.map(item => (
           <Link
             to={'/chatroom/openMemberPage/' + 'ID' + item.member_id}
-            title={item.name}
+            title={item.nickname}
           >
             <div key={item.pt_applysid} className="applyer">
               {(() => {
