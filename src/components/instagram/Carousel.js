@@ -34,7 +34,10 @@ class Carousel extends React.Component {
               >
                 {this.props.photos.map((item, idx) => (
                   <li key={idx}>
-                    <img src={'http://13.112.90.13:3002/images/' + item} alt="" />
+                    <img
+                      src={'http://13.112.90.13:3002/images/instagram' + item}
+                      alt=""
+                    />
                   </li>
                 ))}
               </ul>
