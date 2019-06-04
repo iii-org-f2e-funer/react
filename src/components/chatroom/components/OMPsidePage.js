@@ -48,20 +48,27 @@ class OMPsidePage extends React.Component {
       return ele.friend_id == toID || ele.user_id == toID
       // return ele.friendID == toID && (ele.status == 'approve' || 'review')
     })
-    await this.setState({ FriendData: checkFriend[0] })
-    console.log(checkFriend)
-    if (!Number(checkFriend)) {
+    let newcheckFriend = checkFriend.filter(ele => {
+      if (ele.user_id == this.props.logInId) {
+        return (ele.imgURL = ele.photoTO_URL)
+      } else if (ele.friend_id == this.props.logInId) {
+        return (ele.imgURL = ele.photoFROM_URL)
+      }
+    })
+    await this.setState({ FriendData: newcheckFriend[0] })
+    console.log(newcheckFriend)
+    if (!Number(newcheckFriend)) {
       this.setState({ FriendStatus: 'unFriend' })
     }
-    if (checkFriend[0]) {
-      if (checkFriend[0].status == 'approve') {
+    if (newcheckFriend[0]) {
+      if (newcheckFriend[0].status == 'approve') {
         await this.setState({ FriendStatus: 'approve' })
       } else if (
-        checkFriend[0].status == 'review' &&
-        checkFriend[0].friend_id == this.props.logInId
+        newcheckFriend[0].status == 'review' &&
+        newcheckFriend[0].friend_id == this.props.logInId
       ) {
         await this.setState({ FriendStatus: 'waitMeReview' })
-      } else if (checkFriend[0].status == 'review') {
+      } else if (newcheckFriend[0].status == 'review') {
         await this.setState({ FriendStatus: 'review' })
       }
     }
@@ -98,20 +105,27 @@ class OMPsidePage extends React.Component {
       return ele.friend_id == toID || ele.user_id == toID
       // return ele.friendID == toID && (ele.status == 'approve' || 'review')
     })
-    await this.setState({ FriendData: checkFriend[0] })
-    console.log(checkFriend)
-    if (!Number(checkFriend)) {
+    let newcheckFriend = checkFriend.filter(ele => {
+      if (ele.user_id == this.props.logInId) {
+        return (ele.imgURL = ele.photoTO_URL)
+      } else if (ele.friend_id == this.props.logInId) {
+        return (ele.imgURL = ele.photoFROM_URL)
+      }
+    })
+    await this.setState({ FriendData: newcheckFriend[0] })
+    console.log(newcheckFriend)
+    if (!Number(newcheckFriend)) {
       this.setState({ FriendStatus: 'unFriend' })
     }
-    if (checkFriend[0]) {
-      if (checkFriend[0].status == 'approve') {
+    if (newcheckFriend[0]) {
+      if (newcheckFriend[0].status == 'approve') {
         await this.setState({ FriendStatus: 'approve' })
       } else if (
-        checkFriend[0].status == 'review' &&
-        checkFriend[0].friend_id == this.props.logInId
+        newcheckFriend[0].status == 'review' &&
+        newcheckFriend[0].friend_id == this.props.logInId
       ) {
         await this.setState({ FriendStatus: 'waitMeReview' })
-      } else if (checkFriend[0].status == 'review') {
+      } else if (newcheckFriend[0].status == 'review') {
         await this.setState({ FriendStatus: 'review' })
       }
     }
