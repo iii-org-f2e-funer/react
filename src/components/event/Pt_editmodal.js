@@ -1,11 +1,10 @@
 import React from 'react'
 import { Modal, Button } from 'react-bootstrap'
+import { Link } from 'react-router-dom'
 
 class Pt_editmodal extends React.Component {
   constructor(props) {
     super(props)
-
-
   }
 
   render() {
@@ -34,8 +33,14 @@ class Pt_editmodal extends React.Component {
                     <div>你的修改已成功</div>
                   </div>
                   <div className="btncol">
-                    <button onClick={this.props.handleHide}>回揪團列表</button>
-                    <button onClick={this.props.handleHide}>回個人頁</button>
+                    <Link to={'/event/'}>
+                      <button onClick={this.props.handleHide}>
+                        回揪團列表
+                      </button>
+                    </Link>
+                    <Link to={'/member/userevent'}>
+                      <button onClick={this.props.handleHide}>回個人頁</button>
+                    </Link>
                   </div>
                 </>
               )}
