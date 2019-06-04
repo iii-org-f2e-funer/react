@@ -59,6 +59,7 @@ class userEditInput extends React.Component {
       .then(res => res.json())
       .then(obj => {
         if (obj.success) {
+          this.props.refresh()
           this.props.handleHide()
         }
       })
