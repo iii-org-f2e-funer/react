@@ -71,10 +71,13 @@ class OMPdetail_friendList extends React.Component {
       })
     //fetch status
 
-    fetch(`http://13.112.90.13:3002/chatroom/friendList/${this.props.logInId}`, {
-      method: 'GET',
-      headers: { 'Content-type': 'application/json' },
-    })
+    fetch(
+      `http://13.112.90.13:3002/chatroom/friendList/${this.props.logInId}`,
+      {
+        method: 'GET',
+        headers: { 'Content-type': 'application/json' },
+      }
+    )
       .then(response => {
         return response.json()
       })

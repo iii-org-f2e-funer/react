@@ -45,7 +45,15 @@ class Message_new extends React.Component {
         .locale('zh-tw')
         .fromNow())
     })
-    await this.setState({ chatDataAll: data })
+    let new_data = data.filter(ele => {
+      if (ele.from_id == this.props.logInId) {
+        return (ele.imgURL = ele.photoTO_URL)
+      } else if (ele.to_id == this.props.logInId) {
+        return (ele.imgURL = ele.photoFROM_URL)
+      }
+    })
+    console.log(new_data)
+    await this.setState({ chatDataAll: new_data })
   }
   handleDelete = () => {
     let wantDelete = window.confirm('是否刪除對話紀錄')
@@ -81,7 +89,13 @@ class Message_new extends React.Component {
                   <div className="d-flex w-100 justify-content-between align-items-center">
                     <div className="d-flex justify-content-center align-items-center">
                       <div className="avatar mt-2">
-                        <img src={avatar} alt="會員1頭像" />
+                        <img
+                          src={
+                            'http://13.112.90.13:3002/public/images/member/' +
+                            data.imgURL
+                          }
+                          alt="會員1頭像"
+                        />
                       </div>
                       <h5 className="mb-1 text-nowrap  ">{data.y_toname}</h5>
                     </div>
@@ -115,7 +129,13 @@ class Message_new extends React.Component {
                   <div className="d-flex w-100 justify-content-between align-items-center">
                     <div className="d-flex justify-content-center align-items-center">
                       <div className="avatar mt-2">
-                        <img src={avatar} alt="會員1頭像" />
+                        <img
+                          src={
+                            'http://13.112.90.13:3002/public/images/member/' +
+                            data.imgURL
+                          }
+                          alt="會員1頭像"
+                        />
                       </div>
                       <h5 className="mb-1 text-nowrap  ">{data.x_fromname}</h5>
                     </div>

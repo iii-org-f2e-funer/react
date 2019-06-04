@@ -66,7 +66,9 @@ class ChatArea_socket_new extends React.Component {
 
       //fecth data from database(chat history)
       const response = await fetch(
-        `http://13.112.90.13:3002/chatroom/message/${this.props.logInId}/${to_id}`,
+        `http://13.112.90.13:3002/chatroom/message/${
+          this.props.logInId
+        }/${to_id}`,
         {
           method: 'GET',
           headers: { 'Content-type': 'application/json' },
@@ -247,7 +249,13 @@ class ChatArea_socket_new extends React.Component {
                   <li key={+new Date() + Math.random()}>
                     <div className="text-box  align-items-center">
                       <div className="avatar ">
-                        <img src={avatar} alt="會員1頭像" />
+                        <img
+                          src={
+                            'http://13.112.90.13:3002/public/images/member/' +
+                            element.photoFROM_URL
+                          }
+                          alt="會員1頭像"
+                        />
                       </div>
                       <h5 className="my-auto rounded-pill">{element.m_cont}</h5>
                     </div>

@@ -48,8 +48,15 @@ class FriendList extends React.Component {
       )
       // return ele.friendID == toID && (ele.status == 'approve' || 'review')
     })
-    await this.setState({ FriendData: checkFriend })
-    console.log(checkFriend)
+    let newcheckFriend = checkFriend.filter(ele => {
+      if (ele.user_id == this.props.logInId) {
+        return (ele.imgURL = ele.photoTO_URL)
+      } else if (ele.friend_id == this.props.logInId) {
+        return (ele.imgURL = ele.photoFROM_URL)
+      }
+    })
+    await this.setState({ FriendData: newcheckFriend })
+    console.log(newcheckFriend)
     // if (!Number(checkFriend)) {
     //   this.setState({ FriendStatus: 'unFriend' })
     // }
@@ -99,7 +106,13 @@ class FriendList extends React.Component {
                 >
                   <div className="d-flex w-100 justify-content-center align-items-center">
                     <div className="avatar">
-                      <img src={avatar} alt="會員1頭像" />
+                      <img
+                        src={
+                          'http://13.112.90.13:3002/public/images/member/' +
+                          data.imgURL
+                        }
+                        alt="會員1頭像"
+                      />
                     </div>
 
                     <h5 className="mb-1 text-nowrap d-block">
