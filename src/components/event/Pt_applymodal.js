@@ -94,7 +94,9 @@ class Pt_applymodal extends React.Component {
                 {this.props.ptapply.pt_add}
               </div>
               <div>
-                {moment(this.props.ptapply.pt_time).format('YYYY/MM/DD HH:mm')}{' '}
+                {moment(this.props.ptapply.pt_time)
+                  .zone('-00:00')
+                  .format('YYYY/MM/DD HH:mm')}{' '}
                 開始的團嗎?
               </div>
             </div>
