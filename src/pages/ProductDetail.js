@@ -31,6 +31,26 @@ class ProductDetail extends React.Component {
             break
           }
         }
+        fetch('//13.112.90.13:3002/product/firm', {})
+          .then(response => {
+            return response.json()
+          })
+          .then(firm => {
+            var firmname
+            console.log(jsonData)
+            console.log(gotit)
+            for (let i = 0; i < firm.length; i++) {
+              if (firm[i].sid === gotit.seller_sid) {
+                firmname = firm[i].firmname
+                break
+              }
+            }
+            console.log(firmname)
+            this.setState({ firmname: firmname })
+          })
+          .catch(err => {
+            console.log('錯誤:', err)
+          })
         switch (gotit.gametype_id) {
           case 0:
             this.state.type = '全部'
@@ -118,26 +138,6 @@ class ProductDetail extends React.Component {
           .catch(err => {
             console.log('錯誤:', err)
           })
-      })
-    fetch('//13.112.90.13:3002/product/firm', {})
-      .then(response => {
-        return response.json()
-      })
-      .then(jsonData => {
-        var firmname
-        console.log(jsonData)
-        console.log(gotit)
-        for (let i = 0; i < jsonData.length; i++) {
-          if (jsonData[i].sid === gotit.seller_sid) {
-            firmname = jsonData[i].firmname
-            break
-          }
-        }
-        console.log(firmname)
-        this.setState({ firmname: firmname })
-      })
-      .catch(err => {
-        console.log('錯誤:', err)
       })
 
     console.log(gotit)

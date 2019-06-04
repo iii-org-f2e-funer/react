@@ -112,6 +112,7 @@ class ChatArea_socket_new extends React.Component {
       action: obj.message,
       time: obj.time,
       msgId: this.generateMsgId(),
+      urlSender: obj.urlSender,
     }
     let messages_new = [...messages, newMsg]
     await this.setState({ messages: messages_new })
@@ -196,6 +197,7 @@ class ChatArea_socket_new extends React.Component {
         roomID: this.state.roomID,
         h_id: this.state.member_chat_data[0].h_id,
         is_readed: 0,
+        urlSender: this.props.photoURL,
       }
       ////////////POST to DATA BASE/////////
       fetch(
@@ -223,6 +225,7 @@ class ChatArea_socket_new extends React.Component {
   }
 
   render() {
+    console.log(this.props.photoURL)
     return (
       <>
         <div className="chat_box">
@@ -251,7 +254,7 @@ class ChatArea_socket_new extends React.Component {
                       <div className="avatar ">
                         <img
                           src={
-                            'http://13.112.90.13:3002/public/images/member/' +
+                            '//13.112.90.13:3002/images/member/' +
                             element.photoFROM_URL
                           }
                           alt="會員1頭像"

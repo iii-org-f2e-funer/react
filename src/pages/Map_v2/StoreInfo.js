@@ -31,7 +31,11 @@ class StoreInfo extends Component {
             src={
               'http://13.112.90.13:3002/images/firm/' + this.props.imageArray[0]
             }
-            style={{ minHeight: '230px' }}
+            style={{
+              minHeight: '230px',
+              maxHeight: '300px',
+              objectFit: 'contain',
+            }}
           />
           <Card.Body>
             <Card.Title>

@@ -31,6 +31,7 @@ class Account extends React.Component {
 
   cancelEdit = () => {
     this.setState({ isEdit: false })
+    this.props.reFresh()
     fetch('//13.112.90.13:3002/firm/userInfo', {
       credentials: 'include',
     })

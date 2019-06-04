@@ -14,6 +14,7 @@ class OMPsidePage extends React.Component {
       friendNum: 0,
       toID: 0,
       endpoint: 'http://13.112.90.13:8080',
+      photoURL: '',
     }
     this.ready()
   }
@@ -23,6 +24,25 @@ class OMPsidePage extends React.Component {
     var toID = theUrl.split('/')[theUrl.split('/').length - 1].replace('ID', '')
     this.setState({ toID: toID })
     console.log(this.props.logInId)
+
+    //get friend pics
+    await fetch('http://13.112.90.13:3002/chatroom/openMemberPage/' + toID, {
+      method: 'GET',
+      headers: { 'Content-type': 'application/json' },
+    })
+      .then(res => {
+        return res.json()
+      })
+      .then(obj => {
+        console.log(obj)
+        this.setState({
+          photoURL: obj[1].photoURL,
+          friendNum: obj[1].friendTotal,
+          pt_num: obj[2].p_count,
+        })
+        console.log(this.state.photoURL)
+      })
+
     const response = await fetch(
       `http://13.112.90.13:3002/chatroom/friendList/${this.props.logInId}`,
       {
@@ -40,10 +60,10 @@ class OMPsidePage extends React.Component {
     console.log('FriendData:', data)
     console.log('noDeleteFriendData:', noDeleteData)
 
-    let FriendNum = noDeleteData.filter(ele => {
-      return ele.status == 'approve'
-    })
-    this.setState({ friendNum: FriendNum.length })
+    // let FriendNum = noDeleteData.filter(ele => {
+    //   return ele.status == 'approve'
+    // })
+    // this.setState({ friendNum: FriendNum.length })
     let checkFriend = noDeleteData.filter((ele, ind, arr) => {
       return ele.friend_id == toID || ele.user_id == toID
       // return ele.friendID == toID && (ele.status == 'approve' || 'review')
@@ -80,6 +100,25 @@ class OMPsidePage extends React.Component {
     var toID = theUrl.split('/')[theUrl.split('/').length - 1].replace('ID', '')
     this.setState({ toID: toID })
     console.log(this.props.logInId)
+
+    //get friend pics
+    await fetch('http://13.112.90.13:3002/chatroom/openMemberPage/' + toID, {
+      method: 'GET',
+      headers: { 'Content-type': 'application/json' },
+    })
+      .then(res => {
+        return res.json()
+      })
+      .then(obj => {
+        console.log(obj)
+        this.setState({
+          photoURL: obj[1].photoURL,
+          friendNum: obj[1].friendTotal,
+          pt_num: obj[2].p_count,
+        })
+        console.log(this.state.photoURL)
+      })
+
     const response = await fetch(
       `http://13.112.90.13:3002/chatroom/friendList/${this.props.logInId}`,
       {
@@ -97,10 +136,10 @@ class OMPsidePage extends React.Component {
     console.log('FriendData:', data)
     console.log('noDeleteFriendData:', noDeleteData)
 
-    let FriendNum = noDeleteData.filter(ele => {
-      return ele.status == 'approve'
-    })
-    this.setState({ friendNum: FriendNum.length })
+    // let FriendNum = noDeleteData.filter(ele => {
+    //   return ele.status == 'approve'
+    // })
+    // this.setState({ friendNum: FriendNum.length })
     let checkFriend = noDeleteData.filter((ele, ind, arr) => {
       return ele.friend_id == toID || ele.user_id == toID
       // return ele.friendID == toID && (ele.status == 'approve' || 'review')
@@ -263,14 +302,21 @@ class OMPsidePage extends React.Component {
     return (
       <div className="OMPsidePage">
         <div className="imgOut">
-          <img src={Selfie} alt="selfie" />
+          <img
+            src={
+              this.state.photoURL == false
+                ? ''
+                : '//13.112.90.13:3002/images/member/' + this.state.photoURL
+            }
+            alt="selfie"
+          />
         </div>
         <div className="iconDetail row  align-items-center">
           <div className="col-md text-center">
             <div>
               <i className="fas fa-dice-five" />
             </div>
-            <h5>10</h5>
+            <h5>{this.state.pt_num}</h5>
             <p>參團</p>
           </div>
           <div className="col-md text-center">

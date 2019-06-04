@@ -8,7 +8,7 @@ class CheckCode extends React.Component {
   constructor(props) {
     super(props)
     this.state = {
-      islive: '',
+      islive: false,
       data: [],
       firmname: '',
       phone: '',
@@ -17,6 +17,7 @@ class CheckCode extends React.Component {
       address: '',
       contacter: '',
       preViewImgs: [],
+      message: '',
     }
   }
   handlecityChange = evt =>
@@ -45,6 +46,7 @@ class CheckCode extends React.Component {
         if (obj.success) {
           this.setState({ islive: true, data: obj.body })
         } else {
+          this.setState({ message: '帳號認證失敗' })
         }
       })
   }
@@ -201,7 +203,7 @@ class CheckCode extends React.Component {
             </div>
           ) : (
             <div className="container">
-              <h2>帳號認證失敗</h2>
+              <h2>{this.state.message}</h2>
             </div>
           )}
         </div>

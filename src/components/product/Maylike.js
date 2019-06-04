@@ -46,31 +46,30 @@ class Maylike extends React.Component {
       })
       .then(jsonData => {
         this.setState({ data1: jsonData })
-
         const dt1 = this.state.data
         const dt2 = jsonData
         var d1_leng = Object.keys(this.state.data).length
         var d2_leng = Object.keys(jsonData).length
-
         //迴圈判斷只抓其中一張圖
         for (let data1_index = d1_leng - 1; data1_index >= 0; data1_index--) {
           for (let data2_index = d2_leng - 1; data2_index >= 0; data2_index--) {
             if (dt2[data2_index].sid === dt1[data1_index].sid) {
-              //將抓到的image_path存回去 this.state.data
+              
               dt1[data1_index].image_path = dt2[data2_index].image_path
             }
           }
         }
-        // console.log(dt1)
+       console.log('aaa',dt1)
         this.setState({ data: dt1 })
+        console.log('bbb',this.state.data)
         // ddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddd
-        for (let i = 0; i < d1_leng; i++) {
+        for (let i = d1_leng-1; i >=0 ; i--) {
           var tep =
-            'http://192.168.27.25/happy6/product_manage' +
+            '//13.112.90.13:3002/images/product/' +
             this.state.data[i].image_path
           this.state.images.push(tep)
         }
-        // console.log(this.state.images)
+        this.setState({images:this.state.images})
       })
       .catch(err => {
         console.log('錯誤:', err)
@@ -138,7 +137,7 @@ class Maylike extends React.Component {
               onClick={this.clickaaa1(index)}
             >
               <div className="gamecard">
-                <Card style={{ width: '200px', height: '500px' }}>
+                <Card style={{ width: '184px', height: '184px' }}>
                   <Card.Img
                     variant="top"
                     width="184px"
@@ -147,7 +146,6 @@ class Maylike extends React.Component {
                   />
                   <Card.Body>
                     <div className="maymoney">
-                      <Card.Title>NT 790</Card.Title>
                     </div>
                     <Card.Text />
                   </Card.Body>
