@@ -194,7 +194,7 @@ class NewProduct extends React.Component {
             </Form.Group>
             <div className="d-flex justify-content-center">
               <div className="button mt-3 mr-3" onClick={this.insertProduct}>
-                確認更改
+                確認新增
               </div>
               <div
                 className="button button-white mt-3"

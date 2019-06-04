@@ -42,7 +42,7 @@ class FirmEdit extends React.Component {
             img: obj.img,
           })
         } else {
-          this.setState({ firm_id: obj.firm_id })
+          this.setState({ firm_id: obj.firm_id, insert: true })
         }
       })
   }
@@ -60,16 +60,12 @@ class FirmEdit extends React.Component {
             img: obj.img,
           })
         } else {
-          console.log(obj)
-          this.setState({ firm_id: obj.firm_id })
+          this.setState({ firm_id: obj.firm_id, insert: true })
         }
       })
     this.props.handleHide()
   }
   render() {
-    if (!this.props.data) {
-      return null
-    }
     return (
       <>
         <Modal
