@@ -56,6 +56,13 @@ input[type=number]::-webkit-outer-spin-button {
 		box-shadow: 0px 0px 1px $c_grey;
 	}
 	.detailCard {
+		h2 {
+			margin-bottom: 20px;
+		}
+		p {
+			line-height: 40px;
+		}
+		margin-left: 25px;
 		padding: 20px;
 		.shoptitle {
 			font-size: $fontsz_lg;
@@ -134,4 +141,21 @@ input[type=number]::-webkit-outer-spin-button {
 .fa-arrow-right:before,
 .fa-arrow-left:before {
 	color: #222;
+}
+
+.detail-middle {
+	a,
+	a:active {
+		text-decoration: none !important;
+	}
+	button {
+		width: 200px;
+		display: block;
+		margin: 20px auto;
+		margin-left: 0px;
+		text-decoration: none !important;
+		&:hover {
+			text-decoration: none !important;
+		}
+	}
 }

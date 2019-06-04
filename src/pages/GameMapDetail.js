@@ -480,7 +480,7 @@ class GameMapDetail extends React.Component {
                     &nbsp;&nbsp;
                     <span>{this.state.dataStore.rule}</span>
                   </p>
-                  <div className="middle">
+                  <div className="detail-middle">
                     <button
                       className="button button--lg"
                       block
