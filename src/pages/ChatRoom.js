@@ -73,14 +73,14 @@ class ChatRoom extends React.Component {
           <div className="chatroom">
             <div className="container ">
               <div className="row">
-                <div className="col-md-3 aside">
+                <div className="col-md-3 aside bg-color-white mr-2">
                   <AsidePage
                     logInId={this.props.userInfo.account}
                     refreshID={this.state.refresh}
                     refresh={this.handleRefreh}
                   />
                 </div>
-                <div className="col-md chatArea">
+                <div className="col-md chatArea bg-color-white">
                   {/* 傳props 給子元件: */}
                   {/* <Route path="/abc" render={(props) => <TestWidget {...props} someProp={100} />} /> */}
                   {/* <Route
@@ -106,7 +106,9 @@ class ChatRoom extends React.Component {
                               logInId={this.props.userInfo.account}
                               userData={this.state.chatData}
                               refresh={this.handleRefreh}
-                              toName={data.y_toname}
+                              toName={
+                                data.y_toname == false ? '未知' : data.y_toname
+                              }
                               photoURL={data.photoTO_URL}
                             />
                           )}
@@ -127,7 +129,11 @@ class ChatRoom extends React.Component {
                               logInId={this.props.userInfo.account}
                               userData={this.state.chatData}
                               refresh={this.handleRefreh}
-                              toName={data.y_toname}
+                              toName={
+                                data.x_fromname == false
+                                  ? '未知'
+                                  : data.x_fromname
+                              }
                               photoURL={data.photoFROM_URL}
                             />
                           )}

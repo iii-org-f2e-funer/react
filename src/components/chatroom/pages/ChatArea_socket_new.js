@@ -77,13 +77,14 @@ class ChatArea_socket_new extends React.Component {
       if (!response.ok) throw new Error(response.statusText)
       const data = await response.json()
       console.log(data)
-
-      memberChatData = data.filter(ele => {
-        return ele.m_receiver_id == to_id || ele.m_sender_id == to_id
-      })
-      memberChatData = memberChatData.sort(function(a, b) {
-        return a.m_time > b.m_time ? 1 : -1
-      })
+      if (data) {
+        memberChatData = data.filter(ele => {
+          return ele.m_receiver_id == to_id || ele.m_sender_id == to_id
+        })
+        memberChatData = memberChatData.sort(function(a, b) {
+          return a.m_time > b.m_time ? 1 : -1
+        })
+      }
 
       await this.setState({
         chatDataAll: data,

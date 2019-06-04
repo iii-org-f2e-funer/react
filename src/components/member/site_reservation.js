@@ -87,6 +87,7 @@ class site_reservation extends React.Component {
             <Table striped bordered hover>
               <thead className="table_head">
                 <tr>
+                  <th>預約單編號</th>
                   <th>預約日期</th>
                   <th>預約時間</th>
                   <th>預約店家</th>
@@ -98,6 +99,7 @@ class site_reservation extends React.Component {
               <tbody>
                 {this.state.data.map((item, index) => (
                   <tr key={item.sid}>
+                    <td>{item.sid}</td>
                     <td>
                       {moment(item.date)
                         .utcOffset(960)
@@ -120,10 +122,10 @@ class site_reservation extends React.Component {
                           取消
                         </button>
                       ) : (
-                        '----'
+                        '--'
                       )}
                     </td>
-                    <td className="todo">----</td>
+                    <td className="todo">--</td>
                   </tr>
                 ))}
               </tbody>

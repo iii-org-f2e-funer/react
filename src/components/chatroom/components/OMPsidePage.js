@@ -15,6 +15,7 @@ class OMPsidePage extends React.Component {
       toID: 0,
       endpoint: 'http://13.112.90.13:8080',
       photoURL: '',
+      pt_num: 0,
     }
     this.ready()
   }
@@ -37,8 +38,11 @@ class OMPsidePage extends React.Component {
         console.log(obj)
         this.setState({
           photoURL: obj[1].photoURL,
+          friendNum: obj[1].friendTotal,
+          pt_num: obj[2].pt_conut,
         })
         console.log(this.state.photoURL)
+        console.log(this.state.pt_num)
       })
 
     const response = await fetch(
@@ -58,35 +62,36 @@ class OMPsidePage extends React.Component {
     console.log('FriendData:', data)
     console.log('noDeleteFriendData:', noDeleteData)
 
-    let FriendNum = noDeleteData.filter(ele => {
-      return ele.status == 'approve'
-    })
-    this.setState({ friendNum: FriendNum.length })
+    // let FriendNum = noDeleteData.filter(ele => {
+    //   return ele.status == 'approve'
+    // })
+    // this.setState({ friendNum: FriendNum.length })
     let checkFriend = noDeleteData.filter((ele, ind, arr) => {
       return ele.friend_id == toID || ele.user_id == toID
       // return ele.friendID == toID && (ele.status == 'approve' || 'review')
     })
-    let newcheckFriend = checkFriend.filter(ele => {
-      if (ele.user_id == this.props.logInId) {
-        return (ele.imgURL = ele.photoTO_URL)
-      } else if (ele.friend_id == this.props.logInId) {
-        return (ele.imgURL = ele.photoFROM_URL)
-      }
-    })
-    await this.setState({ FriendData: newcheckFriend[0] })
-    console.log(newcheckFriend)
-    if (!Number(newcheckFriend)) {
+    console.log(checkFriend)
+    // let newcheckFriend = checkFriend.filter(ele => {
+    //   if (ele.user_id == this.props.logInId) {
+    //     return (ele.imgURL = ele.photoTO_URL)
+    //   } else if (ele.friend_id == this.props.logInId) {
+    //     return (ele.imgURL = ele.photoFROM_URL)
+    //   }
+    // })
+    await this.setState({ FriendData: checkFriend[0] })
+    // console.log(newcheckFriend)
+    if (!Number(checkFriend)) {
       this.setState({ FriendStatus: 'unFriend' })
     }
-    if (newcheckFriend[0]) {
-      if (newcheckFriend[0].status == 'approve') {
+    if (checkFriend[0]) {
+      if (checkFriend[0].status == 'approve') {
         await this.setState({ FriendStatus: 'approve' })
       } else if (
-        newcheckFriend[0].status == 'review' &&
-        newcheckFriend[0].friend_id == this.props.logInId
+        checkFriend[0].status == 'review' &&
+        checkFriend[0].friend_id == this.props.logInId
       ) {
         await this.setState({ FriendStatus: 'waitMeReview' })
-      } else if (newcheckFriend[0].status == 'review') {
+      } else if (checkFriend[0].status == 'review') {
         await this.setState({ FriendStatus: 'review' })
       }
     }
@@ -111,6 +116,8 @@ class OMPsidePage extends React.Component {
         console.log(obj)
         this.setState({
           photoURL: obj[1].photoURL,
+          friendNum: obj[1].friendTotal,
+          pt_num: obj[2].pt_conut,
         })
         console.log(this.state.photoURL)
       })
@@ -132,35 +139,35 @@ class OMPsidePage extends React.Component {
     console.log('FriendData:', data)
     console.log('noDeleteFriendData:', noDeleteData)
 
-    let FriendNum = noDeleteData.filter(ele => {
-      return ele.status == 'approve'
-    })
-    this.setState({ friendNum: FriendNum.length })
+    // let FriendNum = noDeleteData.filter(ele => {
+    //   return ele.status == 'approve'
+    // })
+    // this.setState({ friendNum: FriendNum.length })
     let checkFriend = noDeleteData.filter((ele, ind, arr) => {
       return ele.friend_id == toID || ele.user_id == toID
       // return ele.friendID == toID && (ele.status == 'approve' || 'review')
     })
-    let newcheckFriend = checkFriend.filter(ele => {
-      if (ele.user_id == this.props.logInId) {
-        return (ele.imgURL = ele.photoTO_URL)
-      } else if (ele.friend_id == this.props.logInId) {
-        return (ele.imgURL = ele.photoFROM_URL)
-      }
-    })
-    await this.setState({ FriendData: newcheckFriend[0] })
-    console.log(newcheckFriend)
-    if (!Number(newcheckFriend)) {
+    // let newcheckFriend = checkFriend.filter(ele => {
+    //   if (ele.user_id == this.props.logInId) {
+    //     return (ele.imgURL = ele.photoTO_URL)
+    //   } else if (ele.friend_id == this.props.logInId) {
+    //     return (ele.imgURL = ele.photoFROM_URL)
+    //   }
+    // })
+    await this.setState({ FriendData: checkFriend[0] })
+    // console.log(newcheckFriend)
+    if (!Number(checkFriend)) {
       this.setState({ FriendStatus: 'unFriend' })
     }
-    if (newcheckFriend[0]) {
-      if (newcheckFriend[0].status == 'approve') {
+    if (checkFriend[0]) {
+      if (checkFriend[0].status == 'approve') {
         await this.setState({ FriendStatus: 'approve' })
       } else if (
-        newcheckFriend[0].status == 'review' &&
-        newcheckFriend[0].friend_id == this.props.logInId
+        checkFriend[0].status == 'review' &&
+        checkFriend[0].friend_id == this.props.logInId
       ) {
         await this.setState({ FriendStatus: 'waitMeReview' })
-      } else if (newcheckFriend[0].status == 'review') {
+      } else if (checkFriend[0].status == 'review') {
         await this.setState({ FriendStatus: 'review' })
       }
     }
@@ -168,7 +175,7 @@ class OMPsidePage extends React.Component {
   }
 
   //addFriend
-  addFriendClick = () => {
+  addFriendClick = async () => {
     var friendApplied = {
       applicant: parseInt(this.props.logInId),
       addFriendId: parseInt(this.state.toID),
@@ -186,9 +193,10 @@ class OMPsidePage extends React.Component {
       .then(data => {
         console.log(data)
       })
+
     const socket = socketIOClient(this.state.endpoint)
-    socket.emit('confirm', { action: 'add' })
-    this.setState({ FriendStatus: 'review' })
+    await socket.emit('confirm', { action: 'add' })
+    await this.setState({ FriendStatus: 'review' })
 
     console.log(this.state.FriendStatus)
   }
@@ -221,8 +229,32 @@ class OMPsidePage extends React.Component {
       applicant: parseInt(this.props.logInId),
       addFriendId: parseInt(this.state.toID),
       action: 'confirm',
+      time: this.generateTime(),
+      create_time: this.generateTime(),
+      m_sec: new Date().getTime(),
     }
     console.log(friendApplied)
+
+    //post chat_header
+    fetch(
+      `http://13.112.90.13:3002/chatroom/chat_headerInsert/${
+        this.props.logInId
+      }/${this.state.to_member_name}`,
+      {
+        method: 'POST',
+        headers: { 'Content-type': 'application/json' },
+        body: JSON.stringify(friendApplied),
+      }
+    )
+      .then(res => {
+        return res.json()
+      })
+      .then(data => {
+        console.log(data)
+        // this.props.refresh()
+      })
+
+    //post friendList
     fetch(`http://13.112.90.13:3002/chatroom/friendList/${this.state.toID}`, {
       method: 'POST',
       headers: { 'Content-type': 'application/json' },
@@ -234,6 +266,7 @@ class OMPsidePage extends React.Component {
       .then(data => {
         console.log(data)
       })
+
     socket.emit('confirm', { action: 'confirm' })
     this.setState({ FriendStatus: 'approve' })
     this.props.handleaddFriend()
@@ -261,10 +294,6 @@ class OMPsidePage extends React.Component {
       console.log('FriendData:', data)
       console.log('noDeleteFriendData:', noDeleteData)
 
-      let FriendNum = noDeleteData.filter(ele => {
-        return ele.status == 'approve'
-      })
-      this.setState({ friendNum: FriendNum.length })
       let checkFriend = noDeleteData.filter((ele, ind, arr) => {
         return ele.friend_id == toID || ele.user_id == toID
         // return ele.friendID == toID && (ele.status == 'approve' || 'review')
@@ -290,6 +319,17 @@ class OMPsidePage extends React.Component {
     })
   }
 
+  //generate time
+
+  generateTime = () => {
+    let tzoffset = new Date().getTimezoneOffset() * 60000 //offset in milliseconds
+    let localISOTime = new Date(Date.now() - tzoffset) //get local time
+      .toISOString()
+      .replace(/\.\d{3}\Z/, ' ')
+      .replace('T', ' ')
+    return localISOTime
+  }
+
   render() {
     console.log('render', this.props.logInId)
     var theUrl = this.props.location.pathname
@@ -312,7 +352,7 @@ class OMPsidePage extends React.Component {
             <div>
               <i className="fas fa-dice-five" />
             </div>
-            <h5>10</h5>
+            <h5>{this.state.pt_num}</h5>
             <p>參團</p>
           </div>
           <div className="col-md text-center">

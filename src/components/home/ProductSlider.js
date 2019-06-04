@@ -110,7 +110,10 @@ class ProductSlider extends React.Component {
                   <Link to="#">
                     {/* <img src={item.image_path} alt="" /> */}
                     <img
-                      src={process.env.PUBLIC_URL + '/images/home/09.jpg'}
+                      src={
+                        'http://13.112.90.13:3002/images/product/' +
+                        item.image_path
+                      }
                       alt=""
                     />
                     <p className="productTitle">{item.productName}</p>

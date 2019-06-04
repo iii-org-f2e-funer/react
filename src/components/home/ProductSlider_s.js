@@ -1,59 +1,34 @@
 import React from 'react'
 import { Link } from 'react-router-dom'
 
-import {
-  FaRegClock,
-  FaMapMarkerAlt,
-  FaAngleLeft,
-  FaAngleRight,
-} from 'react-icons/fa'
-class EventSlider extends React.Component {
+import { FaAngleLeft, FaAngleRight } from 'react-icons/fa'
+class ProductSlider extends React.Component {
   constructor(props) {
     super(props)
     this.state = {
       position: 0,
       datas: [],
     }
-
-    window.addEventListener('resize', () => {
-      console.log(this)
-      if (document.body.clientWidth < 1300) {
-        this.numbers = 3
-      }
-    })
-
     this.pointer = 0 // 初始化pointer
-    this.numbers = 3 // 顯示個數
-    this.slideWidth = 290 //寬度
+    this.numbers = 1 // 顯示個數
+    this.slideWidth = 232 //寬度
     this.position = -1 * this.slideWidth * this.numbers // -1 * 顯示個數 * 每個寬度
   }
   componentDidMount() {
-    // this.props.events
-    fetch('http://13.112.90.13:3002/home/homeEvent')
+    fetch('http://13.112.90.13:3002/home/homeProduct')
       .then(res => res.json())
       .then(obj => {
         if (obj.success === true) {
-          // console.log(obj.data)
-          var arr = [
-            // obj.data[obj.data.length - 4],
-            obj.data[obj.data.length - 3],
-            obj.data[obj.data.length - 2],
-            obj.data[obj.data.length - 1],
-            ...obj.data,
-            obj.data[0],
-            obj.data[1],
-            obj.data[2],
-            // obj.data[3],
-          ]
+          console.log(obj)
+          var arr = [obj.data[obj.data.length - 1], ...obj.data, obj.data[0]]
           this.setState({ datas: arr }, () => {
             this.data_length = obj.data.length // 原始資料長度
             this.carousel.style.left = this.position + 'px' // 設定初始位置
+            // 開始自動輪播
+            this.handleAutoSlide()
           })
         }
       })
-
-    // 開起輪播
-    this.handleAutoSlide()
   }
   componentWillUnmount() {
     clearInterval(this.timer)
@@ -62,7 +37,7 @@ class EventSlider extends React.Component {
   handleAutoSlide = () => {
     this.timer = setInterval(() => {
       this.handleNextClick()
-    }, 3000)
+    }, 4000)
   }
   //停止播放
   handleStopSlide = () => {
@@ -112,32 +87,25 @@ class EventSlider extends React.Component {
     return (
       <>
         <div
-          className="event_slider"
+          className="product_slider_s"
           onMouseEnter={this.handleStopSlide}
           onMouseLeave={this.handleAutoSlide}
         >
           <div className="slider_inner">
             {/* list */}
-            <ul className="eventList" ref={el => (this.carousel = el)}>
+            <ul className="productList" ref={el => (this.carousel = el)}>
               {this.state.datas.map((item, idx) => (
-                <li key={idx} className="eventItem">
-                  <Link to={'/event/info/' + item.pt_sid}>
-                    {/* <img src="" alt="" /> */}
+                <li key={idx} className="productItem">
+                  <Link to="#">
                     <img
                       src={
-                        'http://13.112.90.13:3002/images/event/' + item.pt_img
+                        'http://13.112.90.13:3002/images/product/' +
+                        item.image_path
                       }
                       alt=""
                     />
-                    <p className="eventTitle">{item.pt_title}</p>
-                    <p>
-                      <FaRegClock />
-                      {item.pt_time}
-                    </p>
-                    <p>
-                      <FaMapMarkerAlt />
-                      {item.pt_add}
-                    </p>
+                    <p className="productTitle">{item.productName}</p>
+                    <p>NT {item.price}</p>
                   </Link>
                 </li>
               ))}
@@ -146,6 +114,7 @@ class EventSlider extends React.Component {
             <div className="slide_btn btn_prev" onClick={this.handlePrevClick}>
               <FaAngleLeft />
             </div>
+
             {/* 下一張 按鈕 */}
             <div className="slide_btn btn_next" onClick={this.handleNextClick}>
               <FaAngleRight />
@@ -156,4 +125,4 @@ class EventSlider extends React.Component {
     )
   }
 }
-export default EventSlider
+export default ProductSlider
