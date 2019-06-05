@@ -109,7 +109,7 @@ class ChatRoom extends React.Component {
                               toName={
                                 data.y_toname == false ? '未知' : data.y_toname
                               }
-                              photoURL={data.photoTO_URL}
+                              photoURL={data.photoFROM_URL}
                             />
                           )}
                         />
@@ -134,7 +134,7 @@ class ChatRoom extends React.Component {
                                   ? '未知'
                                   : data.x_fromname
                               }
-                              photoURL={data.photoFROM_URL}
+                              photoURL={data.photoTO_URL}
                             />
                           )}
                         />
